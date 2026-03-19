@@ -1,0 +1,75 @@
+site_name: RPG Wiki
+site_description: Guide complet du RPG Discord
+site_author: Bot Ultime
+
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: purple
+  features:
+    - navigation.tabs
+    - navigation.tabs.sticky
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.tabs.link
+  font:
+    text: Roboto
+    code: Roboto Mono
+  icon:
+    logo: material/sword-cross
+
+nav:
+  - Accueil: index.md
+  - Guide du Débutant: debutant.md
+  - Classes:
+      - Vue d'ensemble: classes/index.md
+      - Guerrier: classes/guerrier.md
+      - Assassin: classes/assassin.md
+      - Mage: classes/mage.md
+      - Tireur: classes/tireur.md
+      - Support: classes/support.md
+      - Vampire: classes/vampire.md
+      - Gardien du Temps: classes/gardien.md
+      - Ombre Venin: classes/ombre.md
+      - Pyromancien: classes/pyromancien.md
+      - Paladin: classes/paladin.md
+  - Combat:
+      - Mécanique de combat: combat/mecanique.md
+  - Équipements:
+      - Équipements & Panoplies: equipements/index.md
+  - Métiers:
+      - Tous les Métiers: metiers/index.md
+  - Modes de jeu:
+      - Vue d'ensemble: modes/index.md
+      - Monde: modes/monde.md
+      - Donjons: modes/donjons.md
+      - Raids: modes/raids.md
+      - Taverne (PvP): modes/pvp.md
+      - World Boss: modes/world_boss.md
+  - Objets:
+      - Potions & Élixirs: objets/potions.md
+      - Nourritures: objets/nourriture.md
+      - Runes: objets/runes.md
+      - Reliques: objets/reliques.md
+      - Matériaux: objets/materiaux.md
+  - Titres: titres.md
+  - Quêtes: quetes.md
+
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
