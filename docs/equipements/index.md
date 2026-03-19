@@ -39,9 +39,9 @@ La rareté d'un équipement détermine la puissance de ses statistiques.
 
 ---
 
-## L'amélioration (Forgeron)
+## L'amélioration (Forge)
 
-Les équipements peuvent être améliorés au Forgeron jusqu'au **niveau +20**. Chaque niveau d'amélioration augmente toutes les stats de la pièce.
+Les équipements peuvent être améliorés à la **Forge** (bouton ⚒️ dans le Hub Profil, accessible à tous) jusqu'au **niveau +20**. Chaque niveau d'amélioration augmente toutes les stats de la pièce.
 
 ---
 
@@ -361,7 +361,7 @@ Comment obtenir chaque panoplie et comment s'en équiper :
 
 1. **Complète un set** avant de tout maximiser — les bonus 7 pièces sont souvent plus importants que les stats individuelles
 2. **Monte la rareté** de toutes tes pièces uniformément — une pièce trop faible tire tout le set vers le bas
-3. **Améliore chez le Forgeron** — même des pièces communes améliorées +20 peuvent être très efficaces
+3. **Améliore à la Forge** — même des pièces communes améliorées +20 peuvent être très efficaces
 4. **Vise la source correspondant à ton niveau** — inutile de chercher des pièces de Raid si tu ne fais pas encore de Raids
 5. **Choisis selon ton style** — chaque panoplie correspond à un build différent pour la même classe
 

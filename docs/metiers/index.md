@@ -292,24 +292,8 @@ Il y a **15 métiers** dans le RPG, divisés en trois catégories : les **métie
 
     ---
 
-    ### ⚔️ Forgeron — Amélioration d'équipement
-
-    En plus de forger des armes, le Forgeron peut **améliorer n'importe quel équipement** de **+0 à +20**.
-
-    Chaque niveau d'amélioration augmente **toutes les stats** de la pièce améliorée.
-
-    !!! warning "Raretés accessibles selon le niveau du Forgeron"
-        Les raretés que le Forgeron peut toucher à la forge dépendent de son niveau de profession :
-
-    | Niveau Forgeron | Raretés accessibles à la forge |
-    |----------------|-------------------------------|
-    | 1–10 | Commun et Peu Commun |
-    | 11–30 | Rare accessible |
-    | 31–60 | Épique régulier |
-    | 61–100 | Légendaire et au-delà possibles |
-
-    !!! tip "L'amélioration s'applique à tous les équipements"
-        Peu importe la source de l'équipement (monde, donjon, craft, raid…), le Forgeron peut l'améliorer jusqu'à +20. Un item déjà rare ou légendaire sera encore plus puissant après amélioration.
+    !!! info "Amélioration et runes — via la Forge du Profil"
+        L'**amélioration d'équipement** (+0 à +20) et l'**équipement/déséquipement de runes** ne sont pas liés au métier Forgeron. Ces actions se font via le bouton **⚒️ Forge** dans le **Hub Profil**, accessible à tous les joueurs indépendamment de leur profession.
 
 ---
 
@@ -329,6 +313,6 @@ Il y a **15 métiers** dans le RPG, divisés en trois catégories : les **métie
 | Craft équip. | 🛡️ Armurier | Plastrons (panoplie Craft) |
 | Craft équip. | 👖 Tailleur | Pantalons (panoplie Craft) |
 | Craft équip. | 👢 Cordonnier | Chaussures (panoplie Craft) |
-| Craft équip. | ⚔️ Forgeron | Armes (panoplie Craft) + amélioration |
+| Craft équip. | ⚔️ Forgeron | Armes (panoplie Craft) |
 | Craft équip. | 📿 Joaillier | Amulettes (panoplie Craft) |
 | Craft équip. | 💍 Orfèvre | Anneaux (panoplie Craft) |

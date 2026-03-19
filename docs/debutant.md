@@ -47,7 +47,7 @@ Chaque combat te coûte **1 énergie** et te rapporte :
 Dans le **Hub Profil**, tu peux :
 
 - **Équiper** tes items en faisant glisser les pièces dans les emplacements
-- **Améliorer** tes équipements chez le Forgeron (jusqu'au niveau +20)
+- **Améliorer** tes équipements à la Forge (jusqu'au niveau +20)
 - Voir tes stats totales
 - Gérer ta Banque (les items en banque résistent au Prestige)
 - Consommer des **potions** et des **nourritures** avant un combat
@@ -58,10 +58,12 @@ Dans le **Hub Profil**, tu peux :
 
 Les **métiers** te permettent de créer tes propres ressources et consommables. Il y a 9 métiers :
 
-- **Mineur, Herboriste, Bûcheron, Chasseur, Pêcheur, Fermier** → récoltent des matières premières
-- **Boulanger** → cuisine des aliments qui boostent ton énergie
-- **Enchanteur** → crée des runes qui améliorent tes stats en combat
-- **Forgeron** → forge et améliore des équipements
+- **Mineur, Herboriste, Bûcheron, Chasseur, Fermier** → récoltent des matières premières
+- **Alchimiste, Boulanger, Enchanteur** → créent des consommables (potions, nourriture, runes)
+- **Heaumier, Armurier, Tailleur, Cordonnier, Forgeron, Joaillier, Orfèvre** → forgent des équipements (panoplie Craft)
+
+!!! info "La Forge (⚒️) dans le Hub Profil"
+    Améliorer un équipement (+0 à +20) et équiper/déséquiper des runes se fait via le bouton **Forge** du Hub Profil — accessible à **tous les joueurs** sans avoir besoin d'un métier.
 
 ---
 
