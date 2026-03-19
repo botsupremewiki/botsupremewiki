@@ -1,28 +1,42 @@
-site_name: RPG Wiki
-site_description: Guide complet du RPG Discord
-site_author: Bot Ultime
+site_name: Bot Suprême Wiki
+site_description: Le guide complet du RPG Discord — classes, combat, équipements, métiers et plus.
+site_url: https://botsupremewiki.netlify.app
+site_author: Bot Suprême
 
 theme:
   name: material
+  custom_dir: overrides
   language: fr
   palette:
     - scheme: slate
       primary: deep purple
-      accent: purple
+      accent: amber
   features:
+    - navigation.instant
+    - navigation.instant.progress
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.sections
     - navigation.expand
     - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - toc.follow
     - search.suggest
     - search.highlight
+    - search.share
     - content.tabs.link
+    - content.code.copy
+    - content.tooltips
   font:
     text: Roboto
-    code: Roboto Mono
+    code: JetBrains Mono
   icon:
     logo: material/sword-cross
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
 
 nav:
   - Accueil: index.md
