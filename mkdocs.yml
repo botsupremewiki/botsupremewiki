@@ -38,9 +38,13 @@ theme:
 extra_css:
   - stylesheets/extra.css
 
+extra_javascript:
+  - javascripts/enemy_calc.js
+
 nav:
   - Accueil: index.md
   - Guide du Débutant: debutant.md
+  - Prestige: prestige.md
   - Classes:
       - Vue d'ensemble: classes/index.md
       - Guerrier: classes/guerrier.md
@@ -55,6 +59,7 @@ nav:
       - Paladin: classes/paladin.md
   - Combat:
       - Mécanique de combat: combat/mecanique.md
+      - Simulateur d'Ennemis: combat/ennemis.md
   - Équipements:
       - Équipements & Panoplies: equipements/index.md
   - Métiers:

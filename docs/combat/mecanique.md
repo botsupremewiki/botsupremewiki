@@ -96,3 +96,44 @@ Certains sorts ou effets passifs créent un **bouclier** qui absorbe les dégât
 - Certains sorts ont un **tour minimum** avant d'être disponibles
 
 Si tu n'as pas assez de ressource ou si le sort est en recharge, seule l'attaque normale est disponible.
+
+---
+
+## Passifs des Boss Emblématiques
+
+Les boss emblématiques apparaissent **toutes les 100 zones**. Chaque passif est attribué de façon cyclique selon la zone.
+
+| # | Passif | Effet en combat |
+|---|--------|----------------|
+| 1 | **Régénération** | Régénère 2% de ses HP max à chaque tour |
+| 2 | **Réduction de Stats** | Réduit toutes tes stats de 10% au premier tour |
+| 3 | **Dégâts Purs** | Inflige 5% de tes HP max en dégâts purs chaque tour |
+| 4 | **Frénésie** | Ses dégâts sont ×1,5 pendant les 3 premiers tours |
+| 5 | **Immunité** | Immunité aux critiques pendant les 5 premiers tours |
+| 6 | **Enragé** | +10% de dégâts par tranche de 20% HP perdus |
+| 7 | **Absorption** | Convertit 20% des dégâts reçus en bouclier |
+| 8 | **Maudit** | Tes soins sont réduits de 50% |
+| 9 | **Riposte** | Renvoie 30% des dégâts physiques que tu infliges |
+| 10 | **Aura Glaciale** | Réduit ta vitesse de 20% dès le début du combat |
+
+---
+
+## Passifs des Boss Antiques
+
+Les boss antiques apparaissent **tous les 1 000 zones**. Ce sont les combats les plus difficiles du mode Monde.
+
+| # | Passif | Effet en combat |
+|---|--------|----------------|
+| 1 | **Bouclier Ancien** | Absorbe 30% des dégâts que tu infliges pendant les 5 premiers tours |
+| 2 | **Fléau Primordial** | Réduit toutes tes stats de 15% dès le début du combat |
+| 3 | **Éternité** | Ses HP ne peuvent pas tomber sous 50% avant le tour 10 |
+| 4 | **Malédiction Antique** | Tes critiques ne font pas de dégâts supplémentaires |
+| 5 | **Terreur Abyssale** | Réduit ta Défense Physique et Magique de 30% |
+| 6 | **Résilience Ancienne** | Régénère 5% de ses HP max chaque tour |
+| 7 | **Emprise Temporelle** | Bloque l'un de tes tours tous les 5 tours |
+| 8 | **Dévoration** | Vole 3% de tes stats offensives (Att. Phy + Att. Mag) à chaque tour |
+| 9 | **Néant** | Tes passifs de classe sont désactivés les 3 premiers tours |
+| 10 | **Convergence** | Gagne +25% à toutes ses stats au début du combat |
+
+!!! warning "Préparation avant un boss antique"
+    Ces combats demandent une préparation sérieuse. Utilise des potions, des runes et des nourritures avant d'affronter un boss antique — surtout aux zones 3 000, 5 000 et 9 000.
