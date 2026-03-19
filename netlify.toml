@@ -1,5 +1,4 @@
 [build]
-  base    = "bot/cogs/rpg/wiki"
   command = "pip install mkdocs-material && mkdocs build"
   publish = "site"
 
