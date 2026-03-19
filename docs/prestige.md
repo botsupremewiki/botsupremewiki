@@ -15,7 +15,7 @@ Chaque prestige donne **+0,1% à toutes tes stats** (cumulatif et permanent).
 ## Comment prestiger ?
 
 1. Atteins le **niveau 1 000**
-2. Utilise la commande `/prestige` dans le hub
+2. Appuie sur le bouton **Prestige** dans ton Profil
 
 !!! warning "Avant de prestiger — sauvegarde tes équipements !"
     Mets tes meilleurs équipements et ressources en **Banque** avant de prestiger. La Banque résiste au Prestige, mais le reste de ton inventaire est réinitialisé.
@@ -30,7 +30,7 @@ Chaque prestige donne **+0,1% à toutes tes stats** (cumulatif et permanent).
 | Or en Banque | Inventaire |
 | Niveau de Prestige | Équipements équipés non mis en banque |
 | Titres débloqués | Progression de quêtes |
-| Progression de métiers | |
+| | Niveaux de métiers (récolte, forge, conception) |
 
 ---
 

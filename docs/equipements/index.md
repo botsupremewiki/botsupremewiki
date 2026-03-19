@@ -88,12 +88,12 @@ Comment obtenir chaque panoplie et comment s'en équiper :
 
 | Source | Comment l'obtenir | Multiplicateur de puissance | Niveau item |
 |--------|-------------------|-----------------------------|-------------|
-| **Monde** | Drop aléatoire en battant des ennemis dans les zones | ×1,0 | = numéro de zone |
+| **Monde** | Drop aléatoire en battant des ennemis dans les zones | ×1,0 | = numéro de zone ÷ 10 |
 | **Donjon Classique** | Drop de boss dans les donjons classiques | ×1,4 | = niveau donjon × 10 |
 | **Craft** | Fabriquée par les métiers de craft (Heaumier, Armurier…) | ×1,8 | = niveau métier × 10 |
 | **Donjon Élite** | Drop de boss dans les donjons élite | ×2,2 | = niveau donjon × 10 |
 | **Donjon Abyssal** | Drop de boss dans les donjons abyssaux | ×3,0 | = niveau donjon × 10 |
-| **Raid** | Drop dans les raids (niveau 700–1000) | ×4,5 | 700 – 1 000 |
+| **Raid** | Drop dans les raids | ×4,5 | = niveau raid × 100 |
 
 !!! info "Niveau de l'item et niveau requis pour l'équiper"
     Chaque pièce d'équipement possède un **niveau propre** (1–1000) qui détermine sa puissance **et** le niveau minimum du joueur pour l'équiper. Un item de niveau 300 ne peut être équipé que par un joueur de niveau ≥ 300. Les stats de la pièce sont proportionnelles à ce niveau.

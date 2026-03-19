@@ -89,6 +89,9 @@ Quand tu atteins le **niveau 1 000**, tu peux déclencher le Prestige. Tu recomm
 
 ## Conseils généraux
 
+!!! tip "Suis les quêtes !"
+    Au début, les **quêtes** sont le meilleur guide. Elles t'orientent étape par étape, te récompensent en or, XP et équipements, et t'expliquent les mécaniques au fur et à mesure. C'est le chemin le plus rapide pour progresser.
+
 - Ne néglige pas les **sorts** de ta classe : ils font souvent la différence dans les combats difficiles
 - Les **panoplies** (sets de 7 pièces) donnent des bonus très importants — essaie de compléter un set
 - Commence par les **donjons classiques** avant de t'attaquer aux élites et abyssaux
