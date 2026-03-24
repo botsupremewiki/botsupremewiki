@@ -1,0 +1,45 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.Python
+*.egg-info/
+dist/
+build/
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Environment variables
+.env
+*.env
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+*.log
+logs/
+
+# MkDocs build output
+site/
+
+# ffmpeg binary (heavy)
+ffmpeg.exe
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Claude settings
+.claude/
+
+# Embedded wiki repo (handled separately)
+bot/cogs/rpg/wiki/
+
+# Archives
+*.zip

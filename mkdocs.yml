@@ -1,0 +1,53 @@
+site_name: "Bot Ultime RPG — Wiki"
+site_description: "Wiki officiel du RPG Discord Bot Ultime"
+site_url: ""
+docs_dir: docs
+theme:
+  name: material
+  language: fr
+  palette:
+    - scheme: slate
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-4
+        name: Mode clair
+    - scheme: default
+      primary: deep purple
+      accent: amber
+      toggle:
+        icon: material/brightness-7
+        name: Mode sombre
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - search.highlight
+    - content.code.copy
+  font:
+    text: Nunito
+    code: JetBrains Mono
+
+nav:
+  - Accueil: index.md
+  - Guide Débutant: guide_debutant.md
+  - Classes: classes.md
+  - Modes de Jeu: modes_de_jeu.md
+  - Objets: objets.md
+  - Métiers: metiers.md
+  - Quêtes: quetes.md
+  - Titres: titres.md
+
+markdown_extensions:
+  - admonition
+  - tables
+  - attr_list
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - toc:
+      permalink: true

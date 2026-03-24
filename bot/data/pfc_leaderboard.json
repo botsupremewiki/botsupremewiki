@@ -1,0 +1,68 @@
+{
+  "players": {
+    "1154085777299476592": {
+      "bo3_elo": 1031,
+      "bo3_wins": 2,
+      "bo3_losses": 0,
+      "bo5_elo": 959,
+      "bo5_wins": 0,
+      "bo5_losses": 2,
+      "bo1_elo": 988,
+      "bo1_losses": 1
+    },
+    "1359677606907351090": {
+      "bo3_elo": 984,
+      "bo3_wins": 0,
+      "bo3_losses": 1,
+      "bo5_elo": 1000,
+      "bo5_wins": 0,
+      "bo5_losses": 0
+    },
+    "393175855305719809": {
+      "bo3_elo": 985,
+      "bo3_wins": 0,
+      "bo3_losses": 1,
+      "bo5_elo": 1000,
+      "bo5_wins": 0,
+      "bo5_losses": 0
+    },
+    "823272192757989448": {
+      "bo1_elo": 1012,
+      "bo1_wins": 1,
+      "bo1_losses": 0,
+      "bo3_elo": 1000,
+      "bo3_wins": 0,
+      "bo3_losses": 0,
+      "bo5_elo": 1000,
+      "bo5_wins": 0,
+      "bo5_losses": 0
+    },
+    "222082916300226561": {
+      "bo1_elo": 1000,
+      "bo1_wins": 0,
+      "bo1_losses": 0,
+      "bo3_elo": 1000,
+      "bo3_wins": 0,
+      "bo3_losses": 0,
+      "bo5_elo": 1021,
+      "bo5_wins": 1,
+      "bo5_losses": 0
+    },
+    "174234226667814913": {
+      "bo1_elo": 1000,
+      "bo1_wins": 0,
+      "bo1_losses": 0,
+      "bo3_elo": 1000,
+      "bo3_wins": 0,
+      "bo3_losses": 0,
+      "bo5_elo": 1020,
+      "bo5_wins": 1,
+      "bo5_losses": 0
+    }
+  },
+  "messages": {
+    "help": 1477414618702942412,
+    "leaderboard": 1480324800105807977,
+    "launcher": 1480324797366800507
+  }
+}
