@@ -1,0 +1,111 @@
+{% extends "main.html" %}
+
+{% block content %}
+
+<!-- ── Hero ─────────────────────────────────────────────────── -->
+<div class="rpg-hero">
+  <div class="rpg-hero-content">
+    <div class="rpg-hero-badge">⚔️ Guide Officiel du RPG Discord</div>
+    <h1 class="rpg-hero-title">Bot Suprême Wiki</h1>
+    <p class="rpg-hero-subtitle">
+      Le guide complet pour maîtriser chaque classe, chaque donjon<br>
+      et chaque secret du RPG.
+    </p>
+    <div class="rpg-hero-buttons">
+      <a href="debutant/" class="rpg-btn rpg-btn-primary">🚀 Guide du Débutant</a>
+      <a href="classes/" class="rpg-btn rpg-btn-secondary">⚔️ Les Classes</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── Stats Bar ─────────────────────────────────────────────── -->
+<div class="rpg-stats">
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">10</span>
+    <span class="rpg-stat-label">Classes</span>
+  </div>
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">10 000</span>
+    <span class="rpg-stat-label">Zones</span>
+  </div>
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">72</span>
+    <span class="rpg-stat-label">Quêtes</span>
+  </div>
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">170+</span>
+    <span class="rpg-stat-label">Titres</span>
+  </div>
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">9</span>
+    <span class="rpg-stat-label">Métiers</span>
+  </div>
+  <div class="rpg-stat">
+    <span class="rpg-stat-value">50</span>
+    <span class="rpg-stat-label">Matériaux</span>
+  </div>
+</div>
+
+<!-- ── Features Grid ─────────────────────────────────────────── -->
+<div class="rpg-features-section">
+  <h2 class="rpg-features-title">📚 Explorer le Wiki</h2>
+  <div class="rpg-features-grid">
+
+    <a href="debutant/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🌱</span>
+      <div class="rpg-card-title">Guide du Débutant</div>
+      <p class="rpg-card-desc">Tout ce qu'il faut savoir pour commencer : choisir ta classe, gérer ton énergie et progresser efficacement.</p>
+    </a>
+
+    <a href="classes/" class="rpg-feature-card">
+      <span class="rpg-card-icon">⚔️</span>
+      <div class="rpg-card-title">Classes</div>
+      <p class="rpg-card-desc">10 classes uniques — Guerrier, Mage, Assassin, Paladin et plus. Chacune avec ses sorts et son passif exclusif.</p>
+    </a>
+
+    <a href="combat/mecanique/" class="rpg-feature-card">
+      <span class="rpg-card-icon">💥</span>
+      <div class="rpg-card-title">Mécanique de Combat</div>
+      <p class="rpg-card-desc">Dégâts, critiques, pénétration, effets de statut — comprends chaque rouage du système de combat au tour par tour.</p>
+    </a>
+
+    <a href="equipements/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🛡️</span>
+      <div class="rpg-card-title">Équipements & Panoplies</div>
+      <p class="rpg-card-desc">10 raretés, 6 sources, 7 emplacements, bonus de panoplie et améliorations. Construis le build parfait.</p>
+    </a>
+
+    <a href="metiers/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🔨</span>
+      <div class="rpg-card-title">Métiers</div>
+      <p class="rpg-card-desc">9 métiers : récolte, craft et conception. Fabrique tes propres consommables, panoplies et équipements.</p>
+    </a>
+
+    <a href="modes/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🗺️</span>
+      <div class="rpg-card-title">Modes de Jeu</div>
+      <p class="rpg-card-desc">Monde (10 000 zones), Donjons, Raids 5 joueurs, Taverne PvP et World Boss hebdomadaire.</p>
+    </a>
+
+    <a href="objets/potions/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🧪</span>
+      <div class="rpg-card-title">Objets & Consommables</div>
+      <p class="rpg-card-desc">Potions, élixirs, nourritures, runes et reliques — tous les items avec leurs valeurs exactes.</p>
+    </a>
+
+    <a href="titres/" class="rpg-feature-card">
+      <span class="rpg-card-icon">🏅</span>
+      <div class="rpg-card-title">Titres</div>
+      <p class="rpg-card-desc">170+ titres à débloquer avec leurs conditions, bonus passifs permanents et récompenses en or.</p>
+    </a>
+
+    <a href="quetes/" class="rpg-feature-card">
+      <span class="rpg-card-icon">📜</span>
+      <div class="rpg-card-title">Quêtes</div>
+      <p class="rpg-card-desc">42 quêtes principales et 30 quêtes secondaires avec tous leurs objectifs et récompenses détaillés.</p>
+    </a>
+
+  </div>
+</div>
+
+{% endblock %}

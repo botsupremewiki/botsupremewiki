@@ -1,0 +1,753 @@
+/* ============================================================
+   Bot Suprême Wiki — Custom RPG Theme
+   ============================================================ */
+
+/* ── Variables ─────────────────────────────────────────────── */
+:root {
+  --rpg-gold:          #F59E0B;
+  --rpg-gold-light:    #FCD34D;
+  --rpg-gold-glow:     rgba(245, 158, 11, 0.25);
+  --rpg-purple:        #7C3AED;
+  --rpg-purple-light:  #A78BFA;
+  --rpg-purple-glow:   rgba(124, 58, 237, 0.3);
+  --rpg-card-bg:       rgba(255, 255, 255, 0.04);
+  --rpg-card-border:   rgba(124, 58, 237, 0.25);
+  --rpg-text-muted:    rgba(255, 255, 255, 0.55);
+}
+
+/* ── Hero Section ──────────────────────────────────────────── */
+.rpg-hero {
+  position: relative;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 100px 24px 80px;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 25% 60%, rgba(124, 58, 237, 0.18) 0%, transparent 55%),
+    radial-gradient(ellipse at 75% 40%, rgba(245, 158, 11, 0.10) 0%, transparent 55%),
+    linear-gradient(180deg, #0a0612 0%, #130a2e 55%, #0a0612 100%);
+}
+
+/* Starfield */
+.rpg-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(1px 1px at 15% 25%, rgba(255,255,255,0.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 85% 15%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 45% 75%, rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 5%  55%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 92% 85%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 35% 8%,  rgba(255,255,255,0.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 65% 92%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 90%, rgba(255,255,255,0.3) 0%, transparent 100%),
+    radial-gradient(1.5px 1.5px at 55% 50%, rgba(245, 158, 11, 0.4) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* Pulsing glow orb */
+.rpg-hero::after {
+  content: '';
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.10) 0%, transparent 70%);
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  animation: hero-pulse 5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-pulse {
+  0%, 100% { transform: translate(-50%, -50%) scale(1);   opacity: 0.7; }
+  50%       { transform: translate(-50%, -50%) scale(1.3); opacity: 1;   }
+}
+
+.rpg-hero-content {
+  position: relative;
+  z-index: 1;
+  max-width: 720px;
+}
+
+.rpg-hero-badge {
+  display: inline-block;
+  background: rgba(124, 58, 237, 0.18);
+  border: 1px solid rgba(124, 58, 237, 0.45);
+  color: var(--rpg-purple-light);
+  padding: 6px 18px;
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+}
+
+.rpg-hero-title {
+  font-size: clamp(2.8rem, 7vw, 4.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin: 0 0 22px;
+  background: linear-gradient(135deg,
+    var(--rpg-gold-light) 0%,
+    var(--rpg-gold)       30%,
+    var(--rpg-purple-light) 60%,
+    var(--rpg-gold-light) 100%);
+  background-size: 250% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer-title 5s linear infinite;
+}
+
+@keyframes shimmer-title {
+  0%   { background-position: 0%   center; }
+  100% { background-position: 250% center; }
+}
+
+.rpg-hero-subtitle {
+  font-size: 1.15rem;
+  color: var(--rpg-text-muted);
+  margin: 0 0 44px;
+  line-height: 1.7;
+}
+
+.rpg-hero-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.rpg-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 30px;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  letter-spacing: 0.02em;
+}
+
+.rpg-btn-primary {
+  background: linear-gradient(135deg, #7C3AED, #5B21B6);
+  color: #fff !important;
+  box-shadow: 0 4px 24px var(--rpg-purple-glow);
+}
+.rpg-btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 36px var(--rpg-purple-glow);
+  background: linear-gradient(135deg, #8B5CF6, #6D28D9);
+}
+
+.rpg-btn-secondary {
+  background: transparent;
+  color: var(--rpg-gold) !important;
+  border: 1.5px solid var(--rpg-gold);
+  box-shadow: 0 0 0 0 var(--rpg-gold-glow);
+}
+.rpg-btn-secondary:hover {
+  background: var(--rpg-gold-glow);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px var(--rpg-gold-glow);
+}
+
+/* ── Stats Bar ─────────────────────────────────────────────── */
+.rpg-stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.025);
+  border-top: 1px solid rgba(124, 58, 237, 0.2);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+  padding: 36px 24px;
+  gap: 0;
+}
+
+.rpg-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px 44px;
+  border-right: 1px solid rgba(255, 255, 255, 0.07);
+}
+.rpg-stat:last-child { border-right: none; }
+
+.rpg-stat-value {
+  font-size: 2.6rem;
+  font-weight: 900;
+  color: var(--rpg-gold);
+  line-height: 1;
+  margin-bottom: 5px;
+  text-shadow: 0 0 20px var(--rpg-gold-glow);
+}
+
+.rpg-stat-label {
+  font-size: 0.75rem;
+  color: var(--rpg-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+}
+
+/* ── Features Grid ─────────────────────────────────────────── */
+.rpg-features-section {
+  padding: 72px 24px 80px;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.rpg-features-title {
+  text-align: center;
+  font-size: 1.9rem;
+  font-weight: 800;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: 56px;
+  position: relative;
+}
+
+.rpg-features-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  margin: 14px auto 0;
+  background: linear-gradient(90deg, var(--rpg-purple), var(--rpg-gold));
+  border-radius: 2px;
+}
+
+.rpg-features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.rpg-feature-card {
+  background: var(--rpg-card-bg);
+  border: 1px solid var(--rpg-card-border);
+  border-radius: 14px;
+  padding: 30px;
+  text-decoration: none !important;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.rpg-feature-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--rpg-purple), var(--rpg-gold), var(--rpg-purple));
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.rpg-feature-card:hover {
+  border-color: rgba(124, 58, 237, 0.55);
+  background: rgba(124, 58, 237, 0.07);
+  transform: translateY(-5px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35), 0 0 24px var(--rpg-purple-glow);
+  text-decoration: none !important;
+}
+.rpg-feature-card:hover::before { opacity: 1; }
+.rpg-feature-card:hover .rpg-card-title { color: var(--rpg-gold) !important; }
+
+.rpg-card-icon {
+  font-size: 2.6rem;
+  margin-bottom: 18px;
+  display: block;
+  line-height: 1;
+}
+
+.rpg-card-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.92) !important;
+  margin-bottom: 10px;
+  transition: color 0.25s ease;
+}
+
+.rpg-card-desc {
+  font-size: 0.88rem;
+  color: var(--rpg-text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* ── Global — Typography ───────────────────────────────────── */
+.md-typeset h1 {
+  font-weight: 800;
+  color: var(--rpg-gold-light) !important;
+  text-shadow: 0 0 30px var(--rpg-gold-glow);
+}
+
+.md-typeset h2 {
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3);
+  padding-bottom: 10px;
+}
+
+.md-typeset h3 {
+  color: var(--rpg-purple-light);
+  font-weight: 600;
+}
+
+/* ── Global — Tables ───────────────────────────────────────── */
+.md-typeset table:not([class]) {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25);
+  width: 100%;
+}
+
+.md-typeset table:not([class]) th {
+  background: rgba(124, 58, 237, 0.22) !important;
+  color: var(--rpg-gold-light) !important;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.4) !important;
+  padding: 12px 16px !important;
+}
+
+.md-typeset table:not([class]) td {
+  padding: 10px 16px !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+}
+
+.md-typeset table:not([class]) tr:nth-child(even) td {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.md-typeset table:not([class]) tr:hover td {
+  background: rgba(124, 58, 237, 0.08);
+}
+
+/* ── Global — Inline code ──────────────────────────────────── */
+.md-typeset code {
+  background: rgba(124, 58, 237, 0.12) !important;
+  color: var(--rpg-gold-light) !important;
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-size: 0.85em;
+}
+
+/* ── Global — Admonitions ──────────────────────────────────── */
+.md-typeset .admonition,
+.md-typeset details {
+  border-radius: 10px !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* tip → gold */
+.md-typeset .admonition.tip,
+.md-typeset details.tip {
+  border-color: var(--rpg-gold) !important;
+}
+.md-typeset .tip > .admonition-title,
+.md-typeset .tip > summary {
+  background-color: rgba(245, 158, 11, 0.12) !important;
+  color: var(--rpg-gold-light) !important;
+}
+
+/* info → purple */
+.md-typeset .admonition.info,
+.md-typeset details.info {
+  border-color: var(--rpg-purple-light) !important;
+}
+.md-typeset .info > .admonition-title,
+.md-typeset .info > summary {
+  background-color: rgba(167, 139, 250, 0.12) !important;
+  color: var(--rpg-purple-light) !important;
+}
+
+/* warning → amber */
+.md-typeset .admonition.warning,
+.md-typeset details.warning {
+  border-color: #F97316 !important;
+}
+
+/* ── Global — Navigation ───────────────────────────────────── */
+.md-nav__link--active {
+  color: var(--rpg-gold) !important;
+  font-weight: 600;
+}
+
+.md-nav__link:hover {
+  color: var(--rpg-purple-light) !important;
+}
+
+/* ── Global — Header ───────────────────────────────────────── */
+.md-header {
+  background: rgba(10, 6, 18, 0.95) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(124, 58, 237, 0.3), 0 2px 12px rgba(0, 0, 0, 0.4) !important;
+}
+
+.md-header__title {
+  font-weight: 800 !important;
+  letter-spacing: 0.02em;
+}
+
+/* ── Global — Search ───────────────────────────────────────── */
+.md-search__input {
+  border-radius: 8px !important;
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+.md-search__input:focus {
+  background: rgba(124, 58, 237, 0.1) !important;
+}
+
+/* ── Global — Tabs (content) ───────────────────────────────── */
+.md-typeset .tabbed-labels > label {
+  font-weight: 600;
+}
+
+.md-typeset .tabbed-labels > label:hover {
+  color: var(--rpg-gold) !important;
+}
+
+.md-typeset .tabbed-labels > .tabbed-label--active {
+  color: var(--rpg-gold) !important;
+}
+
+/* ── Global — Footer ───────────────────────────────────────── */
+.md-footer {
+  background: rgba(10, 6, 18, 0.95) !important;
+  border-top: 1px solid rgba(124, 58, 237, 0.2);
+}
+
+.md-footer-meta {
+  background: transparent !important;
+}
+
+/* ── Global — Content area ─────────────────────────────────── */
+.md-content__inner {
+  padding-top: 1.5rem;
+}
+
+/* Horizontal rules */
+.md-typeset hr {
+  border-color: rgba(124, 58, 237, 0.2) !important;
+  margin: 2rem 0;
+}
+
+/* ── Global — Scrollbar ────────────────────────────────────── */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #0a0612; }
+::-webkit-scrollbar-thumb {
+  background: rgba(124, 58, 237, 0.4);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.65); }
+
+/* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .rpg-stat { padding: 8px 20px; }
+  .rpg-stat-value { font-size: 2rem; }
+  .rpg-features-grid { grid-template-columns: 1fr; }
+  .rpg-hero { min-height: 420px; padding: 80px 20px 60px; }
+  .rpg-hero-buttons { flex-direction: column; align-items: center; }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   Simulateur d'Ennemis
+   ══════════════════════════════════════════════════════════════ */
+
+#enemy-calculator {
+  background: rgba(10, 6, 18, 0.7);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+/* Onglets de mode */
+.ec-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.ec-tab {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--md-default-fg-color);
+  padding: 0.45rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.18s ease;
+}
+
+.ec-tab:hover {
+  border-color: rgba(124, 58, 237, 0.6);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+.ec-tab-active {
+  background: rgba(124, 58, 237, 0.85) !important;
+  border-color: #7C3AED !important;
+  color: #fff !important;
+  font-weight: 600;
+}
+
+/* Contrôles */
+.ec-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.ec-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.ec-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color);
+}
+
+.ec-hint {
+  font-weight: 400;
+  opacity: 0.55;
+  font-size: 0.8rem;
+}
+
+.ec-input,
+.ec-select {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--md-default-fg-color);
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: inherit;
+  max-width: 380px;
+  transition: border-color 0.15s;
+}
+
+.ec-input:focus,
+.ec-select:focus {
+  outline: none;
+  border-color: rgba(124, 58, 237, 0.7);
+}
+
+.ec-select option {
+  background: #1a1025;
+}
+
+.ec-range {
+  max-width: 380px;
+  accent-color: #7C3AED;
+  cursor: pointer;
+}
+
+.ec-radio-group {
+  display: flex;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  padding: 0.25rem 0;
+}
+
+.ec-radio-group label {
+  font-weight: 400;
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.ec-radio-group input[type="radio"] {
+  accent-color: #7C3AED;
+}
+
+.ec-hint-box {
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.2);
+  border-radius: 8px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  opacity: 0.85;
+}
+
+/* Carte de résultat */
+#ec-result {
+  margin-top: 1.5rem;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(0, 0, 0, 0.25));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 12px;
+  padding: 1.4rem;
+  animation: ec-fadein 0.25s ease;
+}
+
+@keyframes ec-fadein {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ec-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+  margin-bottom: 1.1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.ec-emoji {
+  font-size: 2.6rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.ec-title-block { flex: 1; min-width: 0; }
+
+.ec-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 0.2rem;
+}
+
+.ec-meta {
+  font-size: 0.85rem;
+  opacity: 0.65;
+}
+
+.ec-note {
+  font-size: 0.78rem;
+  opacity: 0.5;
+  font-style: italic;
+  margin-top: 0.2rem;
+}
+
+.ec-badge {
+  flex-shrink: 0;
+  color: #fff;
+  padding: 0.2rem 0.65rem;
+  border-radius: 20px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.ec-req {
+  font-size: 0.85rem;
+  margin-bottom: 0.75rem;
+  opacity: 0.8;
+}
+
+/* Grille de stats */
+.ec-stats-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.45rem;
+  margin-bottom: 1rem;
+}
+
+.ec-stat {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 0.45rem 0.7rem;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.88rem;
+}
+
+.ec-stat-hp {
+  grid-column: 1 / -1;
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.ec-stat-boosted {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.ec-stat-icon { font-size: 1rem; flex-shrink: 0; }
+
+.ec-stat-name {
+  flex: 1;
+  opacity: 0.65;
+  font-size: 0.82rem;
+}
+
+.ec-stat-val {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #e2d9f3;
+}
+
+.ec-stat-boosted .ec-stat-val { color: #F59E0B; }
+
+/* Passif */
+.ec-passif {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: 8px;
+  padding: 0.7rem 0.9rem;
+  margin-bottom: 0.75rem;
+}
+
+.ec-passif-lbl {
+  font-weight: 700;
+  font-size: 0.82rem;
+  color: #F59E0B;
+  margin-bottom: 0.3rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ec-passif-txt {
+  font-size: 0.9rem;
+  line-height: 1.45;
+}
+
+/* Récompenses */
+.ec-rewards {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+  opacity: 0.75;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .ec-stats-grid { grid-template-columns: 1fr; }
+  .ec-stat-hp { grid-column: 1; }
+  .ec-tabs { gap: 0.35rem; }
+  .ec-tab { padding: 0.4rem 0.7rem; font-size: 0.82rem; }
+  .ec-name { font-size: 1.05rem; }
+}

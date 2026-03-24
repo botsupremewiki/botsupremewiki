@@ -1,53 +1,94 @@
-site_name: "Bot Ultime RPG — Wiki"
-site_description: "Wiki officiel du RPG Discord Bot Ultime"
-site_url: ""
-docs_dir: docs
+site_name: Bot Suprême Wiki
+site_description: Le guide complet du RPG Discord — classes, combat, équipements, métiers et plus.
+site_url: https://botsupremewiki.netlify.app
+site_author: Bot Suprême
+
 theme:
   name: material
+  custom_dir: overrides
   language: fr
   palette:
     - scheme: slate
       primary: deep purple
       accent: amber
-      toggle:
-        icon: material/brightness-4
-        name: Mode clair
-    - scheme: default
-      primary: deep purple
-      accent: amber
-      toggle:
-        icon: material/brightness-7
-        name: Mode sombre
   features:
+    - navigation.instant
+    - navigation.instant.progress
     - navigation.tabs
+    - navigation.tabs.sticky
     - navigation.sections
+    - navigation.expand
     - navigation.top
+    - navigation.tracking
+    - navigation.footer
+    - toc.follow
+    - search.suggest
     - search.highlight
+    - search.share
+    - content.tabs.link
     - content.code.copy
+    - content.tooltips
   font:
-    text: Nunito
+    text: Roboto
     code: JetBrains Mono
+  icon:
+    logo: material/sword-cross
+    repo: fontawesome/brands/github
+
+extra_css:
+  - stylesheets/extra.css
+
+extra_javascript:
+  - javascripts/enemy_calc.js
 
 nav:
   - Accueil: index.md
-  - Guide Débutant: guide_debutant.md
-  - Classes: classes.md
-  - Modes de Jeu: modes_de_jeu.md
-  - Objets: objets.md
-  - Métiers: metiers.md
-  - Quêtes: quetes.md
+  - Guide du Débutant: debutant.md
+  - Prestige: prestige.md
+  - Classes:
+      - Vue d'ensemble: classes/index.md
+      - Guerrier: classes/guerrier.md
+      - Assassin: classes/assassin.md
+      - Mage: classes/mage.md
+      - Tireur: classes/tireur.md
+      - Support: classes/support.md
+      - Vampire: classes/vampire.md
+      - Gardien du Temps: classes/gardien.md
+      - Ombre Venin: classes/ombre.md
+      - Pyromancien: classes/pyromancien.md
+      - Paladin: classes/paladin.md
+  - Combat:
+      - Mécanique de combat: combat/mecanique.md
+      - Simulateur d'Ennemis: combat/ennemis.md
+  - Équipements:
+      - Équipements & Panoplies: equipements/index.md
+  - Métiers:
+      - Tous les Métiers: metiers/index.md
+  - Modes de jeu:
+      - Vue d'ensemble: modes/index.md
+      - Monde: modes/monde.md
+      - Donjons: modes/donjons.md
+      - Raids: modes/raids.md
+      - Taverne (PvP): modes/pvp.md
+      - World Boss: modes/world_boss.md
+  - Objets:
+      - Potions & Élixirs: objets/potions.md
+      - Nourritures: objets/nourriture.md
+      - Runes: objets/runes.md
+      - Reliques: objets/reliques.md
+      - Matériaux: objets/materiaux.md
   - Titres: titres.md
+  - Quêtes: quetes.md
 
 markdown_extensions:
   - admonition
-  - tables
-  - attr_list
   - pymdownx.details
   - pymdownx.superfences
+  - pymdownx.tabbed:
+      alternate_style: true
+  - tables
+  - attr_list
+  - md_in_html
   - pymdownx.emoji:
       emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
-  - pymdownx.highlight:
-      anchor_linenums: true
-  - toc:
-      permalink: true
