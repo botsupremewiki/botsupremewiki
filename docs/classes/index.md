@@ -1,47 +1,60 @@
-# ⚔️ Les Classes
+# ⚔️ Classes
 
-Il y a **10 classes** jouables, chacune avec un passif unique, 3 sorts actifs et un sort ultime.
+Il existe **5 classes standard** (gratuites) et **5 classes premium** (rôle Premium requis).
 
-Chaque classe utilise une **ressource** pour lancer ses sorts :
 
-| Ressource | Classes | Fonctionnement |
-|-----------|---------|---------------|
-| **Rage** | Guerrier, Paladin | Se régénère de +10 par tour et +5 à chaque attaque. Maximum : 100 |
-| **Mana** | Mage, Gardien du Temps, Pyromancien | Se régénère de +15 par tour. Maximum : 100 |
-| **Combo** | Assassin, Tireur, Support, Vampire, Ombre Venin | Se régénère de +1 par tour. Maximum : 5 |
+!!! warning "Choix définitif"
+    La classe choisie est **permanente**. Prends le temps de comparer !
 
----
 
-## Comparatif des stats de départ (niveau 1)
+## 📊 Comparatif rapide
 
-| Classe | PV | Att. Phy | Att. Mag | Déf. Phy | Déf. Mag | Vitesse | Critique |
-|--------|----|----------|----------|----------|----------|---------|---------|
-| Guerrier | 1 200 | 80 | 20 | 60 | 30 | 80 | 5% |
-| Assassin | 700 | 110 | 15 | 30 | 20 | 130 | 20% |
-| Mage | 650 | 15 | 120 | 20 | 40 | 90 | 10% |
-| Tireur | 750 | 100 | 10 | 25 | 25 | 110 | 15% |
-| Support | 1 000 | 50 | 50 | 50 | 50 | 70 | 5% |
-| Vampire | 850 | 95 | 40 | 40 | 35 | 100 | 12% |
-| Gardien du Temps | 900 | 70 | 70 | 45 | 45 | 85 | 8% |
-| Ombre Venin | 800 | 85 | 60 | 35 | 35 | 105 | 14% |
-| Pyromancien | 700 | 20 | 130 | 25 | 45 | 88 | 10% |
-| Paladin | 1 100 | 65 | 40 | 55 | 55 | 75 | 5% |
+| Classe | Rôle | Difficulté | Stats phares |
+|--------|------|-----------|--------------|
+| ⚔️ **[Guerrier](guerrier.md)** | DPS Physique / Tank | ⭐⭐☆☆☆ | ❤️ 28,032 HP · ⚔️ 2,800 |
+| 🗡️ **[Assassin](assassin.md)** | DPS Physique / Esquive | ⭐⭐⭐☆☆ | ⚔️ 2,499 · ⚡ 499 |
+| 🔮 **[Mage](mage.md)** | DPS Magique / Burst | ⭐⭐⭐☆☆ | 🔮 2,000 · 🎯 28% |
+| 🏹 **[Tireur](tireur.md)** | DPS Physique / Cadence | ⭐⭐☆☆☆ | ⚔️ 2,199 · 🎯 32% |
+| 🛡️ **[Support](support.md)** | Tank / Soutien Hybride | ⭐⭐⭐⭐☆ | ❤️ 33,996 HP · 🔮 1,700 |
+| 🧛 **[Vampire](vampire.md)** 💎 | DPS Physique / Régénération | ⭐⭐⭐☆☆ | ⚔️ 2,399 |
+| ⏳ **[Gardien du Temps](gardien.md)** 💎 | Contrôle / Hybride | ⭐⭐⭐⭐⭐ | — |
+| ☠️ **[Ombre Venin](ombre.md)** 💎 | DPS DoT / Poison | ⭐⭐⭐⭐☆ | ⚡ 414 |
+| 🔥 **[Pyromancien](pyromancien.md)** 💎 | DPS Magique / Brûlure | ⭐⭐⭐☆☆ | 🔮 2,000 |
+| ✝️ **[Paladin](paladin.md)** 💎 | Tank Défensif / Burst | ⭐⭐☆☆☆ | ❤️ 32,997 HP |
 
-> Ces stats augmentent à chaque niveau. Les dégâts de critique sont séparés (valeur entre 130% et 200% selon la classe).
+💎 = Classe Premium
+
 
 ---
 
-## Résumé des passifs
+## 📈 Stats au niveau 1 (sans équipement)
 
-| Classe | Passif |
-|--------|--------|
-| Guerrier | +% dégâts proportionnel aux PV manquants (jusqu'à +50%) |
-| Assassin | 20% de chance d'esquiver chaque attaque ennemie |
-| Mage | +% dégâts magiques proportionnel aux PV actuels (jusqu'à +50%) |
-| Tireur | 25% de chance de doubler tous ses dégâts |
-| Support | 30% de chance de générer un bouclier de 8% des PV max |
-| Vampire | Vol de vie de 15% des dégâts infligés (plafonné à 10% PV max par tour) |
-| Gardien du Temps | Réduit une stat aléatoire de l'ennemi de -5% par tour (cumulatif, max -50%) |
-| Ombre Venin | Applique du poison dès le premier tour de combat |
-| Pyromancien | Ajoute 1 stack de brûlure par tour (maximum 5 stacks) |
-| Paladin | Rampe : +3% dégâts ET -3% dégâts reçus par tour (maximum +30%/-30%) |
+| Classe | ❤️ HP | ⚔️ P.Atk | 🔮 M.Atk | 🛡️ P.Déf | 🔷 M.Déf | ⚡ Vit. | 🎯 Crit% |
+|--------|------:|------:|------:|------:|------:|------:|------:|
+| ⚔️ **Guerrier** | 600 | 60 | — | 28 | 6 | 80 | 5% |
+| 🗡️ **Assassin** | 500 | 50 | — | 4 | 3 | 160 | 20% |
+| 🔮 **Mage** | 400 | — | 40 | 3 | 10 | 90 | 12% |
+| 🏹 **Tireur** | 440 | 44 | — | 4 | 4 | 130 | 18% |
+| 🛡️ **Support** | 600 | 34 | 34 | 25 | 25 | 55 | 5% |
+| 🧛 **Vampire** 💎 | 450 | 45 | — | 12 | 7 | 90 | 15% |
+| ⏳ **Gardien du Temps** 💎 | 400 | 22 | 22 | 15 | 15 | 85 | 8% |
+| ☠️ **Ombre Venin** 💎 | 300 | 30 | 12 | 5 | 5 | 115 | 16% |
+| 🔥 **Pyromancien** 💎 | 400 | — | 40 | 2 | 10 | 85 | 12% |
+| ✝️ **Paladin** 💎 | 560 | 30 | — | 35 | 22 | 55 | 5% |
+
+---
+
+## 🏆 Stats au niveau 1000 (sans équipement ni prestige)
+
+| Classe | ❤️ HP | ⚔️ P.Atk | 🔮 M.Atk | 🛡️ P.Déf | 🔷 M.Déf | ⚡ Vit. | 🎯 Crit% |
+|--------|------:|------:|------:|------:|------:|------:|------:|
+| ⚔️ **Guerrier** | 28,032 | 2,800 | — | 1,499 | 299 | 274 | 12% |
+| 🗡️ **Assassin** | 24,995 | 2,499 | — | 259 | 199 | 499 | 30% |
+| 🔮 **Mage** | 20,000 | — | 2,000 | 129 | 530 | 349 | 28% |
+| 🏹 **Tireur** | 21,998 | 2,199 | — | 164 | 164 | 399 | 32% |
+| 🛡️ **Support** | 33,996 | 1,700 | 1,700 | 1,379 | 1,379 | 249 | 8% |
+| 🧛 **Vampire** 💎 | 23,996 | 2,399 | — | 640 | 399 | 349 | 22% |
+| ⏳ **Gardien du Temps** 💎 | 21,998 | 1,099 | 1,099 | 880 | 880 | 329 | 18% |
+| ☠️ **Ombre Venin** 💎 | 20,000 | 2,000 | 800 | 259 | 259 | 414 | 24% |
+| 🔥 **Pyromancien** 💎 | 20,000 | — | 2,000 | 99 | 429 | 329 | 25% |
+| ✝️ **Paladin** 💎 | 32,997 | 1,649 | — | 1,900 | 1,199 | 249 | 8% |

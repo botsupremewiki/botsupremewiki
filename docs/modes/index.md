@@ -1,25 +1,44 @@
-# 🗺️ Modes de jeu
+# 🗺️ Modes de Jeu
 
-Le RPG propose plusieurs modes de jeu avec des objectifs et des récompenses différents.
-
-| Mode | Joueurs | Coût en énergie | Récompenses |
-|------|---------|-----------------|-------------|
-| [Monde](monde.md) | Solo | 1 par combat | XP, or, équipements |
-| [Donjons Classiques](donjons.md) | Solo | 3 | Meilleures récompenses |
-| [Donjons Élite](donjons.md) | Solo | 5 | Récompenses supérieures |
-| [Donjons Abyssaux](donjons.md) | Solo | 10 | Récompenses d'élite |
-| [Raids](raids.md) | Jusqu'à 5 | 50 | Récompenses exclusives |
-| [World Boss](world_boss.md) | Tous | 50 | Récompenses hebdomadaires |
-| [Taverne — PvP Classique](pvp.md) | 2 joueurs | Gratuit | Aucune (pour le fun) |
-| [Taverne — PvP Classé](pvp.md) | 2 joueurs | Gratuit | Élo et classement |
+Bot Suprême propose **5 modes de jeu** différents, chacun avec ses propres ennemis, récompenses et mécaniques.
 
 ---
 
-## Recommandations selon ton niveau
+## Résumé des coûts en énergie
 
-| Niveau | Mode conseillé |
-|--------|---------------|
-| 1–50 | Monde (zones 1–50), Donjons Classiques |
-| 50–200 | Donjons Classiques, début des Donjons Élite |
-| 200–500 | Donjons Élite, début des Raids |
-| 500–1000 | Donjons Abyssaux, Raids, World Boss, PvP |
+| Mode | Coût ⚡ | Récompenses |
+|------|--------:|-------------|
+| 🌍 Ennemi monde | 1 | XP, Gold |
+| 🌍 Boss classique | 2 | XP, Gold, Équipement |
+| 🌍 Boss runique | 3 | XP, Gold, Équipement |
+| 🌍 Boss emblématique | 5 | XP, Gold, Équipement+ |
+| 🌍 Boss antique | 10 | XP, Gold, Équipement++ |
+| 🏰 Donjon classique | 3 | Équipement (craft) |
+| 🏰 Donjon élite | 5 | Équipement (élite) |
+| 🏰 Donjon abyssal | 10 | Équipement (abyssal) |
+| 👥 Raid | 100 | Équipement (raid) |
+| 🐉 World Boss | 100 | Reliques, Gold |
+| 🥊 PvP | 5 | Élo, Gloire |
+
+---
+
+## 🌍 [Monde](monde.md)
+
+Le mode principal. Progresse de zone en zone (1 → 10 000) en battant des ennemis et des boss.
+Disponible en **mode automatique** pour farmer en continu.
+
+## 🏰 [Donjons](donjons.md)
+
+7 types de boss, 3 difficultés (Classique / Élite / Abyssal). Les meilleures sources d'équipements.
+
+## 👥 [Raids](raids.md)
+
+10 boss légendaires conçus pour **5 joueurs**. Les équipements les plus puissants du jeu.
+
+## 🐉 [World Boss](world_boss.md)
+
+Un boss partagé par tous les joueurs, réinitialisé chaque semaine. Récompenses basées sur les dégâts infligés.
+
+## 🥊 [Taverne — PvP](pvp.md)
+
+Affronte d'autres joueurs. Système Élo pour le mode classé.

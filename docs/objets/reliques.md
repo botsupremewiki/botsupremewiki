@@ -1,135 +1,55 @@
-# Reliques
+# 💎 Reliques
 
-Les reliques sont des objets d'une puissance exceptionnelle. Il n'existe qu'un seul type de relique : la **Relique du Bot Suprême**, disponible en **10 niveaux de rareté**. Chaque relique confère simultanément **6 effets passifs permanents** en combat, dont les valeurs augmentent avec la rareté.
+Les reliques du **World Boss** donnent des bonus permanents en combat.
 
-Les reliques s'obtiennent exclusivement en participant aux événements **World Boss**.
+Plus la rareté est élevée, plus les bonus sont puissants.
 
-!!! info "Participation garantie"
-    Même les joueurs classés au-delà du rang 10 reçoivent une Relique Commune, à condition d'avoir participé activement au World Boss. Aucune participation n'est jamais perdue.
 
 ---
 
-## Les 6 effets
 
-Chaque Relique du Bot Suprême possède **simultanément** les 6 effets suivants. La valeur de chacun dépend uniquement de la rareté de la relique.
+## Comment obtenir des reliques
 
-| Effet | Description | Cap |
-|-------|-------------|:---:|
-| **Vol de vie** | % des dégâts infligés récupérés en PV | 8% |
-| **Réduction dégâts** | % de réduction des dégâts reçus | 6% |
-| **Bonus dégâts** | % d'amplification des dégâts infligés | 10% |
-| **Reflet** | % des dégâts reçus renvoyés à l'ennemi en dégâts purs | 5% |
-| **Double frappe** | % de chance de frapper deux fois lors du tour du joueur | 15% |
-| **Regen HP/tour** | % des HP max régénérés au début du tour joueur | 4% |
+Les reliques s'obtiennent uniquement via le **[World Boss](../modes/world_boss.md)**.
 
-!!! warning "Plafonds (caps)"
-    Chaque effet possède une valeur maximale cumulée, tous équipements confondus. Accumuler plusieurs reliques ne peut jamais faire dépasser ces caps.
+Chaque semaine, les meilleurs joueurs reçoivent une relique de leur rang.
 
----
 
-## Valeurs par rareté
 
-| Rareté | Vol de vie | Réd. dégâts | Bonus dégâts | Reflet | Double frappe | Regen HP/tour |
-|--------|:----------:|:-----------:|:------------:|:------:|:-------------:|:-------------:|
-| ⬜ Commun | 0.30% | 0.20% | 0.30% | 0.40% | 0.20% | 0.15% |
-| 🟩 Peu Commun | 0.35% | 0.25% | 0.35% | 0.45% | 0.25% | 0.20% |
-| 🟦 Rare | 0.40% | 0.30% | 0.40% | 0.50% | 0.30% | 0.20% |
-| 🟪 Épique | 0.50% | 0.35% | 0.50% | 0.65% | 0.35% | 0.25% |
-| 🟧 Légendaire | 0.60% | 0.40% | 0.60% | 0.80% | 0.40% | 0.30% |
-| 🟥 Mythique | 0.70% | 0.50% | 0.70% | 0.90% | 0.50% | 0.35% |
-| 🔶 Artefact | 0.85% | 0.60% | 0.85% | 1.10% | 0.60% | 0.45% |
-| 🟡 Divin | 1.00% | 0.70% | 1.00% | 1.35% | 0.70% | 0.50% |
-| 🩵 Transcendant | 1.20% | 0.85% | 1.20% | 1.60% | 0.85% | 0.65% |
-| 🌈 Prismatique | 1.50% | 1.00% | 1.50% | 2.00% | 1.00% | 0.75% |
+## Effets des reliques
 
----
+Chaque relique possède les mêmes effets, mais avec des valeurs plus élevées selon la rareté.
 
-## Stacking de reliques
 
-Il est possible de posséder et d'équiper **plusieurs reliques simultanément**. Les effets se cumulent, mais avec des **rendements décroissants** pour les doublons de même rareté.
+| Rareté | Vol de vie | Réd. dégâts | Bonus dégâts | Reflet dégâts | Double frappe | Regen HP/tour |
+|--------|----------:|------------:|-------------:|-------------:|-------------:|--------------:|
+| ⬜ Commun | 30% | 20% | 30% | 40% | 20% | 15% |
+| 🟩 Peu commun | 35% | 25% | 35% | 45% | 25% | 20% |
+| 🟦 Rare | 40% | 30% | 40% | 50% | 30% | 20% |
+| 🟪 Épique | 50% | 35% | 50% | 65% | 35% | 25% |
+| 🟧 Légendaire | 60% | 40% | 60% | 80% | 40% | 30% |
+| 🟥 Mythique | 70% | 50% | 70% | 90% | 50% | 35% |
+| 🔶 Artefact | 85% | 60% | 85% | 110% | 60% | 45% |
+| 🟡 Divin | 100% | 70% | 100% | 135% | 70% | 50% |
+| 🩵 Transcendant | 120% | 85% | 120% | 160% | 85% | 65% |
+| 🌈 Prismatique | 150% | 100% | 150% | 200% | 100% | 75% |
 
-### Rendements décroissants
 
-Chaque copie supplémentaire d'une **même rareté** (même ID de relique) perd **5% d'efficacité** par rapport à la précédente :
+## Plafonds des effets
 
-| Copie | Efficacité |
-|-------|------------|
-| 1ère  | 100% |
-| 2ème  | 95% |
-| 3ème  | 90% |
-| 4ème  | 85% |
-| … | … |
-| 20ème | 5% |
-| 21ème+ | 0% (aucun effet) |
+Pour éviter les abus, les effets de reliques ont des **plafonds maximaux**,
+même si tu possèdes plusieurs reliques.
 
-!!! info "Les reliques de raretés différentes se cumulent sans malus"
-    Seules les reliques de la **même rareté** subissent les rendements décroissants. Une Prismatique + une Transcendante s'ajoutent à pleine efficacité l'une par rapport à l'autre.
 
-!!! tip "Exemple : deux Reliques Prismatiques"
-    La 2ème prismatique n'apporte que **95%** de sa valeur nominale.
+| Effet | Valeur maximale |
+|-------|----------------:|
+| Vol de vie | 800% |
+| Réduction dégâts | 600% |
+| Bonus dégâts | 1000% |
+| Reflet | 500% |
+| Double frappe | 1500% |
+| Regen HP/tour | 400% |
 
-    - Vol de vie : 1.50% + 1.50%×0.95 = **2.925%** (cap 8% — non atteint)
-    - Réduction dégâts : 1.00% + 1.00%×0.95 = **1.95%** (cap 6% — non atteint)
-    - Bonus dégâts : 1.50% + 1.50%×0.95 = **2.925%** (cap 10% — non atteint)
-    - Reflet : 2.00% + 2.00%×0.95 = **3.90%** (cap 5% — non atteint)
-    - Double frappe : 1.00% + 1.00%×0.95 = **1.95%** (cap 15% — non atteint)
-    - Regen HP/tour : 0.75% + 0.75%×0.95 = **1.4625%** (cap 4% — non atteint)
 
-!!! warning "Limites avec une seule rareté"
-    Même avec des doublons infinis de Prismatiques, les rendements décroissants plafonnent l'apport total de cette seule rareté à **~10.5% × (valeur nominale)**. Mélanger des raretés différentes est donc plus efficace que d'empiler la même.
-
-!!! warning "Vérifiez vos caps avant d'équiper"
-    Si tous les effets d'une relique supplémentaire sont déjà au cap, celle-ci n'apporte aucun bénéfice en combat. Consultez votre profil pour connaître vos valeurs actuelles.
-
----
-
-## Récompenses World Boss par rang
-
-Les reliques sont distribuées à l'issue de chaque événement World Boss en fonction du classement des participants par dégâts infligés.
-
-| Rang | Relique obtenue | Gold |
-|------|-----------------|:----:|
-| 🥇 Rang 1 | 🌈 Prismatique | 50 000 |
-| 🥈 Rang 2 | 🩵 Transcendante | 30 000 |
-| 🥉 Rang 3 | 🟡 Divine | 20 000 |
-| Rang 4 | 🔶 Artefact | 12 000 |
-| Rang 5 | 🟥 Mythique | 8 000 |
-| Rang 6 | 🟧 Légendaire | 5 000 |
-| Rang 7 | 🟪 Épique | 3 000 |
-| Rang 8 | 🟦 Rare | 2 000 |
-| Rang 9 | 🟩 Peu Commune | 1 000 |
-| Rang 10 | 🟩 Peu Commune | 500 |
-| Rang 11+ | ⬜ Commune | 200 |
-
-!!! info "Tous les participants sont récompensés"
-    Tout joueur ayant contribué au World Boss reçoit au minimum une Relique Commune et 200 gold, quelle que soit sa position dans le classement.
-
----
-
-## Conseils et stratégies
-
-### Choisir ses effets prioritaires selon son style de jeu
-
-!!! tip "Joueurs offensifs"
-    Priorisez le **Bonus dégâts** (cap 10%) et la **Double frappe** (cap 15%). La double frappe a le cap le plus élevé et nécessite de nombreuses reliques pour l'atteindre, ce qui en fait un effet idéal pour tirer pleinement parti du stacking sur le long terme.
-
-!!! tip "Joueurs axés survie"
-    La **Réduction dégâts** (cap 6%) et la **Regen HP/tour** (cap 4%) allongent considérablement la durée de vie en combats prolongés (raids, donjons abyssaux). Le **Vol de vie** (cap 8%) est excellent en complément si vos dégâts sont élevés.
-
-!!! tip "Style hybride — Reflet"
-    Le **Reflet** (cap 5%) punit directement l'ennemi pour chaque attaque reçue. Il est particulièrement efficace contre les ennemis rapides ou multi-coups, et se combine bien avec la Réduction dégâts.
-
-### Optimiser son stacking
-
-- Evaluez toujours la **distance restante avant le cap** avant d'équiper une relique supplémentaire. Un effet déjà au cap ne progresse plus.
-- En early game, équipez toutes les reliques obtenues sans hésiter — même communes, elles contribuent.
-- En end game, concentrez-vous sur les effets dont le cap n'est pas encore atteint, en privilégiant les raretés Artefact ou supérieures pour progresser efficacement.
-
-### Participer régulièrement aux World Boss
-
-!!! warning "Source exclusive"
-    Les reliques ne s'obtiennent **que** via le World Boss. Il n'existe aucune autre façon d'en acquérir. Chaque événement manqué est une occasion perdue de progresser.
-
-- **Top 3** : l'objectif idéal. Les reliques Prismatique, Transcendante et Divine ont les valeurs les plus élevées et représentent un avantage majeur.
-- **Top 10** : très rentable. Les reliques Artefact à Rare offrent un bon gain pour un effort de participation standard.
-- **Au-delà du top 10** : même une Relique Commune et 200 gold contribuent à votre progression sur la durée.
+!!! note "Diminishing returns"
+    Posséder plusieurs reliques de la même rareté donne des rendements décroissants : −5% d'efficacité par copie supplémentaire (2ème = 95%, 3ème = 90%, etc.).

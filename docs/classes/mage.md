@@ -1,68 +1,68 @@
 # 🔮 Mage
 
-Le Mage est un lanceur de sorts **dévastateur à longue distance**. Il inflige les dégâts magiques les plus élevés du jeu, mais est extrêmement fragile. Son passif le récompense de rester en bonne santé.
+**Rôle :** DPS Magique / Burst
+
+**Difficulté :** ⭐⭐⭐☆☆ (3/5)
+
 
 ---
 
-## Stats de départ (niveau 1)
+## 📖 Description
 
-| Stat | Valeur |
-|------|--------|
-| Points de Vie | 650 |
-| Attaque Physique | 15 |
-| Attaque Magique | 120 |
-| Défense Physique | 20 |
-| Défense Magique | 40 |
-| Vitesse | 90 |
-| Chance de Critique | 10% |
-| Dégâts de Critique | 180% |
+Maître de l'arcane dont la puissance croît avec sa vitalité.
 
----
+**Passif** : +0.5% de dégâts magiques par % de HP actuels (max +50%).
 
-## Passif — Concentration Arcanique
+**Ressource** : 🔵 Mana (max 100, +15/tour).
 
-Plus le Mage a de PV, plus ses sorts font mal. À PV pleins, il gagne **+50% de dégâts magiques**. Ce bonus diminue proportionnellement à mesure qu'il perd des PV.
 
-> À 100% de PV : +50% de dégâts. À 50% de PV : +25%. À 0 PV : +0%.
+**Ressource :** 🔵 Mana — maximum 100, +15 par tour
+
 
 ---
 
-## Ressource — Mana
+## 📊 Progression des statistiques
 
-Le Mana se régénère de **+15 par tour**. Il est plafonné à **100**.
-
----
-
-## Sorts
-
-=== "⚡ Éclair Arcanique"
-    **Coût :** 20 Mana — **Temps de recharge :** aucun
-
-    Inflige **×1,4** les dégâts magiques normaux. Le sort le plus rentable pour spammer.
-
-=== "🌀 Lenteur"
-    **Coût :** 20 Mana — **Temps de recharge :** 3 tours
-
-    Frappe pour ×1,0 dégâts magiques et **réduit la Vitesse ennemie de 30% pendant 2 tours**.
-    Très utile pour s'assurer d'agir avant l'ennemi.
-
-=== "🛡️ Contresort"
-    **Coût :** 25 Mana — **Temps de recharge :** 5 tours
-
-    **Réduit les dégâts reçus de 25%** au prochain tour ennemi. Aucune attaque portée.
-    Un tour de protection quand tu anticipes un gros coup.
-
-=== "🌟 Nova Arcanique (Ultime)"
-    **Coût :** 80 Mana — **Temps de recharge :** 7 tours
-
-    Inflige **×4,0** les dégâts magiques en **ignorant toute la Défense Magique** de l'ennemi.
-    Le sort le plus puissant du jeu sur un seul coup.
+| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
+|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
+| Niv. 1 | 400 | — | 40 | 3 | 10 | 90 | 12% |
+| Niv. 100 | 2,342 | — | 234 | 15 | 61 | 115 | 14% |
+| Niv. 200 | 4,304 | — | 430 | 28 | 113 | 141 | 15% |
+| Niv. 500 | 10,190 | — | 1,019 | 66 | 269 | 219 | 20% |
+| Niv. 1000 | 20,000 | — | 2,000 | 129 | 530 | 349 | 28% |
 
 ---
 
-## Conseils
+## ✨ Sorts
 
-- Soigne-toi autant que possible pour conserver le bonus de passif — garde les potions pour ça.
-- **Nova Arcanique** est monumentale mais coûte 80 Mana. Planifie 6 tours à l'avance pour l'accumuler.
-- **Lenteur** est très précieuse contre les ennemis rapides qui t'attaquent en premier.
-- Évite les combats prolongés : sans PV, ton passif devient nul. Frappe vite et fort.
+### ⚡ Soif Arcane
+
+Inflige ×1.2 dégâts magiques et récupère 20 mana supplémentaire.
+
+- **Coût :** 15 🔵 Mana
+
+
+### 🔵 Écran Magique
+
+Inflige ×1.4 dégâts magiques et réduit les dégâts subis de 25% pendant 2 tours.
+
+- **Coût :** 25 🔵 Mana · Temps de recharge : **3 tours**
+
+
+### ☄️ Nova Primordiale 🌟 **ULTIME**
+
+Inflige ×4.5 dégâts magiques en ignorant toute la Déf.Mag.
+
+- **Coût :** 80 🔵 Mana · Temps de recharge : **7 tours**
+
+
+
+---
+
+## 💡 Conseils de jeu
+
+- Plus tu as de HP, plus tes dégâts magiques sont élevés — reste en pleine santé.
+
+- **Nova Primordiale** ignore toute la défense magique — garde-la pour les boss.
+
+- **Soif Arcane** te permet de régénérer du Mana tout en attaquant.

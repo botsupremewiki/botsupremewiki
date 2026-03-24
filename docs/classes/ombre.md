@@ -1,68 +1,71 @@
 # ☠️ Ombre Venin
 
-L'Ombre Venin est une classe de **dégâts sur la durée**. Elle empoisonne et saigne l'ennemi dès les premiers tours, infligeant des dégâts progressifs qui explosent en fin de combat.
+!!! note "Classe Premium"
+    Cette classe nécessite le rôle Premium pour être sélectionnée.
+
+**Rôle :** DPS DoT / Poison
+
+**Difficulté :** ⭐⭐⭐⭐☆ (4/5)
+
 
 ---
 
-## Stats de départ (niveau 1)
+## 📖 Description
 
-| Stat | Valeur |
-|------|--------|
-| Points de Vie | 800 |
-| Attaque Physique | 85 |
-| Attaque Magique | 60 |
-| Défense Physique | 35 |
-| Défense Magique | 35 |
-| Vitesse | 105 |
-| Chance de Critique | 14% |
-| Dégâts de Critique | 165% |
+*(Premium)* Assassin venimeux dont le poison dévore ses proies de l'intérieur.
 
----
+**Passif** : 30% de chance d'appliquer du poison (3% HP max/tour).
 
-## Passif — Venin Persistant
+**Ressource** : 🔵 Mana (max 100, +12/tour).
 
-Dès le premier tour de combat, l'Ombre Venin **applique automatiquement du poison** sur l'ennemi. Ce poison inflige des dégâts passifs chaque tour.
+
+**Ressource :** 🟡 Combo — maximum 5, +1 par coup reçu
+
 
 ---
 
-## Ressource — Combo
+## 📊 Progression des statistiques
 
-Le Combo se régénère de **+1 par tour**. Il est plafonné à **5**.
-
----
-
-## Sorts
-
-=== "💉 Injection"
-    **Coût :** 1 Combo — **Temps de recharge :** aucun
-
-    Frappe pour ×0,8 et **applique 2 stacks de poison** sur l'ennemi.
-    Plus il y a de stacks, plus les dégâts de poison par tour sont élevés.
-
-=== "🌫️ Nuage Toxique"
-    **Coût :** 2 Combo — **Temps de recharge :** 3 tours
-
-    Frappe pour ×1,0 et **réduit la Défense Physique ennemie de -20% pendant 3 tours**.
-    Synergise avec les attaques physiques pour percer l'armure.
-
-=== "😖 Agonie"
-    **Coût :** 2 Combo — **Temps de recharge :** 4 tours
-
-    Les **dégâts de poison actifs infligent ×2,5** ce tour. Aucune attaque portée.
-    Transforme un tick de poison discret en une vague dévastatrice.
-
-=== "💀 Nécrose (Ultime)"
-    **Coût :** 5 Combo — **Temps de recharge :** 6 tours
-
-    **Explose tous les stacks de poison actifs** pour **×5,0 de dégâts par stack**.
-    Plus tu as accumulé de stacks, plus l'explosion est destructrice.
+| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
+|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
+| Niv. 1 | 300 | 30 | 12 | 5 | 5 | 115 | 16% |
+| Niv. 100 | 2,252 | 225 | 90 | 30 | 30 | 144 | 17% |
+| Niv. 200 | 4,224 | 422 | 169 | 55 | 55 | 174 | 18% |
+| Niv. 500 | 10,140 | 1,014 | 405 | 132 | 132 | 264 | 20% |
+| Niv. 1000 | 20,000 | 2,000 | 800 | 259 | 259 | 414 | 24% |
 
 ---
 
-## Conseils
+## ✨ Sorts
 
-- Le style de jeu de l'Ombre Venin se résume à : **empoisonner → accumuler des stacks → exploser**.
-- Commence par **Injection** plusieurs fois pour monter les stacks, puis utilise **Nécrose** pour l'explosion finale.
-- **Agonie** avant **Nécrose** est une combinaison redoutable sur 2 tours consécutifs.
-- **Nuage Toxique** n'est pas à négliger : -20% de défense aide toutes tes attaques physiques.
-- L'Ombre Venin est moins efficace sur les combats très courts — elle a besoin de quelques tours pour se mettre en place.
+### ☠️ Injection
+
+Inflige ×1.0 dégâts magiques et applique 2 stacks de poison (+12% dégâts par stack).
+
+- **Coût :** 1 🟡 Combo
+
+
+### 💨 Brume Toxique
+
+Inflige ×0.8 dégâts magiques, applique 3 stacks de poison et réduit la Déf. Mag. ennemie de 20% pendant 2 tours.
+
+- **Coût :** 2 🟡 Combo · Temps de recharge : **3 tours**
+
+
+### 💀 Nécrose 🌟 **ULTIME**
+
+Inflige ×2.5 dégâts magiques + ×1.5 ATK Mag par stack de poison. Consomme tous les stacks.
+
+- **Coût :** 5 🟡 Combo · Temps de recharge : **7 tours**
+
+
+
+---
+
+## 💡 Conseils de jeu
+
+- Accumule un maximum de stacks de poison avant de déclencher **Nécrose**.
+
+- Ton passif applique du poison 30% du temps — très efficace sur les longues fights.
+
+- **Brume Toxique** réduit aussi la Déf. Mag. ennemie pour encore plus de dégâts.

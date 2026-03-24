@@ -1,45 +1,110 @@
-# 🏰 Les Donjons
+# 🏰 Donjons
 
-Les Donjons sont des défis en solo avec des **ennemis et boss plus puissants que dans le Monde**, mais qui offrent de bien meilleures récompenses. Il existe **3 niveaux de difficulté**.
+Les donjons te permettent d'obtenir des **équipements puissants** en battant des boss spécialisés.
 
----
+Il existe **7 boss de donjon**, chacun lié à un **slot d'équipement** spécifique.
 
-## Les 3 types de donjons
-
-| Type | Coût | Difficulté | Récompenses |
-|------|------|------------|-------------|
-| **Classique** | 3 énergie | ⭐ Accessible | Bonnes récompenses |
-| **Élite** | 5 énergie | ⭐⭐⭐ Difficile | Très bonnes récompenses |
-| **Abyssal** | 10 énergie | ⭐⭐⭐⭐⭐ Extrême | Récompenses d'exception |
 
 ---
 
-## Structure d'un donjon
 
-Chaque donjon se compose de **plusieurs salles** avec des ennemis, et se termine par un **boss final**. Le combat se fait au tour par tour — tu joues activement chaque attaque et peux utiliser tes sorts.
+## ⚡ Niveaux de difficulté
 
-Si tu perds un combat dans le donjon, tu es éjecté et dois recommencer depuis le début (le coût en énergie est prélevé à l'entrée, pas à la victoire).
+
+| Difficulté | Énergie ⚡ | Niveaux | Équipement | Difficulté |
+|------------|----------:|---------|-----------|-----------|
+| ⚔️ Classique | 3 | 1 – 100 | Source Classique ⭐⭐ | ⭐⭐☆☆☆ |
+| 🔥 Élite | 5 | 1 – 100 | Source Élite ⭐⭐⭐ | ⭐⭐⭐☆☆ |
+| 💀 Abyssal | 10 | 1 – 100 | Source Abyssale ⭐⭐⭐⭐ | ⭐⭐⭐⭐☆ |
+
+
+**Sorts disponibles par difficulté :**
+
+- **Classique** : le boss utilise uniquement son Sort 1
+
+- **Élite** : le boss utilise Sort 1 et Sort 2
+
+- **Abyssal** : le boss utilise Sort 1, Sort 2 et son **Ultime**
+
+
 
 ---
 
-## Les récompenses
 
-En battant le boss final d'un donjon, tu reçois :
-- De l'**or**
-- De l'**expérience**
-- Des **équipements** de la rareté correspondant au niveau du donjon
-- Une chance d'obtenir une pièce de **panoplie Donjon**
+## 🐲 Les 7 Boss de Donjon
 
-Les équipements obtenus dans les donjons sont plus puissants que ceux du Monde :
-- **Donjon Classique** → panoplie Classique (×1,4 par rapport au Monde)
-- **Donjon Élite** → panoplie Élite (×2,2 par rapport au Monde)
-- **Donjon Abyssal** → panoplie Abyssale (×3,0 par rapport au Monde)
+Chaque boss est spécialisé dans un slot d'équipement et possède un **passif unique**.
+
+
+### 🪖 Gardien des Crânes — Slot : Casque
+
+**Stat boostée :** +50% Défense Physique
+
+**Passif :** Protection Céphalique : réduit les dégâts critiques reçus de 20%.
+
+
+### 🛡️ Titan Cuirassé — Slot : Plastron
+
+**Stat boostée :** +50% HP
+
+**Passif :** Endurance Absolue : récupère 3% de ses HP max au début de chaque tour.
+
+
+### 🌪️ Danseur de Guerre — Slot : Pantalon
+
+**Stat boostée :** +50% Vitesse
+
+**Passif :** Esquive Naturelle : 10% de chance d'éviter complètement une attaque.
+
+
+### ⚡ Spectre Fulgurant — Slot : Chaussures
+
+**Stat boostée :** +50% Vitesse
+
+**Passif :** Foulée Redoublée : 20% de chance d'attaquer deux fois lors de son tour.
+
+
+### ⚔️ Lame Dévastatrice — Slot : Arme
+
+**Stat boostée :** +50% Attaque Physique
+
+**Passif :** Tranchant Absolu : ignore 20% de ta Défense Physique et 20% de ta Défense Magique.
+
+
+### 📿 Mystique Absolu — Slot : Amulette
+
+**Stat boostée :** +50% Attaque Magique
+
+**Passif :** Renvoi Mystique : renvoie 8% des dégâts reçus sous forme de dégâts purs (avant défense).
+
+
+### 💍 Catalyseur Éternel — Slot : Anneau
+
+**Stat boostée :** +50% Chance Critique
+
+**Passif :** Empowerment Runique : gagne +2.5% dégâts par tour (cumulé, max 10 fois, +25% au maximum).
+
+
 
 ---
 
-## Conseils
 
-- Prépare-toi bien avant d'entrer : consomme tes **runes** et **nourritures** si nécessaire
-- Garde tes meilleurs **sorts** (ultime notamment) pour le boss final
-- En Donjon Abyssal, le moindre faux pas peut être fatal — connais bien ta classe
-- Si tu enchaînes les défaites, reviens à un donjon inférieur et améliore ton équipement
+## 📈 Stats des boss selon le niveau
+
+Les stats du boss augmentent avec le niveau de donjon (1 à 100).
+
+
+| Niv. Donjon | Zone équiv. | ❤️ HP (Classique) | ❤️ HP (Élite) | ❤️ HP (Abyssal) | Niveau joueur recommandé |
+|------------:|------------:|------------------:|-------------:|----------------:|------------------------:|
+| 1 | 33 | 535 | 89,656 | 340,521 | 3 |
+| 10 | 330 | 3,734 | 101,305 | 365,186 | 33 |
+| 25 | 825 | 9,968 | 122,076 | 408,103 | 82 |
+| 50 | 1,650 | 22,873 | 160,461 | 484,656 | 165 |
+| 75 | 2,475 | 38,917 | 203,556 | 567,492 | 247 |
+| 100 | 3,300 | 58,100 | 251,362 | 656,606 | 330 |
+
+---
+
+
+!!! tip "Simulateur d'ennemis"
+    Utilise le [Simulateur d'Ennemis](../combat/ennemis.md) pour calculer les stats exactes d'un boss de donjon.

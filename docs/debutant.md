@@ -1,98 +1,117 @@
 # 📖 Guide du Débutant
 
-Ce guide t'explique les premières étapes à suivre pour bien démarrer dans le RPG.
+Bienvenue sur **Bot Suprême** ! Ce guide t'explique les bases pour démarrer efficacement.
 
 ---
 
-## Étape 1 — Choisir ta classe
+## 1️⃣ Choisir sa classe
 
-Rends-toi dans le **Hub Classe** et choisis parmi les 10 classes disponibles.
+Rends-toi dans le canal **#classe** et sélectionne ta classe parmi les 10 disponibles.
 
-!!! warning "Attention"
-    Tu ne peux changer de classe qu'une seule fois. Choisis bien !
+- ⚔️ **5 classes standard** — gratuites, accessibles à tous
+- 💎 **5 classes premium** — nécessitent le rôle Premium
 
-Chaque classe a un style de jeu différent. Voici un résumé rapide :
-
-| Classe | Style | Difficulté |
-|--------|-------|-----------|
-| Guerrier | Tank offensif, résiste aux gros dégâts | ⭐ Facile |
-| Support | Soins et boucliers, très résistant | ⭐ Facile |
-| Paladin | Tank avec rampe progressive | ⭐⭐ Moyen |
-| Mage | Dégâts magiques massifs, fragile | ⭐⭐ Moyen |
-| Tireur | Dégâts physiques réguliers, double coup aléatoire | ⭐⭐ Moyen |
-| Vampire | Auto-sustain, vol de vie permanent | ⭐⭐ Moyen |
-| Assassin | Très haut potentiel, fragile | ⭐⭐⭐ Difficile |
-| Gardien du Temps | Contrôle total de l'ennemi | ⭐⭐⭐ Difficile |
-| Ombre Venin | Dégâts de poison en progression | ⭐⭐⭐ Difficile |
-| Pyromancien | Dégâts de brûlure en montée | ⭐⭐⭐ Difficile |
+!!! warning "Choix définitif"
+    Le choix de classe est **permanent** — tu ne pourras pas en changer. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
 
 ---
 
-## Étape 2 — Combattre dans le Monde
+## 2️⃣ L'Énergie ⚡
 
-Va dans le **Hub Monde** et commence à combattre les ennemis de ta zone.
+L'énergie est la ressource centrale du jeu. Chaque action en consomme.
 
-Chaque combat te coûte **1 énergie** et te rapporte :
+| Action | Coût ⚡ |
+|--------|--------:|
+| Attaquer un ennemi | 1 |
+| Boss classique | 2 |
+| Boss runique | 3 |
+| Boss emblématique | 5 |
+| Boss antique | 10 |
+| Donjon classique | 3 |
+| Donjon élite | 5 |
+| Donjon abyssal | 10 |
+| Raid | 100 |
+| World Boss | 100 |
+| PvP | 5 |
 
-- De l'**expérience** → pour monter de niveau
-- De l'**or** → pour acheter et améliorer tes équipements
-- Des **équipements** en butin (aléatoire)
-
-À partir de la zone 2, tu peux aussi affronter des **boss** qui donnent de meilleures récompenses mais coûtent plus d'énergie.
-
----
-
-## Étape 3 — Gérer ton profil
-
-Dans le **Hub Profil**, tu peux :
-
-- **Équiper** tes items en faisant glisser les pièces dans les emplacements
-- **Améliorer** tes équipements à la Forge (jusqu'au niveau +20)
-- Voir tes stats totales
-- Gérer ta Banque (les items en banque résistent au Prestige)
-- Consommer des **potions** et des **nourritures** avant un combat
+**Énergie maximum :** 2,000 ⚡
+**Régénération passive :** +3 ⚡ toutes les 10 minutes
+**Régénération HP passive :** +3% HP max toutes les 10 minutes
 
 ---
 
-## Étape 4 — Apprendre un métier
+## 3️⃣ Progresser dans le Monde 🌍
 
-Les **métiers** te permettent de créer tes propres ressources et consommables. Il y a 9 métiers :
+Dans le canal **#monde** :
 
-- **Mineur, Herboriste, Bûcheron, Chasseur, Fermier** → récoltent des matières premières
-- **Alchimiste, Boulanger, Enchanteur** → créent des consommables (potions, nourriture, runes)
-- **Heaumier, Armurier, Tailleur, Cordonnier, Forgeron, Joaillier, Orfèvre** → forgent des équipements (panoplie Craft)
+1. **Attaque** les ennemis de ta zone pour gagner de l'XP et du Gold
+2. Chaque zone a **4 stages d'ennemis** puis un **boss**
+3. **Bats le boss** pour passer à la zone suivante
+4. Active le **mode auto** pour farmer automatiquement (toutes les 3 secondes)
 
-!!! info "La Forge (⚒️) dans le Hub Profil"
-    Améliorer un équipement (+0 à +20) et équiper/déséquiper des runes se fait via le bouton **Forge** du Hub Profil — accessible à **tous les joueurs** sans avoir besoin d'un métier.
-
----
-
-## La régénération passive
-
-Même quand tu n'es pas connecté, tu récupères :
-
-- **+3% de tes PV maximum** toutes les 10 minutes
-- **+3 énergie** toutes les 10 minutes
-
-Tu n'as donc jamais besoin de te connecter en urgence pour récupérer.
+Les zones vont de 1 à **10 000**. Ton niveau détermine les zones accessibles *(zone ≈ niveau × 9)*.
 
 ---
 
-## Le Prestige
+## 4️⃣ L'XP et les Niveaux
 
-Quand tu atteins le **niveau 1 000**, tu peux déclencher le Prestige. Tu recommences au niveau 1, mais chaque niveau de Prestige te donne un bonus permanent de **+0,1% sur toutes tes stats**.
-
-!!! tip "Conseil"
-    Mets tes meilleurs équipements en **Banque** avant de prestiger — ils sont préservés.
+- XP nécessaire pour passer au niveau suivant = **1 000 × niveau actuel**
+  *(exemple : passer du niveau 10 au 11 demande 10 000 XP)*
+- **Niveau maximum : 1 000**
+- Après le niveau 1 000 → accès au **[Prestige](prestige.md)**
 
 ---
 
-## Conseils généraux
+## 5️⃣ Les Métiers 🔨
 
-!!! tip "Suis les quêtes !"
-    Au début, les **quêtes** sont le meilleur guide. Elles t'orientent étape par étape, te récompensent en or, XP et équipements, et t'expliquent les mécaniques au fur et à mesure. C'est le chemin le plus rapide pour progresser.
+Tu peux rejoindre jusqu'à **3 métiers** (un de chaque branche) :
 
-- Ne néglige pas les **sorts** de ta classe : ils font souvent la différence dans les combats difficiles
-- Les **panoplies** (sets de 7 pièces) donnent des bonus très importants — essaie de compléter un set
-- Commence par les **donjons classiques** avant de t'attaquer aux élites et abyssaux
-- Rejoins un **raid** avec d'autres joueurs pour des récompenses que tu ne peux pas obtenir seul
+| Branche | Exemples de métiers |
+|---------|---------------------|
+| 🌾 Récolte | Mineur, Herboriste, Chasseur, Fermier, Bûcheron |
+| 🔨 Artisanat | Forgeron, Charpentier, Alchimiste artisan |
+| ⚗️ Conception | Alchimiste, Boulanger, Enchanteur |
+
+Consulte la page [Métiers](metiers/index.md) pour tous les détails.
+
+---
+
+## 6️⃣ Les Équipements 🛡️
+
+Les équipements améliorent tes statistiques. Il existe **7 emplacements** :
+casque, plastron, pantalon, chaussures, arme, amulette, anneau.
+
+On les obtient en combattant dans le **monde**, les **donjons** et les **raids**.
+Plus la source est difficile, plus les équipements sont puissants.
+
+Consulte la page [Équipements](equipements/index.md) pour les détails.
+
+---
+
+## 7️⃣ Les Quêtes 📜
+
+Les quêtes donnent de grosses récompenses en XP et Gold.
+
+- **42 quêtes principales** : à faire dans l'ordre, débloquent du contenu
+- **30 quêtes secondaires** : indépendantes, bonus supplémentaires
+
+Consulte la page [Quêtes](quetes.md).
+
+---
+
+## 8️⃣ Les Titres 🎖️
+
+Les titres donnent des **bonus permanents** (XP, Gold, stats de combat, etc.).
+Commence par les titres de zone et de niveau — ils sont faciles à débloquer et très utiles.
+
+Consulte la page [Titres](titres.md).
+
+---
+
+## 🎯 Conseils pour débuter
+
+1. **Farm les ennemis** en mode auto pour monter rapidement en niveau
+2. **Fais les quêtes principales** dès que tu peux — les récompenses sont énormes
+3. **Débloque les titres faciles** (niveaux 10, 25, 50...) pour booster ton XP et ton Gold
+4. **Explore les donjons classiques** dès le niveau 5 pour avoir de meilleurs équipements
+5. **Rejoins un métier de récolte** pour collecter des matériaux et en vendre à l'HDV

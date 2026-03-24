@@ -1,68 +1,71 @@
 # ⏳ Gardien du Temps
 
-Le Gardien du Temps est un spécialiste du **contrôle de l'ennemi**. Son passif affaiblit progressivement toutes les stats de l'adversaire, le rendant de plus en plus inoffensif au fil du combat.
+!!! note "Classe Premium"
+    Cette classe nécessite le rôle Premium pour être sélectionnée.
+
+**Rôle :** Contrôle / Hybride
+
+**Difficulté :** ⭐⭐⭐⭐⭐ (5/5)
+
 
 ---
 
-## Stats de départ (niveau 1)
+## 📖 Description
 
-| Stat | Valeur |
-|------|--------|
-| Points de Vie | 900 |
-| Attaque Physique | 70 |
-| Attaque Magique | 70 |
-| Défense Physique | 45 |
-| Défense Magique | 45 |
-| Vitesse | 85 |
-| Chance de Critique | 8% |
-| Dégâts de Critique | 155% |
+*(Premium)* Manipulateur du destin qui distord le temps et l'espace.
 
----
+**Passif** : 35% de chance de réduire une stat ennemie aléatoire de 8% (max -50%).
 
-## Passif — Distorsion Temporelle
+**Ressource** : 🟡 Combo (max 5, +1/tour).
 
-À chaque tour, une **stat aléatoire de l'ennemi est réduite de -5%** (cumulatif). La réduction maximale par stat est de **-50%**. Sur un long combat, l'ennemi devient extrêmement affaibli dans tous ses aspects.
 
-Les stats pouvant être réduites : Attaque Physique, Attaque Magique, Défense Physique, Défense Magique, Vitesse, Pénétrations, Chance de Critique, Dégâts de Critique.
+**Ressource :** 🟡 Combo — maximum 5, +1 par tour
+
 
 ---
 
-## Ressource — Mana
+## 📊 Progression des statistiques
 
-Le Mana se régénère de **+15 par tour**. Il est plafonné à **100**.
-
----
-
-## Sorts
-
-=== "🌀 Distorsion"
-    **Coût :** 15 Mana — **Temps de recharge :** aucun
-
-    Frappe pour ×1,0 dégâts magiques et **réduit la Vitesse ennemie de -20% pendant 3 tours** (cumulatif avec le passif, et avec lui-même si réutilisé).
-
-=== "⏪ Rembobinage"
-    **Coût :** 20 Mana — **Temps de recharge :** 3 tours
-
-    **Soigne un montant égal à 80% des derniers dégâts reçus**. Aucune attaque portée.
-    Plus l'ennemi t'a frappé fort, plus tu récupères.
-
-=== "⚡ Accélération"
-    **Coût :** 25 Mana — **Temps de recharge :** 5 tours
-
-    Gagne **+40% de Vitesse pendant 2 tours**. Aucune attaque portée.
-    Peut inverser l'ordre d'initiative et t'assurer d'agir en premier.
-
-=== "⏸️ Arrêt du Temps (Ultime)"
-    **Coût :** 80 Mana — **Temps de recharge :** 8 tours
-
-    **L'ennemi est étourdi pendant 2 tours** : il ne peut pas agir du tout.
-    Le sort de contrôle le plus puissant du jeu.
+| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
+|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
+| Niv. 1 | 400 | 22 | 22 | 15 | 15 | 85 | 8% |
+| Niv. 100 | 2,540 | 128 | 128 | 100 | 100 | 109 | 9% |
+| Niv. 200 | 4,702 | 236 | 236 | 187 | 187 | 133 | 10% |
+| Niv. 500 | 11,188 | 560 | 560 | 447 | 447 | 207 | 13% |
+| Niv. 1000 | 21,998 | 1,099 | 1,099 | 880 | 880 | 329 | 18% |
 
 ---
 
-## Conseils
+## ✨ Sorts
 
-- Le Gardien excelle dans les combats longs — plus le fight dure, plus l'ennemi est affaibli.
-- **Distorsion** à répétition réduit la vitesse ennemie à une fraction de sa valeur normale — très efficace.
-- **Rembobinage** est excellent contre les boss qui frappent très fort : encaisse un coup, soigne-toi de presque tout.
-- **Arrêt du Temps** donne 2 tours de liberté totale — utilise-les pour accumuler du Mana et lancer tes meilleurs sorts.
+### ⚡ Accélération Temporelle
+
+Inflige ×1.2 dégâts et augmente sa vitesse de +35% pendant 2 tours.
+
+- **Coût :** 1 🟡 Combo
+
+
+### ⏳ Fissure du Temps
+
+Inflige ×1.3 dégâts et réduit la Déf.Phy. et Mag. ennemie de 20% pendant 2 tours.
+
+- **Coût :** 2 🟡 Combo · Temps de recharge : **3 tours**
+
+
+### ⏱️ Arrêt du Temps 🌟 **ULTIME**
+
+Étourdit l'ennemi pendant 2 tours — il ne peut pas agir.
+
+- **Coût :** 5 🟡 Combo · Temps de recharge : **7 tours**
+
+
+
+---
+
+## 💡 Conseils de jeu
+
+- Accumule 5 Combos grâce aux coups reçus pour des sorts plus fréquents.
+
+- **Arrêt du Temps** (ultime) paralyse l'ennemi 2 tours — décisif contre les boss.
+
+- Utilise **Fissure du Temps** pour réduire les défenses ennemies avant d'attaquer.

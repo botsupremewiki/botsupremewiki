@@ -1,70 +1,71 @@
 # ✝️ Paladin
 
-Le Paladin est un tank offensif qui gagne en puissance au fil des tours grâce à une **rampe progressive**. Plus le combat dure, plus il est à la fois puissant et résistant.
+!!! note "Classe Premium"
+    Cette classe nécessite le rôle Premium pour être sélectionnée.
+
+**Rôle :** Tank Défensif / Burst
+
+**Difficulté :** ⭐⭐☆☆☆ (2/5)
+
 
 ---
 
-## Stats de départ (niveau 1)
+## 📖 Description
 
-| Stat | Valeur |
-|------|--------|
-| Points de Vie | 1 100 |
-| Attaque Physique | 65 |
-| Attaque Magique | 40 |
-| Défense Physique | 55 |
-| Défense Magique | 55 |
-| Vitesse | 75 |
-| Chance de Critique | 5% |
-| Dégâts de Critique | 140% |
+*(Premium)* Chevalier sacré dont la résistance se renforce au fil du combat.
 
----
+**Passif** : 35% de chance d'augmenter une stat aléatoire de 5% (permanent ce combat).
 
-## Passif — Foi du Croisé (Rampe)
+**Ressource** : 🔴 Rage (max 100, +10/tour, +5 par coup reçu).
 
-Chaque tour, le Paladin gagne **+3% de dégâts** et **-3% de dégâts reçus** (cumulatif). Ces bonus montent jusqu'à **+30% de dégâts / -30% de dégâts reçus** au tour 10. Une fois le maximum atteint, les valeurs sont maintenues pour le reste du combat.
 
-> Tour 1 : +3%/−3% | Tour 5 : +15%/−15% | Tour 10 : +30%/−30%
+**Ressource :** 🔴 Rage — maximum 100, +10 par tour, +5 par coup reçu
+
 
 ---
 
-## Ressource — Rage
+## 📊 Progression des statistiques
 
-La Rage se régénère de **+10 par tour** et **+5 à chaque attaque portée**. Elle est plafonnée à **100**.
-
----
-
-## Sorts
-
-=== "✨ Frappe Sacrée"
-    **Coût :** 20 Rage — **Temps de recharge :** aucun
-
-    Frappe pour **×1,2** en dégâts magiques et **soigne 10% de tes PV maximum**.
-    Le seul sort qui attaque ET soigne en même temps.
-
-=== "⚖️ Jugement"
-    **Coût :** 25 Rage — **Temps de recharge :** 3 tours
-
-    Frappe pour **×1,5** dégâts magiques.
-    Si l'ennemi est **affecté par au moins un débuff**, frappe à **×2,5** à la place.
-    Combo parfait avec un Gardien du Temps ou Ombre Venin en Raid.
-
-=== "🌟 Aura Sacrée"
-    **Coût :** 25 Rage — **Temps de recharge :** 5 tours
-
-    **Réduit les dégâts reçus de 25% pendant 2 tours**. En Raid, protège aussi tes alliés (effet réduit).
-
-=== "⚡ Châtiment Divin (Ultime)"
-    **Coût :** 80 Rage — **Temps de recharge :** 7 tours
-
-    Frappe pour **×3,5** dégâts magiques et **soigne 35% de tes PV maximum**.
-    Attaque et soin massifs en un seul sort.
+| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
+|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
+| Niv. 1 | 560 | 30 | — | 35 | 22 | 55 | 5% |
+| Niv. 100 | 3,774 | 190 | — | 219 | 138 | 74 | 5% |
+| Niv. 200 | 7,021 | 352 | — | 406 | 256 | 93 | 6% |
+| Niv. 500 | 16,762 | 838 | — | 966 | 610 | 152 | 6% |
+| Niv. 1000 | 32,997 | 1,649 | — | 1,900 | 1,199 | 249 | 8% |
 
 ---
 
-## Conseils
+## ✨ Sorts
 
-- Le Paladin est lent à démarrer mais devient très difficile à tuer après le tour 5-6.
-- **Frappe Sacrée** est ta meilleure option de base : elle attaque et soigne, ce qui maintient ta rampe active.
-- **Châtiment Divin** à la fin d'un long combat est particulièrement dévastateur (tu as la rampe max + le multiplicateur ×3,5).
-- En Raid, **Aura Sacrée** protège toute l'équipe — utilise-le quand tu anticipes une attaque de zone ennemie.
-- Spécialité du Paladin : il est aussi efficace au tour 1 qu'au tour 20, mais il **excelle** dans les combats longs.
+### ✝️ Frappe Sacrée
+
+Inflige ×1.3 dégâts physiques et génère un bouclier égal à 15% des PV max.
+
+- **Coût :** 20 🔴 Rage
+
+
+### ⚖️ Pénitence
+
+Réduit sa vitesse de -30% mais augmente ATK Phy, Déf Phy+Mag, Pén Phy de +20% pendant 2 tours.
+
+- **Coût :** 30 🔴 Rage · Temps de recharge : **4 tours**
+
+
+### ⚡ Châtiment Divin 🌟 **ULTIME**
+
+Inflige des dégâts égaux à la somme de toutes ses stats de combat (ignore la défense).
+
+- **Coût :** 80 🔴 Rage · Temps de recharge : **7 tours**
+
+
+
+---
+
+## 💡 Conseils de jeu
+
+- Classe la plus défensive du jeu — idéale pour les contenus de fin de jeu.
+
+- **Pénitence** booste tes stats offensives pendant 2 tours — combo avec l'ultime.
+
+- **Châtiment Divin** (ultime) inflige des dégâts basés sur TOUTES tes stats — dévastateur en fin de combat.

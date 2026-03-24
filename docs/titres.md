@@ -1,288 +1,218 @@
-# 🏅 Titres
+# 🎖️ Titres
 
-Les titres sont des récompenses permanentes obtenues en accomplissant des objectifs. Chaque titre débloqué donne de l'**or** et parfois un **bonus passif**. Tu peux équiper le titre de ton choix pour l'afficher dans ton profil.
+Il y a **164 titres** répartis en **9 catégories**.
 
----
+Les titres avec un bonus actif appliquent leur effet en **permanence** une fois débloqués.
 
-## 🌍 Titres Globaux — Niveau
-
-Atteignre ces niveaux débloque un titre et **+5% d'XP globale** (cumulatif). Au niveau 1000, tu auras +50% d'XP totale.
-
-| Niveau requis | Titre | Bonus | Or |
-|--------------|-------|-------|----|
-| 100 | L'Éveillé | +5% XP | 500 🪙 |
-| 200 | L'Expérimenté | +5% XP | 1 000 🪙 |
-| 300 | L'Aguerri | +5% XP | 2 000 🪙 |
-| 400 | Le Valeureux | +5% XP | 3 000 🪙 |
-| 500 | L'Intrépide | +5% XP | 5 000 🪙 |
-| 600 | Le Téméraire | +5% XP | 8 000 🪙 |
-| 700 | L'Illustre | +5% XP | 12 000 🪙 |
-| 800 | Le Mythique | +5% XP | 18 000 🪙 |
-| 900 | L'Éternel | +5% XP | 25 000 🪙 |
-| 1 000 | Le Transcendant | +5% XP | 50 000 🪙 |
 
 ---
 
-## 🌍 Titres Globaux — Prestige
 
-Chaque titre de prestige donne **+10% d'efficacité de prestige** (cumulatif).
+## 🌍 Global
 
-| Prestige requis | Titre | Bonus | Or |
-|----------------|-------|-------|----|
-| 100 | L'Honoré | +10% prestige | 2 000 🪙 |
-| 200 | Le Respecté | +10% prestige | 5 000 🪙 |
-| 300 | L'Éminent | +10% prestige | 10 000 🪙 |
-| 400 | Le Distingué | +10% prestige | 20 000 🪙 |
-| 500 | Le Glorieux | +10% prestige | 35 000 🪙 |
-| 600 | L'Exalté | +10% prestige | 50 000 🪙 |
-| 700 | Le Vénéré | +10% prestige | 75 000 🪙 |
-| 800 | Le Sacré | +10% prestige | 100 000 🪙 |
-| 900 | L'Ascendant | +10% prestige | 150 000 🪙 |
-| 1 000 | Le Divin | +10% prestige | 250 000 🪙 |
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **L'Éveillé** | Niveau joueur : 100 | **+5% XP** | 500 |
+| **L'Expérimenté** | Niveau joueur : 200 | **+5% XP** | 1,000 |
+| **L'Aguerri** | Niveau joueur : 300 | **+5% XP** | 2,000 |
+| **Le Valeureux** | Niveau joueur : 400 | **+5% XP** | 3,000 |
+| **L'Intrépide** | Niveau joueur : 500 | **+5% XP** | 5,000 |
+| **Le Téméraire** | Niveau joueur : 600 | **+5% XP** | 8,000 |
+| **L'Illustre** | Niveau joueur : 700 | **+5% XP** | 12,000 |
+| **Le Mythique** | Niveau joueur : 800 | **+5% XP** | 18,000 |
+| **L'Éternel** | Niveau joueur : 900 | **+5% XP** | 25,000 |
+| **Le Transcendant** | Niveau joueur : 1k | **+5% XP** | 50,000 |
+| **L'Honoré** | Niveau de prestige : 100 | +10 (prestige_bonus_pct) | 2,000 |
+| **Le Respecté** | Niveau de prestige : 200 | +10 (prestige_bonus_pct) | 5,000 |
+| **L'Éminent** | Niveau de prestige : 300 | +10 (prestige_bonus_pct) | 10,000 |
+| **Le Distingué** | Niveau de prestige : 400 | +10 (prestige_bonus_pct) | 20,000 |
+| **Le Glorieux** | Niveau de prestige : 500 | +10 (prestige_bonus_pct) | 35,000 |
+| **L'Exalté** | Niveau de prestige : 600 | +10 (prestige_bonus_pct) | 50,000 |
+| **Le Vénéré** | Niveau de prestige : 700 | +10 (prestige_bonus_pct) | 75,000 |
+| **Le Sacré** | Niveau de prestige : 800 | +10 (prestige_bonus_pct) | 100,000 |
+| **L'Ascendant** | Niveau de prestige : 900 | +10 (prestige_bonus_pct) | 150,000 |
+| **Le Divin** | Niveau de prestige : 1k | +10 (prestige_bonus_pct) | 250,000 |
+| **Le Débrouillard** | Gold accumulé : 10k | **+3% Gold** | 500 |
+| **L'Économe** | Gold accumulé : 50k | **+3% Gold** | 1,000 |
+| **Le Négociant** | Gold accumulé : 200k | **+3% Gold** | 2,000 |
+| **L'Opulent** | Gold accumulé : 500k | **+3% Gold** | 5,000 |
+| **Le Prospère** | Gold accumulé : 1M | **+3% Gold** | 10,000 |
+| **Le Fortuné** | Gold accumulé : 5M | **+3% Gold** | 25,000 |
+| **Le Magnat** | Gold accumulé : 10M | **+3% Gold** | 50,000 |
+| **Le Ploutocrate** | Gold accumulé : 50M | **+3% Gold** | 100,000 |
+| **Le Milliardaire** | Gold accumulé : 100M | **+3% Gold** | 200,000 |
+| **Le Seigneur de l'Or** | Gold accumulé : 1G | **+3% Gold** | 500,000 |
 
----
+## ⚔️ Monde
 
-## 🌍 Titres Globaux — Or accumulé
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **L'Explorateur** | Zone atteinte : 1k | **+2% loot monde** | 1,000 |
+| **L'Aventurier du Monde** | Zone atteinte : 2k | **+2% loot monde** | 3,000 |
+| **Le Conquérant** | Zone atteinte : 3k | **+2% loot monde** | 6,000 |
+| **L'Intrépide Voyageur** | Zone atteinte : 4k | **+2% loot monde** | 10,000 |
+| **Le Maître du Monde** | Zone atteinte : 5k | **+2% loot monde** | 20,000 |
+| **Le Ravageur des Terres** | Zone atteinte : 6k | **+2% loot monde** | 35,000 |
+| **Le Dévastateur des Zones** | Zone atteinte : 7k | **+2% loot monde** | 55,000 |
+| **Le Fléau du Monde** | Zone atteinte : 8k | **+2% loot monde** | 80,000 |
+| **L'Éternel Marcheur** | Zone atteinte : 9k | **+2% loot monde** | 120,000 |
+| **Le Chromate Vivant** | Zone atteinte : 10k | **+2% loot monde** | 200,000 |
 
-Accumuler de l'or total débloque ces titres avec **+3% d'or** par combat (cumulatif, max +30%).
+## 🏰 Donjons
 
-| Or total requis | Titre | Bonus | Or |
-|----------------|-------|-------|----|
-| 10 000 | Le Débrouillard | +3% or | 500 🪙 |
-| 50 000 | L'Économe | +3% or | 1 000 🪙 |
-| 200 000 | Le Négociant | +3% or | 2 000 🪙 |
-| 500 000 | L'Opulent | +3% or | 5 000 🪙 |
-| 1 000 000 | Le Prospère | +3% or | 10 000 🪙 |
-| 5 000 000 | Le Fortuné | +3% or | 25 000 🪙 |
-| 10 000 000 | Le Magnat | +3% or | 50 000 🪙 |
-| 50 000 000 | Le Ploutocrate | +3% or | 100 000 🪙 |
-| 100 000 000 | Le Milliardaire | +3% or | 200 000 🪙 |
-| 1 000 000 000 | Le Seigneur de l'Or | +3% or | 500 000 🪙 |
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Le Plongeur** | Donjons classiques : 10 | **+5% stats donjon classique** | 500 |
+| **L'Infiltrateur** | Donjons classiques : 25 | **+5% stats donjon classique** | 1,000 |
+| **Le Fouilleur** | Donjons classiques : 50 | **+5% stats donjon classique** | 2,000 |
+| **Le Vétéran des Donjons** | Donjons classiques : 100 | **+5% stats donjon classique** | 4,000 |
+| **L'Expert des Gouffres** | Donjons classiques : 200 | **+5% stats donjon classique** | 8,000 |
+| **Le Maître des Donjons** | Donjons classiques : 300 | **+5% stats donjon classique** | 15,000 |
+| **L'Ancien des Cryptes** | Donjons classiques : 500 | **+5% stats donjon classique** | 25,000 |
+| **Le Champion des Abîmes** | Donjons classiques : 750 | **+5% stats donjon classique** | 40,000 |
+| **La Légende des Donjons** | Donjons classiques : 1k | **+5% stats donjon classique** | 60,000 |
+| **Le Seigneur des Cryptes** | Donjons classiques : 2k | **+5% stats donjon classique** | 100,000 |
+| **L'Initié d'Élite** | Donjons élites : 5 | **+5% stats donjon élite** | 1,000 |
+| **Le Combattant Élite** | Donjons élites : 15 | **+5% stats donjon élite** | 2,500 |
+| **L'Assaillant des Hauts Lieux** | Donjons élites : 30 | **+5% stats donjon élite** | 5,000 |
+| **Le Chasseur d'Élite** | Donjons élites : 60 | **+5% stats donjon élite** | 10,000 |
+| **Le Vainqueur d'Élite** | Donjons élites : 100 | **+5% stats donjon élite** | 20,000 |
+| **L'Expert des Hauts Faits** | Donjons élites : 200 | **+5% stats donjon élite** | 35,000 |
+| **Le Maître d'Élite** | Donjons élites : 300 | **+5% stats donjon élite** | 55,000 |
+| **Le Conquérant d'Élite** | Donjons élites : 500 | **+5% stats donjon élite** | 80,000 |
+| **La Terreur Élite** | Donjons élites : 750 | **+5% stats donjon élite** | 120,000 |
+| **Le Seigneur d'Élite** | Donjons élites : 1k | **+5% stats donjon élite** | 200,000 |
+| **L'Abyssal Débutant** | Donjons abyssaux : 1 | **+5% stats donjon abyssal** | 2,000 |
+| **L'Explorateur des Abysses** | Donjons abyssaux : 5 | **+5% stats donjon abyssal** | 5,000 |
+| **Le Plongeur des Abysses** | Donjons abyssaux : 10 | **+5% stats donjon abyssal** | 10,000 |
+| **Le Chasseur d'Abysses** | Donjons abyssaux : 25 | **+5% stats donjon abyssal** | 20,000 |
+| **Le Vétéran des Abysses** | Donjons abyssaux : 50 | **+5% stats donjon abyssal** | 35,000 |
+| **L'Expert Abyssal** | Donjons abyssaux : 100 | **+5% stats donjon abyssal** | 60,000 |
+| **Le Maître des Abysses** | Donjons abyssaux : 200 | **+5% stats donjon abyssal** | 100,000 |
+| **L'Élu des Profondeurs** | Donjons abyssaux : 300 | **+5% stats donjon abyssal** | 150,000 |
+| **La Terreur Abyssale** | Donjons abyssaux : 500 | **+5% stats donjon abyssal** | 225,000 |
+| **Le Seigneur des Abysses** | Donjons abyssaux : 1k | **+5% stats donjon abyssal** | 350,000 |
 
----
+## 👥 Raids
 
-## ⚔️ Titres du Monde — Zones
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Le Raider Débutant** | Raids complétés : 1 | **+5% stats raid** | 1,000 |
+| **L'Assaillant de Raid** | Raids complétés : 5 | **+5% stats raid** | 3,000 |
+| **Le Combattant de Raid** | Raids complétés : 10 | **+5% stats raid** | 7,000 |
+| **Le Vétéran de Raid** | Raids complétés : 25 | **+5% stats raid** | 15,000 |
+| **L'Expert de Raid** | Raids complétés : 50 | **+5% stats raid** | 30,000 |
+| **Le Maître de Raid** | Raids complétés : 100 | **+5% stats raid** | 60,000 |
+| **La Terreur des Raids** | Raids complétés : 200 | **+5% stats raid** | 100,000 |
+| **L'Impitoyable** | Raids complétés : 300 | **+5% stats raid** | 150,000 |
+| **La Légende du Raid** | Raids complétés : 500 | **+5% stats raid** | 225,000 |
+| **Le Seigneur des Raids** | Raids complétés : 1k | **+5% stats raid** | 400,000 |
 
-Atteindre ces zones débloque **+2% de chance de loot** dans le Monde (cumulatif, max +20%).
+## 🐉 World Boss
 
-| Zone requise | Titre | Bonus | Or |
-|-------------|-------|-------|----|
-| 1 000 | L'Explorateur | +2% loot | 1 000 🪙 |
-| 2 000 | L'Aventurier du Monde | +2% loot | 3 000 🪙 |
-| 3 000 | Le Conquérant | +2% loot | 6 000 🪙 |
-| 4 000 | L'Intrépide Voyageur | +2% loot | 10 000 🪙 |
-| 5 000 | Le Maître du Monde | +2% loot | 20 000 🪙 |
-| 6 000 | Le Ravageur des Terres | +2% loot | 35 000 🪙 |
-| 7 000 | Le Dévastateur des Zones | +2% loot | 55 000 🪙 |
-| 8 000 | Le Fléau du Monde | +2% loot | 80 000 🪙 |
-| 9 000 | L'Éternel Marcheur | +2% loot | 120 000 🪙 |
-| 10 000 | Le Chromate Vivant | +2% loot | 200 000 🪙 |
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Le Piquant** | Dégâts WB totaux : 10k | **+3% stats World Boss** | 500 |
+| **Le Blesseur** | Dégâts WB totaux : 50k | **+3% stats World Boss** | 1,500 |
+| **Le Maraudeur** | Dégâts WB totaux : 200k | **+3% stats World Boss** | 4,000 |
+| **Le Dévastateur** | Dégâts WB totaux : 500k | **+3% stats World Boss** | 10,000 |
+| **L'Exterminateur** | Dégâts WB totaux : 1M | **+3% stats World Boss** | 20,000 |
+| **Le Ravageur** | Dégâts WB totaux : 5M | **+3% stats World Boss** | 50,000 |
+| **La Calamité** | Dégâts WB totaux : 10M | **+3% stats World Boss** | 100,000 |
+| **Le Fléau du Boss** | Dégâts WB totaux : 50M | **+3% stats World Boss** | 200,000 |
+| **L'Annihilateur** | Dégâts WB totaux : 100M | **+3% stats World Boss** | 350,000 |
+| **Le Destructeur Suprême** | Dégâts WB totaux : 1G | **+3% stats World Boss** | 600,000 |
+| **Le Challenger** | Attaques WB : 10 | **+2% stats World Boss** | 300 |
+| **Le Combattant de Boss** | Attaques WB : 25 | **+2% stats World Boss** | 800 |
+| **L'Assaillant Persistant** | Attaques WB : 50 | **+2% stats World Boss** | 2,000 |
+| **Le Guerrier du Boss** | Attaques WB : 100 | **+2% stats World Boss** | 5,000 |
+| **Le Vétéran du Boss** | Attaques WB : 200 | **+2% stats World Boss** | 12,000 |
+| **Le Destructeur** | Attaques WB : 300 | **+2% stats World Boss** | 25,000 |
+| **La Terreur du Boss** | Attaques WB : 500 | **+2% stats World Boss** | 50,000 |
+| **L'Implacable** | Attaques WB : 750 | **+2% stats World Boss** | 90,000 |
+| **Le Fléau Suprême** | Attaques WB : 1k | **+2% stats World Boss** | 140,000 |
+| **L'Éternel Assaillant** | Attaques WB : 2k | **+2% stats World Boss** | 250,000 |
+| **Champion du Boss** | Top 1 WB hebdo : 1 | **+10% stats World Boss** | 10,000 |
 
----
+## 🥊 PvP
 
-## 🏰 Titres des Donjons — Classiques
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Battant** | Victoires PvP : 10 | ✨ *Cosmétique* | 300 |
+| **L'Indomptable** | Victoires PvP : 50 | ✨ *Cosmétique* | 1,000 |
+| **Le Dévastateur** | Victoires PvP : 100 | ✨ *Cosmétique* | 3,000 |
+| **L'Implacable** | Victoires PvP : 200 | ✨ *Cosmétique* | 8,000 |
+| **Le Fléau des Arènes** | Victoires PvP : 500 | ✨ *Cosmétique* | 20,000 |
+| **L'Élu du Combat** | Victoires PvP : 1k | ✨ *Cosmétique* | 75,000 |
+| **Fer Trempé** | Élo PvP : 1k | ✨ *Cosmétique* | 500 |
+| **Diamant** | Élo PvP : 1k | ✨ *Cosmétique* | 2,000 |
+| **Maître** | Élo PvP : 1k | ✨ *Cosmétique* | 8,000 |
+| **Grand Maître** | Élo PvP : 2k | ✨ *Cosmétique* | 25,000 |
+| **Challenger Suprême** | Élo PvP : 2k | ✨ *Cosmétique* | 80,000 |
 
-Compléter des donjons classiques débloque **+5% de statistiques en Donjon Classique** (cumulatif, max +50%).
+## 🔨 Métiers
 
-| Complétions requises | Titre | Bonus | Or |
-|---------------------|-------|-------|----|
-| 10 | Le Plongeur | +5% stats DJ.Clas. | 500 🪙 |
-| 25 | L'Infiltrateur | +5% stats DJ.Clas. | 1 000 🪙 |
-| 50 | Le Fouilleur | +5% stats DJ.Clas. | 2 000 🪙 |
-| 100 | Le Vétéran des Donjons | +5% stats DJ.Clas. | 4 000 🪙 |
-| 200 | L'Expert des Gouffres | +5% stats DJ.Clas. | 8 000 🪙 |
-| 300 | Le Maître des Donjons | +5% stats DJ.Clas. | 15 000 🪙 |
-| 500 | L'Ancien des Cryptes | +5% stats DJ.Clas. | 25 000 🪙 |
-| 750 | Le Champion des Abîmes | +5% stats DJ.Clas. | 40 000 🪙 |
-| 1 000 | La Légende des Donjons | +5% stats DJ.Clas. | 60 000 🪙 |
-| 2 000 | Le Seigneur des Cryptes | +5% stats DJ.Clas. | 100 000 🪙 |
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Apprenti Récolteur** | Niveau récolte : 10 | **+5% XP récolte** | 200 |
+| **Récolteur Confirmé** | Niveau récolte : 20 | **+5% XP récolte** | 400 |
+| **Récolteur Expérimenté** | Niveau récolte : 30 | **+5% XP récolte** | 700 |
+| **Récolteur Aguerri** | Niveau récolte : 40 | **+5% XP récolte** | 1,100 |
+| **Récolteur Chevronné** | Niveau récolte : 50 | **+5% XP récolte** | 1,600 |
+| **Expert Récolteur** | Niveau récolte : 60 | **+5% XP récolte** | 2,200 |
+| **Maître Récolteur** | Niveau récolte : 70 | **+5% XP récolte** | 3,000 |
+| **Grand Maître Récolteur** | Niveau récolte : 80 | **+5% XP récolte** | 4,000 |
+| **Légende de la Récolte** | Niveau récolte : 90 | **+5% XP récolte** | 5,500 |
+| **Seigneur des Ressources** | Niveau récolte : 100 | **+5% XP récolte** | 7,500 |
+| **Apprenti Artisan** | Niveau artisanat : 10 | **+5% XP artisanat** | 200 |
+| **Artisan Confirmé** | Niveau artisanat : 20 | **+5% XP artisanat** | 400 |
+| **Artisan Expérimenté** | Niveau artisanat : 30 | **+5% XP artisanat** | 700 |
+| **Artisan Aguerri** | Niveau artisanat : 40 | **+5% XP artisanat** | 1,100 |
+| **Artisan Chevronné** | Niveau artisanat : 50 | **+5% XP artisanat** | 1,600 |
+| **Expert Artisan** | Niveau artisanat : 60 | **+5% XP artisanat** | 2,200 |
+| **Maître Artisan** | Niveau artisanat : 70 | **+5% XP artisanat** | 3,000 |
+| **Grand Maître Artisan** | Niveau artisanat : 80 | **+5% XP artisanat** | 4,000 |
+| **Légende de l'Artisanat** | Niveau artisanat : 90 | **+5% XP artisanat** | 5,500 |
+| **Seigneur du Forge** | Niveau artisanat : 100 | **+5% XP artisanat** | 7,500 |
+| **Apprenti Concepteur** | Niveau conception : 10 | **+5% XP conception** | 200 |
+| **Concepteur Confirmé** | Niveau conception : 20 | **+5% XP conception** | 400 |
+| **Concepteur Expérimenté** | Niveau conception : 30 | **+5% XP conception** | 700 |
+| **Concepteur Aguerri** | Niveau conception : 40 | **+5% XP conception** | 1,100 |
+| **Concepteur Chevronné** | Niveau conception : 50 | **+5% XP conception** | 1,600 |
+| **Expert Concepteur** | Niveau conception : 60 | **+5% XP conception** | 2,200 |
+| **Maître Concepteur** | Niveau conception : 70 | **+5% XP conception** | 3,000 |
+| **Grand Maître Concepteur** | Niveau conception : 80 | **+5% XP conception** | 4,000 |
+| **Légende de la Conception** | Niveau conception : 90 | **+5% XP conception** | 5,500 |
+| **Seigneur des Créations** | Niveau conception : 100 | **+5% XP conception** | 7,500 |
 
----
+## 🏪 Hôtel des Ventes
 
-## 🏰 Titres des Donjons — Élites
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **Le Petit Commerçant** | Ventes HDV : 10 | **−0.4% commission HDV** | 300 |
+| **Le Vendeur Régulier** | Ventes HDV : 25 | **−0.4% commission HDV** | 700 |
+| **Le Marchand Actif** | Ventes HDV : 50 | **−0.4% commission HDV** | 1,500 |
+| **Le Commerçant Établi** | Ventes HDV : 100 | **−0.4% commission HDV** | 3,000 |
+| **Le Négociant Expérimenté** | Ventes HDV : 200 | **−0.4% commission HDV** | 6,000 |
+| **Le Marchand Prospère** | Ventes HDV : 300 | **−0.4% commission HDV** | 10,000 |
+| **L'Expert du Commerce** | Ventes HDV : 500 | **−0.4% commission HDV** | 17,000 |
+| **Le Maître Marchand** | Ventes HDV : 750 | **−0.4% commission HDV** | 27,000 |
+| **Le Grand Commerçant** | Ventes HDV : 1k | **−0.4% commission HDV** | 40,000 |
+| **Le Seigneur du Marché** | Ventes HDV : 2k | **−0.4% commission HDV** | 60,000 |
 
-| Complétions requises | Titre | Bonus | Or |
-|---------------------|-------|-------|----|
-| 5 | L'Initié d'Élite | +5% stats DJ.Élite | 1 000 🪙 |
-| 15 | Le Combattant Élite | +5% stats DJ.Élite | 2 500 🪙 |
-| 30 | L'Assaillant des Hauts Lieux | +5% stats DJ.Élite | 5 000 🪙 |
-| 60 | Le Chasseur d'Élite | +5% stats DJ.Élite | 10 000 🪙 |
-| 100 | Le Vainqueur d'Élite | +5% stats DJ.Élite | 20 000 🪙 |
-| 200 | L'Expert des Hauts Faits | +5% stats DJ.Élite | 35 000 🪙 |
-| 300 | Le Maître d'Élite | +5% stats DJ.Élite | 55 000 🪙 |
-| 500 | Le Conquérant d'Élite | +5% stats DJ.Élite | 80 000 🪙 |
-| 750 | La Terreur Élite | +5% stats DJ.Élite | 120 000 🪙 |
-| 1 000 | Le Seigneur d'Élite | +5% stats DJ.Élite | 200 000 🪙 |
+## ⭐ Spéciaux
 
----
-
-## 🏰 Titres des Donjons — Abyssaux
-
-| Complétions requises | Titre | Bonus | Or |
-|---------------------|-------|-------|----|
-| 1 | L'Abyssal Débutant | +5% stats DJ.Abys. | 2 000 🪙 |
-| 5 | L'Explorateur des Abysses | +5% stats DJ.Abys. | 5 000 🪙 |
-| 10 | Le Plongeur des Abysses | +5% stats DJ.Abys. | 10 000 🪙 |
-| 25 | Le Chasseur d'Abysses | +5% stats DJ.Abys. | 20 000 🪙 |
-| 50 | Le Vétéran des Abysses | +5% stats DJ.Abys. | 35 000 🪙 |
-| 100 | L'Expert Abyssal | +5% stats DJ.Abys. | 60 000 🪙 |
-| 200 | Le Maître des Abysses | +5% stats DJ.Abys. | 100 000 🪙 |
-| 300 | L'Élu des Profondeurs | +5% stats DJ.Abys. | 150 000 🪙 |
-| 500 | La Terreur Abyssale | +5% stats DJ.Abys. | 225 000 🪙 |
-| 1 000 | Le Seigneur des Abysses | +5% stats DJ.Abys. | 350 000 🪙 |
-
----
-
-## 👥 Titres des Raids
-
-| Complétions requises | Titre | Bonus | Or |
-|---------------------|-------|-------|----|
-| 1 | Le Raider Débutant | +5% stats Raid | 1 000 🪙 |
-| 5 | L'Assaillant de Raid | +5% stats Raid | 3 000 🪙 |
-| 10 | Le Combattant de Raid | +5% stats Raid | 7 000 🪙 |
-| 25 | Le Vétéran de Raid | +5% stats Raid | 15 000 🪙 |
-| 50 | L'Expert de Raid | +5% stats Raid | 30 000 🪙 |
-| 100 | Le Maître de Raid | +5% stats Raid | 60 000 🪙 |
-| 200 | La Terreur des Raids | +5% stats Raid | 100 000 🪙 |
-| 300 | L'Impitoyable | +5% stats Raid | 150 000 🪙 |
-| 500 | La Légende du Raid | +5% stats Raid | 225 000 🪙 |
-| 1 000 | Le Seigneur des Raids | +5% stats Raid | 400 000 🪙 |
-
----
-
-## 🐉 Titres du World Boss — Dégâts totaux
-
-| Dégâts totaux requis | Titre | Bonus | Or |
-|---------------------|-------|-------|----|
-| 10 000 | Le Piquant | +3% stats WB | 500 🪙 |
-| 50 000 | Le Blesseur | +3% stats WB | 1 500 🪙 |
-| 200 000 | Le Maraudeur | +3% stats WB | 4 000 🪙 |
-| 500 000 | Le Dévastateur | +3% stats WB | 10 000 🪙 |
-| 1 000 000 | L'Exterminateur | +3% stats WB | 20 000 🪙 |
-| 5 000 000 | Le Ravageur | +3% stats WB | 50 000 🪙 |
-| 10 000 000 | La Calamité | +3% stats WB | 100 000 🪙 |
-| 50 000 000 | Le Fléau du Boss | +3% stats WB | 200 000 🪙 |
-| 100 000 000 | L'Annihilateur | +3% stats WB | 350 000 🪙 |
-| 1 000 000 000 | Le Destructeur Suprême | +3% stats WB | 600 000 🪙 |
-
----
-
-## 🐉 Titres du World Boss — Nombre d'attaques
-
-| Attaques requises | Titre | Bonus | Or |
-|------------------|-------|-------|----|
-| 10 | Le Challenger | +2% stats WB | 300 🪙 |
-| 25 | Le Combattant de Boss | +2% stats WB | 800 🪙 |
-| 50 | L'Assaillant Persistant | +2% stats WB | 2 000 🪙 |
-| 100 | Le Guerrier du Boss | +2% stats WB | 5 000 🪙 |
-| 200 | Le Vétéran du Boss | +2% stats WB | 12 000 🪙 |
-| 300 | Le Destructeur | +2% stats WB | 25 000 🪙 |
-| 500 | La Terreur du Boss | +2% stats WB | 50 000 🪙 |
-| 750 | L'Implacable | +2% stats WB | 90 000 🪙 |
-| 1 000 | Le Fléau Suprême | +2% stats WB | 140 000 🪙 |
-| 2 000 | L'Éternel Assaillant | +2% stats WB | 250 000 🪙 |
-
----
-
-## 🐉 Titres du World Boss — Rang #1
-
-| Condition | Titre | Bonus | Or |
-|-----------|-------|-------|----|
-| Finir #1 du classement WB | Champion du Boss | +10% stats WB | 10 000 🪙 |
-
----
-
-## 🔨 Titres des Métiers — Récolte
-
-| Niveau requis | Titre | Bonus | Or |
-|--------------|-------|-------|----|
-| 10 | Apprenti Récolteur | +5% XP récolte | 200 🪙 |
-| 20 | Récolteur Confirmé | +5% XP récolte | 400 🪙 |
-| 30 | Récolteur Expérimenté | +5% XP récolte | 700 🪙 |
-| 40 | Récolteur Aguerri | +5% XP récolte | 1 100 🪙 |
-| 50 | Récolteur Chevronné | +5% XP récolte | 1 600 🪙 |
-| 60 | Expert Récolteur | +5% XP récolte | 2 200 🪙 |
-| 70 | Maître Récolteur | +5% XP récolte | 3 000 🪙 |
-| 80 | Grand Maître Récolteur | +5% XP récolte | 4 000 🪙 |
-| 90 | Légende de la Récolte | +5% XP récolte | 5 500 🪙 |
-| 100 | Seigneur des Ressources | +5% XP récolte | 7 500 🪙 |
-
----
-
-## 🔨 Titres des Métiers — Craft
-
-| Niveau requis | Titre | Bonus | Or |
-|--------------|-------|-------|----|
-| 10 | Apprenti Artisan | +5% XP craft | 200 🪙 |
-| 20 | Artisan Confirmé | +5% XP craft | 400 🪙 |
-| 30 | Artisan Expérimenté | +5% XP craft | 700 🪙 |
-| 40 | Artisan Aguerri | +5% XP craft | 1 100 🪙 |
-| 50 | Artisan Chevronné | +5% XP craft | 1 600 🪙 |
-| 60 | Expert Artisan | +5% XP craft | 2 200 🪙 |
-| 70 | Maître Artisan | +5% XP craft | 3 000 🪙 |
-| 80 | Grand Maître Artisan | +5% XP craft | 4 000 🪙 |
-| 90 | Légende de l'Artisanat | +5% XP craft | 5 500 🪙 |
-| 100 | Seigneur du Forge | +5% XP craft | 7 500 🪙 |
-
----
-
-## 🔨 Titres des Métiers — Conception
-
-| Niveau requis | Titre | Bonus | Or |
-|--------------|-------|-------|----|
-| 10 | Apprenti Concepteur | +5% XP conception | 200 🪙 |
-| 20 | Concepteur Confirmé | +5% XP conception | 400 🪙 |
-| 30 | Concepteur Expérimenté | +5% XP conception | 700 🪙 |
-| 40 | Concepteur Aguerri | +5% XP conception | 1 100 🪙 |
-| 50 | Concepteur Chevronné | +5% XP conception | 1 600 🪙 |
-| 60 | Expert Concepteur | +5% XP conception | 2 200 🪙 |
-| 70 | Maître Concepteur | +5% XP conception | 3 000 🪙 |
-| 80 | Grand Maître Concepteur | +5% XP conception | 4 000 🪙 |
-| 90 | Légende de la Conception | +5% XP conception | 5 500 🪙 |
-| 100 | Seigneur des Créations | +5% XP conception | 7 500 🪙 |
-
----
-
-## 🏪 Titres de l'Hôtel des Ventes
-
-Vendre à l'HDV réduit ta commission (de 5% de base jusqu'à 1%).
-
-| Ventes requises | Titre | Réduction commission | Or |
-|----------------|-------|---------------------|----|
-| 10 | Le Petit Commerçant | −0,4% commission | 300 🪙 |
-| 25 | Le Vendeur Régulier | −0,4% commission | 700 🪙 |
-| 50 | Le Marchand Actif | −0,4% commission | 1 500 🪙 |
-| 100 | Le Commerçant Établi | −0,4% commission | 3 000 🪙 |
-| 200 | Le Négociant Expérimenté | −0,4% commission | 6 000 🪙 |
-| 300 | Le Marchand Prospère | −0,4% commission | 10 000 🪙 |
-| 500 | L'Expert du Commerce | −0,4% commission | 17 000 🪙 |
-| 750 | Le Maître Marchand | −0,4% commission | 27 000 🪙 |
-| 1 000 | Le Grand Commerçant | −0,4% commission | 40 000 🪙 |
-| 2 000 | Le Seigneur du Marché | −0,4% commission | 60 000 🪙 |
-
----
-
-## 🥊 Titres PvP — Victoires (cosmétiques)
-
-Ces titres sont **purement cosmétiques** — ils n'apportent aucun bonus de statistiques, uniquement la fierté.
-
-| Victoires requises | Titre | Or |
-|-------------------|-------|----|
-| 10 | Battant | 300 🪙 |
-| 50 | L'Indomptable | 1 000 🪙 |
-| 100 | Le Dévastateur | 3 000 🪙 |
-| 200 | L'Implacable | 8 000 🪙 |
-| 500 | Le Fléau des Arènes | 20 000 🪙 |
-| 1 000 | L'Élu du Combat | 75 000 🪙 |
-
----
-
-## 🥊 Titres PvP — Élo (cosmétiques)
-
-| Élo requis | Titre | Or |
-|-----------|-------|----|
-| 1 000 | Fer Trempé | 500 🪙 |
-| 1 200 | Diamant | 2 000 🪙 |
-| 1 500 | Maître | 8 000 🪙 |
-| 2 000 | Grand Maître | 25 000 🪙 |
-| 2 500 | Challenger Suprême | 80 000 🪙 |
+| Titre | Condition | Bonus | Gold |
+|-------|-----------|-------|------:|
+| **L'Être au-Delà** | Niveau joueur : 1k | ✨ *Cosmétique* | 100,000 |
+| **L'Absolu** | Niveau de prestige : 1k | ✨ *Cosmétique* | 500,000 |
+| **Maître des Dix Mille Mondes** | Zone atteinte : 10k | ✨ *Cosmétique* | 250,000 |
+| **L'Éternel du Gouffre** | Donjons classiques : 2k | ✨ *Cosmétique* | 200,000 |
+| **Seigneur des Hauts Faits** | Donjons élites : 1k | ✨ *Cosmétique* | 300,000 |
+| **L'Abyssal Immortel** | Donjons abyssaux : 1k | ✨ *Cosmétique* | 500,000 |
+| **Dieu des Légions** | Raids complétés : 1k | ✨ *Cosmétique* | 500,000 |
+| **Le Destructeur Primordial** | Dégâts WB totaux : 1G | ✨ *Cosmétique* | 750,000 |
+| **Le Maître des Richesses** | Gold accumulé : 1G | ✨ *Cosmétique* | 500,000 |
+| **Légende Vivante** | Top 1 classement général hebdo : 1 | ✨ *Cosmétique* | 50,000 |
+| **L'Intouchable** | Top 1 PvP hebdo : 1 | ✨ *Cosmétique* | 50,000 |
+| **Tueur de Titans** | Top 1 WB hebdo : 1 | ✨ *Cosmétique* | 50,000 |
