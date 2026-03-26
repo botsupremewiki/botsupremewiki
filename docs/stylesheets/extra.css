@@ -228,7 +228,7 @@
 
 .rpg-features-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
@@ -243,6 +243,23 @@
   position: relative;
   overflow: hidden;
 }
+
+/* Carte large — pleine largeur */
+.rpg-feature-card--wide {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  padding: 32px 40px;
+}
+.rpg-feature-card--wide .rpg-card-icon {
+  font-size: 3.8rem;
+  flex-shrink: 0;
+  margin-bottom: 0;
+}
+.rpg-feature-card--wide .rpg-card-title { font-size: 1.35rem; margin-bottom: 8px; }
+.rpg-feature-card--wide .rpg-card-desc  { font-size: 0.93rem; max-width: 680px; }
 
 .rpg-feature-card::before {
   content: '';
@@ -458,6 +475,12 @@
 ::-webkit-scrollbar-thumb:hover { background: rgba(124, 58, 237, 0.65); }
 
 /* ── Responsive ────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .rpg-features-grid { grid-template-columns: repeat(2, 1fr); }
+  .rpg-feature-card--wide { flex-direction: column; gap: 16px; padding: 28px; }
+  .rpg-feature-card--wide .rpg-card-icon { font-size: 2.8rem; }
+}
+
 @media (max-width: 768px) {
   .rpg-stat { padding: 8px 20px; }
   .rpg-stat-value { font-size: 2rem; }
@@ -743,11 +766,155 @@
   border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
+/* Drops — section collapsible */
+.ec-drops-detail {
+  margin-top: 0.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 0.4rem;
+}
+.ec-drops-detail summary {
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--md-accent-fg-color, #7c9fff);
+  list-style: none;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  user-select: none;
+}
+.ec-drops-detail summary::after {
+  content: '▶';
+  font-size: 0.65rem;
+  transition: transform 0.2s;
+  margin-left: 0.3rem;
+}
+.ec-drops-detail[open] summary::after { transform: rotate(90deg); }
+.ec-drops-detail summary::-webkit-details-marker { display: none; }
+.ec-drops-equip {
+  font-size: 0.82rem;
+  opacity: 0.85;
+  padding: 0.4rem 0 0.3rem;
+  line-height: 1.5;
+}
+.ec-drops-mats {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  padding-bottom: 0.3rem;
+}
+.ec-mat-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 0.3rem;
+}
+.ec-mat-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 180px);
+  gap: 0.4rem;
+  min-width: max-content;
+}
+.ec-mat-prof {
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 6px;
+  padding: 0.35rem 0.4rem;
+}
+.ec-mat-prof-lbl {
+  font-size: 0.75rem;
+  font-weight: 700;
+  opacity: 0.9;
+  margin-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.2rem;
+}
+.ec-mat-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.25rem;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+.ec-mat-emoji { flex-shrink: 0; }
+.ec-mat-name {
+  flex: 1;
+  opacity: 0.75;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.ec-mat-chance {
+  flex-shrink: 0;
+  font-weight: 600;
+  color: var(--md-accent-fg-color, #7c9fff);
+  font-size: 0.7rem;
+}
+.ec-mat-note {
+  font-size: 0.72rem;
+  opacity: 0.55;
+  margin-top: 0.4rem;
+  font-style: italic;
+  line-height: 1.4;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .ec-stats-grid { grid-template-columns: 1fr; }
   .ec-stat-hp { grid-column: 1; }
   .ec-tabs { gap: 0.35rem; }
   .ec-tab { padding: 0.4rem 0.7rem; font-size: 0.82rem; }
+  .ec-mat-grid { grid-template-columns: repeat(5, 160px); }
   .ec-name { font-size: 1.05rem; }
+}
+
+/* ── Sticky Footer ─────────────────────────────────────────── */
+.md-footer {
+  position: sticky;
+  bottom: 0;
+  z-index: 10;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.md-footer-nav {
+  background: rgba(10, 6, 18, 0.85) !important;
+  border-top: 1px solid rgba(124, 58, 237, 0.25) !important;
+}
+
+.md-footer__inner {
+  padding: 0 0.8rem !important;
+  min-height: unset !important;
+  height: 4rem !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.md-footer__link {
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.4rem !important;
+}
+
+.md-footer__title {
+  font-size: 1rem !important;
+  line-height: 1.1 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.md-footer__direction {
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+
+.md-footer__button {
+  margin: 0 !important;
+  padding: 0.5rem !important;
+  width: 2.4rem !important;
+  height: 2.4rem !important;
+}
+
+.md-footer-meta {
+  display: none !important;
 }

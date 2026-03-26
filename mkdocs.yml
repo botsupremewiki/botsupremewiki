@@ -57,24 +57,26 @@ nav:
       - Ombre Venin: classes/ombre.md
       - Pyromancien: classes/pyromancien.md
       - Paladin: classes/paladin.md
+  - Métiers:
+      - Vue d'ensemble: metiers/index.md
+      - Récolte: metiers/recolte.md
+      - Artisanat: metiers/artisanat.md
+      - Conception: metiers/conception.md
   - Modes de jeu:
       - Vue d'ensemble: modes/index.md
-      - Mécanique de combat: combat/mecanique.md
       - Monde: modes/monde.md
       - Donjons: modes/donjons.md
       - Raids: modes/raids.md
-      - Taverne (PvP): modes/pvp.md
       - World Boss: modes/world_boss.md
-      - Simulateur d'Ennemis: combat/ennemis.md
-  - Métiers:
-      - Vue d'ensemble: metiers/index.md
+      - Taverne (PvP): modes/pvp.md
+      - Simulateur d'Ennemis: modes/ennemis.md
   - Objets:
-      - Équipements & Panoplies: equipements/index.md
+      - Matériaux: objets/materiaux.md
+      - Équipements & Panoplies: objets/equipements.md
       - Potions & Élixirs: objets/potions.md
       - Nourritures: objets/nourriture.md
       - Runes: objets/runes.md
       - Reliques: objets/reliques.md
-      - Matériaux: objets/materiaux.md
   - Titres & Quêtes:
       - Titres: titres.md
       - Quêtes: quetes.md
