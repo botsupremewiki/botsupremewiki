@@ -11,8 +11,8 @@ Rends-toi dans le canal **#classe** et sélectionne ta classe parmi les 10 dispo
 - ⚔️ **5 classes standard** — gratuites, accessibles à tous
 - 💎 **5 classes premium** — nécessitent le rôle Premium
 
-!!! warning "Choix définitif"
-    Le choix de classe est **permanent** — tu ne pourras pas en changer. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
+!!! warning "Choix de classe"
+    Le choix de classe est **permanent**. Tu pourras en changer **après avoir effectué un Prestige**. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
 
 ---
 
@@ -45,20 +45,18 @@ L'énergie est la ressource centrale du jeu. Chaque action en consomme.
 Dans le canal **#monde** :
 
 1. **Attaque** les ennemis de ta zone pour gagner de l'XP et du Gold
-2. Chaque zone a **4 stages d'ennemis** puis un **boss**
+2. Chaque zone a **10 stages d'ennemis** puis un **boss**
 3. **Bats le boss** pour passer à la zone suivante
 4. Active le **mode auto** pour farmer automatiquement (toutes les 3 secondes)
 
-Les zones vont de 1 à **10 000**. Ton niveau détermine les zones accessibles *(zone ≈ niveau × 9)*.
+Les zones vont de 1 à **10 000**. Les zones sont accessibles à tous tant que tu gagnes tes combats.
 
 ---
 
 ## 4️⃣ L'XP et les Niveaux
 
-- XP nécessaire pour passer au niveau suivant = **1 000 × niveau actuel**
-  *(exemple : passer du niveau 10 au 11 demande 10 000 XP)*
 - **Niveau maximum : 1 000**
-- Après le niveau 1 000 → accès au **[Prestige](prestige.md)**
+- Dès le niveau 10 → accès au **[Prestige](prestige.md)**
 
 ---
 
@@ -90,7 +88,7 @@ Consulte la page [Équipements](equipements/index.md) pour les détails.
 
 ## 7️⃣ Les Quêtes 📜
 
-Les quêtes donnent de grosses récompenses en XP et Gold.
+Chaque quête complétée donne **+0,1 énergie/cycle** et **+0,1% régén. HP** en bonus passif permanent.
 
 - **42 quêtes principales** : à faire dans l'ordre, débloquent du contenu
 - **30 quêtes secondaires** : indépendantes, bonus supplémentaires
@@ -101,7 +99,7 @@ Consulte la page [Quêtes](quetes.md).
 
 ## 8️⃣ Les Titres 🎖️
 
-Les titres donnent des **bonus permanents** (XP, Gold, stats de combat, etc.).
+Les titres donnent des **bonus permanents** (stats de combat, efficacité donjon/raid, etc.).
 Commence par les titres de zone et de niveau — ils sont faciles à débloquer et très utiles.
 
 Consulte la page [Titres](titres.md).

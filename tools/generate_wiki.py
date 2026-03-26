@@ -157,36 +157,34 @@ def _fmt_num(n: int | float) -> str:
 
 
 def _fmt_req(req: int) -> str:
-    if req >= 1_000_000_000:
-        return f"{req // 1_000_000_000}G"
-    if req >= 1_000_000:
-        return f"{req // 1_000_000}M"
-    if req >= 1_000:
-        return f"{req // 1_000}k"
-    return str(req)
+    return _fmt_num(req)
 
 
 def _req_type_label(rt: str) -> str:
     labels = {
-        "level":           "Niveau joueur",
-        "prestige":        "Niveau de prestige",
-        "zone":            "Zone atteinte",
-        "dungeon_clears":  "Donjons classiques",
-        "elite_clears":    "Donjons élites",
-        "abyssal_clears":  "Donjons abyssaux",
-        "raid_clears":     "Raids complétés",
-        "wb_total_damage": "Dégâts WB totaux",
-        "wb_attacks":      "Attaques WB",
-        "wb_rank1":        "Top 1 WB hebdo",
-        "harvest_level":   "Niveau récolte",
-        "craft_level":     "Niveau artisanat",
-        "conception_level":"Niveau conception",
-        "market_sales":    "Ventes HDV",
-        "pvp_wins":        "Victoires PvP",
-        "pvp_elo":         "Élo PvP",
-        "total_gold":      "Gold accumulé",
-        "global_rank1":    "Top 1 classement général hebdo",
-        "pvp_rank1":       "Top 1 PvP hebdo",
+        "level":                    "Niveau joueur",
+        "prestige":                 "Niveau de prestige",
+        "zone":                     "Zone atteinte",
+        "dungeon_clears":           "Donjons classiques",
+        "elite_clears":             "Donjons élites",
+        "abyssal_clears":           "Donjons abyssaux",
+        "dungeon_best_classique":   "Donjon classique niv. atteint",
+        "dungeon_best_elite":       "Donjon élite niv. atteint",
+        "dungeon_best_abyssal":     "Donjon abyssal niv. atteint",
+        "raid_clears":              "Raids complétés",
+        "raid_max_completed":       "Raid niv. complété",
+        "wb_total_damage":          "Dégâts WB totaux",
+        "wb_attacks":               "Attaques WB",
+        "wb_rank1":                 "Top 1 WB hebdo",
+        "harvest_level":            "Niveau récolte",
+        "craft_level":              "Niveau artisanat",
+        "conception_level":         "Niveau conception",
+        "market_sales":             "Ventes HDV",
+        "pvp_wins":                 "Victoires PvP",
+        "pvp_elo":                  "Élo PvP",
+        "total_gold":               "Gold accumulé",
+        "global_rank1":             "Top 1 classement général hebdo",
+        "pvp_rank1":                "Top 1 PvP hebdo",
     }
     return labels.get(rt, rt)
 
@@ -303,8 +301,8 @@ Rends-toi dans le canal **#classe** et sélectionne ta classe parmi les {len(ALL
 - ⚔️ **{len(CLASSES_STANDARD)} classes standard** — gratuites, accessibles à tous
 - 💎 **{len(CLASSES_PREMIUM)} classes premium** — nécessitent le rôle Premium
 
-!!! warning "Choix définitif"
-    Le choix de classe est **permanent** — tu ne pourras pas en changer. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
+!!! warning "Choix de classe"
+    Le choix de classe est **permanent**. Tu pourras en changer **après avoir effectué un Prestige**. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
 
 ---
 
@@ -337,20 +335,18 @@ L'énergie est la ressource centrale du jeu. Chaque action en consomme.
 Dans le canal **#monde** :
 
 1. **Attaque** les ennemis de ta zone pour gagner de l'XP et du Gold
-2. Chaque zone a **4 stages d'ennemis** puis un **boss**
+2. Chaque zone a **10 stages d'ennemis** puis un **boss**
 3. **Bats le boss** pour passer à la zone suivante
 4. Active le **mode auto** pour farmer automatiquement (toutes les 3 secondes)
 
-Les zones vont de 1 à **10 000**. Ton niveau détermine les zones accessibles *(zone ≈ niveau × 9)*.
+Les zones vont de 1 à **10 000**. Les zones sont accessibles à tous tant que tu gagnes tes combats.
 
 ---
 
 ## 4️⃣ L'XP et les Niveaux
 
-- XP nécessaire pour passer au niveau suivant = **1 000 × niveau actuel**
-  *(exemple : passer du niveau 10 au 11 demande 10 000 XP)*
 - **Niveau maximum : 1 000**
-- Après le niveau 1 000 → accès au **[Prestige](prestige.md)**
+- Dès le niveau 10 → accès au **[Prestige](prestige.md)**
 
 ---
 
@@ -382,7 +378,7 @@ Consulte la page [Équipements](equipements/index.md) pour les détails.
 
 ## 7️⃣ Les Quêtes 📜
 
-Les quêtes donnent de grosses récompenses en XP et Gold.
+Chaque quête complétée donne **+0,1 énergie/cycle** et **+0,1% régén. HP** en bonus passif permanent.
 
 - **{len(MAIN_QUESTS)} quêtes principales** : à faire dans l'ordre, débloquent du contenu
 - **{len(SECONDARY_QUESTS)} quêtes secondaires** : indépendantes, bonus supplémentaires
@@ -393,7 +389,7 @@ Consulte la page [Quêtes](quetes.md).
 
 ## 8️⃣ Les Titres 🎖️
 
-Les titres donnent des **bonus permanents** (XP, Gold, stats de combat, etc.).
+Les titres donnent des **bonus permanents** (stats de combat, efficacité donjon/raid, etc.).
 Commence par les titres de zone et de niveau — ils sont faciles à débloquer et très utiles.
 
 Consulte la page [Titres](titres.md).
@@ -1352,7 +1348,7 @@ def gen_world_boss() -> None:
         ref   = effs.get("reflet", 0)
         df    = effs.get("double_frappe", 0)
         rh    = effs.get("regen_hp", 0)
-        lines.append(f"| {rem} {rar.capitalize()} | {vv:.0%} | {rd:.0%} | {bd:.0%} | {ref:.0%} | {df:.0%} | {rh:.0%} |")
+        lines.append(f"| {rem} {rar.capitalize()} | {vv:.2f}% | {rd:.2f}% | {bd:.2f}% | {ref:.2f}% | {df:.2f}% | {rh:.2f}% |")
 
     lines.append("")
     lines.append("\n!!! info \"Diminishing returns\"\n    "
@@ -1456,29 +1452,19 @@ def _consumables_by_prof_effect(prof_key: str, effects_filter: list[str] | None 
     return result
 
 
-def _consumable_table(items: list[tuple], show_level: bool = True) -> str:
+def _consumable_table(items: list[tuple]) -> str:
     lines = []
-    if show_level:
-        lines.append("| Nom | Effet | Niv. requis |")
-        lines.append("|-----|-------|------------:|")
-    else:
-        lines.append("| Nom | Effet |")
-        lines.append("|-----|-------|")
+    lines.append("| Nom | Effet |")
+    lines.append("|-----|-------|")
 
     for iid, item in sorted(items, key=lambda x: x[1].get("level_req", 0)):
         name    = item.get("name", iid)
         emoji   = item.get("emoji", "")
         effect  = item.get("effect", "?")
-        value   = item.get("value", 0)
-        lvl_req = item.get("level_req", 1)
 
         # Build effect description
         eff_desc = _effect_desc(effect, item)
-
-        if show_level:
-            lines.append(f"| {emoji} **{name}** | {eff_desc} | {lvl_req} |")
-        else:
-            lines.append(f"| {emoji} **{name}** | {eff_desc} |")
+        lines.append(f"| {emoji} **{name}** | {eff_desc} |")
 
     return "\n".join(lines)
 
@@ -1676,7 +1662,7 @@ def gen_objets_reliques() -> None:
         ref  = effs.get("reflet", 0)
         df   = effs.get("double_frappe", 0)
         rh   = effs.get("regen_hp", 0)
-        lines.append(f"| {rem} {rar.capitalize()} | {vv:.0%} | {rd:.0%} | {bd:.0%} | {ref:.0%} | {df:.0%} | {rh:.0%} |")
+        lines.append(f"| {rem} {rar.capitalize()} | {vv:.2f}% | {rd:.2f}% | {bd:.2f}% | {ref:.2f}% | {df:.2f}% | {rh:.2f}% |")
 
     lines.append("")
     lines.append("\n## Plafonds des effets\n")
@@ -1694,7 +1680,7 @@ def gen_objets_reliques() -> None:
     lines.append("|-------|----------------:|")
     for k, cap in RELIC_CAPS.items():
         lbl = cap_labels.get(k, k)
-        lines.append(f"| {lbl} | {cap:.0%} |")
+        lines.append(f"| {lbl} | {cap:.2f}% |")
 
     lines.append("")
     lines.append("\n!!! note \"Diminishing returns\"\n    "
@@ -1760,6 +1746,7 @@ def gen_titres() -> None:
             "xp_pct":             f"**+{bv}% XP**",
             "gold_pct":           f"**+{bv}% Gold**",
             "prestige_pct":       f"**+{bv}% Prestige**",
+            "prestige_bonus_pct": f"**+{bv}% bonus prestige**",
             "monde_loot_pct":     f"**+{bv}% loot monde**",
             "djc_stats_pct":      f"**+{bv}% stats donjon classique**",
             "dje_stats_pct":      f"**+{bv}% stats donjon élite**",
@@ -1779,8 +1766,8 @@ def gen_titres() -> None:
             continue
 
         lines.append(f"\n## {cat_label}\n")
-        lines.append("| Titre | Condition | Bonus | Gold |")
-        lines.append("|-------|-----------|-------|------:|")
+        lines.append("| Titre | Condition | Bonus |")
+        lines.append("|-------|-----------|-------|")
 
         for tid, t in cat_titles:
             name  = t.get("name", tid)
@@ -1788,8 +1775,7 @@ def gen_titres() -> None:
             rt    = t.get("req_type", "?")
             bt    = t.get("bonus_type")
             bv    = t.get("bonus_value", 0)
-            gold  = t.get("reward_gold", 0)
-            lines.append(f"| **{name}** | {_req_type_label(rt)} : {_fmt_req(req)} | {bonus_label(bt, bv)} | {_fmt_num(gold)} |")
+            lines.append(f"| **{name}** | {_req_type_label(rt)} : {_fmt_req(req)} | {bonus_label(bt, bv)} |")
 
     write("titres.md", "\n".join(lines))
 
@@ -1801,35 +1787,31 @@ def gen_quetes() -> None:
     lines = [
         "# 📜 Quêtes\n",
         f"Il y a **{len(MAIN_QUESTS)} quêtes principales** et **{len(SECONDARY_QUESTS)} quêtes secondaires**.\n",
-        "Les quêtes donnent de grosses récompenses en **XP** et **Gold**.\n",
+        "Chaque quête complétée donne **+0,1 énergie/cycle** et **+0,1% régén. HP** en bonus passif permanent.\n",
         "\n---\n",
         "\n## 📖 Quêtes Principales\n",
         "Progression linéaire — chaque quête doit être complétée avant la suivante.\n\n",
-        "| # | Quête | Objectif | XP | Gold |",
-        "|--:|-------|----------|---:|------:|",
+        "| # | Quête | Objectif |",
+        "|--:|-------|----------|",
     ]
 
     for i, q in enumerate(MAIN_QUESTS, 1):
         name  = q.get("name", "?")
         emoji = q.get("emoji", "")
         desc  = q.get("desc", q.get("description", "")).replace("**", "")
-        xp    = q.get("xp", q.get("xp_reward", 0))
-        gold  = q.get("gold", q.get("gold_reward", 0))
-        lines.append(f"| {i} | {emoji} **{name}** | {desc} | {_fmt_num(xp)} | {_fmt_num(gold)} |")
+        lines.append(f"| {i} | {emoji} **{name}** | {desc} |")
 
     lines.append("\n\n---\n")
     lines.append("\n## 📋 Quêtes Secondaires\n")
     lines.append("Indépendantes — peuvent être faites dans n'importe quel ordre.\n\n")
-    lines.append("| # | Quête | Objectif | XP | Gold |")
-    lines.append("|--:|-------|----------|---:|------:|")
+    lines.append("| # | Quête | Objectif |")
+    lines.append("|--:|-------|----------|")
 
     for i, q in enumerate(SECONDARY_QUESTS, 1):
         name  = q.get("name", "?")
         emoji = q.get("emoji", "")
         desc  = q.get("desc", q.get("description", "")).replace("**", "")
-        xp    = q.get("xp", q.get("xp_reward", 0))
-        gold  = q.get("gold", q.get("gold_reward", 0))
-        lines.append(f"| {i} | {emoji} **{name}** | {desc} | {_fmt_num(xp)} | {_fmt_num(gold)} |")
+        lines.append(f"| {i} | {emoji} **{name}** | {desc} |")
 
     write("quetes.md", "\n".join(lines))
 

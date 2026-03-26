@@ -299,16 +299,18 @@
   // ── World Boss ─────────────────────────────────────────────────────────────
 
   function calcWorldBoss(tour) {
-    var zoneEquiv = Math.max(1000, tour * 1000);
+    // tour = numéro d'attaque WB de la semaine (1–20), correspond à personal_turn = tour-1
+    var personalTurn = Math.max(0, tour - 1);
+    var zoneEquiv = Math.round(1000 * Math.pow(1.25, personalTurn));
     var mult = 1 + (zoneEquiv - 1) * 0.15;
     var stats = scaleStatsAvg(mult);
-    stats.hp *= 50;
+    delete stats.hp; // HP fixe chaque semaine (collectif), non affiché ici
     return {
       name: 'Bot Suprême', nameNote: null,
       cls: 'Titan', theme: 'World Boss', themeEmoji: '🐉',
-      typeLabel: 'World Boss — Tour ' + tour + ' (zone ≈ ' + fmt(zoneEquiv) + ')',
+      typeLabel: 'Tour WB #' + tour + ' — Zone ' + fmt(zoneEquiv),
       typeBadge: 'World Boss T' + tour, typeEmoji: '🐉',
-      passif: "Escalade de Puissance : chaque tour, ses stats augmentent de l'équivalent de 1 000 zones supplémentaires.",
+      passif: "Escalade de Puissance : à chaque attaque WB de la semaine, ses stats augmentent (×1.25 de zone par tour).",
       xp: zoneEquiv * 500, gold: zoneEquiv * 200,
       stats: stats
     };
@@ -480,7 +482,7 @@
     function syncWbTour(val) {
       val = Math.max(1, parseInt(val, 10) || 1);
       if (wbVal)       wbVal.textContent   = val;
-      if (wbTour)      wbTour.value        = Math.min(val, 50);
+      if (wbTour)      wbTour.value        = Math.min(val, 20);
       if (wbTourInput) wbTourInput.value   = val;
     }
 

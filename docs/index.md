@@ -14,7 +14,7 @@
 | 🏆 Niveau maximum    | 1 000 |
 | 🏰 Donjons           | 7 types × 3 difficultés |
 | 👥 Raids             | 10 |
-| 🎖️ Titres            | 164 |
+| 🎖️ Titres            | 215 |
 | 🧪 Consommables      | 133 |
 | 🌿 Matériaux         | 50 |
 | 📜 Quêtes            | 72 |

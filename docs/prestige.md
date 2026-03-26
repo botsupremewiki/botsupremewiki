@@ -6,7 +6,7 @@ Le Prestige est le système de **progression à long terme** du jeu. Il récompe
 
 ## Qu'est-ce que le Prestige ?
 
-Lorsque tu atteins le **niveau 1 000**, tu peux effectuer un Prestige. Ton niveau revient à 1, mais tu conserves un **bonus permanent** qui s'applique à toutes tes statistiques de combat pour toujours.
+Lorsque tu atteins le **niveau 10**, tu peux effectuer un Prestige. Ton niveau revient à 1, mais tu conserves un **bonus permanent** qui s'applique à toutes tes statistiques de combat pour toujours.
 
 Chaque prestige donne **+0,1% à toutes tes stats** (cumulatif et permanent).
 
@@ -14,7 +14,7 @@ Chaque prestige donne **+0,1% à toutes tes stats** (cumulatif et permanent).
 
 ## Comment prestiger ?
 
-1. Atteins le **niveau 1 000**
+1. Atteins le **niveau 10**
 2. Appuie sur le bouton **Prestige** dans ton Profil
 
 !!! warning "Avant de prestiger — sauvegarde tes équipements !"
@@ -27,10 +27,10 @@ Chaque prestige donne **+0,1% à toutes tes stats** (cumulatif et permanent).
 | Conservé ✅ | Réinitialisé ❌ |
 |------------|----------------|
 | Équipements en Banque | Niveau (repart à 1) |
-| Or en Banque | Inventaire |
+| Tout ce qui est en banque | Inventaire |
 | Niveau de Prestige | Équipements équipés non mis en banque |
-| Titres débloqués | Progression de quêtes |
-| | Niveaux de métiers (récolte, forge, conception) |
+| Titres débloqués | Niveaux de métiers (récolte, forge, conception) |
+| Progression de quêtes | |
 
 ---
 
@@ -56,36 +56,32 @@ Le multiplicateur de stats est calculé directement sur tes stats de classe :
 
 Les titres de prestige s'obtiennent tous les 100 niveaux de prestige. Chacun donne **+10% d'efficacité de prestige** dans les donjons, raids et World Boss.
 
-Ce bonus de titre est calculé séparément pour le combat avancé :
-
-> **Bonus titre combat = Prestige × prestige_bonus_pct_total / 1000**
-
-| Prestige | Titres obtenus | Efficacité prestige totale | Bonus combat supplémentaire (ex. prestige 500) |
-|----------|----------------|---------------------------|-----------------------------------------------|
-| 100      | L'Honoré       | +10%                      | 500 × 10% / 10 = **+5%**                     |
-| 200      | + Le Respecté  | +20%                      | 500 × 20% / 10 = **+10%**                    |
-| 500      | + Le Glorieux  | +50%                      | 500 × 50% / 10 = **+25%**                    |
-| 1 000    | + Le Divin     | +100%                     | 1000 × 100% / 10 = **+100%**                 |
+| Prestige | Titres obtenus | Efficacité prestige totale |
+|----------|----------------|---------------------------|
+| 100      | L'Honoré       | +10%                      |
+| 200      | + Le Respecté  | +20%                      |
+| 500      | + Le Glorieux  | +50%                      |
+| 1 000    | + Le Divin     | +100%                     |
 
 !!! tip "Ce que ça signifie concrètement"
-    À prestige 1 000 avec tous les titres débloqués, le bonus combat avancé dans les donjons/raids/WB est **+100% à toutes tes stats de combat** (en plus du ×2 de base du prestige).
+    À prestige 1 000 avec tous les titres débloqués, l'efficacité de prestige dans les donjons/raids/WB est **+100%** (en plus du ×2 de base du prestige).
 
 ---
 
 ## Les 10 Titres de Prestige
 
-| Prestige requis | Titre | Bonus | Récompense |
-|----------------|-------|-------|------------|
-| 100  | L'Honoré    | +10% efficacité prestige | 2 000 🪙 |
-| 200  | Le Respecté | +10% efficacité prestige | 5 000 🪙 |
-| 300  | L'Éminent   | +10% efficacité prestige | 10 000 🪙 |
-| 400  | Le Distingué| +10% efficacité prestige | 20 000 🪙 |
-| 500  | Le Glorieux | +10% efficacité prestige | 35 000 🪙 |
-| 600  | L'Exalté    | +10% efficacité prestige | 50 000 🪙 |
-| 700  | Le Vénéré   | +10% efficacité prestige | 75 000 🪙 |
-| 800  | Le Sacré    | +10% efficacité prestige | 100 000 🪙 |
-| 900  | L'Ascendant | +10% efficacité prestige | 150 000 🪙 |
-| 1 000| Le Divin    | +10% efficacité prestige | 250 000 🪙 |
+| Prestige requis | Titre | Bonus |
+|----------------|-------|-------|
+| 100  | L'Honoré    | +10% efficacité prestige |
+| 200  | Le Respecté | +10% efficacité prestige |
+| 300  | L'Éminent   | +10% efficacité prestige |
+| 400  | Le Distingué| +10% efficacité prestige |
+| 500  | Le Glorieux | +10% efficacité prestige |
+| 600  | L'Exalté    | +10% efficacité prestige |
+| 700  | Le Vénéré   | +10% efficacité prestige |
+| 800  | Le Sacré    | +10% efficacité prestige |
+| 900  | L'Ascendant | +10% efficacité prestige |
+| 1 000| Le Divin    | +10% efficacité prestige |
 
 ---
 

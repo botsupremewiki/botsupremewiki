@@ -23,16 +23,16 @@ Chaque relique possède les mêmes effets, mais avec des valeurs plus élevées 
 
 | Rareté | Vol de vie | Réd. dégâts | Bonus dégâts | Reflet dégâts | Double frappe | Regen HP/tour |
 |--------|----------:|------------:|-------------:|-------------:|-------------:|--------------:|
-| ⬜ Commun | 30% | 20% | 30% | 40% | 20% | 15% |
-| 🟩 Peu commun | 35% | 25% | 35% | 45% | 25% | 20% |
-| 🟦 Rare | 40% | 30% | 40% | 50% | 30% | 20% |
-| 🟪 Épique | 50% | 35% | 50% | 65% | 35% | 25% |
-| 🟧 Légendaire | 60% | 40% | 60% | 80% | 40% | 30% |
-| 🟥 Mythique | 70% | 50% | 70% | 90% | 50% | 35% |
-| 🔶 Artefact | 85% | 60% | 85% | 110% | 60% | 45% |
-| 🟡 Divin | 100% | 70% | 100% | 135% | 70% | 50% |
-| 🩵 Transcendant | 120% | 85% | 120% | 160% | 85% | 65% |
-| 🌈 Prismatique | 150% | 100% | 150% | 200% | 100% | 75% |
+| ⬜ Commun | 0.30% | 0.20% | 0.30% | 0.40% | 0.20% | 0.15% |
+| 🟩 Peu commun | 0.35% | 0.25% | 0.35% | 0.45% | 0.25% | 0.20% |
+| 🟦 Rare | 0.40% | 0.30% | 0.40% | 0.50% | 0.30% | 0.20% |
+| 🟪 Épique | 0.50% | 0.35% | 0.50% | 0.65% | 0.35% | 0.25% |
+| 🟧 Légendaire | 0.60% | 0.40% | 0.60% | 0.80% | 0.40% | 0.30% |
+| 🟥 Mythique | 0.70% | 0.50% | 0.70% | 0.90% | 0.50% | 0.35% |
+| 🔶 Artefact | 0.85% | 0.60% | 0.85% | 1.10% | 0.60% | 0.45% |
+| 🟡 Divin | 1.00% | 0.70% | 1.00% | 1.35% | 0.70% | 0.50% |
+| 🩵 Transcendant | 1.20% | 0.85% | 1.20% | 1.60% | 0.85% | 0.65% |
+| 🌈 Prismatique | 1.50% | 1.00% | 1.50% | 2.00% | 1.00% | 0.75% |
 
 
 ## Plafonds des effets
@@ -43,12 +43,12 @@ même si tu possèdes plusieurs reliques.
 
 | Effet | Valeur maximale |
 |-------|----------------:|
-| Vol de vie | 800% |
-| Réduction dégâts | 600% |
-| Bonus dégâts | 1000% |
-| Reflet | 500% |
-| Double frappe | 1500% |
-| Regen HP/tour | 400% |
+| Vol de vie | 0.27% |
+| Réduction dégâts | 0.20% |
+| Bonus dégâts | 0.33% |
+| Reflet | 0.17% |
+| Double frappe | 0.50% |
+| Regen HP/tour | 0.13% |
 
 
 !!! note "Diminishing returns"
