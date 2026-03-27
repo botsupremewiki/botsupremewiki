@@ -1,53 +1,10 @@
-# 🗺️ Modes de jeu
-
-Le RPG propose plusieurs modes de jeu avec des objectifs et des récompenses différents.
-
-| Mode | Joueurs | Coût en énergie | Récompenses |
-|------|---------|-----------------|-------------|
-| [Monde](monde.md) | Solo | 1 par combat | XP, or, équipements |
-| [Donjons Classiques](donjons.md) | Solo | 3 | Meilleures récompenses |
-| [Donjons Élite](donjons.md) | Solo | 5 | Récompenses supérieures |
-| [Donjons Abyssaux](donjons.md) | Solo | 10 | Récompenses d'élite |
-| [Raids](raids.md) | Jusqu'à 5 | 50 | Récompenses exclusives |
-| [World Boss](world_boss.md) | Tous | 50 | Récompenses hebdomadaires |
-| [Taverne — PvP Classique](pvp.md) | 2 joueurs | Gratuit | Aucune (pour le fun) |
-| [Taverne — PvP Classé](pvp.md) | 2 joueurs | Gratuit | Élo et classement |
-
----
-
-## Recommandations selon ton niveau
-
-### Niveau 1 – 100
-
-- **Monde** — zones 1 à 1 000
-- **Donjons Classiques** — niveaux 1 à 30
-
-### Niveau 100 – 500
-
-- **Monde** — zones 1 000 à 5 000
-- **Donjons Classiques** — niveaux 30 à 100
-- **Donjons Élite** — niveaux 1 à 50
-- **Raids** — niveaux 1 à 5
-- **World Boss** — participe chaque semaine
-
-### Niveau 500 – 1 000
-
-- **Monde** — zones 5 000 à 10 000
-- **Donjons Élite** — niveaux 50 à 100
-- **Donjons Abyssaux** — niveaux 1 à 100
-- **Raids** — niveaux 5 à 10
-- **World Boss** — vise le top 10 pour les meilleures Reliques
-- **PvP** — teste-toi contre d'autres joueurs
-
----
-
-## ⚔️ Mécanique de combat
+# ⚔️ Mécanique de combat
 
 Tous les combats dans le RPG se déroulent **au tour par tour**. Ce guide explique comment fonctionnent les statistiques, les dégâts, les coups critiques et l'ordre des actions.
 
 ---
 
-### Les statistiques
+## Les statistiques
 
 | Stat | Nom complet | Rôle |
 |------|-------------|------|
@@ -64,7 +21,7 @@ Tous les combats dans le RPG se déroulent **au tour par tour**. Ce guide expliq
 
 ---
 
-### Comment sont calculés les dégâts ?
+## Comment sont calculés les dégâts ?
 
 **Dégâts physiques :**
 
@@ -80,7 +37,7 @@ Le minimum de dégâts est toujours **1** (impossible de faire 0 dégâts).
 
 ---
 
-### Les coups critiques
+## Les coups critiques
 
 Lorsqu'un coup critique survient, les dégâts sont multipliés par le **pourcentage de Dégâts de Critique** divisé par 100.
 
@@ -92,7 +49,7 @@ Si ta Chance de Critique dépasse 100%, l'excédent se transforme en bonus sur l
 
 ---
 
-### L'ordre des actions (Vitesse)
+## L'ordre des actions (Vitesse)
 
 La Vitesse détermine qui agit en premier à chaque tour. Si ta Vitesse est **supérieure** à celle de l'ennemi, tu attaques avant lui. En cas d'égalité, l'ordre est aléatoire.
 
@@ -100,15 +57,15 @@ Certains sorts modifient temporairement la vitesse ennemie ou la tienne.
 
 ---
 
-### Le bouclier
+## Le bouclier
 
 Certains sorts ou effets passifs créent un **bouclier** qui absorbe les dégâts avant tes PV. Le bouclier disparaît quand il est épuisé ou à la fin de son effet.
 
 ---
 
-### Les effets de statut
+## Les effets de statut
 
-#### Sur l'ennemi
+### Sur l'ennemi
 
 | Effet | Description |
 |-------|-------------|
@@ -119,7 +76,7 @@ Certains sorts ou effets passifs créent un **bouclier** qui absorbe les dégât
 | **Étourdissement** | L'ennemi ne peut pas agir pendant X tours |
 | **Marquage** | L'ennemi reçoit +X% de dégâts de toutes sources |
 
-#### Sur toi
+### Sur toi
 
 | Effet | Description |
 |-------|-------------|
@@ -130,7 +87,7 @@ Certains sorts ou effets passifs créent un **bouclier** qui absorbe les dégât
 
 ---
 
-### Les sorts
+## Les sorts
 
 À ton tour, tu peux choisir d'**attaquer normalement** ou d'utiliser un **sort** de ta classe.
 
@@ -142,7 +99,7 @@ Si tu n'as pas assez de ressource ou si le sort est en recharge, seule l'attaque
 
 ---
 
-### Passifs des Boss Emblématiques
+## Passifs des Boss Emblématiques
 
 Les boss emblématiques apparaissent **toutes les 100 zones**. Chaque passif est attribué de façon cyclique selon la zone.
 
@@ -161,7 +118,7 @@ Les boss emblématiques apparaissent **toutes les 100 zones**. Chaque passif est
 
 ---
 
-### Passifs des Boss Antiques
+## Passifs des Boss Antiques
 
 Les boss antiques apparaissent **tous les 1 000 zones**. Ce sont les combats les plus difficiles du mode Monde.
 

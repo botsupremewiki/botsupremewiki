@@ -5,8 +5,11 @@ Canal : 1479297621007798283
 from __future__ import annotations
 import asyncio
 import json
+import logging
 import discord
 from discord.ext import commands
+
+logger = logging.getLogger(__name__)
 
 from bot.cogs.rpg import database as db
 from bot.cogs.rpg.models import (
@@ -14,7 +17,7 @@ from bot.cogs.rpg.models import (
     STAT_FR, compute_relic_effects,
 )
 from bot.cogs.rpg.enemies import RAID_BOSSES, RAID_DROP_SOURCE, generate_raid_boss, format_enemy_stats
-from bot.cogs.rpg.items import get_equipment_drops, format_item_name
+from bot.cogs.rpg.items import get_equipment_drops, format_item_name, get_material_drop_table, MATERIALS
 from bot.cogs.rpg.combat import (
     CombatStats, CombatState, hp_bar,
     build_combat_state, apply_spell, tick_spell_effects, get_spell_buttons_data,
@@ -29,29 +32,9 @@ from bot.cogs.rpg.core import increment_and_check_title
 _active_raids: dict[int, dict] = {}
 ATTACK_TIMEOUT = 60  # secondes par joueur pour attaquer
 
-_FOOD_STAT_BUFFS = ("stat_def", "stat_speed", "stat_patk", "stat_matk", "elixir_patk", "elixir_matk", "elixir_def", "elixir_speed", "elixir_crit", "elixir_all")
-
 async def _consume_raid_food_buffs(user_id: int) -> None:
-    """Décrémente les compteurs de combats des buffs alimentaires de stats après un raid."""
-    p = await db.get_player(user_id)
-    if not p:
-        return
-    food_raw = p.get("food_buffs")
-    if not food_raw:
-        return
-    try:
-        fb = json.loads(food_raw)
-        changed = False
-        for key in _FOOD_STAT_BUFFS:
-            if key in fb:
-                fb[key]["combats"] = fb[key].get("combats", 0) - 1
-                if fb[key]["combats"] <= 0:
-                    del fb[key]
-                changed = True
-        if changed:
-            await db.update_player(user_id, food_buffs=json.dumps(fb))
-    except Exception:
-        pass
+    """Décrémente les buffs alimentaires après un raid (délégué à database.consume_food_buffs)."""
+    await db.consume_food_buffs(user_id)
 
 
 class RaidsHubView(discord.ui.View):
@@ -239,10 +222,15 @@ class RaidLobbyView(discord.ui.View):
             await interaction.response.send_message("❌ Il faut au moins 1 joueur.", ephemeral=True)
             return
 
-        # Vérifier qu'aucun participant n'est déjà en combat
+        await db.update_raid(self.raid_id, status="active")
+
+        # Verrouiller chaque participant atomiquement
+        locked: list[int] = []
         for uid in participants_ids:
-            p = await db.get_player(uid)
-            if p and p.get("in_combat", 0):
+            if not await db.try_start_combat(uid):
+                # Libérer ceux déjà verrouillés
+                for locked_uid in locked:
+                    await db.update_player(locked_uid, in_combat=0)
                 member = self.guild.get_member(uid) if self.guild else None
                 name = member.display_name if member else str(uid)
                 await interaction.response.send_message(
@@ -250,14 +238,13 @@ class RaidLobbyView(discord.ui.View):
                     ephemeral=True,
                 )
                 return
+            locked.append(uid)
 
-        await db.update_raid(self.raid_id, status="active")
-
-        # Déduire l'énergie de chaque participant et verrouiller le combat
+        # Déduire l'énergie de chaque participant
         for uid in participants_ids:
             p = await db.get_player(uid)
             if p:
-                await db.update_player(uid, energy=max(0, p.get("energy", 0) - ENERGY_COST["raid"]), in_combat=1)
+                await db.update_player(uid, energy=max(0, p.get("energy", 0) - ENERGY_COST["raid"]))
 
         # Initialiser l'état du raid
         enemy_data = self.enemy_data
@@ -330,8 +317,8 @@ class RaidLobbyView(discord.ui.View):
                                 for sk in stat_keys:
                                     if sk in ts and isinstance(ts[sk], (int, float)):
                                         ts[sk] = int(ts[sk] * (1 + pct / 100))
-                    except Exception:
-                        pass
+                    except Exception as e:
+                        logger.warning(f"food_buffs parse error (raid stats) pour user_id={uid}: {e}")
                 tank_score = ts.get("p_def", 0) + ts.get("m_def", 0) + ts.get("hp", 0) * 0.1
                 participants_stats.append((uid, ts, tank_score))
                 player_relic_effects[uid] = compute_relic_effects(relics)
@@ -951,7 +938,8 @@ class RaidCombatView(discord.ui.View):
                     p = await db.get_player(u)
                     if p:
                         eq_drops = get_equipment_drops(zone_equiv, p["class"], "raid",
-                                                       drop_source=drop_source)
+                                                       drop_source=drop_source,
+                                                       raid_level=raid_level)
                         for eq_drop in eq_drops:
                             await db.add_equipment(u, eq_drop["item_id"], eq_drop["rarity"], 0,
                                                    eq_drop.get("level", 1000))
@@ -959,27 +947,44 @@ class RaidCombatView(discord.ui.View):
                         new_level, new_xp = level_up(p["level"], new_xp)
                         await db.update_player(u, gold=p["gold"] + gold_gain, xp=new_xp, level=new_level)
                         # Bonus énergie par victoire (food buff energy_on_win)
-                        from datetime import datetime as _dt, timezone as _tz
                         food_raw = p.get("food_buffs")
                         if food_raw:
                             try:
                                 fb = json.loads(food_raw)
                                 eow = fb.get("energy_on_win")
-                                if eow:
-                                    exp = eow.get("expires")
-                                    if exp and _dt.now(_tz.utc) < _dt.fromisoformat(exp):
-                                        win_e = eow.get("value", 0)
-                                        p_latest = await db.get_player(u)
-                                        cur_e = p_latest.get("energy", 0)
-                                        max_e = p_latest.get("max_energy", 2000)
-                                        await db.update_player(u, energy=min(cur_e + win_e, max_e))
-                            except Exception:
-                                pass
+                                if eow and eow.get("combats", 0) > 0:
+                                    win_e = eow.get("value", 0)
+                                    p_latest = await db.get_player(u)
+                                    cur_e = p_latest.get("energy", 0)
+                                    max_e = p_latest.get("max_energy", 2000)
+                                    await db.update_player(u, energy=min(cur_e + win_e, max_e))
+                                    eow["combats"] -= 1
+                                    if eow["combats"] <= 0:
+                                        del fb["energy_on_win"]
+                                    else:
+                                        fb["energy_on_win"] = eow
+                                    await db.update_player(u, food_buffs=json.dumps(fb))
+                            except Exception as e:
+                                logger.error(f"Erreur energy_on_win (raid) pour user_id={u}: {e}")
                         # Consommer les buffs alimentaires de stats après le raid
                         await _consume_raid_food_buffs(u)
                         await increment_and_check_title(u, "t_raider")
                         await increment_and_check_title(u, "t_héros_raid")
                         await increment_and_check_title(u, "t_legende_raid")
+                        # Loots matériaux (×1.8 difficulté × ×5 coût énergie)
+                        import random as _rr
+                        prof_r = await db.get_professions(u)
+                        harvest_type_r  = prof_r.get("harvest_type") if prof_r else None
+                        harvest_level_r = prof_r.get("harvest_level", 0) if prof_r else 0
+                        tier_cap_r = min(10, harvest_level_r // 10 + 1)
+                        drop_table_r = get_material_drop_table(zone_equiv, harvest_type_r, harvest_level_r, tier_cap=tier_cap_r)
+                        for drop_r in drop_table_r:
+                            chance_r = round(drop_r["chance"] * 1.8 * 5, 2)
+                            guaranteed_r = int(chance_r / 100)
+                            extra_r = chance_r % 100
+                            qty_r = guaranteed_r + (1 if _rr.random() * 100 < extra_r else 0)
+                            if qty_r > 0:
+                                await db.add_material(u, drop_r["item_id"], qty_r)
                         await db.update_raid_max(u, raid_level)
                 color = 0x00FF88
             else:

@@ -25,11 +25,16 @@ ITEMS_PER_PAGE = 15
 FORGE_ITEMS_PER_PAGE = 25
 MARKET_COMMISSION = 0.05  # 5%
 
-# Coût d'enchantement/déséquipement des runes (or)
+# Coût d'enchantement/déséquipement des runes (or) — valeur × poids = coût de base
 _RUNE_COST_WEIGHTS = {
+    # Anciens effets plats (legacy)
     "p_atk": 200, "m_atk": 200, "p_def": 150, "m_def": 150,
     "speed": 500, "crit_chance": 2000, "p_pen": 250, "m_pen": 250,
     "hp": 20, "all_stats": 500,
+    # Nouveaux effets % (runes t1-t10) — valeur en %, coût basé sur 1000 par %
+    "p_atk_pct": 1000, "m_atk_pct": 1000, "p_def_pct": 800, "m_def_pct": 800,
+    "speed_pct": 1200, "crit_pct": 1500, "p_pen_pct": 900, "m_pen_pct": 900,
+    "hp_pct": 700,
 }
 
 def _get_rune_equip_cost(rune_data: dict) -> int:
@@ -290,9 +295,16 @@ def build_inventaire_embed(user: discord.User, player: dict, equipment: list[dic
             "p_def": "🛡️ DEF Physique", "m_def": "🔷 DEF Magique",
             "p_pen": "🗡️ PEN Physique", "m_pen": "💫 PEN Magique",
             "speed": "⚡ Vitesse", "crit_chance": "🎯 Crit%", "crit_damage": "💥 CritDMG%",
+            "p_atk_pct": "⚔️ ATK Physique", "m_atk_pct": "🔮 ATK Magique",
+            "p_def_pct": "🛡️ DEF Physique", "m_def_pct": "🔷 DEF Magique",
+            "p_pen_pct": "🗡️ PEN Physique", "m_pen_pct": "💫 PEN Magique",
+            "speed_pct": "⚡ Vitesse", "crit_pct": "🎯 Crit%", "hp_pct": "❤️ PV",
         }
+        is_pct = {"p_atk_pct", "m_atk_pct", "p_def_pct", "m_def_pct", "p_pen_pct",
+                  "m_pen_pct", "speed_pct", "crit_pct", "hp_pct", "crit_chance"}
         rune_lines = [
-            f"{STAT_LABEL_RUNE.get(k, k)} : **+{v}**" for k, v in total_rune_bonuses.items()
+            f"{STAT_LABEL_RUNE.get(k, k)} : **+{v}{'%' if k in is_pct else ''}**"
+            for k, v in total_rune_bonuses.items()
         ]
         embed.add_field(name="🔮 Bonus de Runes", value="\n".join(rune_lines), inline=False)
 
@@ -856,7 +868,11 @@ class SacView(discord.ui.View):
             except Exception:
                 pass
 
-            expires_24h = (datetime.now(timezone.utc) + timedelta(hours=24)).isoformat()
+            # Une seule nourriture active à la fois — on efface les anciens buffs nourriture
+            for _fk in ("energy_regen", "energy_on_win", "stat_def", "stat_speed", "stat_patk", "stat_matk"):
+                food_buffs.pop(_fk, None)
+
+            expires_1h = (datetime.now(timezone.utc) + timedelta(hours=1)).isoformat()
             energy_gain = item_data.get("value", 0)
             lines = []
 
@@ -867,13 +883,13 @@ class SacView(discord.ui.View):
 
             if effect == "energy_regen" or effect == "energy_all":
                 regen_val = item_data.get("value", 0) if effect == "energy_regen" else item_data.get("regen_bonus", 0)
-                food_buffs["energy_regen"] = {"value": regen_val, "expires": expires_24h}
-                lines.append(f"😴 Régénération passive +{regen_val}% pendant 24h")
+                food_buffs["energy_regen"] = {"value": regen_val, "expires": expires_1h}
+                lines.append(f"😴 Régénération passive +{regen_val}% pendant 1h")
 
             if effect == "energy_on_win" or effect == "energy_all":
                 win_val = item_data.get("value", 0) if effect == "energy_on_win" else item_data.get("win_bonus", 0)
-                food_buffs["energy_on_win"] = {"value": win_val, "expires": expires_24h}
-                lines.append(f"⚡ +{win_val} énergie par victoire pendant 24h")
+                food_buffs["energy_on_win"] = {"value": win_val, "combats": 3}
+                lines.append(f"⚡ +{win_val} énergie par victoire pendant 3 combats")
 
             if effect == "energy_def_pct":
                 food_buffs["stat_def"] = {"value": item_data.get("combat_value", 0), "combats": 1}
@@ -899,10 +915,8 @@ class SacView(discord.ui.View):
             await db.update_player(self.user_id, potion_no_passive=1)
             msg = "🛡️ **Potion de Protection Ultime** active ! Les passifs ennemis seront ignorés lors du prochain combat."
 
-        elif effect in ("p_atk_pct", "m_atk_pct", "def_pct", "speed_pct", "crit_pct", "all_pct"):
-            # Élixirs — stockés dans food_buffs, actifs pour 1 combat
-            # Un seul élixir par type (le nouveau écrase l'ancien du même type)
-            # Différents types d'élixirs peuvent coexister
+        elif effect in ("p_atk_pct", "m_atk_pct", "p_def_pct", "m_def_pct", "speed_pct", "crit_dmg_pct", "all_pct"):
+            # Élixirs — un seul élixir actif à la fois (le nouveau remplace l'ancien)
             import json
             food_buffs = {}
             try:
@@ -911,19 +925,31 @@ class SacView(discord.ui.View):
                     food_buffs = json.loads(raw)
             except Exception:
                 pass
+            # Effacer tous les élixirs existants avant d'activer le nouveau
+            for _ek in ("elixir_patk", "elixir_matk", "elixir_def", "elixir_def_p", "elixir_def_m", "elixir_speed", "elixir_crit", "elixir_all"):
+                food_buffs.pop(_ek, None)
             _elixir_key = {
-                "p_atk_pct": "elixir_patk", "m_atk_pct": "elixir_matk",
-                "def_pct":    "elixir_def",  "speed_pct": "elixir_speed",
-                "crit_pct":   "elixir_crit", "all_pct":   "elixir_all",
+                "p_atk_pct":   "elixir_patk",
+                "m_atk_pct":   "elixir_matk",
+                "p_def_pct":   "elixir_def_p",
+                "m_def_pct":   "elixir_def_m",
+                "speed_pct":   "elixir_speed",
+                "crit_dmg_pct":"elixir_crit",
+                "all_pct":     "elixir_all",
             }[effect]
-            food_buffs[_elixir_key] = {"value": value, "combats": 1}
+            duration = item_data.get("duration", 10)
+            food_buffs[_elixir_key] = {"value": value, "combats": duration}
             await db.update_player(self.user_id, food_buffs=json.dumps(food_buffs))
             _effect_label = {
-                "p_atk_pct": "Attaque Physique", "m_atk_pct": "Attaque Magique",
-                "def_pct":    "Défense Phys & Mag", "speed_pct": "Vitesse",
-                "crit_pct":   "Chance Critique",  "all_pct":   "Toutes les Stats",
+                "p_atk_pct":   "Attaque Physique",
+                "m_atk_pct":   "Attaque Magique",
+                "p_def_pct":   "Défense Physique",
+                "m_def_pct":   "Défense Magique",
+                "speed_pct":   "Vitesse",
+                "crit_dmg_pct":"Dégâts Critiques",
+                "all_pct":     "Toutes les Stats",
             }[effect]
-            msg = f"⚗️ **{item_data['name']}** actif ! **+{value}% {_effect_label}** lors du prochain combat."
+            msg = f"⚗️ **{item_data['name']}** actif ! **+{value}% {_effect_label}** pendant **{duration} combats**."
 
         else:
             msg = f"✅ **{item_data['name']}** consommé ! (effet non reconnu)"
@@ -1396,8 +1422,12 @@ def build_prestige_embed(player: dict) -> tuple:
             "• Niveau, XP, golds (hors banque)\n"
             "• Zone et stage\n"
             "• Inventaire complet (items, matériaux, consommables)\n"
-            "• Professions et métiers\n"
             "• HP actuels\n\n"
+            "⚠️ **Tous tes métiers sont effacés** — remis à niveau 0 :\n"
+            "  − Récolte : Mineur, Bûcheron, Herboriste, Chasseur, Fermier\n"
+            "  − Artisanat : Heaumier, Armurier, Tailleur, Cordonnier, Forgeron, Joaillier, Orfèvre\n"
+            "  − Conception : Alchimiste, Boulanger, Enchanteur\n"
+            "💡 Dépose tes matériaux en **Banque** avant de prestige !\n\n"
         ),
         color=0xFF9800,
     )

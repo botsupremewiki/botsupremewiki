@@ -4,10 +4,12 @@ Tâches de fond du RPG :
 - Reset hebdomadaire du World Boss (lundi minuit UTC)
 - Récompenses World Boss de fin de semaine
 - Initialisation des messages hub
+- Nettoyage des états de combat stale (toutes les 5 min)
 """
 from __future__ import annotations
 import asyncio
 import logging
+import time
 import discord
 from datetime import datetime, timezone, timedelta
 from discord.ext import commands, tasks
@@ -30,10 +32,39 @@ class RPGCore(commands.Cog):
         await db.init_db()
         self.passive_regen_task.start()
         self.wb_weekly_reset_task.start()
+        self.stale_combat_cleanup_task.start()
 
     async def cog_unload(self):
         self.passive_regen_task.cancel()
+        self.stale_combat_cleanup_task.cancel()
         self.wb_weekly_reset_task.cancel()
+
+    # ─── Cleanup états de combat stale ─────────────────────────────────────
+
+    @tasks.loop(minutes=5)
+    async def stale_combat_cleanup_task(self):
+        """Nettoie les états de combat en mémoire qui ont dépassé 10 minutes."""
+        from bot.cogs.rpg.hubs import monde, donjons
+        now = time.monotonic()
+        timeout = 600  # 10 minutes
+
+        for uid, started in list(monde._combat_started_at.items()):
+            if now - started > timeout:
+                monde._active_combats.pop(uid, None)
+                monde._combat_started_at.pop(uid, None)
+                await db.update_player(uid, in_combat=0)
+                logger.warning(f"Combat stale nettoyé (monde) pour user_id={uid}")
+
+        for uid, started in list(donjons._dungeon_combat_started_at.items()):
+            if now - started > timeout:
+                donjons._active_dungeon_combats.pop(uid, None)
+                donjons._dungeon_combat_started_at.pop(uid, None)
+                await db.update_player(uid, in_combat=0)
+                logger.warning(f"Combat stale nettoyé (donjon) pour user_id={uid}")
+
+    @stale_combat_cleanup_task.error
+    async def stale_combat_cleanup_error(self, error):
+        logger.error(f"Erreur dans stale_combat_cleanup_task: {error}")
 
     # ─── Regen passive ─────────────────────────────────────────────────────
 
@@ -79,7 +110,10 @@ class RPGCore(commands.Cog):
                     except Exception:
                         pass
 
-                hp_regen = max(1, int(max_hp * PASSIVE_REGEN_HP_PCT / 100))
+                # Bonus de regen des quêtes : +0.1% HP par quête complétée (base = PASSIVE_REGEN_HP_PCT)
+                quests_done = player_full.get("quests_completed", 0) or 0
+                hp_regen_pct = PASSIVE_REGEN_HP_PCT + quests_done * 0.1
+                hp_regen = max(1, int(max_hp * hp_regen_pct / 100))
                 new_hp     = min(max_hp, current_hp + hp_regen)
 
                 # Bonus regen alimentaire (food_buff energy_regen)
@@ -98,7 +132,9 @@ class RPGCore(commands.Cog):
                     except Exception:
                         pass
 
-                energy_regen_total = PASSIVE_REGEN_ENERGY * (1 + food_energy_regen_bonus)
+                # Bonus de regen des quêtes : +0.15 énergie par quête complétée (base = PASSIVE_REGEN_ENERGY)
+                energy_quest_bonus = quests_done * 0.15
+                energy_regen_total = (PASSIVE_REGEN_ENERGY + energy_quest_bonus) * (1 + food_energy_regen_bonus)
                 new_energy = min(max_energy, current_energy + int(energy_regen_total))
 
                 if new_hp != current_hp or new_energy != current_energy:
@@ -176,9 +212,8 @@ class RPGCore(commands.Cog):
             # Titres WB — top 1 semaine
             if leaderboard:
                 wb_top_uid = leaderboard[0]["user_id"]
-                for tid in ("t_wb_rank1", "t_spec_wb_top1"):
-                    await db.increment_title_progress(wb_top_uid, tid)
-                    await _check_title(wb_top_uid, tid)
+                await db.increment_title_progress(wb_top_uid, "t_spec_wb_top1")
+                await _check_title(wb_top_uid, "t_spec_wb_top1")
 
             # Titres Global / PvP — top 1 hebdomadaire
             try:
@@ -207,12 +242,10 @@ class RPGCore(commands.Cog):
             return
         self._hub_views_registered = True
         await db.reset_all_in_combat()
-        # Laisser un moment pour que les autres cogs s'enregistrent
-        await asyncio.sleep(2)
         await self._setup_hub_messages()
 
     async def _setup_hub_messages(self):
-        """Crée ou met à jour les messages hub dans chaque salon."""
+        """Enfile les messages hub dans la queue de démarrage globale."""
         from bot.cogs.rpg.hubs import bienvenue, classe, profil, metiers
         from bot.cogs.rpg.hubs import banque, monde, donjons, raids
         from bot.cogs.rpg.hubs import world_boss, hotel_ventes, echanges
@@ -238,9 +271,8 @@ class RPGCore(commands.Cog):
         }
 
         for hub_name, module in hub_modules.items():
-            await self._setup_one_hub(hub_name, module)
-            # Petite pause entre chaque hub pour éviter le burst de rate limit
-            await asyncio.sleep(1.5)
+            hn, mod = hub_name, module
+            self.bot._startup_queue.put_nowait(lambda h=hn, m=mod: self._setup_one_hub(h, m))
 
     async def _setup_one_hub(self, hub_name: str, module, max_retries: int = 10):
         """Crée ou édite le message d'un hub, avec retry automatique sur rate limit."""
@@ -251,7 +283,7 @@ class RPGCore(commands.Cog):
         channel = self.bot.get_channel(channel_id)
         if not channel:
             logger.warning("[RPG] Canal introuvable pour hub '%s' (id=%s)", hub_name, channel_id)
-            return
+            return False
 
         for attempt in range(max_retries):
             try:
@@ -262,7 +294,7 @@ class RPGCore(commands.Cog):
                     try:
                         msg = await channel.fetch_message(existing["message_id"])
                         await msg.edit(embed=embed, view=view)
-                        return
+                        return True
                     except discord.NotFound:
                         # Message supprimé → on en crée un nouveau
                         pass
@@ -270,7 +302,7 @@ class RPGCore(commands.Cog):
                 # Créer le message
                 msg = await channel.send(embed=embed, view=view)
                 await db.set_hub_message(hub_name, channel_id, msg.id)
-                return
+                return True
 
             except discord.HTTPException as e:
                 if e.status == 429:
@@ -282,10 +314,10 @@ class RPGCore(commands.Cog):
                     await asyncio.sleep(retry_after + 0.5)
                 else:
                     logger.error("[RPG] Erreur HTTP hub '%s' : %s", hub_name, e)
-                    return
+                    return False
             except Exception as e:
                 logger.error("[RPG] Erreur setup hub '%s' : %s", hub_name, e)
-                return
+                return False
 
 
 # ─── Vérification des titres ──────────────────────────────────────────────
@@ -300,23 +332,36 @@ async def _check_title(user_id: int, title_id: str):
     if progress >= title["req"]:
         unlocked = await db.unlock_title(user_id, title_id)
         if unlocked:
-            reward_gold = title.get("reward_gold", 0)
-            if reward_gold:
-                player = await db.get_player(user_id)
-                if player:
-                    await db.update_player(user_id, gold=player["gold"] + reward_gold)
             return True
     return False
 
 
-async def check_all_titles(user_id: int, player: dict, professions: dict = None):
+async def check_all_titles(user_id: int, player: dict, professions: dict = None, quest_stats: dict = None):
     """Vérifie tous les titres liés à un joueur après une action."""
     from bot.cogs.rpg.models import TITLES
 
+    # Charger les quest_stats si non fournis (nécessaire pour dungeon_best_* et raid_max_completed)
+    if quest_stats is None:
+        try:
+            async with __import__("aiosqlite").connect(db.DB_PATH) as conn:
+                conn.row_factory = __import__("aiosqlite").Row
+                async with conn.execute(
+                    "SELECT * FROM player_quest_stats WHERE user_id=?", (user_id,)
+                ) as cur:
+                    row = await cur.fetchone()
+                    quest_stats = dict(row) if row else {}
+        except Exception:
+            quest_stats = {}
+
     for title_id, title in TITLES.items():
-        req_type = title["req_type"]
-        req      = title["req"]
-        value    = None
+        req_type  = title["req_type"]
+        req       = title["req"]
+        req_class = title.get("req_class")
+        value     = None
+
+        # Vérification de classe : ignorer si la classe ne correspond pas
+        if req_class and player.get("class") != req_class:
+            continue
 
         if req_type == "level":
             value = player.get("level", 1)
@@ -328,6 +373,14 @@ async def check_all_titles(user_id: int, player: dict, professions: dict = None)
             value = player.get("pvp_elo", 1000)
         elif req_type == "total_gold":
             value = player.get("total_gold", player.get("gold", 0))
+        elif req_type == "dungeon_best_classique":
+            value = quest_stats.get("dungeon_best_classique", 0)
+        elif req_type == "dungeon_best_elite":
+            value = quest_stats.get("dungeon_best_elite", 0)
+        elif req_type == "dungeon_best_abyssal":
+            value = quest_stats.get("dungeon_best_abyssal", 0)
+        elif req_type == "raid_max_completed":
+            value = quest_stats.get("raid_max_completed", 0)
         elif professions:
             if req_type == "harvest_level":
                 value = professions.get("harvest_level", 0)

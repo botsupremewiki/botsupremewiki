@@ -298,7 +298,7 @@ def generate_world_boss(turn: int = 0) -> dict:
     Tour 0 → zone 1000, tour 1 → zone 1300, tour 2 → zone 1690, etc. (×1.3/tour).
     HP normaux (non multipliés) : les HP collectifs sont gérés séparément dans world_boss.py.
     """
-    zone_equiv = round(1000 * (1.3 ** turn))
+    zone_equiv = round(1000 * (1.25 ** turn))
     # Moyenne de toutes les classes pour la zone équivalente
     all_stats = [compute_enemy_stats(zone_equiv, cls) for cls in ALL_CLASSES]
     stats = {k: int(sum(s[k] for s in all_stats) / len(all_stats)) for k in all_stats[0]}
@@ -342,7 +342,7 @@ DUNGEON_BOSSES = [
     {
         "id": "d_arme", "slot": "arme", "name": "Lame Dévastatrice", "stat_boost": "p_atk", "emoji": "⚔️",
         "passif": "Tranchant Absolu : ignore 20% de ta Défense Physique et 20% de ta Défense Magique.",
-        "passif_effects": {"ignore_def_pct": 0.20},
+        "passif_effects": {"ignore_pdef_pct": 0.20, "ignore_mdef_pct": 0.20},
     },
     {
         "id": "d_amulette", "slot": "amulette", "name": "Mystique Absolu", "stat_boost": "m_atk", "emoji": "📿",
@@ -381,7 +381,7 @@ def generate_dungeon_boss(boss_id: str, difficulty: str, level: int) -> dict:
     stats = compute_enemy_stats(zone_equiv, boss_class)
 
     # Multiplicateur de difficulté appliqué à toutes les stats
-    diff_mult = {"classique": 1.2, "elite": 1.5, "abyssal": 2.0}.get(difficulty, 1.0)
+    diff_mult = {"classique": 1.2, "elite": 1.4, "abyssal": 1.6}.get(difficulty, 1.0)
     for stat in list(stats):
         if stat in ("crit_chance", "crit_damage"):
             stats[stat] = round(stats[stat] * diff_mult, 2)
@@ -389,10 +389,10 @@ def generate_dungeon_boss(boss_id: str, difficulty: str, level: int) -> dict:
             stats[stat] = int(stats[stat] * diff_mult)
     stats["max_hp"] = stats["hp"]
 
-    # Amplifier la stat spéciale du boss (×1.5 supplémentaire)
+    # Amplifier la stat spéciale du boss (×diff_mult supplémentaire)
     stat_boost = boss_template["stat_boost"]
     if stat_boost in stats:
-        stats[stat_boost] = int(stats[stat_boost] * 1.5)
+        stats[stat_boost] = int(stats[stat_boost] * diff_mult)
         if stat_boost == "hp":
             stats["max_hp"] = stats["hp"]
 
@@ -583,13 +583,8 @@ RAID_LEVEL_ZONE_EQUIV = {i: i * 1000 for i in range(1, 11)}
 
 # Source d'équipement par niveau de raid (drop_source pour get_equipment_drops)
 # item_level = (raid_level × 1000) // 10 = raid_level × 100
-RAID_DROP_SOURCE = {
-    1: "donjon_classique",  2: "donjon_classique",
-    3: "donjon_elite",      4: "donjon_elite",
-    5: "donjon_elite",      6: "donjon_abyssal",
-    7: "donjon_abyssal",    8: "donjon_abyssal",
-    9: "donjon_abyssal",   10: "raid",
-}
+# Tous les raids donnent la source "raid" (×1.8) quel que soit le niveau
+RAID_DROP_SOURCE = {i: "raid" for i in range(1, 11)}
 
 
 def generate_raid_boss(raid_id: str, raid_number: int = 1) -> dict:
@@ -601,14 +596,14 @@ def generate_raid_boss(raid_id: str, raid_number: int = 1) -> dict:
     boss_class = boss.get("class", "Guerrier")
     stats = compute_enemy_stats(zone_equiv, boss_class)
 
-    # Stats ×2.5 pour un boss de raid (combat 5 joueurs)
+    # Stats ×1.8 pour un boss de raid (combat 5 joueurs)
     for k in list(stats):
         if k in ("crit_chance", "crit_damage"):
-            stats[k] = round(stats[k] * 2.5, 2)
+            stats[k] = round(stats[k] * 1.8, 2)
         elif k != "max_hp":
-            stats[k] = int(stats[k] * 2.5)
-    # HP ×4 supplémentaire → HP total ×10 vs ennemi de zone équivalente
-    stats["hp"] = int(stats["hp"] * 4)
+            stats[k] = int(stats[k] * 1.8)
+    # HP ×5 supplémentaire → HP total ×9 vs ennemi de zone équivalente
+    stats["hp"] = int(stats["hp"] * 5)
     stats["max_hp"] = stats["hp"]
 
     if raid_id == "raid_10":  # Boss final raid — stats offensives doublées
@@ -647,7 +642,7 @@ def compute_enemy_stats(level: int, class_name: str) -> dict:
     pct = 30% au niveau 1 → 100% au niveau 10000 (linéaire).
     Utilise BASE_STATS + LEVEL_GROWTH de la classe (fallback: Guerrier).
     """
-    level = max(1, min(level, 10000))
+    level = max(1, level)
     pct   = 0.3 + 0.7 * (level - 1) / 9999
     resolved = class_name if class_name in BASE_STATS else "Guerrier"
     base  = BASE_STATS[resolved]

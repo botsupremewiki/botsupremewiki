@@ -1,71 +1,61 @@
 # ✝️ Paladin
 
-!!! note "Classe Premium"
-    Cette classe nécessite le rôle Premium pour être sélectionnée.
-
-**Rôle :** Tank Défensif / Burst
-
-**Difficulté :** ⭐⭐☆☆☆ (2/5)
-
+Le Paladin est un tank offensif qui **renforce progressivement toutes ses stats** au fil du combat. Avec les meilleures défenses du jeu et une montée en puissance constante, il excelle aussi bien en solo face aux boss qu'en Raid où ses bénédictions profitent à toute l'équipe.
 
 ---
 
-## 📖 Description
+## Stats de départ (niveau 1)
 
-*(Premium)* Chevalier sacré dont la résistance se renforce au fil du combat.
-
-**Passif** : 35% de chance d'augmenter une stat aléatoire de 5% (permanent ce combat).
-
-**Ressource** : 🔴 Rage (max 100, +10/tour, +5 par coup reçu).
-
-
-**Ressource :** 🔴 Rage — maximum 100, +10 par tour, +5 par coup reçu
-
-
----
-
-## 📊 Progression des statistiques
-
-| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
-|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
-| Niv. 1 | 560 | 30 | — | 35 | 22 | 55 | 5% |
-| Niv. 100 | 3,774 | 190 | — | 219 | 138 | 74 | 5% |
-| Niv. 200 | 7,021 | 352 | — | 406 | 256 | 93 | 6% |
-| Niv. 500 | 16,762 | 838 | — | 966 | 610 | 152 | 6% |
-| Niv. 1000 | 32,997 | 1,649 | — | 1,900 | 1,199 | 249 | 8% |
+| Stat | Valeur |
+|------|--------|
+| Points de Vie | 560 |
+| Attaque Physique | 42 |
+| Attaque Magique | 0 |
+| Défense Physique | 35 |
+| Défense Magique | 22 |
+| Vitesse | 72 |
+| Chance de Critique | 5.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
-## ✨ Sorts
+## Passif — Bénédiction de Combat
 
-### ✝️ Frappe Sacrée
-
-Inflige ×1.3 dégâts physiques et génère un bouclier égal à 15% des PV max.
-
-- **Coût :** 20 🔴 Rage
-
-
-### ⚖️ Pénitence
-
-Réduit sa vitesse de -30% mais augmente ATK Phy, Déf Phy+Mag, Pén Phy de +20% pendant 2 tours.
-
-- **Coût :** 30 🔴 Rage · Temps de recharge : **4 tours**
-
-
-### ⚡ Châtiment Divin 🌟 **ULTIME**
-
-Inflige des dégâts égaux à la somme de toutes ses stats de combat (ignore la défense).
-
-- **Coût :** 80 🔴 Rage · Temps de recharge : **7 tours**
-
-
+Le Paladin a **50% de chance d'augmenter une stat aléatoire de 5%** (max **+20%**, permanent pour ce combat) — toutes les stats sauf les HP. En raid, le boost s'applique à **tous les alliés**.
 
 ---
 
-## 💡 Conseils de jeu
+## Ressource — Rage
 
-- Classe la plus défensive du jeu — idéale pour les contenus de fin de jeu.
+La Rage se régénère automatiquement : **+10 par tour** et **+5 à chaque coup reçu**.
+Elle est plafonnée à **100**.
 
-- **Pénitence** booste tes stats offensives pendant 2 tours — combo avec l'ultime.
+---
 
-- **Châtiment Divin** (ultime) inflige des dégâts basés sur TOUTES tes stats — dévastateur en fin de combat.
+## Sorts
+
+=== "✝️ Frappe Sacrée"
+    **Coût :** 20 Rage — **Temps de recharge :** aucun
+
+    Inflige **×1.6 dégâts physiques** et génère un **bouclier égal à 15% des PV max**.
+
+=== "⚖️ Pénitence"
+    **Coût :** 30 Rage — **Temps de recharge :** 4 tours
+
+    Réduit sa vitesse de **-30%**, génère un **bouclier de 20% des PV max**, et augmente **ATK Phy, Déf Phy+Mag et Pén Phy de +20% pendant 2 tours**.
+
+=== "⚡ Châtiment Divin (Ultime)"
+    **Coût :** 80 Rage — **Temps de recharge :** 7 tours
+
+    Inflige des dégâts égaux à la **somme de toutes ses stats de combat** (ignore la défense).
+
+---
+
+## Conseils
+
+- **Frappe Sacrée** est ton attaque principale — elle frappe fort (×1.6) et génère un bouclier à chaque utilisation.
+- **Pénitence** est maintenant sécurisée : le bouclier de 20% PV max couvre la fenêtre de vulnérabilité due à la réduction de vitesse.
+- Enchaîne **Pénitence** → attendre que les buffs expirent → **Châtiment Divin** pour un burst maximal : les stats boostées rentrent dans le calcul.
+- Le passif proc à **50%** — dans les combats longs, tu accumules facilement +10/+15% sur plusieurs stats avant ton ultime.
+- En Raid, le passif **buff toute l'équipe** à chaque proc — le Paladin est l'amplificateur passif le plus puissant du jeu en groupe.
+- **Châtiment Divin** ignore la défense — il est particulièrement dévastateur contre les boss à haute DEF comme les Donjons Abyssaux.

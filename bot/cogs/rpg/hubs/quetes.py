@@ -11,7 +11,6 @@ import discord
 from discord.ext import commands
 
 from bot.cogs.rpg import database as db
-from bot.cogs.rpg.models import level_up
 from bot.cogs.rpg.quests import (
     MAIN_QUESTS, SECONDARY_QUESTS,
     get_progress_value, get_active_quest, progress_bar,
@@ -114,12 +113,17 @@ def _build_embed(
         if active.get("special_desc"):
             special_line = f"\n{active['special_desc']}"
 
+        reward_line = (
+            "🌱 Récompense : **+0,1 énergie/cycle** et **+0,1% régén. HP** (passif permanent)"
+            if is_main else
+            "⚡ Récompense : **+0,5% de chance** de gagner **+1 énergie** après un combat gagné (cumulatif)"
+        )
         embed.add_field(
             name=f"⚡ Quête active — {active['emoji']} {active['name']}",
             value=(
                 f"{active['desc']}\n"
                 f"{status}{special_line}\n"
-                f"💰 Récompense : **{active['xp']:,} XP** | **{active['gold']:,} golds**"
+                f"{reward_line}"
             ),
             inline=False,
         )
@@ -172,8 +176,7 @@ class QuestChainView(discord.ui.View):
         player = await db.get_or_create_player(interaction.user.id)
         prof   = await db.get_professions(interaction.user.id)
         stats  = await db.get_quest_stats(interaction.user.id)
-        claimed_rows = await db.get_claimed_quests(interaction.user.id)
-        claimed_ids  = {r["quest_id"] for r in claimed_rows}
+        claimed_ids  = await db.get_claimed_quests(interaction.user.id)
 
         quest_list = MAIN_QUESTS if self.chain == "main" else SECONDARY_QUESTS
         active     = get_active_quest(quest_list, claimed_ids)
@@ -190,38 +193,26 @@ class QuestChainView(discord.ui.View):
         # Réclamer
         await db.claim_quest(interaction.user.id, active["id"])
 
-        xp_gain   = active["xp"]
-        gold_gain = active["gold"]
-        new_xp    = player["xp"] + xp_gain
-        new_level, new_xp = level_up(player["level"], new_xp)
-        await db.update_player(
-            interaction.user.id,
-            xp=new_xp,
-            level=new_level,
-            gold=player["gold"] + gold_gain,
-        )
-
-        # Récompense spéciale
-        special_text = ""
-        if active.get("special"):
-            sp = active["special"]
-            if sp["type"] == "energy_on_win":
-                await db.update_player(interaction.user.id, energy_on_win_chance=sp["value"])
-                special_text = f"\n{active.get('special_desc', '')}"
+        # Récompense selon la chaîne
+        if self.chain == "main":
+            reward_text = "🌱 **+0,1 énergie/cycle** et **+0,1% régén. HP** (passif permanent)"
+        else:
+            # Quête secondaire : +0,5% chance de gagner +1 énergie après combat gagné
+            current_chance = player.get("energy_on_win_chance", 0.0)
+            await db.update_player(interaction.user.id, energy_on_win_chance=round(current_chance + 0.005, 4))
+            total_pct = round((current_chance + 0.005) * 100, 1)
+            reward_text = f"⚡ **+0,5% chance énergie/combat** (total : **{total_pct}%**)"
 
         # Réclamation faite — on regénère l'embed avec la nouvelle quête
         claimed_ids.add(active["id"])
         next_active = get_active_quest(quest_list, claimed_ids)
 
-        level_up_text = f"\n🎉 **Niveau {new_level} atteint !**" if new_level > player["level"] else ""
-
         # Confirmation rapide
         confirm = discord.Embed(
             title=f"✅ {active['emoji']} {active['name']} — Complétée !",
             description=(
-                f"**Récompenses :**\n"
-                f"✨ **+{xp_gain:,} XP** | 💰 **+{gold_gain:,} golds**"
-                f"{level_up_text}{special_text}\n\n"
+                f"**Récompense :**\n"
+                f"{reward_text}\n\n"
                 + (f"➡️ Prochaine quête : **{next_active['emoji']} {next_active['name']}**" if next_active
                    else "🏆 Tu as complété toute la chaîne !")
             ),
@@ -244,8 +235,7 @@ class QuestChainView(discord.ui.View):
         player = await db.get_or_create_player(interaction.user.id)
         prof   = await db.get_professions(interaction.user.id)
         stats  = await db.get_quest_stats(interaction.user.id)
-        claimed_rows = await db.get_claimed_quests(interaction.user.id)
-        claimed_ids  = {r["quest_id"] for r in claimed_rows}
+        claimed_ids  = await db.get_claimed_quests(interaction.user.id)
 
         quest_list = MAIN_QUESTS if self.chain == "main" else SECONDARY_QUESTS
         active     = get_active_quest(quest_list, claimed_ids)

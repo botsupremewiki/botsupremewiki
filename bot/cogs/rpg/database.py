@@ -1,6 +1,9 @@
 import aiosqlite
+import logging
 import os
 from datetime import datetime, timezone
+
+logger = logging.getLogger(__name__)
 
 DB_PATH = os.path.join("bot", "data", "rpg.db")
 
@@ -14,6 +17,7 @@ async def init_db():
         db.row_factory = aiosqlite.Row
         await db.executescript("""
             PRAGMA journal_mode=WAL;
+            PRAGMA busy_timeout=5000;
 
             CREATE TABLE IF NOT EXISTS players (
                 user_id     INTEGER PRIMARY KEY,
@@ -265,8 +269,10 @@ async def init_db():
             # World Boss — HP collectifs hebdomadaires
             """CREATE TABLE IF NOT EXISTS wb_weekly_config (
                 week_start TEXT PRIMARY KEY,
-                boss_hp    INTEGER NOT NULL
+                boss_hp    INTEGER NOT NULL,
+                killed     INTEGER DEFAULT 0
             )""",
+            "ALTER TABLE wb_weekly_config ADD COLUMN killed INTEGER DEFAULT 0",
             # Verrou combat global (1 seul combat à la fois par joueur)
             "ALTER TABLE players ADD COLUMN in_combat INTEGER DEFAULT 0",
             # Niveau des items en banque (préservation du niveau lors du dépôt)
@@ -276,12 +282,14 @@ async def init_db():
             # Niveau et runes dans le marché (hotel des ventes)
             "ALTER TABLE market_listings ADD COLUMN equipment_level INTEGER DEFAULT 1",
             "ALTER TABLE market_listings ADD COLUMN equipment_rune_bonuses TEXT DEFAULT NULL",
+            # Quêtes complétées (bonus regen passif)
+            "ALTER TABLE players ADD COLUMN quests_completed INTEGER DEFAULT 0",
         ]
         for sql in migrations:
             try:
                 await db.execute(sql)
-            except Exception:
-                pass  # colonne déjà existante
+            except aiosqlite.OperationalError:
+                pass  # colonne/table déjà existante
         await db.commit()
 
 
@@ -304,14 +312,38 @@ async def create_player(user_id: int) -> dict:
     return await get_player(user_id)
 
 
+_PLAYER_FIELDS = {
+    "class", "level", "xp", "gold", "zone", "stage", "boss_stage", "prestige_level",
+    "current_hp", "energy", "max_energy", "pvp_elo", "last_passive_regen", "last_daily",
+    "daily_streak", "wb_weekly_dmg", "wb_weekly_attacks", "wb_week_start", "display_name",
+    "food_buffs", "potion_revival_active", "potion_no_passive", "wb_personal_turn",
+    "pvp_ranked_today", "pvp_ranked_reset", "pvp_ranked_wins", "pvp_ranked_losses",
+    "in_combat", "quests_completed", "regen_blocked_until", "death_gold_lost",
+    "death_energy_lost", "active_title", "energy_on_win_chance",
+}
+
 async def update_player(user_id: int, **kwargs):
     if not kwargs:
         return
+    invalid = set(kwargs.keys()) - _PLAYER_FIELDS
+    if invalid:
+        raise ValueError(f"update_player: champs invalides {invalid}")
     sets = ", ".join(f"{k}=?" for k in kwargs)
     vals = list(kwargs.values()) + [user_id]
     async with aiosqlite.connect(DB_PATH) as db:
         await db.execute(f"UPDATE players SET {sets} WHERE user_id=?", vals)
         await db.commit()
+
+
+async def try_start_combat(user_id: int) -> bool:
+    """Tente de passer in_combat=1 de façon atomique. Retourne True si succès."""
+    async with aiosqlite.connect(DB_PATH) as db:
+        cur = await db.execute(
+            "UPDATE players SET in_combat=1 WHERE user_id=? AND in_combat=0",
+            (user_id,)
+        )
+        await db.commit()
+        return cur.rowcount > 0
 
 
 async def get_or_create_player(user_id: int, display_name: str = None) -> dict:
@@ -323,6 +355,68 @@ async def get_or_create_player(user_id: int, display_name: str = None) -> dict:
         p = dict(p)
         p["display_name"] = display_name
     return p
+
+
+async def consume_food_buffs(user_id: int) -> None:
+    """Décrémente les compteurs de combats des buffs alimentaires après un combat.
+    Supprime les entrées dont le compteur atteint 0. Partagé entre tous les hubs."""
+    import json
+    from bot.cogs.rpg.models import FOOD_BUFF_KEYS
+    player = await get_player(user_id)
+    if not player:
+        return
+    raw = player.get("food_buffs")
+    if not raw:
+        return
+    try:
+        fb = json.loads(raw)
+    except (json.JSONDecodeError, TypeError):
+        logger.warning(f"consume_food_buffs: food_buffs JSON invalide pour user_id={user_id}")
+        return
+    changed = False
+    for key in FOOD_BUFF_KEYS:
+        if key in fb:
+            fb[key]["combats"] = fb[key].get("combats", 1) - 1
+            if fb[key]["combats"] <= 0:
+                del fb[key]
+            changed = True
+    if changed:
+        await update_player(user_id, food_buffs=json.dumps(fb) if fb else None)
+
+
+async def apply_energy_on_win(user_id: int, player: dict, rewards_lines: list[str]) -> None:
+    """Applique le bonus d'énergie par victoire (food buff energy_on_win) si actif.
+    Modifie rewards_lines en place. Partagé entre monde et donjons."""
+    import json
+    raw = player.get("food_buffs")
+    if not raw:
+        return
+    try:
+        fb = json.loads(raw)
+        eow = fb.get("energy_on_win")
+        if eow and eow.get("combats", 0) > 0:
+            win_e = eow.get("value", 0)
+            cur_e = player.get("energy", 0)
+            max_e = player.get("max_energy", 2000)
+            await update_player(user_id, energy=min(cur_e + win_e, max_e))
+            rewards_lines.append(f"⚡ +{win_e} énergie (buff alimentaire)")
+            eow["combats"] -= 1
+            if eow["combats"] <= 0:
+                del fb["energy_on_win"]
+            else:
+                fb["energy_on_win"] = eow
+            await update_player(user_id, food_buffs=json.dumps(fb) if fb else None)
+    except Exception as e:
+        logger.error(f"apply_energy_on_win: erreur pour user_id={user_id}: {e}")
+
+
+async def get_stats_bonus_pct(user_id: int, player: dict, bonus_key: str) -> float:
+    """Calcule le bonus de stats total (titre + prestige) pour un contexte donné.
+    bonus_key : ex. 'wb_stats_pct', 'djc_stats_pct', 'dje_stats_pct', 'dja_stats_pct', etc."""
+    title_bonuses = await get_title_bonuses(user_id)
+    ctx_bonus  = title_bonuses.get(bonus_key, 0)
+    pres_bonus = player.get("prestige_level", 0) * title_bonuses.get("prestige_bonus_pct", 0) / 1000
+    return ctx_bonus + pres_bonus
 
 
 async def reset_all_in_combat():
@@ -357,10 +451,7 @@ async def delete_player(user_id: int):
                 continue
             if table == "trade_items":
                 continue  # déjà géré avec active_trades
-            try:
-                await db.execute(f"DELETE FROM {table} WHERE {col}=?", (user_id,))
-            except Exception:
-                pass
+            await db.execute(f"DELETE FROM {table} WHERE {col}=?", (user_id,))
         await db.commit()
 
 
@@ -722,8 +813,11 @@ async def add_profession_xp(user_id: int, profession_type: str, xp_gain: int) ->
 
 
 def xp_for_prof_level(level: int) -> int:
-    """XP requis pour passer au niveau suivant. Linéaire : profession niv 10 ≈ zone 1000."""
-    return int(1000 * level)
+    """XP requis pour passer au niveau suivant.
+    Tier-based : tier = min((level-1)//10 + 1, 10) → xp = tier² × 1000.
+    Toujours ~20 crafts au tier approprié pour monter d'un niveau."""
+    tier = min((level - 1) // 10 + 1, 10)
+    return tier * tier * 1000
 
 
 # ─── Quêtes ────────────────────────────────────────────────────────────────
@@ -801,9 +895,14 @@ async def claim_quest(user_id: int, quest_id: str) -> bool:
                 "INSERT INTO player_quest_claimed (user_id, quest_id) VALUES (?, ?)",
                 (user_id, quest_id),
             )
+            await db.execute(
+                "UPDATE players SET quests_completed = quests_completed + 1 WHERE user_id = ?",
+                (user_id,),
+            )
             await db.commit()
             return True
-        except Exception:
+        except Exception as e:
+            logger.error(f"complete_quest_if_first error pour user_id={user_id}: {e}")
             return False
 
 
@@ -1052,6 +1151,12 @@ def current_week_start() -> str:
     return monday.strftime("%Y-%m-%d")
 
 
+def prev_week_start() -> str:
+    now = datetime.now(timezone.utc)
+    monday = now - __import__('datetime').timedelta(days=now.weekday() + 7)
+    return monday.strftime("%Y-%m-%d")
+
+
 async def add_wb_damage(user_id: int, display_name: str, damage: int):
     week = current_week_start()
     async with aiosqlite.connect(DB_PATH) as db:
@@ -1079,18 +1184,49 @@ async def get_wb_server_stats() -> dict:
 
 
 async def get_or_create_wb_weekly_hp(week: str, boss_hp: int) -> int:
-    """Récupère ou initialise les HP du boss de la semaine."""
+    """Récupère ou initialise les HP du boss de la semaine.
+
+    S'adapte à la semaine précédente :
+    - Boss tué → +25% (plus difficile)
+    - Boss non tué → −15% (plus facile)
+    HP final toujours entre 50% et 400% du HP de base calculé.
+    """
     async with aiosqlite.connect(DB_PATH) as db:
         async with db.execute("SELECT boss_hp FROM wb_weekly_config WHERE week_start=?", (week,)) as cur:
             row = await cur.fetchone()
         if row:
             return row[0]
+
+        # Consulte la semaine précédente pour adapter les HP
+        prev_week = prev_week_start()
+        async with db.execute(
+            "SELECT boss_hp, killed FROM wb_weekly_config WHERE week_start=?", (prev_week,)
+        ) as cur:
+            prev_row = await cur.fetchone()
+
+        if prev_row is not None:
+            _, prev_killed = prev_row
+            mult = 1.25 if prev_killed else 0.85
+            boss_hp = int(boss_hp * mult)
+            # Garde les HP entre 50% et 400% du HP de base calculé
+            base = boss_hp / mult
+            boss_hp = max(int(base * 0.50), min(int(base * 4.00), boss_hp))
+
         await db.execute(
             "INSERT INTO wb_weekly_config (week_start, boss_hp) VALUES (?,?)",
             (week, boss_hp)
         )
         await db.commit()
         return boss_hp
+
+
+async def mark_wb_killed(week: str) -> None:
+    """Marque le Boss Suprême comme tué cette semaine."""
+    async with aiosqlite.connect(DB_PATH) as db:
+        await db.execute(
+            "UPDATE wb_weekly_config SET killed=1 WHERE week_start=?", (week,)
+        )
+        await db.commit()
 
 
 async def get_wb_total_weekly_damage(week: str = None) -> int:

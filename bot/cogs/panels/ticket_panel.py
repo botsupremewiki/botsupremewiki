@@ -209,12 +209,14 @@ class TicketPanelCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        if not self._views_registered:
+        first_ready = not self._views_registered
+        if first_ready:
             self.bot.add_view(TicketPanelView())
             self.bot.add_view(CloseTicketButton()) # Important pour que les boutons des tickets actuels restent fonctionnels
             self._views_registered = True
-
-        await self.ensure_panel_message()
+            self.bot._startup_queue.put_nowait(self.ensure_panel_message)
+        else:
+            await self.ensure_panel_message()
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(TicketPanelCog(bot))

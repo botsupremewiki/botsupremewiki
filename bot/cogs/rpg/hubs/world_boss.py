@@ -90,8 +90,11 @@ async def _handle_wb_show(interaction: discord.Interaction):
     attacks_left   = _WB_MAX_ATTACKS_PER_WEEK - weekly_attacks
     energy_cost    = ENERGY_COST.get("world_boss", 50)
 
-    next_mat_count = (weekly_attacks + 1) * 5
-    zone_equiv = round(1000 * (1.3 ** personal_turn))
+    # Formule réelle : 10 + 2 × (personal_turn + survie/mort)
+    _pt = weekly_attacks  # personal_turn pour la prochaine attaque
+    next_mat_min = 10 + 2 * _pt        # si le joueur meurt
+    next_mat_max = 10 + 2 * (_pt + 1)  # si le joueur survit
+    zone_equiv = round(1000 * (1.25 ** personal_turn))
 
     # ── HP collectifs du serveur ──
     from bot.cogs.rpg.database import current_week_start
@@ -144,7 +147,7 @@ async def _handle_wb_show(interaction: discord.Interaction):
     embed.add_field(
         name="🎒 Récompense de ta prochaine attaque",
         value=(
-            f"**{next_mat_count} matériaux aléatoires** (tour #{personal_turn + 1} × 5)\n"
+            f"**{next_mat_min}–{next_mat_max} matériaux aléatoires** (survie : {next_mat_max}, mort : {next_mat_min})\n"
             f"*Tous types et tiers confondus — 100% aléatoire*"
         ),
         inline=False,
@@ -203,13 +206,6 @@ class WBAttackView(discord.ui.View):
 async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None = None):
     player = await db.get_or_create_player(interaction.user.id, display_name=interaction.user.display_name)
 
-    if player.get("in_combat", 0):
-        await interaction.response.edit_message(
-            embed=discord.Embed(title="⚔️ Déjà en combat", description="Tu es déjà en combat ! Termine ton combat actuel avant d'attaquer le World Boss.", color=0xFF4444),
-            view=None,
-        )
-        return
-
     energy_cost = ENERGY_COST.get("world_boss", 50)
     if player.get("energy", 0) < energy_cost:
         await interaction.response.edit_message(
@@ -237,42 +233,65 @@ async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None 
         )
         return
 
-    # Déduire l'énergie et verrouiller le combat
-    await db.update_player(interaction.user.id, energy=max(0, player["energy"] - energy_cost), in_combat=1)
+    if not await db.try_start_combat(interaction.user.id):
+        await interaction.response.edit_message(
+            embed=discord.Embed(title="⚔️ Déjà en combat", description="Tu es déjà en combat ! Termine ton combat actuel avant d'attaquer le World Boss.", color=0xFF4444),
+            view=None,
+        )
+        return
+
+    # Déduire l'énergie
+    await db.update_player(interaction.user.id, energy=max(0, player["energy"] - energy_cost))
 
     personal_turn = player.get("wb_personal_turn", 0)
     scaled_enemy = generate_world_boss(personal_turn)
 
     equipment   = await db.get_equipment(interaction.user.id)
     relics_data = await db.get_relics(interaction.user.id)
-    title_bonuses = await db.get_title_bonuses(interaction.user.id)
-    wb_bonus = title_bonuses.get("wb_stats_pct", 0)
-    pres_bonus = player.get("prestige_level", 0) * title_bonuses.get("prestige_bonus_pct", 0) / 1000
+    stats_bonus_pct = await db.get_stats_bonus_pct(interaction.user.id, player, "wb_stats_pct")
     state = build_combat_state(player, scaled_enemy, equipment, relics_data, None,
-                               stats_bonus_pct=wb_bonus + pres_bonus, ignore_food_buffs=True)
+                               stats_bonus_pct=stats_bonus_pct, ignore_food_buffs=True)
     # WB : ressources initialisées au maximum (pas de persistance de cooldown entre attaques)
     cls_key = _class_to_spell_key(player.get("class", ""))
     if cls_key:
         state.player_resource = CLASS_SPELLS.get(cls_key, {}).get("resource_max", 100)
-    result = run_one_turn(state, spell_key)
 
-    # Dégâts réels = dégâts infligés au boss ce tour
-    real_damage = max(1, scaled_enemy["max_hp"] - result["enemy_hp"])
+    # Combat 40 tours : 20 tours joueur + 20 tours WB (joueur en premier)
+    # La vitesse ne détermine PAS l'ordre, mais les doubles attaques via sorts/passifs comptent
+    state.player_stats.speed = 1
+    state.enemy_stats.speed = 1
+    _WB_LARGE_HP = 10_000_000_000
+    state.enemy_stats.hp = _WB_LARGE_HP
+    state.enemy_stats.max_hp = _WB_LARGE_HP
+
+    all_logs: list[str] = []
+    result = {}
+    player_survived = True
+    for _round in range(20):
+        result = run_one_turn(state, spell_key)
+        all_logs.extend(result["log"])
+        if state.is_over:
+            if not state.player_won:
+                player_survived = False
+            break
+
+    # Dégâts réels = HP infligés au boss sur les 20 tours
+    real_damage = max(1, _WB_LARGE_HP - (result.get("enemy_hp", _WB_LARGE_HP)))
     await db.add_wb_damage(interaction.user.id, interaction.user.display_name, real_damage)
 
     # Mise à jour personal_turn: +1 si survie, reset à 0 si mort
-    if result["is_over"] and not result["player_won"]:
+    if not player_survived:
         # Joueur mort → reset
         await db.update_player(interaction.user.id, wb_personal_turn=0)
         new_personal_turn = 0
         death_msg = "\n💀 **Défaite !** Le Bot Suprême repasse à Zone 1000 pour toi."
     else:
-        new_personal_turn = personal_turn + 1
+        new_personal_turn = min(personal_turn + 1, 19)  # cap Tour 20 (index 19)
         await db.update_player(interaction.user.id, wb_personal_turn=new_personal_turn)
         death_msg = ""
 
     # Zone suivante pour affichage
-    next_zone = round(1000 * (1.3 ** new_personal_turn))
+    next_zone = round(1000 * (1.25 ** new_personal_turn))
 
     # Vérification titres WB (attaques + dégâts cumulés)
     from bot.cogs.rpg.models import TITLES as _TITLES
@@ -283,9 +302,10 @@ async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None 
             await increment_and_check_title(interaction.user.id, tid, real_damage)
     await db.increment_quest_stat(interaction.user.id, "world_boss_count")
 
-    # Récompense immédiate : 5 matériaux par attaque personnelle du joueur cette semaine
-    # (1ère attaque = 5 mats, 2ème = 10, ..., 10ème = 50)
-    wb_mat_count = (weekly_attacks + 1) * 5
+    # Récompense immédiate : 10 mats de base + 2 par attaque du WB survivée
+    # Survie = +1 tour tenu (personal_turn+1), mort = tours tenus = personal_turn
+    # Tour 1 survie=12, Tour 1 mort=10 | Tour 20 survie=50, Tour 20 mort=48
+    wb_mat_count = 10 + 2 * (personal_turn + (1 if player_survived else 0))
     all_mat_ids = list(MATERIALS.keys())
     mat_drops: dict[str, int] = {}
     for _ in range(wb_mat_count):
@@ -303,11 +323,12 @@ async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None 
     weekly_total_dmg = player_row["damage"] if player_row else real_damage
     weekly_total_atk = player_row["attacks"] if player_row else 1
 
+    turns_played = result.get("turn", 20)
     embed = discord.Embed(
         title="🤖 Bot Suprême — Attaque !",
         description=(
-            f"Tu attaques **{scaled_enemy['name']}** (Tour #{personal_turn + 1} — Zone {scaled_enemy['zone']:,}) !\n\n"
-            f"💥 Dégâts infligés : **{real_damage:,}**\n"
+            f"Tu attaques **{scaled_enemy['name']}** (Tour WB #{personal_turn + 1} — Zone {scaled_enemy['zone']:,}) !\n\n"
+            f"💥 Dégâts infligés : **{real_damage:,}** ({turns_played} tours de combat)\n"
             f"⚡ Énergie restante : **{max(0, player['energy'] - energy_cost)}**\n"
             f"🗡️ Attaques restantes cette semaine : **{attacks_left}/{_WB_MAX_ATTACKS_PER_WEEK}**"
             f"{death_msg}"
@@ -374,6 +395,8 @@ async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None 
     filled         = int(pct_done * bar_len)
     boss_bar       = "█" * filled + "░" * (bar_len - filled)
     boss_killed    = total_dmg >= boss_weekly_hp
+    if boss_killed:
+        await db.mark_wb_killed(week)
     collective_txt = (
         "💀 **Boss Suprême VAINCU cette semaine !** 🎉"
         if boss_killed else
@@ -381,7 +404,7 @@ async def _do_wb_attack(interaction: discord.Interaction, spell_key: str | None 
     )
     embed.add_field(name="❤️‍🔥 Vie collective du Boss", value=collective_txt, inline=False)
 
-    log_txt = "\n".join(result["log"][-5:])[:800]
+    log_txt = "\n".join(all_logs[-8:])[:800]
     if log_txt:
         embed.add_field(name="📜 Combat", value=log_txt, inline=False)
     embed.set_footer(text="Le classement est réinitialisé chaque lundi à minuit UTC.")
@@ -465,7 +488,12 @@ async def _handle_relics(interaction: discord.Interaction):
             inline=False,
         )
 
-    embed.set_footer(text="Les plafonds : Vol de vie 25% · Réduction 25% · Amplif. 30% · Renvoi 20% · Double frappe 40% · Regen 10%")
+    caps_txt = " · ".join(
+        f"{label} {RELIC_CAPS[key]:.0f}%"
+        for key, (label, _) in _RELIC_EFFECT_LABELS.items()
+        if key in RELIC_CAPS
+    )
+    embed.set_footer(text=f"Plafonds : {caps_txt}")
     await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -554,7 +582,7 @@ def build_hub_message(bot: commands.Bot) -> tuple[discord.Embed, discord.ui.View
             "🟪 #7 : Épique · 🟦 #8 : Rare · 🟩 #9-10 : Peu Commun\n"
             "⬜ Tous les participants : Commune (minimum garanti)\n\n"
             "**Récompense par attaque :**\n"
-            "🎒 **5 matériaux × ton tour personnel** (tour 1 = 5 mats, tour 10 = 50 mats)\n\n"
+            "🎒 **10–12 mats** au tour 1, **28–30 mats** au tour 10 — formule : `10 + 2 × tour (+2 si survie)`\n\n"
             "**Reliques :**\n"
             "💎 Les reliques donnent des bonus permanents à tes stats.\n"
             "Chaque copie supplémentaire d'une même relique est 5% moins efficace."

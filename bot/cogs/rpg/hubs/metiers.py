@@ -53,6 +53,20 @@ HARVEST_PROFESSIONS = {
     "fermier":    {"name": "Fermier",    "emoji": "🌾",   "desc": "Cultive et récolte des produits agricoles et rares."},
 }
 
+# Métiers de récolte recommandés par classe (pour l'équipement d'artisanat)
+_CLASS_HARVEST_RECO: dict[str, tuple[str, str]] = {
+    "Guerrier":         ("mineur",     "bucheron"),
+    "Assassin":         ("herboriste", "chasseur"),
+    "Mage":             ("herboriste", "mineur"),
+    "Tireur":           ("bucheron",   "chasseur"),
+    "Support":          ("mineur",     "fermier"),
+    "Vampire":          ("chasseur",   "fermier"),
+    "Gardien du Temps": ("mineur",     "bucheron"),   # + herboriste idéalement
+    "Ombre Venin":      ("herboriste", "fermier"),
+    "Pyromancien":      ("mineur",     "chasseur"),
+    "Paladin":          ("bucheron",   "fermier"),
+}
+
 CRAFT_PROFESSIONS = {
     "heaumier":  {"name": "Heaumier",   "emoji": "⛑️",  "slot": "casque",      "desc": "Fabrique des casques et protections de tête."},
     "armurier":  {"name": "Armurier",   "emoji": "🦺",   "slot": "plastron",    "desc": "Forge des plastrons et armures de torse."},
@@ -96,7 +110,8 @@ class MetiersHubView(discord.ui.View):
             return
         prof = await db.get_professions(interaction.user.id)
         current = _check_has_prof(prof or {}, "harvest")
-        embed, view = build_choose_profession_embed("harvest", HARVEST_PROFESSIONS, current)
+        player_class = player.get("class")
+        embed, view = build_choose_profession_embed("harvest", HARVEST_PROFESSIONS, current, player_class=player_class)
         await interaction.response.send_message(embed=embed, view=view, ephemeral=True)
 
     @discord.ui.button(label="Métier de Craft", style=discord.ButtonStyle.primary, emoji="⚒️", custom_id="rpg:metiers:choose_craft", row=0)
@@ -172,7 +187,7 @@ class MetiersHubView(discord.ui.View):
 
 # ─── Choix de profession ──────────────────────────────────────────────────
 
-def build_choose_profession_embed(prof_type: str, professions: dict, current: str | None) -> tuple:
+def build_choose_profession_embed(prof_type: str, professions: dict, current: str | None, player_class: str | None = None) -> tuple:
     type_names = {"harvest": "Récolte", "craft": "Craft", "conception": "Conception"}
     embed = discord.Embed(
         title=f"🔨 Choisir un métier de {type_names.get(prof_type, prof_type)}",
@@ -182,6 +197,20 @@ def build_choose_profession_embed(prof_type: str, professions: dict, current: st
         embed.description = f"⚠️ Tu as actuellement : **{current}**\nChanger de métier te fera **perdre** ton niveau actuel et recommencer au niveau 1."
     else:
         embed.description = "Choisissez votre métier ci-dessous :"
+
+    # Recommandation par classe pour les métiers de récolte
+    if prof_type == "harvest" and player_class and player_class in _CLASS_HARVEST_RECO:
+        reco = _CLASS_HARVEST_RECO[player_class]
+        reco_names = " + ".join(
+            f"{HARVEST_PROFESSIONS[k]['emoji']} **{HARVEST_PROFESSIONS[k]['name']}**"
+            for k in reco if k in HARVEST_PROFESSIONS
+        )
+        extra = " *(+ Herboriste idéalement)*" if player_class == "Gardien du Temps" else ""
+        embed.add_field(
+            name=f"💡 Recommandé pour {player_class}",
+            value=f"{reco_names}{extra} — pour crafter ton équipement de classe.",
+            inline=False,
+        )
 
     for key, data in professions.items():
         embed.add_field(
@@ -353,36 +382,30 @@ def build_craft_class_select_embed(user: discord.User, prof: dict, craft_type: s
     craft_xp    = prof.get("craft_xp", 0)
     slot        = CRAFT_PROFESSIONS[craft_type]["slot"]
 
-    max_tier_allowed = craft_level // 10 + 1
+    current_tier = min(10, max(1, (craft_level - 1) // 10 + 1))
 
-    # Collect all classes with their max ingredient tier, then sort
+    # Toutes les classes sont disponibles dès le niveau 1 (tier 1 existe pour toutes)
     class_entries = []
     for class_name in ALL_CLASSES:
         set_key = _get_craft_set_key(class_name)
         if not set_key:
             continue
-        item_id     = f"eq_{set_key}_{slot}"
-        item_data   = EQUIPMENT_CATALOG.get(item_id, {})
-        recipe_id   = f"crec_{set_key}_{slot}"
-        recipe      = CRAFT_RECIPES.get(recipe_id, {})
+        item_id   = f"eq_{set_key}_{slot}"
+        item_data = EQUIPMENT_CATALOG.get(item_id, {})
+        recipe_id = f"crec_{set_key}_{slot}_t{current_tier}"
+        recipe    = CRAFT_RECIPES.get(recipe_id, {})
         ingredients = recipe.get("ingredients", {})
-        ing_tier    = max_ingredient_tier(ingredients)
-        class_entries.append((ing_tier, class_name, item_data, ingredients))
-    class_entries.sort(key=lambda x: x[0])
+        class_entries.append((class_name, item_data, ingredients, current_tier))
 
     unlocked_lines = []
-    locked_lines   = []
     options        = []
-    for ing_tier, class_name, item_data, ingredients in class_entries:
+    for class_name, item_data, ingredients, tier in class_entries:
         item_name = item_data.get("name", f"eq_?_{slot}")
         emoji     = CLASS_EMOJI.get(class_name, "❓")
-        if ing_tier <= max_tier_allowed:
-            ingr_str = _format_ingredients(ingredients)
-            unlocked_lines.append(f"{emoji} **{class_name}** — *{item_name}*\n  └ {ingr_str}")
-            options.append(discord.SelectOption(label=class_name, value=class_name, emoji=emoji))
-        else:
-            unlock_level = (ing_tier - 1) * 10
-            locked_lines.append(f"🔒 **{class_name}** — *{item_name}* *(Niv. {unlock_level}+ requis)*")
+        ingr_str  = _format_ingredients(ingredients)
+        unlocked_lines.append(f"{emoji} **{class_name}** — *{item_name}* [T{tier}]\n  └ {ingr_str}")
+        options.append(discord.SelectOption(label=class_name, value=class_name, emoji=emoji))
+    locked_lines = []
 
     lines = unlocked_lines
     if locked_lines:
@@ -454,7 +477,8 @@ def build_craft_item_detail_embed(user: discord.User, prof: dict, craft_type: st
 
     set_key   = _get_craft_set_key(selected_class)
     item_id   = f"eq_{set_key}_{slot}"
-    recipe_id = f"crec_{set_key}_{slot}"
+    tier      = min(10, max(1, (craft_level - 1) // 10 + 1))
+    recipe_id = f"crec_{set_key}_{slot}_t{tier}"
     item_data = EQUIPMENT_CATALOG.get(item_id, {})
     recipe    = CRAFT_RECIPES.get(recipe_id, {})
     item_name = item_data.get("name", item_id)
@@ -533,7 +557,8 @@ class CraftItemDetailView(discord.ui.View):
         rarity      = roll_craft_rarity(craft_level)
         item_level  = min(craft_level * 10, 1000)
         await db.add_equipment(self.user_id, self.item_id, rarity, 0, item_level)
-        xp_gain = (50 + craft_level * 5) * 3
+        item_tier = recipe.get("tier", 1)
+        xp_gain = item_tier * item_tier * 50
         title_bonuses = await db.get_title_bonuses(self.user_id)
         xp_gain = int(xp_gain * (1 + title_bonuses.get("craft_xp_pct", 0) / 100))
         _, new_level, leveled = await db.add_profession_xp(self.user_id, "craft", xp_gain)
@@ -594,7 +619,7 @@ async def build_conception_embed(user: discord.User, player: dict, prof: dict, c
             for mid, qty in recipe["ingredients"].items()
         )
         embed.add_field(
-            name=f"{available} {result_data.get('emoji', '')} **{result_data.get('name', recipe['result'])}** ×{recipe['qty']} (Niv. requis : {recipe.get('level_req', 1)})",
+            name=f"{available} {result_data.get('emoji', '')} **{result_data.get('name', recipe['result'])}** (Niv. requis : {recipe.get('level_req', 1)})",
             value=f"Ingrédients : {ingr_str}",
             inline=False,
         )
@@ -602,7 +627,7 @@ async def build_conception_embed(user: discord.User, player: dict, prof: dict, c
             options.append(discord.SelectOption(
                 label=result_data.get("name", recipe["result"])[:100],
                 value=recipe_id,
-                description=f"Produit ×{recipe['qty']}",
+                description=f"Niv. {recipe.get('level_req', 1)} requis",
             ))
 
     # Show locked recipe stubs on the last page
@@ -669,19 +694,16 @@ class ConceptionQtyModal(discord.ui.Modal, title="Quantité à concevoir"):
                 return
 
         result_id = recipe["result"]
-        qty_per   = recipe.get("qty", 1)
-        total_qty = qty_per * times
-        await db.add_consumable(user_id, result_id, total_qty)
+        await db.add_consumable(user_id, result_id, times)
 
-        prof = await db.get_professions(user_id)
-        conc_level = prof.get("conception_level", 1) if prof else 1
-        xp_gain = (40 + conc_level * 4) * 3 * times
+        item_tier = min(10, recipe.get("level_req", 0) // 10 + 1)
+        xp_gain = item_tier * item_tier * 50 * times
         title_bonuses = await db.get_title_bonuses(user_id)
         xp_gain = int(xp_gain * (1 + title_bonuses.get("conception_xp_pct", 0) / 100))
         _, new_level, leveled = await db.add_profession_xp(user_id, "conception", xp_gain)
 
         result_data = CONSUMABLES.get(result_id, {})
-        msg = f"✅ Tu as conçu : {result_data.get('emoji', '')} **{result_data.get('name', result_id)}** ×{total_qty} !\n+{xp_gain} XP de conception"
+        msg = f"✅ Tu as conçu : {result_data.get('emoji', '')} **{result_data.get('name', result_id)}** ×{times} !\n+{xp_gain} XP de conception"
         if leveled:
             conc_type = self.parent_view.conc_type
             msg += f"\n🎉 Niveau **{new_level}** en {CONCEPTION_PROFESSIONS.get(conc_type, {}).get('name', conc_type)} !"

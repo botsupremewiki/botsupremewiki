@@ -1,115 +1,99 @@
 # 📖 Guide du Débutant
 
-Bienvenue sur **Bot Suprême** ! Ce guide t'explique les bases pour démarrer efficacement.
+Ce guide t'explique les premières étapes à suivre pour bien démarrer dans le RPG.
 
 ---
 
-## 1️⃣ Choisir sa classe
+## Étape 1 — Choisir ta classe
 
-Rends-toi dans le canal **#classe** et sélectionne ta classe parmi les 10 disponibles.
+Rends-toi dans le **Hub Classe** et choisis parmi les 10 classes disponibles.
 
-- ⚔️ **5 classes standard** — gratuites, accessibles à tous
-- 💎 **5 classes premium** — nécessitent le rôle Premium
+!!! info "Changement de classe"
+    Tu peux changer de classe à chaque prestige.
 
-!!! warning "Choix de classe"
-    Le choix de classe est **permanent**. Tu pourras en changer **après avoir effectué un Prestige**. Consulte la page [Classes](classes/index.md) pour comparer avant de décider !
+Chaque classe a un style de jeu différent. Voici un résumé rapide :
 
----
-
-## 2️⃣ L'Énergie ⚡
-
-L'énergie est la ressource centrale du jeu. Chaque action en consomme.
-
-| Action | Coût ⚡ |
-|--------|--------:|
-| Attaquer un ennemi | 1 |
-| Boss classique | 2 |
-| Boss runique | 3 |
-| Boss emblématique | 5 |
-| Boss antique | 10 |
-| Donjon classique | 3 |
-| Donjon élite | 5 |
-| Donjon abyssal | 10 |
-| Raid | 100 |
-| World Boss | 100 |
-| PvP | 5 |
-
-**Énergie maximum :** 2,000 ⚡
-**Régénération passive :** +3 ⚡ toutes les 10 minutes
-**Régénération HP passive :** +3% HP max toutes les 10 minutes
+| Classe | Style | Difficulté |
+|--------|-------|-----------|
+| Guerrier | Tank offensif, résiste aux gros dégâts | ⭐ Facile |
+| Support | Soins et boucliers, très résistant | ⭐ Facile |
+| Paladin | Tank avec rampe progressive | ⭐⭐ Moyen |
+| Mage | Dégâts magiques massifs, fragile | ⭐⭐ Moyen |
+| Tireur | Dégâts physiques réguliers, double coup aléatoire | ⭐⭐ Moyen |
+| Vampire | Auto-sustain, vol de vie permanent | ⭐⭐ Moyen |
+| Assassin | Très haut potentiel, fragile | ⭐⭐⭐ Difficile |
+| Gardien du Temps | Contrôle total de l'ennemi | ⭐⭐⭐ Difficile |
+| Ombre Venin | Dégâts de poison en progression | ⭐⭐⭐ Difficile |
+| Pyromancien | Dégâts de brûlure en montée | ⭐⭐⭐ Difficile |
 
 ---
 
-## 3️⃣ Progresser dans le Monde 🌍
+## Étape 2 — Combattre dans le Monde
 
-Dans le canal **#monde** :
+Va dans le **Hub Monde** et commence à combattre les ennemis de ta zone.
 
-1. **Attaque** les ennemis de ta zone pour gagner de l'XP et du Gold
-2. Chaque zone a **10 stages d'ennemis** puis un **boss**
-3. **Bats le boss** pour passer à la zone suivante
-4. Active le **mode auto** pour farmer automatiquement (toutes les 3 secondes)
+Chaque combat te coûte **1 énergie** et te rapporte :
 
-Les zones vont de 1 à **10 000**. Les zones sont accessibles à tous tant que tu gagnes tes combats.
-
----
-
-## 4️⃣ L'XP et les Niveaux
-
-- **Niveau maximum : 1 000**
-- Dès le niveau 10 → accès au **[Prestige](prestige.md)**
+- De l'**expérience** → pour monter de niveau
+- De l'**or** → pour acheter et améliorer tes équipements
+- Des **équipements** en butin (aléatoire)
 
 ---
 
-## 5️⃣ Les Métiers 🔨
+## Étape 3 — Gérer ton profil
 
-Tu peux rejoindre jusqu'à **3 métiers** (un de chaque branche) :
+Dans le **Hub Profil**, tu peux :
 
-| Branche | Exemples de métiers |
-|---------|---------------------|
-| 🌾 Récolte | Mineur, Herboriste, Chasseur, Fermier, Bûcheron |
-| 🔨 Artisanat | Forgeron, Charpentier, Alchimiste artisan |
-| ⚗️ Conception | Alchimiste, Boulanger, Enchanteur |
-
-Consulte la page [Métiers](metiers/index.md) pour tous les détails.
+- **Équiper** tes items en faisant glisser les pièces dans les emplacements
+- **Améliorer** tes équipements à la Forge (jusqu'au niveau +10)
+- Voir tes stats totales
+- Gérer ta Banque (les items en banque résistent au Prestige)
+- Consommer des **potions** et des **nourritures** avant un combat
 
 ---
 
-## 6️⃣ Les Équipements 🛡️
+## Étape 4 — Apprendre un métier
 
-Les équipements améliorent tes statistiques. Il existe **7 emplacements** :
-casque, plastron, pantalon, chaussures, arme, amulette, anneau.
+Les **métiers** te permettent de créer tes propres ressources et consommables. Il y a **15 métiers** répartis en 3 catégories — tu ne peux en exercer qu'**un seul par catégorie** à la fois :
 
-On les obtient en combattant dans le **monde**, les **donjons** et les **raids**.
-Plus la source est difficile, plus les équipements sont puissants.
+- **Récolte** (1 au choix) : Mineur, Bûcheron, Herboriste, Chasseur, Fermier → récoltent des matières premières
+- **Artisanat** (1 au choix) : Heaumier, Armurier, Tailleur, Cordonnier, Forgeron, Joaillier, Orfèvre → forgent des équipements (panoplie Craft)
+- **Conception** (1 au choix) : Alchimiste, Boulanger, Enchanteur → créent des consommables (potions, nourriture, runes)
 
-Consulte la page [Équipements](equipements/index.md) pour les détails.
+!!! tip "Quel métier de récolte choisir ?"
+    Chaque classe d'équipement utilise 2 matières premières spécifiques. Consulte le [guide de récolte](metiers/recolte.md#quel-metier-de-recolte-choisir) pour savoir quel métier correspond à ta classe.
 
----
-
-## 7️⃣ Les Quêtes 📜
-
-Chaque quête complétée donne **+0,1 énergie/cycle** et **+0,1% régén. HP** en bonus passif permanent.
-
-- **42 quêtes principales** : à faire dans l'ordre, débloquent du contenu
-- **30 quêtes secondaires** : indépendantes, bonus supplémentaires
-
-Consulte la page [Quêtes](quetes.md).
+!!! info "La Forge (⚒️) dans le Hub Profil"
+    Améliorer un équipement (+0 à +10) et équiper/déséquiper des runes se fait via le bouton **Forge** du Hub Profil — accessible à **tous les joueurs** sans avoir besoin d'un métier.
 
 ---
 
-## 8️⃣ Les Titres 🎖️
+## La régénération passive
 
-Les titres donnent des **bonus permanents** (stats de combat, efficacité donjon/raid, etc.).
-Commence par les titres de zone et de niveau — ils sont faciles à débloquer et très utiles.
+Même quand tu n'es pas connecté, tu récupères toutes les **10 minutes** :
 
-Consulte la page [Titres](titres.md).
+- **+3% de tes PV maximum** (augmente jusqu'à +13% au fil des quêtes)
+- **+10 énergie** (augmente jusqu'à ~+25 au fil des quêtes)
+
+Tu n'as donc jamais besoin de te connecter en urgence pour récupérer.
 
 ---
 
-## 🎯 Conseils pour débuter
+## Le Prestige
 
-1. **Farm les ennemis** en mode auto pour monter rapidement en niveau
-2. **Fais les quêtes principales** dès que tu peux — les récompenses sont énormes
-3. **Débloque les titres faciles** (niveaux 10, 25, 50...) pour booster ton XP et ton Gold
-4. **Explore les donjons classiques** dès le niveau 5 pour avoir de meilleurs équipements
-5. **Rejoins un métier de récolte** pour collecter des matériaux et en vendre à l'HDV
+Le Prestige est disponible dès le **niveau 10**. Tu recommences au niveau 1, mais tu gagnes des **niveaux de prestige** en fonction du niveau maximum que tu avais atteint — plus tu étais haut, plus tu en gagnes. Chaque niveau de prestige donne un bonus permanent de **+0,1% sur toutes tes stats**.
+
+!!! tip "Conseil"
+    Mets tes meilleurs équipements en **Banque** avant de prestiger — ils sont préservés.
+
+---
+
+## Conseils généraux
+
+!!! tip "Suis les quêtes !"
+    Au début, les **quêtes** sont le meilleur guide. Elles t'orientent étape par étape, te récompensent en **équipements et consommables**, et t'expliquent les mécaniques au fur et à mesure. C'est le chemin le plus rapide pour progresser.
+
+- Ne néglige pas les **sorts** de ta classe : ils font souvent la différence dans les combats difficiles
+- Les **panoplies** (sets de 7 pièces) donnent des bonus très importants — essaie de compléter un set
+- Commence par les **donjons classiques** avant de t'attaquer aux élites et abyssaux
+- Rejoins un **raid** avec d'autres joueurs pour des récompenses que tu ne peux pas obtenir seul

@@ -3,9 +3,12 @@ Hub Donjons — Classiques, Élite, Abyssaux.
 Canal : 1468959474151587871
 """
 from __future__ import annotations
+import logging
 from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
+
+logger = logging.getLogger(__name__)
 
 from bot.cogs.rpg import database as db
 from bot.cogs.rpg.models import (
@@ -18,6 +21,7 @@ from bot.cogs.rpg.combat import build_combat_state, run_one_turn, hp_bar, Combat
 from bot.cogs.rpg.core import increment_and_check_title
 
 _active_dungeon_combats: dict[int, tuple[CombatState, dict]] = {}  # user_id → (state, enemy)
+_dungeon_combat_started_at: dict[int, float] = {}   # user_id → timestamp de début (pour cleanup)
 
 DIFFICULTIES = {
     "classique": {"name": "Classique", "emoji": "🟩", "color": 0x4CAF50, "factor": 0.33},
@@ -75,18 +79,22 @@ async def _show_dungeon_list(interaction: discord.Interaction, difficulty: str):
     energy_cost = ENERGY_COST.get(energy_key, 3)
     dungeon_level = max(1, min(100, player.get("zone", 1) // 10))
     zone_equiv = _zone_equiv(difficulty, dungeon_level)
-    reward_mult = {"classique": 2, "elite": 3, "abyssal": 4}.get(difficulty, 2)
-    xp_estim   = zone_equiv * 15 * reward_mult
-    gold_estim = zone_equiv * 8  * reward_mult
+    title_bonuses = await db.get_title_bonuses(interaction.user.id)
+    xp_pct   = title_bonuses.get("xp_pct",   0)
+    gold_pct = title_bonuses.get("gold_pct", 0)
+    xp_estim   = round(zone_equiv * 10 * (1 + xp_pct   / 100))
+    gold_estim = round(zone_equiv * 3  * (1 + gold_pct / 100))
+    xp_suffix   = f" *(+{xp_pct:.0f}% titre)*"   if xp_pct   else ""
+    gold_suffix = f" *(+{gold_pct:.0f}% titre)*" if gold_pct else ""
 
     embed = discord.Embed(
         title=f"{diff_data['emoji']} Donjons {diff_data['name']}",
         description=(
-            f"Il y a **7 boss** de donjons, chacun associé à un **slot d'équipement** avec un **passif unique**.\n"
+            f"Il y a **{len(DUNGEON_BOSSES)} boss** de donjons, chacun associé à un **slot d'équipement** avec un **passif unique**.\n"
             f"Coût : **{energy_cost} énergies** par combat\n"
             f"⚡ Énergie actuelle : **{player.get('energy', 0)}/{player.get('max_energy', 2000)}**\n"
             f"📊 Niveau du donjon : **{dungeon_level}** (zone equiv. **{zone_equiv}**)\n"
-            f"🎁 Récompenses : **~{xp_estim:,} XP** | **~{gold_estim:,} golds** | **1 item niveau {zone_equiv // 10}**"
+            f"🎁 Récompenses : **~{xp_estim:,} XP**{xp_suffix} | **~{gold_estim:,} golds**{gold_suffix} | **1 item niveau {zone_equiv // 10}**"
         ),
         color=diff_data["color"],
     )
@@ -162,11 +170,17 @@ class DungeonListView(discord.ui.View):
                 inline=True,
             )
             zone_equiv = _zone_equiv(self.difficulty, level)
-            _rm = {"classique": 2, "elite": 3, "abyssal": 4}.get(self.difficulty, 2)
+            title_bonuses = await db.get_title_bonuses(self.user_id)
+            _xp_pct   = title_bonuses.get("xp_pct",   0)
+            _gold_pct = title_bonuses.get("gold_pct", 0)
+            _xp_estim   = round(zone_equiv * 10 * (1 + _xp_pct   / 100))
+            _gold_estim = round(zone_equiv * 3  * (1 + _gold_pct / 100))
+            _xp_suffix   = f" *(+{_xp_pct:.0f}% titre)*"   if _xp_pct   else ""
+            _gold_suffix = f" *(+{_gold_pct:.0f}% titre)*" if _gold_pct else ""
             embed.add_field(
                 name="🎁 Récompenses estimées",
                 value=(
-                    f"✨ XP : **~{zone_equiv * 15 * _rm:,}** | 💰 Gold : **~{zone_equiv * 8 * _rm:,}**\n"
+                    f"✨ XP : **~{_xp_estim:,}**{_xp_suffix} | 💰 Gold : **~{_gold_estim:,}**{_gold_suffix}\n"
                     f"⚔️ Item niveau **{zone_equiv // 10}** garanti\n"
                     f"⚡ Énergie : **-{energy_cost}** (actuel : **{player.get('energy', 0)}**)"
                 ),
@@ -233,32 +247,34 @@ class DungeonCombatView(discord.ui.View):
             state, _ = _active_dungeon_combats[self.user_id]
         else:
             # Vérifier et déduire l'énergie seulement au premier tour
-            if player.get("in_combat", 0):
-                await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
-                return
             energy_key  = f"donjon_{self.difficulty}"
             energy_cost = ENERGY_COST.get(energy_key, 3)
             if player.get("energy", 0) < energy_cost:
                 await interaction.response.send_message(f"❌ Pas assez d'énergie ! (besoin : {energy_cost})", ephemeral=True)
                 return
-            await db.update_player(self.user_id, energy=max(0, player["energy"] - energy_cost), in_combat=1)
+            if not await db.try_start_combat(self.user_id):
+                await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
+                return
+            await db.update_player(self.user_id, energy=max(0, player["energy"] - energy_cost))
             equipment = await db.get_equipment(self.user_id)
             relics    = await db.get_relics(self.user_id)
-            title_bonuses = await db.get_title_bonuses(self.user_id)
             djmap = {"classique": "djc_stats_pct", "elite": "dje_stats_pct", "abyssal": "dja_stats_pct"}
-            ctx_bonus = title_bonuses.get(djmap.get(self.difficulty, "djc_stats_pct"), 0)
-            pres_bonus = player.get("prestige_level", 0) * title_bonuses.get("prestige_bonus_pct", 0) / 1000
-            stats_bonus_pct = ctx_bonus + pres_bonus
+            stats_bonus_pct = await db.get_stats_bonus_pct(
+                self.user_id, player, djmap.get(self.difficulty, "djc_stats_pct")
+            )
             state = build_combat_state(player, self.enemy, equipment, relics, player.get("current_hp"),
                                        stats_bonus_pct=stats_bonus_pct)
+            import time as _time
             self.player_class = player["class"]
             _active_dungeon_combats[self.user_id] = (state, self.enemy)
+            _dungeon_combat_started_at[self.user_id] = _time.monotonic()
 
         result = run_one_turn(state, spell_key)
         player = await db.get_player(self.user_id)
 
         if result["is_over"]:
             del _active_dungeon_combats[self.user_id]
+            _dungeon_combat_started_at.pop(self.user_id, None)
             # Nettoyer les flags de potion après usage
             if player.get("potion_revival_active") or player.get("potion_no_passive"):
                 await db.update_player(self.user_id, potion_revival_active=0, potion_no_passive=0)
@@ -319,6 +335,7 @@ class DungeonCombatView(discord.ui.View):
     async def on_timeout(self):
         if self.user_id in _active_dungeon_combats:
             del _active_dungeon_combats[self.user_id]
+        _dungeon_combat_started_at.pop(self.user_id, None)
         await db.update_player(self.user_id, in_combat=0)
 
     async def _loot_info(self, interaction: discord.Interaction):
@@ -328,7 +345,9 @@ class DungeonCombatView(discord.ui.View):
         harvest_type  = prof.get("harvest_type") if prof else None
         harvest_level = prof.get("harvest_level", 0) if prof else 0
         tier_cap = min(10, harvest_level // 10 + 1)
+        diff_mat_mult = {"classique": 1.2, "elite": 1.4, "abyssal": 1.6}.get(self.difficulty, 1.0)
         drop_table = get_material_drop_table(zone_equiv, harvest_type, harvest_level, tier_cap=tier_cap)
+        drop_table = [{"item_id": d["item_id"], "chance": round(d["chance"] * diff_mat_mult, 2)} for d in drop_table]
         drop_table.sort(key=lambda x: x["chance"], reverse=True)
 
         lines = ["⚔️ **Équipement** — 1 item garanti (80% ta classe, 20% autre)\n"]
@@ -353,25 +372,8 @@ class DungeonCombatView(discord.ui.View):
 
 
 async def _consume_combat_food_buffs(user_id: int):
-    """Décrémente les buffs alimentaires de combat (combats: 1 → 0 → supprimé)."""
-    import json
-    player = await db.get_player(user_id)
-    raw = player.get("food_buffs")
-    if not raw:
-        return
-    try:
-        fb = json.loads(raw)
-    except Exception:
-        return
-    changed = False
-    for key in list(("stat_def", "stat_speed", "stat_patk", "stat_matk", "elixir_patk", "elixir_matk", "elixir_def", "elixir_speed", "elixir_crit", "elixir_all")):
-        if key in fb:
-            fb[key]["combats"] = fb[key].get("combats", 1) - 1
-            if fb[key]["combats"] <= 0:
-                del fb[key]
-            changed = True
-    if changed:
-        await db.update_player(user_id, food_buffs=json.dumps(fb) if fb else None)
+    """Décrémente les buffs alimentaires de combat (délégué à database.consume_food_buffs)."""
+    await db.consume_food_buffs(user_id)
 
 
 async def _dungeon_rewards(user_id: int, player: dict, enemy: dict, difficulty: str, level: int, result: dict) -> str:
@@ -410,7 +412,9 @@ async def _dungeon_rewards(user_id: int, player: dict, enemy: dict, difficulty: 
     harvest_type  = prof.get("harvest_type") if prof else None
     harvest_level = prof.get("harvest_level", 0) if prof else 0
     tier_cap = min(10, harvest_level // 10 + 1)
+    diff_mat_mult = {"classique": 1.2, "elite": 1.4, "abyssal": 1.6}.get(difficulty, 1.0)
     drop_table = get_material_drop_table(zone_equiv, harvest_type, harvest_level, tier_cap=tier_cap)
+    drop_table = [{"item_id": d["item_id"], "chance": round(d["chance"] * diff_mat_mult, 2)} for d in drop_table]
     looted_mats = []
     for drop in drop_table:
         chance = drop["chance"]
@@ -442,30 +446,9 @@ async def _dungeon_rewards(user_id: int, player: dict, enemy: dict, difficulty: 
             rewards_lines.append("⚡ +1 énergie (passif)")
 
     # Bonus énergie par victoire (food buff energy_on_win)
-    import json as _json
-    from datetime import datetime as _dt, timezone as _tz
-    food_buffs_raw = player_post.get("food_buffs")
-    if food_buffs_raw:
-        try:
-            fb = _json.loads(food_buffs_raw)
-            eow = fb.get("energy_on_win")
-            if eow:
-                exp = eow.get("expires")
-                if exp and _dt.now(_tz.utc) < _dt.fromisoformat(exp):
-                    win_e = eow.get("value", 0)
-                    cur_e = player_post.get("energy", 0)
-                    max_e = player_post.get("max_energy", 2000)
-                    await db.update_player(user_id, energy=min(cur_e + win_e, max_e))
-                    rewards_lines.append(f"⚡ +{win_e} énergie (buff alimentaire)")
-        except Exception:
-            pass
+    await db.apply_energy_on_win(user_id, player_post, rewards_lines)
 
-    # Titres
-    await increment_and_check_title(user_id, "t_plongeur")
-    await increment_and_check_title(user_id, "t_expert_donjon")
-    if difficulty == "abyssal":
-        await increment_and_check_title(user_id, "t_maitre_abyssal")
-        await increment_and_check_title(user_id, "t_abyssal_100")
+    # Titres donjons — basés sur le niveau maximum atteint (gérés par check_all_titles)
 
     return "\n".join(rewards_lines)
 

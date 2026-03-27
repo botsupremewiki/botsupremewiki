@@ -1,68 +1,58 @@
 # 🏹 Tireur
 
-**Rôle :** DPS Physique / Cadence
-
-**Difficulté :** ⭐⭐☆☆☆ (2/5)
-
+Le Tireur est un spécialiste des dégâts physiques à distance. Son passif lui donne une chance de **doubler ses dégâts** à chaque attaque, ce qui le rend imprévisible et potentiellement dévastateur.
 
 ---
 
-## 📖 Description
+## Stats de départ (niveau 1)
 
-Archer agile capable de déchaîner une pluie de projectiles mortels.
-
-**Passif** : 25% de chance de doubler ses dégâts.
-
-**Ressource** : 🟡 Combo (max 5, +1/tour).
-
-
-**Ressource :** 🟡 Combo — maximum 5, +1 par tour
-
-
----
-
-## 📊 Progression des statistiques
-
-| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
-|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
-| Niv. 1 | 440 | 44 | — | 4 | 4 | 130 | 18% |
-| Niv. 100 | 2,576 | 257 | — | 19 | 19 | 156 | 19% |
-| Niv. 200 | 4,734 | 473 | — | 36 | 36 | 183 | 21% |
-| Niv. 500 | 11,208 | 1,120 | — | 84 | 84 | 264 | 25% |
-| Niv. 1000 | 21,998 | 2,199 | — | 164 | 164 | 399 | 32% |
+| Stat | Valeur |
+|------|--------|
+| Points de Vie | 440 |
+| Attaque Physique | 44 |
+| Attaque Magique | 0 |
+| Défense Physique | 4 |
+| Défense Magique | 4 |
+| Vitesse | 130 |
+| Chance de Critique | 18.0% |
+| Dégâts de Critique | 175.0% |
 
 ---
 
-## ✨ Sorts
+## Passif — Double Tir
 
-### 🏹 Tir Rapide
-
-Inflige ×1.2 dégâts physiques et augmente sa vitesse de +30% pendant 2 tours.
-
-- **Coût :** 1 🟡 Combo
-
-
-### 🎯 Tir Marqué
-
-Inflige ×1.0 dégâts et marque l'ennemi — il subit +20% dégâts pendant 3 tours.
-
-- **Coût :** 2 🟡 Combo · Temps de recharge : **3 tours**
-
-
-### 💥 Tir Fatal 🌟 **ULTIME**
-
-Inflige ×3.5 dégâts physiques en ignorant toute la Déf.Phy. ennemie.
-
-- **Coût :** 5 🟡 Combo · Temps de recharge : **6 tours**
-
-
+À chaque attaque, le Tireur a **25% de chance de doubler ses dégâts**.
 
 ---
 
-## 💡 Conseils de jeu
+## Ressource — Combo
 
-- Ton passif double tes dégâts 25% du temps — très efficace sur les longs combats.
+Le Combo se régénère de **+1 par tour**. Il est plafonné à **5**.
 
-- Utilise **Tir Marqué** puis **Tir Fatal** pour un burst dévastateur.
+---
 
-- Ta vitesse élevée te permet souvent d'attaquer en premier.
+## Sorts
+
+=== "🏹 Tir Rapide"
+    **Coût :** 1 Combo — **Temps de recharge :** aucun
+
+    Inflige **×1.2 dégâts physiques** et augmente sa vitesse de **+30% pendant 2 tours**.
+
+=== "🎯 Tir Marqué"
+    **Coût :** 2 Combo — **Temps de recharge :** 3 tours
+
+    Inflige **×1.0 dégâts** et marque l'ennemi — il subit **+20% de dégâts pendant 3 tours**.
+
+=== "💥 Tir Fatal (Ultime)"
+    **Coût :** 5 Combo — **Temps de recharge :** 6 tours
+
+    Inflige **×2.8 dégâts physiques** en ignorant **toute la Déf. Phy.** ennemie.
+
+---
+
+## Conseils
+
+- **Tir Rapide** augmente ta vitesse — utile pour prendre l'avantage sur les ennemis plus lents.
+- **Tir Marqué** avant **Tir Fatal** est une combinaison dévastatrice : +20% dégâts sur un ×2.8 qui ignore la défense.
+- En Raid, **Tir Marqué** bénéficie à toute l'équipe — pose-le dès que possible.
+- Le passif de double dégâts peut se déclencher sur n'importe quelle attaque, y compris les sorts — ne l'oublie pas.

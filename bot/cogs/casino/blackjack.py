@@ -5,9 +5,17 @@ import time
 import asyncio
 import logging
 from .core import (
-    load_casino, save_casino, get_balance, add_balance, add_wager,
+    load_casino, save_casino, get_balance, add_balance, add_wager, add_game_count,
+    get_seated_game, set_seated_game,
     BLACKJACK_CHANNEL_ID
 )
+
+def _seated_game_label(game: str) -> str:
+    if not game: return game
+    if game.startswith("slots_"): return f"🎰 Machine à Sous #{game.split('_')[1]}"
+    if game.startswith("poker_"): return f"♠️ Poker — Table {game.split('_', 1)[1]}"
+    labels = {"roulette": "🎡 Roulette", "blackjack": "🃏 Blackjack"}
+    return labels.get(game, game)
 
 logger = logging.getLogger(__name__)
 
@@ -41,30 +49,12 @@ class BlackjackView(discord.ui.View):
     def __init__(self, engine):
         super().__init__(timeout=None)
         self.engine = engine
-        self.user_currencies = {}
         for i in range(5):
             occ = engine.seats[i]
             label = f"Siège {i+1}" + (f" ({occ.display_name[:10]})" if occ else "")
             btn = discord.ui.Button(label=label, style=discord.ButtonStyle.secondary if occ else discord.ButtonStyle.primary, custom_id=f"bj_seat_{i}", row=0)
             btn.callback = self.make_seat_callback(i)
             self.add_item(btn)
-        cur_options = [
-            discord.SelectOption(label="Jetons", value="Jetons", emoji="🪙"),
-            discord.SelectOption(label="Freebits", value="Freebets", emoji="🎟️")
-        ]
-        self.currency_select = discord.ui.Select(placeholder="🔄 Changer ta devise par défaut...", options=cur_options, custom_id="bj_curr_sel", row=3)
-        self.currency_select.callback = self.currency_select_callback
-        self.add_item(self.currency_select)
-        
-        self.currency_btn = discord.ui.Button(label="Ma Devise Actuelle", style=discord.ButtonStyle.secondary, custom_id="bj_curr_info", row=4)
-        self.currency_btn.callback = self.currency_info_callback
-        self.add_item(self.currency_btn)
-        self.btn_bet = discord.ui.Button(label="💰 Miser", style=discord.ButtonStyle.success, custom_id="bj_bet", row=1, disabled=(engine.state not in ("IDLE", "BETTING")))
-        self.btn_bet.callback = self._btn_bet
-        self.add_item(self.btn_bet)
-        self.btn_quit = discord.ui.Button(label="🚪 Quitter", style=discord.ButtonStyle.danger, custom_id="bj_quit", row=1)
-        self.btn_quit.callback = self._btn_quit
-        self.add_item(self.btn_quit)
         if engine.state == "PLAYING":
             cp = engine.players[engine.current_turn_idx] if engine.current_turn_idx < len(engine.players) else None
             h = discord.ui.Button(label="🃏 Tirer", style=discord.ButtonStyle.primary, row=2)
@@ -84,88 +74,102 @@ class BlackjackView(discord.ui.View):
                     sp.disabled = True
             self.add_item(sp)
 
-    async def currency_select_callback(self, interaction: discord.Interaction):
-        data = load_casino()
-        uid = str(interaction.user.id)
-        if uid not in data["players"]:
-            return await interaction.response.send_message("❌ Fais d'abord `/cash` pour t'inscrire !", ephemeral=True)
-        val = self.currency_select.values[0]
-        data["players"][uid]["currency"] = val
-        save_casino(data)
-        display_name = "Freebits 🎟️" if val == "Freebets" else "Jetons 🪙"
-        try:
-            await interaction.response.send_message(f"✅ Ta devise de mise est maintenant : **{display_name}**", ephemeral=True)
-        except discord.errors.NotFound: pass
-
-    async def currency_info_callback(self, interaction: discord.Interaction):
-        data = load_casino()
-        val = data["players"].get(str(interaction.user.id), {}).get("currency", "Jetons")
-        display_name = "Freebits 🎟️" if val == "Freebets" else "Jetons 🪙"
-        try:
-            await interaction.response.send_message(f"ℹ️ Ta devise par défaut est actuellement : **{display_name}**", ephemeral=True)
-        except discord.errors.NotFound: pass
-
     def make_seat_callback(self, idx):
         async def cb(interaction: discord.Interaction):
             engine = self.engine
             user = interaction.user
+            uid = str(user.id)
             curr = next((i for i, s in enumerate(engine.seats) if s and s.id == user.id), None)
             if engine.seats[idx] and engine.seats[idx].id != user.id:
-                return await interaction.response.send_message("❌ Occupé", ephemeral=True)
+                return await interaction.response.send_message("❌ Ce siège est occupé.", ephemeral=True)
+            # Already seated at this exact seat → re-show ephemeral
             if curr == idx:
-                return await interaction.response.send_message("ℹ️ Déjà assis", ephemeral=True)
+                return await interaction.response.send_message(
+                    "🪑 **Ton siège** — utilise les boutons ci-dessous pour miser ou quitter.",
+                    view=BlackjackSeatView(engine, user.id), ephemeral=True
+                )
+            # Cross-game seated check (only if not already at this BJ table)
+            if curr is None:
+                data = load_casino()
+                seated_game = get_seated_game(uid, data)
+                if seated_game and seated_game != "blackjack":
+                    label = _seated_game_label(seated_game)
+                    return await interaction.response.send_message(
+                        f"❌ Tu es déjà assis(e) à **{label}**. Lève-toi d'abord !", ephemeral=True
+                    )
+                set_seated_game(uid, "blackjack", data)
+                save_casino(data)
             if engine.state == "PLAYING":
                 if curr is not None:
                     engine.next_seats[user.id] = idx
                 else:
                     engine.seats[idx] = user
                     await engine.update_ui()
-                return await interaction.response.defer()
+                return await interaction.response.send_message(
+                    "🎮 Une partie est en cours. Tu seras placé(e) à ce siège à la prochaine manche.", ephemeral=True
+                )
             if curr is not None:
                 engine.seats[curr] = None
             engine.seats[idx] = user
             await engine.update_ui()
-            await interaction.response.defer()
+            await interaction.response.send_message(
+                "🪑 **Assis !** Utilise les boutons ci-dessous pour miser ou quitter.",
+                view=BlackjackSeatView(engine, user.id), ephemeral=True
+            )
         return cb
-
-    async def _btn_bet(self, interaction: discord.Interaction):
-        if not any(s and s.id == interaction.user.id for s in self.engine.seats):
-            return await interaction.response.send_message("❌ Assieds-toi", ephemeral=True)
-        if interaction.user.id in self.engine.round_bets:
-            return await interaction.response.send_message("❌ Déjà misé", ephemeral=True)
-        data = load_casino()
-        curr = data["players"].get(str(interaction.user.id), {}).get("currency", "Jetons")
-        try:
-            await interaction.response.send_modal(BlackjackBetModal(self.engine, curr))
-        except discord.errors.NotFound: pass
-
-    async def _btn_quit(self, interaction: discord.Interaction):
-        seat = next((i for i, s in enumerate(self.engine.seats) if s and s.id == interaction.user.id), None)
-        if seat is None:
-            return await interaction.response.send_message("❌ Pas à table", ephemeral=True)
-        if self.engine.state == "PLAYING" and any(p.member.id == interaction.user.id for p in self.engine.players):
-            if interaction.user.id not in self.engine.waitlist_leave:
-                self.engine.waitlist_leave.append(interaction.user.id)
-            return await interaction.response.send_message("👋 Tu quitteras la table à la **fin de la partie**.", ephemeral=True)
-        self.engine.seats[seat] = None
-        self.engine.round_bets.pop(interaction.user.id, None)
-        await interaction.response.send_message("👋 Quitté", ephemeral=True)
-        await self.engine.update_ui()
 
     async def _btn_hit(self, interaction: discord.Interaction): await self.engine.handle_action(interaction, "hit")
     async def _btn_stand(self, interaction: discord.Interaction): await self.engine.handle_action(interaction, "stand")
     async def _btn_double(self, interaction: discord.Interaction): await self.engine.handle_action(interaction, "double")
     async def _btn_split(self, interaction: discord.Interaction): await self.engine.handle_action(interaction, "split")
 
-class BlackjackBetModal(discord.ui.Modal):
-    def __init__(self, engine, currency: str):
-        display_name = "Freebits 🎟️" if currency == "Freebets" else "Jetons 🪙"
-        super().__init__(title=f"💰 Mise ({display_name}) — Blackjack")
+
+class BlackjackSeatView(discord.ui.View):
+    def __init__(self, engine, user_id: int):
+        super().__init__(timeout=300)
         self.engine = engine
-        self.currency = currency
-        self.amount = discord.ui.TextInput(label=f"Combien de {display_name} ?", placeholder="ex: 500")
+        self.user_id = user_id
+
+    @discord.ui.button(label="💰 Miser", style=discord.ButtonStyle.success)
+    async def btn_bet(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if interaction.user.id != self.user_id:
+            return await interaction.response.send_message("❌ Ce n'est pas ton siège.", ephemeral=True)
+        engine = self.engine
+        if not any(s and s.id == interaction.user.id for s in engine.seats):
+            return await interaction.response.send_message("❌ Tu n'es plus assis(e) à cette table.", ephemeral=True)
+        if interaction.user.id in engine.round_bets:
+            return await interaction.response.send_message("❌ Tu as déjà misé ce round.", ephemeral=True)
+        if engine.state not in ("IDLE", "BETTING"):
+            return await interaction.response.send_message("❌ La phase de mise est terminée.", ephemeral=True)
+        try:
+            await interaction.response.send_modal(BlackjackBetModal(engine))
+        except discord.errors.NotFound:
+            pass
+
+    @discord.ui.button(label="🚪 Quitter", style=discord.ButtonStyle.danger)
+    async def btn_quit(self, interaction: discord.Interaction, button: discord.ui.Button):
+        if interaction.user.id != self.user_id:
+            return await interaction.response.send_message("❌ Ce n'est pas ton siège.", ephemeral=True)
+        await self.engine._quit_user(interaction)
+
+
+class BlackjackBetModal(discord.ui.Modal):
+    def __init__(self, engine):
+        super().__init__(title="💰 Mise — Blackjack")
+        self.engine = engine
+        self.amount = discord.ui.TextInput(label="Mise", placeholder="ex: 500")
+        self.currency_input = discord.ui.TextInput(
+            label="Devise  (J = Jetons 🪙 / F = Freebets 🎟️)",
+            placeholder="J ou F",
+            default="J",
+            min_length=1, max_length=1, required=True
+        )
         self.add_item(self.amount)
+        self.add_item(self.currency_input)
+
     async def on_submit(self, interaction: discord.Interaction):
+        raw_cur = self.currency_input.value.strip().upper()
+        currency = "Jetons" if raw_cur == "J" else "Freebets"
         try:
             val = int(self.amount.value)
             if val <= 0: raise ValueError
@@ -173,20 +177,20 @@ class BlackjackBetModal(discord.ui.Modal):
             return await interaction.response.send_message("❌ Invalide", ephemeral=True)
         data = load_casino()
         uid = str(interaction.user.id)
-        p = data["players"].get(uid, {"balance":0,"freebets":0})
-        if self.currency == "Jetons":
+        p = data["players"].get(uid, {"balance": 0, "freebets": 0})
+        if currency == "Jetons":
             if p["balance"] < val:
-                return await interaction.response.send_message("❌ Pas assez", ephemeral=True)
+                return await interaction.response.send_message("❌ Pas assez de jetons", ephemeral=True)
             p["balance"] -= val
             p["total_wagered_blackjack"] = p.get("total_wagered_blackjack", 0) + val
         else:
             if p.get("freebets", 0) < val:
-                return await interaction.response.send_message("❌ Pas assez", ephemeral=True)
+                return await interaction.response.send_message("❌ Pas assez de freebets", ephemeral=True)
             p["freebets"] -= val
         p["username"] = interaction.user.display_name
         save_casino(data)
-        self.engine.round_bets[interaction.user.id] = (val, self.currency)
-        display_name = "Freebits 🎟️" if self.currency == "Freebets" else "Jetons 🪙"
+        self.engine.round_bets[interaction.user.id] = (val, currency)
+        display_name = "Freebets 🎟️" if currency == "Freebets" else "Jetons 🪙"
         await interaction.response.send_message(f"✅ {val} **{display_name}** misés !", ephemeral=True)
         self.engine.reset_betting_timer()
 
@@ -218,16 +222,62 @@ class BlackjackEngine:
         self.state = "BETTING"
         self.betting_timer_end = time.time() + delay
         self.bot.loop.create_task(self.update_ui(
-            f"💰 **Phase de mise !** Mises fermées <t:{int(self.betting_timer_end)}:R>\n"
-            f"• Utilise le sélecteur pour choisir entre **Jetons 🪙** et **Freebits 🎟️**.\n"
-            f"• **10 secondes d'urgence** si tous les sièges ont misé !"
+            f"💰 **Phase de mise !** Mises fermées <t:{int(self.betting_timer_end)}:R>"
         ))
+
+    async def _quit_user(self, interaction: discord.Interaction):
+        uid = str(interaction.user.id)
+        seat = next((i for i, s in enumerate(self.seats) if s and s.id == interaction.user.id), None)
+        if seat is None:
+            return await interaction.response.send_message("❌ Tu n'es pas à table.", ephemeral=True)
+        # If currently playing (cards dealt) → leave at end of round
+        if self.state == "PLAYING" and any(p.member.id == interaction.user.id for p in self.players):
+            if interaction.user.id not in self.waitlist_leave:
+                self.waitlist_leave.append(interaction.user.id)
+            return await interaction.response.send_message(
+                "👋 Tu quitteras la table à la **fin de la partie**. Tes jetons/freebets te seront restitués si tu gagnes.",
+                ephemeral=True
+            )
+        # If in betting phase and a bet was placed → refund before leaving
+        if self.state == "BETTING" and interaction.user.id in self.round_bets:
+            bet_amount, bet_currency = self.round_bets.pop(interaction.user.id)
+            data = load_casino()
+            p = data["players"].get(uid, {})
+            if bet_currency == "Jetons":
+                p["balance"] = p.get("balance", 0) + bet_amount
+            else:
+                p["freebets"] = p.get("freebets", 0) + bet_amount
+            data["players"][uid] = p
+            self.seats[seat] = None
+            set_seated_game(uid, None, data)
+            save_casino(data)
+            cur_emoji = "🎟️" if bet_currency == "Freebets" else "🪙"
+            await interaction.response.send_message(
+                f"👋 Quitté — ta mise de **{bet_amount} {cur_emoji}** a été remboursée.", ephemeral=True
+            )
+            await self.update_ui()
+            return
+        # IDLE or no bet → leave immediately
+        self.seats[seat] = None
+        self.round_bets.pop(interaction.user.id, None)
+        data = load_casino()
+        set_seated_game(uid, None, data)
+        save_casino(data)
+        await interaction.response.send_message("👋 Quitté", ephemeral=True)
+        await self.update_ui()
 
     async def start_playing_phase(self):
         # Éjecter les joueurs assis qui n'ont pas misé
+        ejected_uids = []
         for i, seat in enumerate(self.seats):
             if seat and seat.id not in self.round_bets:
+                ejected_uids.append(str(seat.id))
                 self.seats[i] = None
+        if ejected_uids:
+            data = load_casino()
+            for uid in ejected_uids:
+                set_seated_game(uid, None, data)
+            save_casino(data)
         self.players = [BJPlayerState(s, self.round_bets[s.id][0], i, self.round_bets[s.id][1]) for i, s in enumerate(self.seats) if s and s.id in self.round_bets]
         if not self.players:
             self.state = "IDLE"
@@ -270,7 +320,7 @@ class BlackjackEngine:
         p = self.players[self.current_turn_idx]
         if p.member.id != interaction.user.id: return await interaction.response.send_message("❌ Pas ton tour", ephemeral=True)
         self.turn_timer_end = 0; hand = p.hands[p.current_hand_idx]
-        if action == "hit": 
+        if action == "hit":
              hand.append(draw_card())
              if calculate_hand(hand) >= 21: await self.next_hand_or_player()
              else: await self.start_turn()
@@ -294,7 +344,7 @@ class BlackjackEngine:
         self.state = "RESOLVING"; self.turn_timer_end = 0
         if any(calculate_hand(h) <= 21 for p in self.players for h in p.hands):
             while calculate_hand(self.dealer_hand) < 17: self.dealer_hand.append(draw_card())
-        
+
         dv = calculate_hand(self.dealer_hand)
         res_str = ""
         data = load_casino()
@@ -320,10 +370,10 @@ class BlackjackEngine:
                     if p.currency == "Freebets": fb_refund += b
                     else: j_won += b
                     r = f"🤝 Égalité (Remboursé {b} {cur_emoji})"
-                else: 
+                else:
                     r = f"💸 Perdu (-{b} {cur_emoji})"
                 res_str += f"**{p.member.display_name}** Siège {p.seat_index+1}: {r}\n"
-            
+
             uid = str(p.member.id)
             if uid in data["players"]:
                 if j_won > 0:
@@ -332,14 +382,24 @@ class BlackjackEngine:
                         data["players"][uid]["max_balance"] = data["players"][uid]["balance"]
                 if fb_refund > 0: data["players"][uid]["freebets"] = data["players"][uid].get("freebets", 0) + fb_refund
         save_casino(data)
-        
+
+        leave_uids = []
         for p_id in self.waitlist_leave:
             seat_idx = next((i for i, s in enumerate(self.seats) if s and s.id == p_id), None)
             if seat_idx is not None:
                 self.seats[seat_idx] = None
+                leave_uids.append(str(p_id))
+        if leave_uids:
+            data_l = load_casino()
+            for uid in leave_uids:
+                set_seated_game(uid, None, data_l)
+            save_casino(data_l)
         self.waitlist_leave.clear()
-        
-        await self.update_ui(f"🏁 **Résultats du Round**\n\n{res_str}\n*Rappel: Profit net uniquement pour les Freebits 🎟️.*")
+
+        # Count one game per player per round
+        for p in self.players:
+            add_game_count(p.member.id, "blackjack", username=p.member.display_name)
+        await self.update_ui(f"🏁 **Résultats du Round**\n\n{res_str}\n*Rappel: Profit net uniquement pour les Freebets 🎟️.*")
         casino = self.bot.get_cog("Casino")
         if casino: casino.trigger_leaderboard_update()
         await asyncio.sleep(8)
@@ -365,7 +425,16 @@ class BlackjackEngine:
 class BlackjackCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot; self.engine = None
-    async def cog_load(self): self.setup_task.start()
+
+    async def cog_load(self):
+        # Clear stale BJ seated states from previous session
+        data = load_casino()
+        stale = [uid for uid, g in data.get("seated", {}).items() if g == "blackjack"]
+        for uid in stale:
+            data["seated"].pop(uid, None)
+        if stale:
+            save_casino(data)
+        self.setup_task.start()
     @tasks.loop(seconds=5)
     async def setup_task(self):
         await self.bot.wait_until_ready()
@@ -375,9 +444,18 @@ class BlackjackCog(commands.Cog):
         if not c: return
         casino = self.bot.get_cog("Casino")
         if not casino: return
+        # Prérequis OK → enfile le setup dans la queue de démarrage
+        self.bot._startup_queue.put_nowait(self._do_setup)
+        self.setup_task.stop()
+
+    async def _do_setup(self):
+        c = self.bot.get_channel(BLACKJACK_CHANNEL_ID)
+        casino = self.bot.get_cog("Casino")
+        if not c or not casino:
+            logger.warning("Blackjack _do_setup: channel ou Casino cog introuvable")
+            return
         tmp_engine = None
         try:
-            # Récupère le message sans passer par upsert_panel_message (évite de queuer un dummy embed)
             data = load_casino()
             msg_id = data.get("messages", {}).get("blackjack")
             m = None
@@ -385,17 +463,17 @@ class BlackjackCog(commands.Cog):
                 try: m = await c.fetch_message(int(msg_id))
                 except discord.NotFound: m = None
             if m is None:
-                # Première fois : crée le message directement
                 e = discord.Embed(title="🃏 TABLE DE BLACKJACK", description="⏸️ En attente...", color=discord.Color.green())
                 m = await casino._do_upsert("blackjack", embed=e)
-            if m is None: logger.warning("Blackjack setup: impossible de créer le message, retry..."); return
+            if m is None:
+                logger.warning("Blackjack _do_setup: impossible de créer le message")
+                return
             tmp_engine = BlackjackEngine(self.bot, c, m.id, self)
             await m.edit(embed=self.create_blackjack_embed(tmp_engine), view=BlackjackView(tmp_engine))
             self.engine = tmp_engine
             tmp_engine = None
-            self.setup_task.stop()
         except Exception as ex:
-            logger.warning("Blackjack setup: échec (%s), retry in 5s", ex)
+            logger.warning("Blackjack _do_setup: échec (%s)", ex)
             if tmp_engine is not None:
                 try: tmp_engine.loop_task.cancel()
                 except Exception: pass
@@ -403,6 +481,15 @@ class BlackjackCog(commands.Cog):
     def create_blackjack_embed(self, engine, msg=""):
         e = discord.Embed(title="🃏 BLACKJACK", description=msg or "\u200b", color=discord.Color.green() if engine.state in ("IDLE","BETTING") else discord.Color.gold())
         if engine.state in ("IDLE","BETTING"):
+            e.add_field(
+                name="ℹ️ Comment miser",
+                value=(
+                    "• Clique sur ton siège pour ouvrir le panneau de mise.\n"
+                    "• Indique **J** = Jetons 🪙 ou **F** = Freebets 🎟️ dans le formulaire.\n"
+                    "• ⚡ **10 secondes d'urgence** si tous les sièges ont misé !"
+                ),
+                inline=False,
+            )
             s_l = ""
             for i in range(5):
                 if engine.seats[i]:
@@ -413,7 +500,7 @@ class BlackjackCog(commands.Cog):
                         b_info = f"✅ (a misé {amt} {c_emoji})"
                     s_l += f"**Siège {i+1}** : {engine.seats[i].display_name} {b_info}\n"
                 else: s_l += f"**Siège {i+1}** : Libre\n"
-            e.add_field(name="🪑 Sièges", value=s_l, inline=False)
+            e.add_field(name="🪑 En attente de mise", value=s_l, inline=False)
         else:
             dv = calculate_hand(engine.dealer_hand)
             e.add_field(name=f"🏦 Croupier ({'?' if engine.state=='PLAYING' else dv})", value=f"{engine.dealer_hand[0]} 🎴" if engine.state=="PLAYING" else " ".join(engine.dealer_hand), inline=False)

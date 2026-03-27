@@ -1,68 +1,58 @@
 # 🗡️ Assassin
 
-**Rôle :** DPS Physique / Esquive
-
-**Difficulté :** ⭐⭐⭐☆☆ (3/5)
-
+L'Assassin est un combattant **ultra-rapide et furtif**, spécialisé dans les dégâts physiques élevés et l'esquive. Il a peu de PV mais une vitesse et une puissance d'attaque exceptionnelles.
 
 ---
 
-## 📖 Description
+## Stats de départ (niveau 1)
 
-Ombre rapide frappant avec une précision mortelle.
-
-**Passif** : 20% de chance d'esquiver une attaque ennemie.
-
-**Ressource** : 🟡 Combo (max 5, +1/tour).
-
-
-**Ressource :** 🟡 Combo — maximum 5, +1 par tour
-
-
----
-
-## 📊 Progression des statistiques
-
-| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
-|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
-| Niv. 1 | 500 | 50 | — | 4 | 3 | 160 | 20% |
-| Niv. 100 | 2,927 | 292 | — | 29 | 22 | 193 | 21% |
-| Niv. 200 | 5,379 | 537 | — | 54 | 42 | 227 | 22% |
-| Niv. 500 | 12,735 | 1,273 | — | 131 | 101 | 329 | 25% |
-| Niv. 1000 | 24,995 | 2,499 | — | 259 | 199 | 499 | 30% |
+| Stat | Valeur |
+|------|--------|
+| Points de Vie | 500 |
+| Attaque Physique | 50 |
+| Attaque Magique | 0 |
+| Défense Physique | 4 |
+| Défense Magique | 3 |
+| Vitesse | 160 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 175.0% |
 
 ---
 
-## ✨ Sorts
+## Passif — Ombre Furtive
 
-### 🗡️ Frappe de l'Ombre
-
-Inflige ×1.8 dégâts physiques. Double les chances d'esquive pour la prochaine attaque ennemie.
-
-- **Coût :** 1 🟡 Combo
-
-
-### ✴️ Lame Perçante
-
-Inflige ×1.6 dégâts physiques en ignorant 60% de la Déf.Phy. ennemie.
-
-- **Coût :** 2 🟡 Combo · Temps de recharge : **2 tours**
-
-
-### 💀 Exécution 🌟 **ULTIME**
-
-Dégâts ×2.0 → ×4.0 selon les PV manquants de l'ennemi (×4.0 à 0% PV).
-
-- **Coût :** 5 🟡 Combo · Temps de recharge : **6 tours**
-
-
+L'Assassin a **20% de chance d'esquiver** chaque attaque ennemie. Totalement passif, aucune action nécessaire.
 
 ---
 
-## 💡 Conseils de jeu
+## Ressource — Combo
 
-- Accumule des Combos avant d'utiliser tes sorts.
+Le Combo se régénère de **+1 par tour**. Il est plafonné à **5**.
 
-- **Exécution** (ultime) est idéal quand l'ennemi est presque mort.
+---
 
-- Ton passif d'esquive réduit beaucoup les dégâts reçus dans la durée.
+## Sorts
+
+=== "🗡️ Frappe de l'Ombre"
+    **Coût :** 1 Combo — **Temps de recharge :** aucun
+
+    Inflige **×1.8 dégâts physiques**. Double les chances d'esquive pour la prochaine attaque ennemie.
+
+=== "✴️ Lame Perçante"
+    **Coût :** 2 Combo — **Temps de recharge :** 2 tours
+
+    Inflige **×1.6 dégâts physiques** en ignorant **60% de la Déf. Phy.** ennemie.
+
+=== "💀 Exécution (Ultime)"
+    **Coût :** 5 Combo — **Temps de recharge :** 6 tours
+
+    Dégâts **×2.0 → ×3.5** selon les PV manquants de l'ennemi (×3.5 à 0% PV).
+
+---
+
+## Conseils
+
+- L'Assassin est la classe la plus rapide du jeu — il agit presque toujours en premier.
+- **Frappe de l'Ombre** à ×1.8 est excellent pour spammer et accumuler du Combo rapidement.
+- **Lame Perçante** est idéale contre les ennemis bien blindés physiquement — 60% d'ignore de défense est énorme.
+- Garde **Exécution** pour quand l'ennemi est à faibles PV — le bonus de ×3.5 à 0 PV est dévastateur.

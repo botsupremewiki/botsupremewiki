@@ -159,11 +159,13 @@ class RulesPanelCog(commands.Cog):
     @commands.Cog.listener()
     async def on_ready(self):
         # View persistante: bouton utilisable après redémarrage
-        if not self._views_registered:
+        first_ready = not self._views_registered
+        if first_ready:
             self.bot.add_view(RulesView())
             self._views_registered = True
-
-        await self.ensure_rules_message()
+            self.bot._startup_queue.put_nowait(self.ensure_rules_message)
+        else:
+            await self.ensure_rules_message()
 
 
 async def setup(bot: commands.Bot):

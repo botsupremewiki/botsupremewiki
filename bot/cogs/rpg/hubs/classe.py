@@ -11,35 +11,8 @@ from bot.cogs.rpg.models import (
     ALL_CLASSES, CLASSES_STANDARD, CLASSES_PREMIUM,
     CLASS_EMOJI, CLASS_DESCRIPTION, BASE_STATS,
     ROLE_PREMIUM, ROLE_RPG, LEVEL_GROWTH,
+    STAT_EMOJI, STAT_FR as STAT_LABEL,
 )
-
-# ─── Emojis de stats ───────────────────────────────────────────────────────
-
-STAT_EMOJI = {
-    "hp":          "❤️",
-    "p_atk":       "⚔️",
-    "m_atk":       "🔮",
-    "p_def":       "🛡️",
-    "m_def":       "✨",
-    "p_pen":       "🩸",
-    "m_pen":       "💥",
-    "speed":       "⚡",
-    "crit_chance": "🎯",
-    "crit_damage": "💢",
-}
-
-STAT_LABEL = {
-    "hp":          "Points de Vie",
-    "p_atk":       "Attaque Physique",
-    "m_atk":       "Attaque Magique",
-    "p_def":       "Défense Physique",
-    "m_def":       "Défense Magique",
-    "p_pen":       "Pénétration Physique",
-    "m_pen":       "Pénétration Magique",
-    "speed":       "Vitesse",
-    "crit_chance": "Chance Critique",
-    "crit_damage": "Dégâts Critiques",
-}
 
 # Stats affichées dans l'ordre
 STAT_ORDER = ["hp", "p_atk", "m_atk", "p_pen", "m_pen", "p_def", "m_def", "speed", "crit_chance", "crit_damage"]

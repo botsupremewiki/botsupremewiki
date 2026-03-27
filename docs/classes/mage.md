@@ -1,68 +1,60 @@
 # 🔮 Mage
 
-**Rôle :** DPS Magique / Burst
-
-**Difficulté :** ⭐⭐⭐☆☆ (3/5)
-
+Le Mage est un lanceur de sorts **dévastateur**. Il inflige de lourds dégâts magiques et son passif le récompense de rester en bonne santé — plus il a de PV, plus il est dangereux.
 
 ---
 
-## 📖 Description
+## Stats de départ (niveau 1)
 
-Maître de l'arcane dont la puissance croît avec sa vitalité.
-
-**Passif** : +0.5% de dégâts magiques par % de HP actuels (max +50%).
-
-**Ressource** : 🔵 Mana (max 100, +15/tour).
-
-
-**Ressource :** 🔵 Mana — maximum 100, +15 par tour
-
-
----
-
-## 📊 Progression des statistiques
-
-| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
-|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
-| Niv. 1 | 400 | — | 40 | 3 | 10 | 90 | 12% |
-| Niv. 100 | 2,342 | — | 234 | 15 | 61 | 115 | 14% |
-| Niv. 200 | 4,304 | — | 430 | 28 | 113 | 141 | 15% |
-| Niv. 500 | 10,190 | — | 1,019 | 66 | 269 | 219 | 20% |
-| Niv. 1000 | 20,000 | — | 2,000 | 129 | 530 | 349 | 28% |
+| Stat | Valeur |
+|------|--------|
+| Points de Vie | 400 |
+| Attaque Physique | 0 |
+| Attaque Magique | 38 |
+| Défense Physique | 3 |
+| Défense Magique | 10 |
+| Vitesse | 90 |
+| Chance de Critique | 12.0% |
+| Dégâts de Critique | 175.0% |
 
 ---
 
-## ✨ Sorts
+## Passif — Concentration Arcanique
 
-### ⚡ Soif Arcane
+Le Mage gagne **+0.5% de dégâts magiques par % de HP actuels**, jusqu'à un maximum de **+50%**.
 
-Inflige ×1.2 dégâts magiques et récupère 20 mana supplémentaire.
-
-- **Coût :** 15 🔵 Mana
-
-
-### 🔵 Écran Magique
-
-Inflige ×1.4 dégâts magiques et réduit les dégâts subis de 25% pendant 2 tours.
-
-- **Coût :** 25 🔵 Mana · Temps de recharge : **3 tours**
-
-
-### ☄️ Nova Primordiale 🌟 **ULTIME**
-
-Inflige ×4.5 dégâts magiques en ignorant toute la Déf.Mag.
-
-- **Coût :** 80 🔵 Mana · Temps de recharge : **7 tours**
-
-
+> À 100% de PV : +50% de dégâts magiques. À 50% de PV : +25%. À 0 PV : +0%.
 
 ---
 
-## 💡 Conseils de jeu
+## Ressource — Mana
 
-- Plus tu as de HP, plus tes dégâts magiques sont élevés — reste en pleine santé.
+Le Mana se régénère de **+15 par tour**. Il est plafonné à **100**.
 
-- **Nova Primordiale** ignore toute la défense magique — garde-la pour les boss.
+---
 
-- **Soif Arcane** te permet de régénérer du Mana tout en attaquant.
+## Sorts
+
+=== "⚡ Soif Arcane"
+    **Coût :** 15 Mana — **Temps de recharge :** aucun
+
+    Inflige **×1.2 dégâts magiques** et récupère **20 mana supplémentaire**.
+
+=== "🔵 Écran Magique"
+    **Coût :** 25 Mana — **Temps de recharge :** 3 tours
+
+    Inflige **×1.4 dégâts magiques** et réduit les dégâts subis de **25% pendant 2 tours**.
+
+=== "☄️ Nova Primordiale (Ultime)"
+    **Coût :** 80 Mana — **Temps de recharge :** 7 tours
+
+    Inflige **×3.5 dégâts magiques** en ignorant **toute la Déf. Mag.** ennemie.
+
+---
+
+## Conseils
+
+- Reste en bonne santé pour conserver le bonus passif — utilise des consommables avant les gros combats.
+- **Soif Arcane** récupère du Mana en plus des dégâts, ce qui accélère l'accumulation vers l'ultime.
+- **Écran Magique** combine attaque et réduction de dégâts — idéal pour survivre tout en attaquant.
+- **Nova Primordiale** ignore toute la défense magique ennemie — parfaite contre les ennemis très résistants magiquement.

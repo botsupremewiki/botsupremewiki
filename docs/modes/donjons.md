@@ -1,110 +1,179 @@
-# 🏰 Donjons
+# 🏰 Les Donjons
 
-Les donjons te permettent d'obtenir des **équipements puissants** en battant des boss spécialisés.
-
-Il existe **7 boss de donjon**, chacun lié à un **slot d'équipement** spécifique.
-
+Les Donjons sont des défis en solo avec des **ennemis et boss plus puissants que dans le Monde**, mais qui offrent de bien meilleures récompenses. Il existe **3 niveaux de difficulté**.
 
 ---
 
+## Les 3 types de donjons
 
-## ⚡ Niveaux de difficulté
-
-
-| Difficulté | Énergie ⚡ | Niveaux | Équipement | Difficulté |
-|------------|----------:|---------|-----------|-----------|
-| ⚔️ Classique | 3 | 1 – 100 | Source Classique ⭐⭐ | ⭐⭐☆☆☆ |
-| 🔥 Élite | 5 | 1 – 100 | Source Élite ⭐⭐⭐ | ⭐⭐⭐☆☆ |
-| 💀 Abyssal | 10 | 1 – 100 | Source Abyssale ⭐⭐⭐⭐ | ⭐⭐⭐⭐☆ |
-
-
-**Sorts disponibles par difficulté :**
-
-- **Classique** : le boss utilise uniquement son Sort 1
-
-- **Élite** : le boss utilise Sort 1 et Sort 2
-
-- **Abyssal** : le boss utilise Sort 1, Sort 2 et son **Ultime**
-
-
+| Type | Coût | Difficulté | Récompenses |
+|------|------|------------|-------------|
+| **Classique** | 3 énergie | ⭐ Accessible | Bonnes récompenses |
+| **Élite** | 5 énergie | ⭐⭐⭐ Difficile | Très bonnes récompenses |
+| **Abyssal** | 10 énergie | ⭐⭐⭐⭐⭐ Extrême | Récompenses d'exception |
 
 ---
 
+## Structure d'un donjon
 
-## 🐲 Les 7 Boss de Donjon
+Chaque donjon se compose de **plusieurs salles** avec des ennemis, et se termine par un **boss final**. Le combat se fait au tour par tour — tu joues activement chaque attaque et peux utiliser tes sorts.
 
-Chaque boss est spécialisé dans un slot d'équipement et possède un **passif unique**.
-
-
-### 🪖 Gardien des Crânes — Slot : Casque
-
-**Stat boostée :** +50% Défense Physique
-
-**Passif :** Protection Céphalique : réduit les dégâts critiques reçus de 20%.
-
-
-### 🛡️ Titan Cuirassé — Slot : Plastron
-
-**Stat boostée :** +50% HP
-
-**Passif :** Endurance Absolue : récupère 3% de ses HP max au début de chaque tour.
-
-
-### 🌪️ Danseur de Guerre — Slot : Pantalon
-
-**Stat boostée :** +50% Vitesse
-
-**Passif :** Esquive Naturelle : 10% de chance d'éviter complètement une attaque.
-
-
-### ⚡ Spectre Fulgurant — Slot : Chaussures
-
-**Stat boostée :** +50% Vitesse
-
-**Passif :** Foulée Redoublée : 20% de chance d'attaquer deux fois lors de son tour.
-
-
-### ⚔️ Lame Dévastatrice — Slot : Arme
-
-**Stat boostée :** +50% Attaque Physique
-
-**Passif :** Tranchant Absolu : ignore 20% de ta Défense Physique et 20% de ta Défense Magique.
-
-
-### 📿 Mystique Absolu — Slot : Amulette
-
-**Stat boostée :** +50% Attaque Magique
-
-**Passif :** Renvoi Mystique : renvoie 8% des dégâts reçus sous forme de dégâts purs (avant défense).
-
-
-### 💍 Catalyseur Éternel — Slot : Anneau
-
-**Stat boostée :** +50% Chance Critique
-
-**Passif :** Empowerment Runique : gagne +2.5% dégâts par tour (cumulé, max 10 fois, +25% au maximum).
-
-
+Si tu perds un combat dans le donjon, tu es éjecté et dois recommencer depuis le début (le coût en énergie est prélevé à l'entrée, pas à la victoire).
 
 ---
 
+## Spécificités générales des boss de donjon
 
-## 📈 Stats des boss selon le niveau
+Les boss de donjon ont **trois paramètres qui se cumulent** :
 
-Les stats du boss augmentent avec le niveau de donjon (1 à 100).
+### 1. La difficulté — multiplicateur global de stats
 
+| Difficulté | Mult. stats | Sorts disponibles | Zone équivalente |
+|---|:---:|---|---|
+| Classique | ×1,2 | Sort 1 uniquement | Niveau × 33 |
+| Élite | ×1,4 | Sorts 1 et 2 | 3 333 + Niveau × 33 |
+| Abyssal | ×1,6 | Sorts 1, 2 et Ultime | 6 666 + Niveau × 33 |
 
-| Niv. Donjon | Zone équiv. | ❤️ HP (Classique) | ❤️ HP (Élite) | ❤️ HP (Abyssal) | Niveau joueur recommandé |
-|------------:|------------:|------------------:|-------------:|----------------:|------------------------:|
-| 1 | 33 | 535 | 89,656 | 340,521 | 3 |
-| 10 | 330 | 3,734 | 101,305 | 365,186 | 33 |
-| 25 | 825 | 9,968 | 122,076 | 408,103 | 82 |
-| 50 | 1,650 | 22,873 | 160,461 | 484,656 | 165 |
-| 75 | 2,475 | 38,917 | 203,556 | 567,492 | 247 |
-| 100 | 3,300 | 58,100 | 251,362 | 656,606 | 330 |
+Le multiplicateur de difficulté s'applique à **toutes** les stats (HP, attaque, défense, vitesse, critique...).
+
+### 2. La classe — rotation par niveau
+
+La **classe** du boss est déterminée par le **niveau du donjon** : niveau 1 = Guerrier, niveau 2 = Assassin, ..., niveau 11 = Guerrier à nouveau. La classe influence les stats de base et les sorts utilisés en combat.
+
+### 3. La stat signature — boost selon la difficulté
+
+Chaque boss a une **stat signature** amplifiée une seconde fois par le multiplicateur de difficulté (×1,2 / ×1,4 / ×1,6). C'est sa vraie menace spécifique, indépendante de sa classe ou son niveau.
 
 ---
 
+## Les 7 boss de donjon
 
-!!! tip "Simulateur d'ennemis"
-    Utilise le [Simulateur d'Ennemis](../combat/ennemis.md) pour calculer les stats exactes d'un boss de donjon.
+Chaque boss est fixe et drop un **slot d'équipement spécifique**.
+
+=== "🪖 Gardien des Crânes"
+
+    **Slot droppé :** Casque | **Stat signature :** Défense Physique (×diff)
+
+    **Passif — Protection Céphalique :**
+    > Réduit les dégâts critiques reçus de **20%**.
+
+    Ses grandes défenses physiques le rendent résistant aux dégâts physiques. Préfère les attaques magiques ou les sorts à pénétration élevée. Son passif réduit l'efficacité des classes orientées critiques (Assassin, Tireur).
+
+=== "🛡️ Titan Cuirassé"
+
+    **Slot droppé :** Plastron | **Stat signature :** Points de Vie (×diff)
+
+    **Passif — Endurance Absolue :**
+    > Récupère **3% de ses HP max** au début de chaque tour.
+
+    Test d'endurance pure. Ses HP boostés combinés à sa régénération massive en font un adversaire très long à tuer. Plus le combat dure, plus il récupère — utilise tes sorts les plus puissants dès les premiers tours pour ne pas le laisser s'installer.
+
+=== "🌪️ Danseur de Guerre"
+
+    **Slot droppé :** Pantalon | **Stat signature :** Vitesse (×diff)
+
+    **Passif — Esquive Naturelle :**
+    > **10% de chance** d'éviter complètement une attaque.
+
+    Sa vitesse boostée lui permet d'attaquer souvent en premier. Les esquives peuvent faire rater des sorts — les dégâts purs et les DoT (poison, brûlure) ne peuvent pas être esquivés et contournent ce passif.
+
+=== "⚡ Spectre Fulgurant"
+
+    **Slot droppé :** Chaussures | **Stat signature :** Vitesse (×diff)
+
+    **Passif — Foulée Redoublée :**
+    > **20% de chance** d'attaquer deux fois lors de son tour.
+
+    Le plus dangereux en burst. Sa double attaque combinée à sa vitesse élevée peut te submerger rapidement. Une bonne défense physique est essentielle — un bouclier (Support ou Paladin) peut faire la différence en Abyssal.
+
+=== "⚔️ Lame Dévastatrice"
+
+    **Slot droppé :** Arme | **Stat signature :** Attaque Physique (×diff)
+
+    **Passif — Tranchant Absolu :**
+    > Ignore **20% de ta Défense Physique et 20% de ta Défense Magique**.
+
+    Pénètre tes deux types de défense simultanément — stacker uniquement un type ne suffit pas. En Abyssal, il utilise son Ultime. Montage hybride recommandé, ou maximiser les HP bruts plutôt que les défenses.
+
+=== "📿 Mystique Absolu"
+
+    **Slot droppé :** Amulette | **Stat signature :** Attaque Magique (×diff)
+
+    **Passif — Renvoi Mystique :**
+    > Renvoie **8% des dégâts reçus** sous forme de **dégâts purs** (ignorent toute défense).
+
+    Plus tu frappes fort, plus tu te blesses. Les gros bursts sont risqués — étale tes dégâts sur plusieurs tours. Les DoT (poison, brûlure) et les sorts défensifs contournent le renvoi. Le renvoi est calculé sur les dégâts bruts avant réduction.
+
+=== "💍 Catalyseur Éternel"
+
+    **Slot droppé :** Anneau | **Stat signature :** Chance de Critique (×diff)
+
+    **Passif — Empowerment Runique :**
+    > Gagne **+2,5% dégâts par tour**, cumulé jusqu'à **+25% au tour 10** (maximum).
+
+    Le plus dangereux sur la durée. À partir du tour 10 il inflige 25% de dégâts supplémentaires en permanence. Priorité absolue : finir le combat vite. Garde tes sorts les plus puissants pour les premiers tours.
+
+---
+
+## Les récompenses
+
+En battant le boss final d'un donjon, tu reçois :
+- De l'**or**
+- De l'**expérience**
+- Des **équipements** de la rareté correspondant au niveau du donjon
+- Une chance d'obtenir une pièce de **panoplie Donjon**
+
+Les équipements obtenus dans les donjons sont plus puissants que ceux du Monde :
+- **Donjon Classique** → panoplie Classique (×1,4 par rapport au Monde)
+- **Donjon Élite** → panoplie Élite (×2,2 par rapport au Monde)
+- **Donjon Abyssal** → panoplie Abyssale (×3,0 par rapport au Monde)
+
+---
+
+## Conseils
+
+- Prépare-toi bien avant d'entrer : consomme tes **runes** et **nourritures** si nécessaire
+- Garde tes meilleurs **sorts** (ultime notamment) pour le boss final
+- En Donjon Abyssal, le moindre faux pas peut être fatal — connais bien ta classe
+- Si tu enchaînes les défaites, reviens à un donjon inférieur et améliore ton équipement
+
+---
+
+## 🔍 Simulateur d'ennemi
+
+Sélectionne un boss, une difficulté et un niveau pour voir ses statistiques exactes.
+
+> Les stats sont calculées avec la même formule que le jeu.
+
+<div id="enemy-calculator">
+
+  <div id="ec-ctrl-donjon" class="ec-controls">
+    <div class="ec-row">
+      <label class="ec-label">Boss</label>
+      <select id="ec-donjon-boss" class="ec-select">
+        <option value="d_casque">🪖 Gardien des Crânes (★ Déf. Physique)</option>
+        <option value="d_plastron">🛡️ Titan Cuirassé (★ HP)</option>
+        <option value="d_pantalon">🌪️ Danseur de Guerre (★ Vitesse)</option>
+        <option value="d_chaussures">⚡ Spectre Fulgurant (★ Vitesse)</option>
+        <option value="d_arme">⚔️ Lame Dévastatrice (★ Att. Physique)</option>
+        <option value="d_amulette">📿 Mystique Absolu (★ Att. Magique)</option>
+        <option value="d_anneau">💍 Catalyseur Éternel (★ Critique)</option>
+      </select>
+    </div>
+    <div class="ec-row">
+      <label class="ec-label">Difficulté</label>
+      <div class="ec-radio-group">
+        <label><input type="radio" name="ec-diff" value="classique" checked /> Classique</label>
+        <label><input type="radio" name="ec-diff" value="elite" /> Élite</label>
+        <label><input type="radio" name="ec-diff" value="abyssal" /> Abyssal</label>
+      </div>
+    </div>
+    <div class="ec-row">
+      <label class="ec-label">Niveau <strong id="ec-donjon-level-val">1</strong> <span class="ec-hint">/ 100</span></label>
+      <input type="range" id="ec-donjon-level" class="ec-range" min="1" max="100" value="1" />
+    </div>
+  </div>
+
+  <div id="ec-result" style="display:none"></div>
+
+</div>

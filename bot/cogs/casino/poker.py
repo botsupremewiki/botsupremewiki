@@ -8,8 +8,16 @@ from collections import Counter
 from functools import cmp_to_key
 from .core import (
     load_casino, save_casino, get_balance, add_balance,
+    get_seated_game, set_seated_game,
     POKER_CHANNEL_ID
 )
+
+def _seated_game_label(game: str) -> str:
+    if not game: return game
+    if game.startswith("slots_"): return f"🎰 Machine à Sous #{game.split('_')[1]}"
+    if game.startswith("poker_"): return f"♠️ Poker — Table {game.split('_', 1)[1]}"
+    labels = {"roulette": "🎡 Roulette", "blackjack": "🃏 Blackjack"}
+    return labels.get(game, game)
 
 # ═══════════════════════════════════════════════════════════
 #  CONSTANTS
@@ -149,7 +157,8 @@ class PlayerState:
 #  POKER ENGINE
 # ═══════════════════════════════════════════════════════════
 class PokerEngine:
-    def __init__(self, bot, channel, table_name: str, big_blind: int, buy_in: int, cog: 'PokerCog'):
+    def __init__(self, bot, channel, table_name: str, big_blind: int, buy_in: int,
+                 cog: 'PokerCog', creator_id: int = 0):
         self.bot              = bot
         self.channel          = channel
         self.table_name       = table_name
@@ -157,10 +166,11 @@ class PokerEngine:
         self.initial_big_blind= big_blind
         self.buy_in           = buy_in
         self.cog              = cog
+        self.creator_id       = creator_id
 
-        self.players          = []   # [PlayerState]
-        self.waitlist_join    = []   # [discord.Member]
-        self.waitlist_leave   = []   # [discord.Member]
+        self.players          = []
+        self.waitlist_join    = []
+        self.waitlist_leave   = []
 
         self.dealer_idx       = 0
         self.current_turn_idx = -1
@@ -238,12 +248,31 @@ class PokerEngine:
         hidden  = ["🎴"] * (5 - len(visible))
         return " ".join(visible + hidden)
 
+    # ── Cleanup ───────────────────────────────────────────────────────
+    async def _cleanup_if_empty(self):
+        """Supprime le message de table et retire l'engine si la table est vide en WAITING."""
+        if self.players or self.waitlist_join or self.state != "WAITING":
+            return
+        if not self.is_running:
+            return
+        self.is_running = False
+        if self.turn_task:
+            self.turn_task.cancel()
+        if self.message_id:
+            try:
+                msg = await self.channel.fetch_message(self.message_id)
+                await msg.delete()
+            except Exception:
+                pass
+        self.cog.tiers.pop(self.table_name, None)
+
     # ── Hand flow ─────────────────────────────────────────────────────
     async def start_hand(self):
         if not self.is_running:
             return
 
         # Process departures
+        leave_uids = []
         for member in self.waitlist_leave:
             for p in self.players:
                 if p.member.id == member.id and p.chips > 0:
@@ -251,8 +280,13 @@ class PokerEngine:
                     break
             self.players = [p for p in self.players if p.member.id != member.id]
             self.cog.active_players.discard(member.id)
+            leave_uids.append(str(member.id))
         if self.waitlist_leave:
             self._trigger_leaderboard()
+            data_l = load_casino()
+            for uid in leave_uids:
+                set_seated_game(uid, None, data_l)
+            save_casino(data_l)
         self.waitlist_leave = []
 
         # Process arrivals
@@ -264,6 +298,7 @@ class PokerEngine:
         if len(self.players) < 2:
             self.state = "WAITING"
             await self.update_ui("⏸️ **En attente de joueurs...**\nIl faut au moins **2 joueurs** pour commencer.")
+            await self._cleanup_if_empty()
             return
 
         # Blind escalation every 8 hands
@@ -453,7 +488,7 @@ class PokerEngine:
 
             unfolded = self.get_unfolded()
             pot_to_distribute = self.pot
-            self.pot = 0 # Reset early to prevent race conditions during sleeps
+            self.pot = 0
 
             if len(unfolded) == 1:
                 winner = unfolded[0]
@@ -475,7 +510,6 @@ class PokerEngine:
                     reverse=True
                 )
 
-                # Build tiers (ex-aequo)
                 tiers = []
                 if sorted_players:
                     tier = [sorted_players[0]]
@@ -487,7 +521,6 @@ class PokerEngine:
                             tier = [p]
                     tiers.append(tier)
 
-                # Distribute with side-pots
                 win_messages = []
                 contributors = list(self.players)
                 for tier in tiers:
@@ -530,32 +563,44 @@ class PokerEngine:
 
             # Eliminate broke players
             broke = [p for p in self.players if p.chips <= 0]
-            for p in broke:
-                self.cog.active_players.discard(p.member.id)
-                try:
-                    await self.channel.send(f"💀 **{p.member.display_name}** est éliminé(e) (plus de chips) !")
-                except Exception:
-                    pass
+            if broke:
+                data_b = load_casino()
+                for p in broke:
+                    self.cog.active_players.discard(p.member.id)
+                    set_seated_game(str(p.member.id), None, data_b)
+                    try:
+                        await self.channel.send(f"💀 **{p.member.display_name}** est éliminé(e) (plus de chips) !")
+                    except Exception:
+                        pass
+                save_casino(data_b)
             self.players = [p for p in self.players if p.chips > 0]
 
             if not self.players:
-                self.hand_count = 0 
+                self.hand_count = 0
                 self.state = "WAITING"
                 self.dealer_idx = 0
+                self.processing_end = False
+                await self._cleanup_if_empty()
             else:
                 self.dealer_idx = (self.dealer_idx + 1) % len(self.players)
-
-            self.processing_end = False
-            await self.start_hand()
+                self.processing_end = False
+                await self.start_hand()
 
     # ── Join helper ───────────────────────────────────────────────────
     async def join_player(self, interaction: discord.Interaction):
-        """Vérifie les conditions et ajoute le joueur à la waitlist. Répond à l'interaction."""
+        uid = str(interaction.user.id)
         if any(p.member.id == interaction.user.id for p in self.players) or \
            any(m.id == interaction.user.id for m in self.waitlist_join):
             return await interaction.response.send_message("❌ Tu es déjà à cette table.", ephemeral=True)
         if interaction.user.id in self.cog.active_players:
-            return await interaction.response.send_message("❌ Tu es déjà actif sur une autre table.", ephemeral=True)
+            return await interaction.response.send_message("❌ Tu es déjà actif sur une autre table de poker.", ephemeral=True)
+        data = load_casino()
+        seated_game = get_seated_game(uid, data)
+        if seated_game and not seated_game.startswith(f"poker_{self.table_name.lower()}"):
+            label = _seated_game_label(seated_game)
+            return await interaction.response.send_message(
+                f"❌ Tu es déjà assis(e) à **{label}**. Lève-toi d'abord !", ephemeral=True
+            )
         if get_balance(interaction.user.id) < self.buy_in:
             return await interaction.response.send_message(
                 f"❌ Il te faut **{self.buy_in:,}** jetons pour rejoindre cette table.", ephemeral=True
@@ -563,6 +608,8 @@ class PokerEngine:
         add_balance(interaction.user.id, -self.buy_in, username=interaction.user.display_name)
         self.waitlist_join.append(interaction.user)
         self.cog.active_players.add(interaction.user.id)
+        set_seated_game(uid, f"poker_{self.table_name.lower()}", data)
+        save_casino(data)
         self._trigger_leaderboard()
         await interaction.response.send_message(
             f"✅ Tu rejoindras **Table {self.table_name}** à la prochaine main avec **{self.buy_in:,}** jetons.",
@@ -592,7 +639,6 @@ class PokerEngine:
             color=color
         )
 
-        # Table info
         sb = self.big_blind // 2
         embed.add_field(
             name="🏦 Table",
@@ -604,17 +650,14 @@ class PokerEngine:
             inline=False
         )
 
-        # Board
         board_str = self._board_display() if self.state != "WAITING" else "*(La partie n'a pas encore commencé)*"
         embed.add_field(name="🃏 Cartes Communes", value=board_str, inline=False)
 
-        # Pot / current bet
         if self.state != "WAITING":
             embed.add_field(name="💰 Pot", value=f"**{self.pot:,}** jetons", inline=True)
         if self.state not in ("WAITING", "SHOWDOWN") and self.current_bet > 0:
             embed.add_field(name="📊 Mise Courante", value=f"**{self.current_bet}**", inline=True)
 
-        # Players
         if self.players:
             n      = len(self.players)
             lines  = []
@@ -637,28 +680,28 @@ class PokerEngine:
                 lines.append(f"{p.member.mention}{tag_str} — **{p.chips:,}** 🪙 | {st}")
             embed.add_field(name="👥 Joueurs", value="\n".join(lines), inline=False)
 
-        # Waiting list
         if self.waitlist_join:
             names = ", ".join(m.display_name for m in self.waitlist_join)
             embed.add_field(name="⏳ En attente de la prochaine main", value=names, inline=False)
 
-        # Choose view
         if self.state not in ("WAITING", "SHOWDOWN"):
             view = PokerActionView(self)
         else:
             view = PokerLobbyView(self)
 
-        casino = self.bot.get_cog("Casino")
-        if casino:
-            msg = await casino.upsert_panel_message(
-                f"poker_{self.table_name.lower()}", embed=embed, view=view
-            )
-            if msg:
-                self.message_id = msg.id
+        if self.message_id:
+            try:
+                channel_msg = await self.channel.fetch_message(self.message_id)
+                await channel_msg.edit(embed=embed, view=view)
+                return
+            except Exception:
+                self.message_id = None
+        msg = await self.channel.send(embed=embed, view=view)
+        self.message_id = msg.id
 
 
 # ═══════════════════════════════════════════════════════════
-#  ACTION VIEW  (in-game: Fold / Check / Call / Raise / All-In / Voir Cartes)
+#  ACTION VIEW
 # ═══════════════════════════════════════════════════════════
 class PokerActionView(discord.ui.View):
     def __init__(self, engine: PokerEngine):
@@ -675,7 +718,6 @@ class PokerActionView(discord.ui.View):
                      and cp.chips > (engine.current_bet - cp.bet_in_round))
         can_raise = cp is not None and cp.chips > 0
 
-        # Row 0 — main actions
         btn_fold = discord.ui.Button(
             label="Se Coucher", style=discord.ButtonStyle.danger,
             custom_id=f"pk_fold_{engine.table_name}", emoji="❌", row=0
@@ -715,7 +757,6 @@ class PokerActionView(discord.ui.View):
         btn_allin.callback = self._btn_allin
         self.add_item(btn_allin)
 
-        # Row 1 — utility
         btn_view = discord.ui.Button(
             label="👀 Voir mes Cartes", style=discord.ButtonStyle.secondary,
             custom_id=f"pk_view_{engine.table_name}", row=1
@@ -741,28 +782,22 @@ class PokerActionView(discord.ui.View):
         ok, err = await self.engine.process_action(interaction.user, "fold")
         if not ok: await interaction.response.send_message(err, ephemeral=True)
         else:
-            try:
-                await interaction.response.defer()
-            except discord.errors.NotFound:
-                pass
+            try: await interaction.response.defer()
+            except discord.errors.NotFound: pass
 
     async def _btn_check(self, interaction: discord.Interaction):
         ok, err = await self.engine.process_action(interaction.user, "check")
         if not ok: await interaction.response.send_message(err, ephemeral=True)
         else:
-            try:
-                await interaction.response.defer()
-            except discord.errors.NotFound:
-                pass
+            try: await interaction.response.defer()
+            except discord.errors.NotFound: pass
 
     async def _btn_call(self, interaction: discord.Interaction):
         ok, err = await self.engine.process_action(interaction.user, "call")
         if not ok: await interaction.response.send_message(err, ephemeral=True)
         else:
-            try:
-                await interaction.response.defer()
-            except discord.errors.NotFound:
-                pass
+            try: await interaction.response.defer()
+            except discord.errors.NotFound: pass
 
     async def _btn_raise(self, interaction: discord.Interaction):
         if 0 <= self.engine.current_turn_idx < len(self.engine.players):
@@ -774,10 +809,8 @@ class PokerActionView(discord.ui.View):
         ok, err = await self.engine.process_action(interaction.user, "all_in")
         if not ok: await interaction.response.send_message(err, ephemeral=True)
         else:
-            try:
-                await interaction.response.defer()
-            except discord.errors.NotFound:
-                pass
+            try: await interaction.response.defer()
+            except discord.errors.NotFound: pass
 
     async def _btn_view_cards(self, interaction: discord.Interaction):
         for p in self.engine.players:
@@ -837,7 +870,7 @@ class PokerRaiseModal(discord.ui.Modal, title="Relancer"):
 
 
 # ═══════════════════════════════════════════════════════════
-#  LOBBY VIEW  (waiting room: S'asseoir / Se lever)
+#  LOBBY VIEW
 # ═══════════════════════════════════════════════════════════
 class PokerLobbyView(discord.ui.View):
     def __init__(self, engine: PokerEngine):
@@ -851,31 +884,41 @@ class PokerLobbyView(discord.ui.View):
     @discord.ui.button(label="Lancer la table", style=discord.ButtonStyle.primary, emoji="🚀")
     async def start_manual(self, interaction: discord.Interaction, button: discord.ui.Button):
         engine = self.engine
+        if interaction.user.id != engine.creator_id:
+            return await interaction.response.send_message(
+                "❌ Seul le **créateur de la table** peut lancer la partie.", ephemeral=True
+            )
         async with engine.lock:
             if engine.state != "WAITING":
                 return await interaction.response.send_message("❌ La table est déjà lancée.", ephemeral=True)
-            
             total_p = len(engine.players) + len(engine.waitlist_join)
             if total_p < 2:
-                return await interaction.response.send_message("❌ Il faut au moins **2 joueurs** pour lancer la table.", ephemeral=True)
-            
+                return await interaction.response.send_message(
+                    "❌ Il faut au moins **2 joueurs** pour lancer la table.", ephemeral=True
+                )
             await interaction.response.send_message("🚀 Lancement de la table...", ephemeral=True)
             await engine.start_hand()
 
     @discord.ui.button(label="Se lever", style=discord.ButtonStyle.danger, emoji="🚪")
     async def leave(self, interaction: discord.Interaction, button: discord.ui.Button):
         engine = self.engine
+        uid = str(interaction.user.id)
 
-        # In waitlist only (not yet playing)
+        # In waitlist only
         if any(m.id == interaction.user.id for m in engine.waitlist_join) and \
            not any(p.member.id == interaction.user.id for p in engine.players):
             engine.waitlist_join = [m for m in engine.waitlist_join if m.id != interaction.user.id]
             engine.cog.active_players.discard(interaction.user.id)
             add_balance(interaction.user.id, engine.buy_in, username=interaction.user.display_name)
             engine._trigger_leaderboard()
-            return await interaction.response.send_message(
+            data_l = load_casino()
+            set_seated_game(uid, None, data_l)
+            save_casino(data_l)
+            await interaction.response.send_message(
                 f"👋 Tu as quitté la liste d'attente. **{engine.buy_in:,}** jetons remboursés.", ephemeral=True
             )
+            await engine._cleanup_if_empty()
+            return
 
         # Currently playing
         if any(p.member.id == interaction.user.id for p in engine.players):
@@ -886,7 +929,7 @@ class PokerLobbyView(discord.ui.View):
                     "👋 Tu quitteras la table à la **fin de la manche**. Tes jetons te seront restitués.",
                     ephemeral=True
                 )
-            # State is WAITING → leave immediately
+            # WAITING → leave immediately
             for p in engine.players:
                 if p.member.id == interaction.user.id and p.chips > 0:
                     add_balance(interaction.user.id, p.chips, username=interaction.user.display_name)
@@ -894,11 +937,105 @@ class PokerLobbyView(discord.ui.View):
             engine.players = [p for p in engine.players if p.member.id != interaction.user.id]
             engine.cog.active_players.discard(interaction.user.id)
             engine._trigger_leaderboard()
+            data_l = load_casino()
+            set_seated_game(uid, None, data_l)
+            save_casino(data_l)
             await interaction.response.send_message("👋 Tu as quitté la table.", ephemeral=True)
-            await engine.update_ui()
+            await engine._cleanup_if_empty()
+            if engine.is_running:
+                await engine.update_ui()
             return
 
         await interaction.response.send_message("❌ Tu n'es pas à cette table.", ephemeral=True)
+
+
+# ═══════════════════════════════════════════════════════════
+#  HUB VIEW (persistant)
+# ═══════════════════════════════════════════════════════════
+class PokerHubView(discord.ui.View):
+    def __init__(self):
+        super().__init__(timeout=None)
+
+    @discord.ui.button(
+        label="🃏 Créer une table",
+        style=discord.ButtonStyle.success,
+        custom_id="poker_hub_create_table"
+    )
+    async def create_table(self, interaction: discord.Interaction, button: discord.ui.Button):
+        await interaction.response.send_modal(PokerCreateModal())
+
+
+# ═══════════════════════════════════════════════════════════
+#  CREATE TABLE MODAL
+# ═══════════════════════════════════════════════════════════
+class PokerCreateModal(discord.ui.Modal, title="Créer une table de Poker"):
+    buy_in_input = discord.ui.TextInput(
+        label="Buy-in (jetons pour s'asseoir)",
+        placeholder="ex: 5000",
+        required=True,
+        max_length=10,
+    )
+    bb_input = discord.ui.TextInput(
+        label="Big Blind",
+        placeholder="ex: 100  (Small Blind = moitié de la Big Blind)",
+        required=True,
+        max_length=8,
+    )
+
+    async def on_submit(self, interaction: discord.Interaction):
+        try:
+            buy_in    = int(self.buy_in_input.value.strip().replace(" ", "").replace(",", ""))
+            big_blind = int(self.bb_input.value.strip().replace(" ", "").replace(",", ""))
+        except ValueError:
+            return await interaction.response.send_message(
+                "❌ Valeurs invalides — entre des nombres entiers.", ephemeral=True
+            )
+
+        if big_blind < 2:
+            return await interaction.response.send_message(
+                "❌ La Big Blind doit être d'au moins **2**.", ephemeral=True
+            )
+        if buy_in < big_blind * 2:
+            return await interaction.response.send_message(
+                f"❌ Le buy-in doit être au moins 2× la Big Blind (**{big_blind * 2:,}** minimum).",
+                ephemeral=True
+            )
+
+        cog: PokerCog = interaction.client.get_cog("PokerCog")
+        if not cog:
+            return await interaction.response.send_message("❌ Erreur interne.", ephemeral=True)
+
+        if any(e.creator_id == interaction.user.id for e in cog.tiers.values()):
+            return await interaction.response.send_message(
+                "❌ Tu as déjà une table en cours.", ephemeral=True
+            )
+        if interaction.user.id in cog.active_players:
+            return await interaction.response.send_message(
+                "❌ Tu es déjà assis(e) à une table de poker.", ephemeral=True
+            )
+
+        table_name = f"de {interaction.user.display_name}"
+        if table_name in cog.tiers:
+            table_name = f"de {interaction.user.display_name}#{interaction.user.id % 10000}"
+
+        await interaction.response.defer(ephemeral=True)
+
+        engine = PokerEngine(
+            bot=interaction.client,
+            channel=interaction.channel,
+            table_name=table_name,
+            big_blind=big_blind,
+            buy_in=buy_in,
+            cog=cog,
+            creator_id=interaction.user.id,
+        )
+        cog.tiers[table_name] = engine
+        await engine.update_ui("⏸️ **En attente de joueurs...**\nClique sur **S'asseoir** pour rejoindre !")
+        await interaction.followup.send(
+            f"✅ Ta **Table {table_name}** a été créée !\n"
+            f"Buy-in : **{buy_in:,}** 🪙 | BB : **{big_blind:,}** | SB : **{big_blind // 2:,}**",
+            ephemeral=True
+        )
 
 
 # ═══════════════════════════════════════════════════════════
@@ -907,10 +1044,17 @@ class PokerLobbyView(discord.ui.View):
 class PokerCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot            = bot
-        self.tiers          = {}   # {name: PokerEngine}
+        self.tiers          : dict[str, PokerEngine] = {}
         self.active_players : set = set()
 
     async def cog_load(self):
+        data = load_casino()
+        stale = [uid for uid, g in data.get("seated", {}).items() if g and g.startswith("poker_")]
+        for uid in stale:
+            data["seated"].pop(uid, None)
+        if stale:
+            save_casino(data)
+        self.bot.add_view(PokerHubView())
         self.setup_task.start()
 
     @tasks.loop(count=1)
@@ -920,15 +1064,64 @@ class PokerCog(commands.Cog):
         if not channel:
             return
 
-        self.tiers = {
-            "Débutant":      PokerEngine(self.bot, channel, "Débutant",      10,   1_000,   self),
-            "Intermédiaire": PokerEngine(self.bot, channel, "Intermédiaire", 50,   5_000,   self),
-            "Expert":        PokerEngine(self.bot, channel, "Expert",        100,  10_000,  self),
-            "Des Légendes":  PokerEngine(self.bot, channel, "Des Légendes",  1000, 100_000, self),
-        }
+        # Supprimer les anciens messages des 4 tables fixes
+        data = load_casino()
+        old_keys = [k for k in data.get("messages", {}) if k.startswith("poker_") and k != "poker_hub"]
+        for k in old_keys:
+            try:
+                msg = await channel.fetch_message(int(data["messages"][k]))
+                await msg.delete()
+            except Exception:
+                pass
+            data["messages"].pop(k, None)
+        if old_keys:
+            save_casino(data)
 
-        for engine in self.tiers.values():
-            await engine.update_ui("⏸️ **En attente de joueurs...**\nClique sur **S'asseoir** pour rejoindre !")
+        self.bot._startup_queue.put_nowait(self._upsert_hub)
+
+    @setup_task.before_loop
+    async def before_setup(self):
+        await self.bot.wait_until_ready()
+
+    async def _upsert_hub(self, data: dict | None = None):
+        channel = self.bot.get_channel(POKER_CHANNEL_ID)
+        if not channel:
+            return
+        if data is None:
+            data = load_casino()
+
+        embed = discord.Embed(
+            title="♠️  SALLE DE POKER — Texas Hold'em",
+            description=(
+                "Bienvenue au **Poker Texas Hold'em** !\n\n"
+                "**Comment ça marche :**\n"
+                "• Crée ta propre table en définissant le **buy-in** et la **Big Blind**\n"
+                "• Les autres joueurs rejoignent ta table avec le buy-in défini\n"
+                "• Toi seul peux **lancer la partie** quand tu es prêt\n"
+                "• La table se supprime automatiquement quand tous les joueurs partent\n\n"
+                "**Règles :**\n"
+                "• Texas Hold'em — 2 cartes privées + 5 communes\n"
+                "• Actions : **Fold / Check / Call / Raise / All-In**\n"
+                "• 60 secondes pour jouer (sinon Check ou Fold automatique)\n"
+                "• Les blindes **doublent toutes les 8 mains** !\n"
+                "• *Small Blind = moitié de la Big Blind — Jetons uniquement*"
+            ),
+            color=discord.Color.dark_green(),
+        )
+        embed.set_footer(text="Crée une table pour commencer une partie avec tes amis")
+
+        view = PokerHubView()
+        msg_id = data.get("messages", {}).get("poker_hub")
+        if msg_id:
+            try:
+                msg = await channel.fetch_message(int(msg_id))
+                await msg.edit(embed=embed, view=view)
+                return
+            except Exception:
+                pass
+        msg = await channel.send(embed=embed, view=view)
+        data.setdefault("messages", {})["poker_hub"] = msg.id
+        save_casino(data)
 
 
 async def setup(bot: commands.Bot):

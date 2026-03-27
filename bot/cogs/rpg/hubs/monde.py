@@ -4,9 +4,12 @@ Canal : 1465432915612799109
 """
 from __future__ import annotations
 import asyncio
+import logging
 from datetime import datetime, timezone, timedelta
 import discord
 from discord.ext import commands
+
+logger = logging.getLogger(__name__)
 
 from bot.cogs.rpg import database as db
 from bot.cogs.rpg.models import (
@@ -27,6 +30,7 @@ from bot.cogs.rpg.core import check_all_titles, increment_and_check_title
 
 # Stock des états de combat actifs (non automatiques)
 _active_combats: dict[int, CombatState] = {}
+_combat_started_at: dict[int, float] = {}   # user_id → timestamp de début (pour cleanup)
 
 # ─── Constantes Farm ───────────────────────────────────────────────────────
 FARM_XP_MULT   = 0.10   # 10% XP
@@ -97,8 +101,13 @@ async def _build_combat_info(user_id: int, player: dict, zone: int, stage) -> tu
     _boss_type = ("boss_antique"      if _etype == "boss_antique"      else
                   "boss_emblematique" if _etype == "boss_emblematique" else
                   "boss_classique"    if "boss" in _etype              else "monster")
-    xp_reward   = combat_xp_reward(zone, _boss_type)
-    gold_reward  = combat_gold_reward(zone, _boss_type)
+    _title_bonuses = await db.get_title_bonuses(user_id)
+    _xp_pct   = _title_bonuses.get("xp_pct",   0)
+    _gold_pct = _title_bonuses.get("gold_pct", 0)
+    xp_reward  = round(combat_xp_reward(zone, _boss_type)   * (1 + _xp_pct   / 100))
+    gold_reward = round(combat_gold_reward(zone, _boss_type) * (1 + _gold_pct / 100))
+    _xp_sfx   = f" *(+{_xp_pct:.0f}% titre)*"   if _xp_pct   else ""
+    _gold_sfx = f" *(+{_gold_pct:.0f}% titre)*" if _gold_pct else ""
     energy_type  = {
         "boss_antique":      "boss_antique",
         "boss_emblematique": "boss_emblematique",
@@ -109,7 +118,7 @@ async def _build_combat_info(user_id: int, player: dict, zone: int, stage) -> tu
 
     embed.add_field(
         name="🎁 Récompenses",
-        value=f"✨ XP : **{xp_reward:,}** | 💰 Gold : **{gold_reward:,}** | ⚡ Énergie : **-{energy_cost}**",
+        value=f"✨ XP : **{xp_reward:,}**{_xp_sfx} | 💰 Gold : **{gold_reward:,}**{_gold_sfx} | ⚡ Énergie : **-{energy_cost}**",
         inline=False,
     )
     embed.add_field(name="⚡ Énergie actuelle", value=f"**{player.get('energy', 0)}/{player.get('max_energy', 2000)}**", inline=True)
@@ -190,11 +199,6 @@ class CombatView(discord.ui.View):
             await interaction.response.send_message("❌ Profil introuvable.", ephemeral=True)
             return
 
-        # Vérifier énergie
-        if player.get("in_combat", 0):
-            await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ou fuis ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
-            return
-
         energy_type = {
             "ennemi": "ennemi", "boss_classique": "boss_classique",
             "boss_runique": "boss_runique",
@@ -205,14 +209,21 @@ class CombatView(discord.ui.View):
             await interaction.response.send_message(f"❌ Pas assez d'énergie ! (besoin : **{cost}**, actuel : **{player.get('energy', 0)}**)", ephemeral=True)
             return
 
-        await db.update_player(self.user_id, energy=max(0, player.get("energy", 0) - cost), in_combat=1)
+        if not await db.try_start_combat(self.user_id):
+            await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ou fuis ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
+            return
+        await db.update_player(self.user_id, energy=max(0, player.get("energy", 0) - cost))
 
-        if self.is_manual:
-            # Combat manuel tour par tour
-            await _start_manual_combat(interaction, player, self.enemy)
-        else:
-            # Combat automatique (classique/boss classique) — édite le message éphémère
-            await _run_auto_combat(interaction, player, self.enemy)
+        try:
+            if self.is_manual:
+                # Combat manuel tour par tour
+                await _start_manual_combat(interaction, player, self.enemy)
+            else:
+                # Combat automatique (classique/boss classique) — édite le message éphémère
+                await _run_auto_combat(interaction, player, self.enemy)
+        except Exception:
+            await db.update_player(self.user_id, in_combat=0)
+            raise
 
     async def _auto_attaquer(self, interaction: discord.Interaction):
         if interaction.user.id != self.user_id:
@@ -222,10 +233,6 @@ class CombatView(discord.ui.View):
         player = await db.get_player(self.user_id)
         if not player:
             await interaction.response.send_message("❌ Profil introuvable.", ephemeral=True)
-            return
-
-        if player.get("in_combat", 0):
-            await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ou fuis ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
             return
 
         zone  = player.get("zone", 1)
@@ -247,7 +254,9 @@ class CombatView(discord.ui.View):
             )
             return
 
-        await db.update_player(self.user_id, in_combat=1)
+        if not await db.try_start_combat(self.user_id):
+            await interaction.response.send_message("⚔️ Tu es déjà en combat ! Termine ou fuis ton combat actuel avant d'en lancer un nouveau.", ephemeral=True)
+            return
         loop_view = AutoLoopView(self.user_id)
         embed = discord.Embed(
             title="🔄 Combat en Boucle",
@@ -255,7 +264,8 @@ class CombatView(discord.ui.View):
             color=0x607D8B,
         )
         await interaction.response.edit_message(embed=embed, view=loop_view)
-        asyncio.create_task(_run_auto_loop(interaction, loop_view))
+        task = asyncio.create_task(_run_auto_loop(interaction, loop_view))
+        task.add_done_callback(lambda t: t.exception() if not t.cancelled() and t.exception() else None)
 
     async def _open_farm(self, interaction: discord.Interaction):
         if interaction.user.id != self.user_id:
@@ -268,21 +278,21 @@ class CombatView(discord.ui.View):
 
     async def _loot_info(self, interaction: discord.Interaction):
         zone = self.enemy.get("zone", 1)
-        player = await db.get_player(self.user_id)
         prof = await db.get_professions(self.user_id)
         harvest_type  = prof.get("harvest_type") if prof else None
         harvest_level = prof.get("harvest_level", 0) if prof else 0
         tier_cap = min(10, harvest_level // 10 + 1)
         drop_table = get_material_drop_table(zone, harvest_type, harvest_level, tier_cap=tier_cap)
 
-        # Trier par chance décroissante et prendre les 20 premiers
-        drop_table.sort(key=lambda x: x["chance"], reverse=True)
-        top_drops = drop_table[:20]
+        title_bonuses = await db.get_title_bonuses(self.user_id)
+        loot_pct = title_bonuses.get("monde_loot_pct", 0)
+        loot_mult = 1 + loot_pct / 100
 
+        drop_table.sort(key=lambda x: x["chance"], reverse=True)
         lines = []
-        for drop in top_drops:
+        for drop in drop_table[:20]:
             mat_data = MATERIALS.get(drop["item_id"], {})
-            chance = drop["chance"]
+            chance = drop["chance"] * loot_mult
             if chance >= 100:
                 guaranteed = int(chance / 100)
                 extra = chance % 100
@@ -305,7 +315,10 @@ class CombatView(discord.ui.View):
             description="\n".join(lines),
             color=0xFF9800,
         )
-        embed.set_footer(text="×N +X% = N garantis + X% de chance d'un (N+1)ème | Loots indépendants.")
+        footer = "×N +X% = N garantis + X% de chance d'un (N+1)ème | Loots indépendants."
+        if loot_pct:
+            footer += f" | Bonus loot titre : +{loot_pct:.0f}% appliqué."
+        embed.set_footer(text=footer)
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 
@@ -399,7 +412,7 @@ async def _run_auto_loop(orig_interaction: discord.Interaction, view: AutoLoopVi
                     break
                 try:
                     await orig_interaction.edit_original_response(embed=embed, view=view)
-                except Exception:
+                except discord.HTTPException:
                     pass
             else:
                 gold_lost   = int(player.get("gold", 0) * 0.10)
@@ -426,7 +439,7 @@ async def _run_auto_loop(orig_interaction: discord.Interaction, view: AutoLoopVi
                 )
                 try:
                     await orig_interaction.edit_original_response(embed=embed, view=view)
-                except Exception:
+                except discord.HTTPException:
                     pass
                 break
 
@@ -547,7 +560,9 @@ async def _start_manual_combat(interaction: discord.Interaction, player: dict, e
     equipment = await db.get_equipment(user_id)
     relics    = await db.get_relics(user_id)
     state = build_combat_state(player, enemy, equipment, relics, player.get("current_hp"))
+    import time as _time
     _active_combats[user_id] = state
+    _combat_started_at[user_id] = _time.monotonic()
 
     player_class = player.get("class", "")
     embed = _build_manual_combat_embed(player, enemy, state, log_lines=[])
@@ -624,6 +639,7 @@ class ManualCombatView(discord.ui.View):
 
         if result["is_over"]:
             del _active_combats[self.user_id]
+            _combat_started_at.pop(self.user_id, None)
             # Nettoyer les flags de potion après usage
             if player.get("potion_revival_active") or player.get("potion_no_passive"):
                 await db.update_player(self.user_id, potion_revival_active=0, potion_no_passive=0)
@@ -666,6 +682,7 @@ class ManualCombatView(discord.ui.View):
             return
         if self.user_id in _active_combats:
             del _active_combats[self.user_id]
+        _combat_started_at.pop(self.user_id, None)
         await db.update_player(self.user_id, in_combat=0)
         await interaction.response.edit_message(
             embed=discord.Embed(title="🏃 Tu as fui !", description="Tes HP actuels sont conservés.", color=0xFF9800),
@@ -675,6 +692,7 @@ class ManualCombatView(discord.ui.View):
     async def on_timeout(self):
         if self.user_id in _active_combats:
             del _active_combats[self.user_id]
+        _combat_started_at.pop(self.user_id, None)
         await db.update_player(self.user_id, in_combat=0)
 
 
@@ -759,23 +777,7 @@ async def _apply_combat_rewards(user_id: int, player: dict, enemy: dict, result:
             rewards_lines.append("⚡ +1 énergie (passif)")
 
     # Bonus énergie par victoire (food buff energy_on_win)
-    food_buffs_raw = player_updated.get("food_buffs")
-    if food_buffs_raw:
-        try:
-            import json as _json
-            from datetime import datetime as _dt, timezone as _tz
-            fb = _json.loads(food_buffs_raw)
-            eow = fb.get("energy_on_win")
-            if eow:
-                exp = eow.get("expires")
-                if exp and _dt.now(_tz.utc) < _dt.fromisoformat(exp):
-                    win_e = eow.get("value", 0)
-                    cur_e = player_updated.get("energy", 0)
-                    max_e = player_updated.get("max_energy", 2000)
-                    await db.update_player(user_id, energy=min(cur_e + win_e, max_e))
-                    rewards_lines.append(f"⚡ +{win_e} énergie (buff alimentaire)")
-        except Exception:
-            pass
+    await db.apply_energy_on_win(user_id, player_updated, rewards_lines)
 
     # Titres
     is_boss = boss_type != "monster"
@@ -789,25 +791,8 @@ async def _apply_combat_rewards(user_id: int, player: dict, enemy: dict, result:
 
 
 async def _consume_combat_food_buffs(user_id: int):
-    """Décrémente les buffs alimentaires de combat (combats: 1 → 0 → supprimé)."""
-    import json
-    player = await db.get_player(user_id)
-    raw = player.get("food_buffs")
-    if not raw:
-        return
-    try:
-        fb = json.loads(raw)
-    except Exception:
-        return
-    changed = False
-    for key in list(("stat_def", "stat_speed", "stat_patk", "stat_matk", "elixir_patk", "elixir_matk", "elixir_def", "elixir_speed", "elixir_crit", "elixir_all")):
-        if key in fb:
-            fb[key]["combats"] = fb[key].get("combats", 1) - 1
-            if fb[key]["combats"] <= 0:
-                del fb[key]
-            changed = True
-    if changed:
-        await db.update_player(user_id, food_buffs=json.dumps(fb) if fb else None)
+    """Décrémente les buffs alimentaires de combat (délégué à database.consume_food_buffs)."""
+    await db.consume_food_buffs(user_id)
 
 
 def _advance_zone(zone: int, stage: int | str) -> tuple[int, int | str]:
@@ -962,12 +947,16 @@ class FarmView(discord.ui.View):
         harvest_level = prof.get("harvest_level", 0) if prof else 0
         tier_cap = min(10, harvest_level // 10 + 1)
         drop_table = get_material_drop_table(self.zone, harvest_type, harvest_level, tier_cap=tier_cap)
-        drop_table.sort(key=lambda x: x["chance"], reverse=True)
 
+        title_bonuses = await db.get_title_bonuses(self.user_id)
+        loot_pct = title_bonuses.get("monde_loot_pct", 0)
+        farm_loot_mult = (1 + loot_pct / 100) / FARM_LOOT_DIV
+
+        drop_table.sort(key=lambda x: x["chance"], reverse=True)
         lines = []
         for drop in drop_table[:20]:
             mat_data = MATERIALS.get(drop["item_id"], {})
-            chance = drop["chance"] / FARM_LOOT_DIV
+            chance = drop["chance"] * farm_loot_mult
             if chance >= 100:
                 guaranteed = int(chance / 100)
                 extra = chance % 100
@@ -984,7 +973,10 @@ class FarmView(discord.ui.View):
             description="\n".join(lines),
             color=0xFF9800,
         )
-        embed.set_footer(text="×N +X% = N garantis + X% chance (N+1)ème | Indépendants.")
+        footer = "×N +X% = N garantis + X% chance (N+1)ème | Indépendants."
+        if loot_pct:
+            footer += f" | Bonus loot titre : +{loot_pct:.0f}% appliqué."
+        embed.set_footer(text=footer)
         await interaction.response.send_message(embed=embed, ephemeral=True)
 
 

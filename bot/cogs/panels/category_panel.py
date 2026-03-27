@@ -17,7 +17,7 @@ TOGGLES = [
     {"key": "TFT",         "role_id": 1474444191361929286, "category_id": 1462928391832600775, "emoji": "🧩"},
     {"key": "Arc Raiders", "role_id": 1474444214237532220, "category_id": 1462932316438401199, "emoji": "🏹"},
     {"key": "RPG",         "role_id": 1474444276136939663, "category_id": 1464924308215169034, "emoji": "🐉"},
-    {"key": "RPG",         "role_id": 1480238800931393668, "category_id": 1480238509968199770, "emoji": "🎲"},
+    {"key": "Casino",      "role_id": 1480238800931393668, "category_id": 1480238509968199770, "emoji": "🎰"},
     {"key": "Autre",       "role_id": 1474444312518328401, "category_id": 1462928084607959227, "emoji": "📦"},
 ]
 
@@ -43,90 +43,47 @@ def save_state(state: dict) -> None:
     os.replace(tmp, STATE_FILE)
 
 
-def _build_options_for(member: discord.Member) -> list[discord.SelectOption]:
-    member_role_ids = {r.id for r in member.roles}
-    options = []
-    for item in TOGGLES:
-        role_id = item["role_id"]
-        has_role = role_id in member_role_ids
-
-        # ✅ Coché = l'utilisateur A le rôle (donc catégorie visible)
-        options.append(
-            discord.SelectOption(
-                label=item["key"],
-                value=str(role_id),
-                emoji=item.get("emoji"),
-                description="Visible" if has_role else "Masquée",
-                default=has_role,
-            )
-        )
-    return options
-
-
-class CategoryVisibilitySelect(discord.ui.Select):
-    def __init__(self, member: discord.Member):
-        super().__init__(
-            placeholder="Coche ce que tu veux VOIR 👀 (coché = rôle donné)",
-            min_values=0,
-            max_values=len(TOGGLES),
-            options=_build_options_for(member),
-            custom_id="category_panel:visibility_select",
-        )
-
-    async def callback(self, interaction: discord.Interaction):
-        if not interaction.guild or not isinstance(interaction.user, discord.Member):
-            return await interaction.response.send_message("❌ Serveur uniquement.", ephemeral=True)
-
-        me = interaction.guild.me
-        if not me or not me.guild_permissions.manage_roles:
-            return await interaction.response.send_message("❌ Permission bot: Gérer les rôles.", ephemeral=True)
-
-        # Ici: values = rôles que l'utilisateur VEUT AVOIR (donc visible)
-        wanted_role_ids = {int(v) for v in self.values}
-        user_role_ids = {r.id for r in interaction.user.roles}
-
-        to_add = []
-        to_remove = []
-
-        for item in TOGGLES:
-            rid = item["role_id"]
-            wants_role = rid in wanted_role_ids
-            has_role = rid in user_role_ids
-
-            if wants_role and not has_role:
-                to_add.append(rid)        # coché => ajouter role catRole
-            if (not wants_role) and has_role:
-                to_remove.append(rid)     # décoché => retirer role catRole
-
-        try:
-            for rid in to_add:
-                role = interaction.guild.get_role(rid)
-                if role:
-                    await interaction.user.add_roles(role, reason="Category visibility toggle (catRole added)")
-            for rid in to_remove:
-                role = interaction.guild.get_role(rid)
-                if role:
-                    await interaction.user.remove_roles(role, reason="Category visibility toggle (catRole removed)")
-        except discord.Forbidden:
-            return await interaction.response.send_message(
-                "❌ Hiérarchie: mets le rôle du bot au-dessus des rôles catRole.",
-                ephemeral=True
-            )
-        except discord.HTTPException as e:
-            logger.warning("CategoryVisibilitySelect: erreur HTTP lors de la modification des rôles: %s", e)
-            return await interaction.response.send_message("❌ Erreur Discord lors de la mise à jour des rôles.", ephemeral=True)
-
-        # Rafraîchir l'UI en fonction des rôles actuels
-        await interaction.response.edit_message(
-            content="✅ Mis à jour. (coché = rôle donné = visible)",
-            view=CategoryPanelEphemeralView(interaction.user)
-        )
-
-
-class CategoryPanelEphemeralView(discord.ui.View):
+class CategoryToggleView(discord.ui.View):
     def __init__(self, member: discord.Member):
         super().__init__(timeout=300)
-        self.add_item(CategoryVisibilitySelect(member))
+        member_role_ids = {r.id for r in member.roles}
+        for i, item in enumerate(TOGGLES):
+            has_role = item["role_id"] in member_role_ids
+            btn = discord.ui.Button(
+                label=item["key"],
+                emoji=item["emoji"],
+                style=discord.ButtonStyle.success if has_role else discord.ButtonStyle.secondary,
+                row=i // 5,
+            )
+            btn.callback = self._make_toggle_cb(item["role_id"])
+            self.add_item(btn)
+
+    def _make_toggle_cb(self, role_id: int):
+        async def callback(interaction: discord.Interaction):
+            if not isinstance(interaction.user, discord.Member):
+                return await interaction.response.send_message("❌ Serveur uniquement.", ephemeral=True)
+            me = interaction.guild.me
+            if not me or not me.guild_permissions.manage_roles:
+                return await interaction.response.send_message("❌ Permission bot : Gérer les rôles.", ephemeral=True)
+            user_role_ids = {r.id for r in interaction.user.roles}
+            role = interaction.guild.get_role(role_id)
+            if not role:
+                return await interaction.response.send_message("❌ Rôle introuvable.", ephemeral=True)
+            try:
+                if role_id in user_role_ids:
+                    await interaction.user.remove_roles(role, reason="Category visibility toggle")
+                else:
+                    await interaction.user.add_roles(role, reason="Category visibility toggle")
+            except discord.Forbidden:
+                return await interaction.response.send_message(
+                    "❌ Hiérarchie : mets le rôle du bot au-dessus des rôles catégorie.", ephemeral=True
+                )
+            except discord.HTTPException as e:
+                logger.warning("CategoryToggleView: erreur HTTP: %s", e)
+                return await interaction.response.send_message("❌ Erreur Discord lors de la mise à jour.", ephemeral=True)
+            fresh = await interaction.guild.fetch_member(interaction.user.id)
+            await interaction.response.edit_message(view=CategoryToggleView(fresh))
+        return callback
 
 
 class CategoryPanelMainView(discord.ui.View):
@@ -134,7 +91,7 @@ class CategoryPanelMainView(discord.ui.View):
         super().__init__(timeout=None)
 
     @discord.ui.button(
-        label="Préférences",
+        label="Mes préférences",
         style=discord.ButtonStyle.primary,
         emoji="⚙️",
         custom_id="category_panel:open",
@@ -144,10 +101,9 @@ class CategoryPanelMainView(discord.ui.View):
             return await interaction.response.send_message("❌ Serveur uniquement.", ephemeral=True)
 
         await interaction.response.send_message(
-            "🧩 **Choisis les catégories que tu veux voir**\n"
-            "✅ Cochée = tu reçois le rôle (visible)\n"
-            "⬜ Décochée = rôle retiré (masquée)",
-            view=CategoryPanelEphemeralView(interaction.user),
+            "⚙️ **Tes préférences de catégories**\n"
+            "🟢 Vert = catégorie visible  •  ⬜ Gris = catégorie masquée",
+            view=CategoryToggleView(interaction.user),
             ephemeral=True
         )
 
@@ -161,9 +117,9 @@ class CategoryPanelCog(commands.Cog):
         return discord.Embed(
             title="🎛️ Préférences de catégories",
             description=(
-                "Clique sur **Préférences** pour choisir les catégories que tu veux voir.\n\n"
-                "✅ Cochée = rôle donné (visible)\n"
-                "⬜ Décochée = rôle retiré (masquée)"
+                "Clique sur **Mes préférences** pour choisir les catégories que tu veux voir.\n\n"
+                "🟢 **Vert** = catégorie visible (rôle actif)\n"
+                "⬜ **Gris** = catégorie masquée (pas de rôle)"
             ),
         )
 
@@ -197,12 +153,13 @@ class CategoryPanelCog(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        # IMPORTANT pour que le bouton reste actif après redémarrage
-        if not self._views_registered:
+        first_ready = not self._views_registered
+        if first_ready:
             self.bot.add_view(CategoryPanelMainView())
             self._views_registered = True
-
-        await self.ensure_panel_message()
+            self.bot._startup_queue.put_nowait(self.ensure_panel_message)
+        else:
+            await self.ensure_panel_message()
 
 
 async def setup(bot: commands.Bot):

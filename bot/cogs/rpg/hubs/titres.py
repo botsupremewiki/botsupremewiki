@@ -31,29 +31,30 @@ def _fmt_num(n: int | float) -> str:
 
 
 def _format_req(title: dict) -> str:
-    rt  = title["req_type"]
-    req = title["req"]
+    rt        = title["req_type"]
+    req       = title["req"]
+    req_class = title.get("req_class")
+    class_prefix = f"[{req_class}] " if req_class else ""
     mapping = {
-        "level":            f"Niveau {req:,}",
-        "prestige":         f"Prestige {req:,}",
-        "total_gold":       f"{_fmt_num(req)} golds gagnés au total",
-        "zone":             f"Zone {req:,} atteinte",
-        "dungeon_clears":   f"{req:,} donjons classiques complétés",
-        "elite_clears":     f"{req:,} donjons élites complétés",
-        "abyssal_clears":   f"{req:,} donjons abyssaux complétés",
-        "raid_clears":      f"{req:,} raids complétés",
-        "wb_attacks":       f"{req:,} attaques World Boss",
-        "wb_total_damage":  f"{_fmt_num(req)} dégâts au World Boss",
-        "wb_rank1":         "Être classé #1 au World Boss",
-        "harvest_level":    f"Niveau {req} en récolte",
-        "craft_level":      f"Niveau {req} en artisanat",
-        "conception_level": f"Niveau {req} en conception",
-        "market_sales":     f"{req:,} ventes à l'HDV",
-        "pvp_wins":         f"{req:,} victoires PvP",
-        "pvp_elo":          f"ELO {req:,} en PvP",
-        "global_rank1":     "Être classé #1 au Classement Général",
-        "pvp_rank1":        "Être classé #1 au Classement PvP",
-        "wb_rank1":         "Être classé #1 au World Boss",
+        "level":                    f"{class_prefix}Niveau {req:,}",
+        "prestige":                 f"{class_prefix}Prestige {req:,}",
+        "total_gold":               f"{class_prefix}{_fmt_num(req)} golds gagnés au total",
+        "zone":                     f"{class_prefix}Zone {req:,} atteinte",
+        "dungeon_best_classique":   f"{class_prefix}Donjon classique niveau {req} atteint",
+        "dungeon_best_elite":       f"{class_prefix}Donjon élite niveau {req} atteint",
+        "dungeon_best_abyssal":     f"{class_prefix}Donjon abyssal niveau {req} atteint",
+        "raid_clears":              f"{req:,} raids complétés",
+        "raid_max_completed":       f"{class_prefix}Raid niveau {req} complété",
+        "wb_total_damage":          f"{class_prefix}{_fmt_num(req)} dégâts au World Boss",
+        "harvest_level":            f"Niveau {req} en récolte",
+        "craft_level":              f"Niveau {req} en artisanat",
+        "conception_level":         f"Niveau {req} en conception",
+        "market_sales":             f"{req:,} ventes à l'HDV",
+        "pvp_wins":                 f"{req:,} victoires PvP",
+        "pvp_elo":                  f"ELO {req:,} en PvP",
+        "global_rank1":             "Être classé #1 au Classement Général",
+        "pvp_rank1":                "Être classé #1 au Classement PvP",
+        "wb_rank1":                 "Être classé #1 au World Boss",
     }
     return mapping.get(rt, f"{rt} ≥ {req}")
 
@@ -263,12 +264,10 @@ async def _show_category(
         name_str  = f"**{td['name']}**" + (" *(équipé)*" if is_active else "")
         cond_str  = _format_req(td)
         bonus_str = _format_bonus(td)
-        gold_str  = f"  🪙 {td['reward_gold']:,}g" if td.get("reward_gold") else ""
-
         lines.append(
             f"{icon} {name_str}\n"
             f"   📋 {cond_str}\n"
-            f"   {bonus_str}{gold_str}"
+            f"   {bonus_str}"
         )
 
     # ── Bonus actif dans cette catégorie ──

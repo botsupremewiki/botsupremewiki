@@ -1,91 +1,121 @@
-# 🐉 World Boss
+# 🌍 World Boss
 
-Le **World Boss** est un boss colossal partagé par **tous les joueurs** du serveur.
-
-Il est réinitialisé chaque **lundi à minuit** et les récompenses sont distribuées selon les dégâts infligés.
-
+Le World Boss est un **boss coopératif hebdomadaire** que tous les joueurs du serveur peuvent affronter ensemble. C'est le défi le plus puissant du jeu.
 
 ---
 
+## Comment ça fonctionne ?
 
-## 📋 Informations générales
+Rends-toi dans le **Hub World Boss** pour attaquer le boss de la semaine.
 
-- **Coût :** 100 ⚡ par attaque
-
-- **Partage :** tous les joueurs attaquent le même boss
-
-- **Réinitialisation :** chaque lundi à minuit (UTC)
-
-- **Classement :** basé sur les **dégâts totaux** infligés dans la semaine
-
-
+- Coût : **50 énergie** par attaque
+- Chaque joueur attaque **individuellement** à son rythme — pas besoin d'être synchronisé avec les autres
+- Le boss a une **barre de vie commune** : tous les dégâts de tous les joueurs s'accumulent
+- Quand la barre tombe à zéro, **tout le serveur gagne** et les récompenses sont distribuées
 
 ---
 
+## Les combats
 
-## 🎁 Récompenses hebdomadaires
+Contrairement aux Raids, chaque attaque contre le World Boss est un **combat solo** contre le boss. Tu joues ton combat normalement avec tes sorts, et tes dégâts s'ajoutent au total collectif.
 
-Les récompenses sont distribuées le lundi selon ton classement.
-
-
-| Rang | Relique | Gold |
-|-----:|---------|------:|
-| 🥇 1 | Prismatique 🌈 | 50,000 |
-| 🥈 2 | Transcendant 🩵 | 30,000 |
-| 🥉 3 | Divin 🟡 | 20,000 |
-| #4 4 | Artefact 🔶 | 12,000 |
-| #5 5 | Mythique 🟥 | 8,000 |
-| #6 6 | Légendaire 🟧 | 5,000 |
-| #7 7 | Épique 🟪 | 3,000 |
-| #8 8 | Rare 🟦 | 2,000 |
-| #9 9 | Peu commun 🟩 | 1,000 |
-| #10 10 | Peu commun 🟩 | 500 |
-| #11+ | Commun ⬜ | 200 |
+!!! info "Mode éphémère"
+    Le World Boss commence chaque combat à tes **PV maximum**, peu importe ton état. Il n'impacte pas tes PV hors combat.
 
 ---
 
+## Le classement individuel
 
-## 🗡️ Reliques du World Boss
-
-Les reliques sont équipables et donnent des **bonus permanents en combat**.
-
-Il existe une relique par rareté — plus la rareté est élevée, plus les bonus sont puissants.
-
-
-| Rareté | Vol de vie | Réd. dégâts | Bonus dégâts | Reflet | Double frappe | Regen HP/tour |
-|--------|----------:|------------:|-------------:|-------:|-------------:|--------------:|
-| ⬜ Commun | 0.30% | 0.20% | 0.30% | 0.40% | 0.20% | 0.15% |
-| 🟩 Peu commun | 0.35% | 0.25% | 0.35% | 0.45% | 0.25% | 0.20% |
-| 🟦 Rare | 0.40% | 0.30% | 0.40% | 0.50% | 0.30% | 0.20% |
-| 🟪 Épique | 0.50% | 0.35% | 0.50% | 0.65% | 0.35% | 0.25% |
-| 🟧 Légendaire | 0.60% | 0.40% | 0.60% | 0.80% | 0.40% | 0.30% |
-| 🟥 Mythique | 0.70% | 0.50% | 0.70% | 0.90% | 0.50% | 0.35% |
-| 🔶 Artefact | 0.85% | 0.60% | 0.85% | 1.10% | 0.60% | 0.45% |
-| 🟡 Divin | 1.00% | 0.70% | 1.00% | 1.35% | 0.70% | 0.50% |
-| 🩵 Transcendant | 1.20% | 0.85% | 1.20% | 1.60% | 0.85% | 0.65% |
-| 🌈 Prismatique | 1.50% | 1.00% | 1.50% | 2.00% | 1.00% | 0.75% |
-
-
-!!! info "Diminishing returns"
-    Posséder plusieurs reliques de même rareté donne des rendements décroissants (-5% d'efficacité par copie supplémentaire). Des plafonds empêchent les abus.
-
+Un classement des joueurs ayant infligé le plus de dégâts au boss est affiché en temps réel. Les meilleurs contributeurs reçoivent des **récompenses supplémentaires**.
 
 ---
 
+## Les récompenses
 
-## 📈 Stats du World Boss par tour
+### Matériaux immédiats (à chaque attaque)
 
-Le World Boss devient de plus en plus puissant à chaque tour d'attaque personnel. Les stats sont calculées à partir d'une zone équivalente qui augmente de ×1.3 par tour.
+Tu reçois des matériaux aléatoires **immédiatement après chaque combat**, selon le tour personal que tu tiens :
 
+| Tour personnel | Survie | Défaite |
+|:--------------:|:------:|:-------:|
+| Tour 1 | 12 | 10 |
+| Tour 5 | 20 | 18 |
+| Tour 10 | 30 | 28 |
+| Tour 15 | 40 | 38 |
+| Tour 20 | **50** | 48 |
 
-| Tour | Zone équiv. | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | ⚡ Vit. |
-|-----:|------------:|------:|----------:|----------:|----------:|-------:|
-| 0 | 1,000 | 9,174 | 604 | 280 | 266 | 126 |
-| 1 | 1,300 | 12,552 | 827 | 384 | 364 | 163 |
-| 2 | 1,690 | 17,402 | 1,146 | 532 | 505 | 216 |
-| 3 | 2,197 | 24,483 | 1,613 | 749 | 711 | 292 |
-| 5 | 3,713 | 50,887 | 3,352 | 1,558 | 1,479 | 573 |
-| 7 | 6,275 | 113,326 | 7,466 | 3,470 | 3,296 | 1,231 |
-| 10 | 13,786 | 244,050 | 16,079 | 7,473 | 7,100 | 2,598 |
-| 15 | 51,186 | 244,050 | 16,079 | 7,473 | 7,100 | 2,598 |
-| 20 | 190,050 | 244,050 | 16,079 | 7,473 | 7,100 | 2,598 |
+**Formule :** `10 + 2 × attaques_du_WB_survivées`
+- **Survie** : `10 + 2 × tour` (tu as survécu à l'attaque de ce tour)
+- **Défaite** : `10 + 2 × (tour − 1)` (tu n'as pas survécu au dernier coup)
+- Minimum garanti : **10 matériaux** (défaite au Tour 1)
+
+Avec 10 attaques par semaine, tu obtiens entre **100** (tout Tour 1 mort) et **500** matériaux (tout Tour 20 survie).
+
+### Récompenses de fin de semaine (classement)
+
+À la défaite du World Boss :
+- Tous les participants reçoivent des récompenses de base
+- Les meilleurs dégâts reçoivent des récompenses **supplémentaires et exclusives**
+- Possibilité d'obtenir des **Reliques** — des objets très rares qui donnent des effets passifs permanents en combat
+
+---
+
+## Les Reliques
+
+Les Reliques sont des objets uniques obtenables via le World Boss. Elles ajoutent **6 effets passifs permanents** simultanément en combat. Les récompenses sont attribuées selon le classement final par dégâts infligés.
+
+| Rang | Relique obtenue | Or |
+|------|-----------------|:--:|
+| 🥇 Rang 1 | 🌈 Prismatique | 300 000 |
+| 🥈 Rang 2 | 🩵 Transcendante | 250 000 |
+| 🥉 Rang 3 | 🟡 Divine | 200 000 |
+| Rang 4 | 🔶 Artefact | 175 000 |
+| Rang 5 | 🟥 Mythique | 150 000 |
+| Rang 6 | 🟧 Légendaire | 125 000 |
+| Rang 7 | 🟪 Épique | 100 000 |
+| Rang 8 | 🟦 Rare | 85 000 |
+| Rang 9 | 🟩 Peu Commune | 70 000 |
+| Rang 10 | 🟩 Peu Commune | 60 000 |
+| Rang 11+ | ⬜ Commune | 50 000 |
+
+!!! info "Tous les participants sont récompensés"
+    Tout joueur ayant contribué au World Boss reçoit au minimum une Relique Commune et 50 000 or, quelle que soit sa position dans le classement.
+
+Chaque Relique confère simultanément **6 effets passifs** — Vol de vie, Réduction de dégâts, Bonus de dégâts, Reflet, Double frappe, et Régénération HP par tour — dont les valeurs augmentent avec la rareté.
+
+> Pour les effets détaillés, les plafonds, et les règles de stacking : **[Objets → Reliques](../objets/reliques.md)**
+
+---
+
+## Conseils
+
+- Participe chaque semaine — les Reliques sont des items très puissants disponibles nulle part ailleurs
+- Plus tu infliges de dégâts, meilleures sont tes récompenses — utilise tes meilleurs sorts
+- Utilise tes **nourritures** (Boulanger) avant d'attaquer pour maximiser tes dégâts
+- Le World Boss est très résistant — ne t'attends pas à le finir seul, la coopération de tout le serveur est nécessaire
+
+---
+
+## 🔍 Simulateur d'ennemi
+
+Indique ton tour personnel pour voir les statistiques du World Boss que tu affronteras.
+
+> Les stats sont calculées avec la même formule que le jeu. La zone équivalente augmente de ×1,25 à chaque tour (Tour 1 = Zone 1 000, Tour 10 = Zone ~7 451, Tour 20 = Zone ~55 511). **Tour 20 maximum** — en cas de défaite, le tour repart à 1.
+
+<div id="enemy-calculator">
+
+  <div id="ec-ctrl-wb" class="ec-controls">
+    <div class="ec-row">
+      <label class="ec-label">Tour personnel <strong id="ec-wb-tour-val">1</strong></label>
+      <input type="range" id="ec-wb-tour" class="ec-range" min="1" max="20" value="1" />
+      <input type="number" id="ec-wb-tour-input" class="ec-input" min="1" max="20" value="1" style="max-width:120px; margin-top:0.4rem" />
+      <div id="ec-wb-zone-equiv" class="ec-note" style="margin-top:0.3rem">Zone équivalente : ~1 000</div>
+    </div>
+    <div class="ec-hint-box">
+      🐉 Le World Boss est <strong>Bot Suprême</strong>. Ses stats augmentent de ×1,25 à chaque tour survivé (Tour 1 = Zone 1 000 · Tour 10 = Zone ~7 451 · Tour 20 = Zone ~55 511). <strong>Tour 20 maximum</strong> — en cas de défaite, le tour repart à 1.
+    </div>
+  </div>
+
+  <div id="ec-result" style="display:none"></div>
+
+</div>

@@ -1,71 +1,58 @@
 # 🔥 Pyromancien
 
-!!! note "Classe Premium"
-    Cette classe nécessite le rôle Premium pour être sélectionnée.
-
-**Rôle :** DPS Magique / Brûlure
-
-**Difficulté :** ⭐⭐⭐☆☆ (3/5)
-
+Le Pyromancien est un mage spécialisé dans les **brûlures progressives**. Il accumule des stacks de brûlure sur l'ennemi via son passif et ses sorts, ce qui amplifie massivement la puissance de son ultime Inferno.
 
 ---
 
-## 📖 Description
+## Stats de départ (niveau 1)
 
-*(Premium)* Sorcier des flammes dont la brûlure s'accumule inexorablement.
-
-**Passif** : 35% de chance d'appliquer 1 stack de brûlure (15% ATK Mag/stack).
-
-**Ressource** : 🔵 Mana (max 100, +15/tour).
-
-
-**Ressource :** 🔵 Mana — maximum 100, +15 par tour
-
-
----
-
-## 📊 Progression des statistiques
-
-| Niveau | ❤️ HP | ⚔️ Atk Phy | 🔮 Atk Mag | 🛡️ Déf Phy | 🔷 Déf Mag | ⚡ Vit. | 🎯 Crit% |
-|-------:|------:|----------:|----------:|----------:|----------:|-------:|--------:|
-| Niv. 1 | 400 | — | 40 | 2 | 10 | 85 | 12% |
-| Niv. 100 | 2,342 | — | 234 | 11 | 51 | 109 | 13% |
-| Niv. 200 | 4,304 | — | 430 | 21 | 93 | 133 | 15% |
-| Niv. 500 | 10,190 | — | 1,019 | 50 | 219 | 207 | 18% |
-| Niv. 1000 | 20,000 | — | 2,000 | 99 | 429 | 329 | 25% |
+| Stat | Valeur |
+|------|--------|
+| Points de Vie | 420 |
+| Attaque Physique | 0 |
+| Attaque Magique | 43 |
+| Défense Physique | 2 |
+| Défense Magique | 10 |
+| Vitesse | 85 |
+| Chance de Critique | 13.0% |
+| Dégâts de Critique | 175.0% |
 
 ---
 
-## ✨ Sorts
+## Passif — Embrasement Perpétuel
 
-### 🔥 Flammèche
-
-Inflige ×0.8 dégâts magiques et applique 1 stack de brûlure.
-
-- **Coût :** 15 🔵 Mana
-
-
-### 💥 Brasier
-
-Réduit la Déf.Mag. ennemie de 20% (2 tours), inflige ×1.0 dégâts magiques et applique 2 stacks de brûlure.
-
-- **Coût :** 25 🔵 Mana · Temps de recharge : **3 tours**
-
-
-### 🌋 Inferno 🌟 **ULTIME**
-
-Inflige ×3.0 dégâts magiques + 0.7×ATK Mag par stack. Bonus ×1.5 sur le bonus brûlure si ≥5 stacks actifs.
-
-- **Coût :** 80 🔵 Mana · Temps de recharge : **7 tours**
-
-
+Le Pyromancien a **45% de chance d'appliquer 1 stack de brûlure** à chaque attaque. Chaque stack actif inflige des dégâts supplémentaires égaux à **15% de l'ATK Mag par stack**.
 
 ---
 
-## 💡 Conseils de jeu
+## Ressource — Mana
 
-- Accumule au moins 5 stacks de brûlure avant d'utiliser **Inferno** pour le bonus.
+Le Mana se régénère de **+15 par tour**. Il est plafonné à **100**.
 
-- Ton passif d'embrasement (35%) applique des stacks très rapidement.
+---
 
-- Chaque stack de brûlure augmente tes dégâts — farm les brûlures au maximum.
+## Sorts
+
+=== "🔥 Flammèche"
+    **Coût :** 15 Mana — **Temps de recharge :** aucun
+
+    Inflige **×0.8 dégâts magiques** et applique **2 stacks de brûlure**.
+
+=== "💥 Brasier"
+    **Coût :** 25 Mana — **Temps de recharge :** 3 tours
+
+    Réduit la **Déf. Mag. ennemie de 20% pendant 2 tours**, inflige **×1.0 dégâts magiques** et applique **2 stacks de brûlure**.
+
+=== "🌋 Inferno (Ultime)"
+    **Coût :** 80 Mana — **Temps de recharge :** 7 tours
+
+    Inflige **×3.0 dégâts magiques + 0.9×ATK Mag par stack**. Bonus **×1.5 sur le bonus brûlure** si ≥5 stacks actifs.
+
+---
+
+## Conseils
+
+- Le passif monte les stacks de brûlure tout seul — **Flammèche** en ajoute encore plus rapidement.
+- **Brasier** avant **Inferno** réduit la Déf. Mag. de 20% — indispensable pour maximiser les dégâts de l'ultime.
+- À 5 stacks ou plus, le bonus de l'Inferno est multiplié par ×1.5 — vise toujours ce seuil avant de l'utiliser.
+- Le Pyromancien est fragile (2 Déf. Phy.) — soigne-toi avant les gros combats et frappe vite.

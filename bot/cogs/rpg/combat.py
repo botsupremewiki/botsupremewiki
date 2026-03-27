@@ -3,10 +3,13 @@ Moteur de combat du RPG.
 Gère les calculs de dégâts, les tours, les passifs de classes et les effets de statut.
 """
 from __future__ import annotations
+import logging
 import math
 import random
 from dataclasses import dataclass, field
 from typing import Optional
+
+logger = logging.getLogger(__name__)
 
 from bot.cogs.rpg.models import compute_total_stats, compute_max_hp, compute_relic_effects, CLASS_SPELLS, STAT_FR
 
@@ -18,7 +21,8 @@ def _parse_food_buffs(raw: str | None) -> dict:
     try:
         import json
         return json.loads(raw)
-    except Exception:
+    except (json.JSONDecodeError, TypeError) as e:
+        logger.warning(f"food_buffs JSON invalide: {e!r} — valeur: {raw!r:.100}")
         return {}
 
 
@@ -85,6 +89,7 @@ class CombatState:
     # Buffs Paladin (ramp)
     paladin_ramp_dmg_red: float = 0.0   # 0.0 → 0.30
     paladin_ramp_dmg_amp: float = 0.0   # 0.0 → 0.30
+    paladin_initial_stats: dict = field(default_factory=dict)  # stats de référence (début combat, cap +20%)
 
     # Relics effects
     relic_effects:    dict  = field(default_factory=dict)
@@ -204,7 +209,7 @@ def apply_player_passive(state: CombatState, base_phys: int, base_magic: int) ->
     hp_pct_current = max(0, ps.hp / max(ps.max_hp, 1))
 
     if cls == "Guerrier":
-        bonus = min(hp_pct_missing * 0.5, 0.50)
+        bonus = min(hp_pct_missing * 0.5, 0.30)
         base_phys  = int(base_phys  * (1 + bonus))
         base_magic = int(base_magic * (1 + bonus))
         if bonus > 0:
@@ -227,8 +232,8 @@ def apply_player_passive(state: CombatState, base_phys: int, base_magic: int) ->
             logs.append("🏹 Passif Tireur : **Double Coup !**")
 
     elif cls == "Support":
-        if random.random() < 0.30:
-            shield_val = int(ps.max_hp * 0.08)
+        if random.random() < 0.45:
+            shield_val = int(ps.max_hp * 0.10)
             ps.shield += shield_val
             logs.append(f"🛡️ Passif Support : Bouclier +{shield_val:,} HP")
 
@@ -237,35 +242,43 @@ def apply_player_passive(state: CombatState, base_phys: int, base_magic: int) ->
         pass
 
     elif cls == "Gardien du Temps":
-        if random.random() < 0.35:
+        if random.random() < 0.55:
             all_stats = ["p_atk", "m_atk", "p_def", "m_def", "speed", "p_pen", "m_pen"]
-            stat = random.choice(all_stats)
-            current = state.enemy_debuffs.get(stat, 1.0)
-            new_val  = max(0.50, current - 0.08)  # -8% par proc, max -50%
-            state.enemy_debuffs[stat] = new_val
-            stat_fr_name = STAT_FR.get(stat, stat)
-            logs.append(f"⏳ Passif Gardien du Temps : {stat_fr_name} ennemi réduit à {new_val*100:.0f}%")
-            _apply_debuffs_to_enemy(state)
+            # Retirage forcé : on exclut les stats déjà capées à -20%
+            uncapped = [s for s in all_stats if state.enemy_debuffs.get(s, 1.0) > 0.80]
+            if uncapped:
+                stat = random.choice(uncapped)
+                current = state.enemy_debuffs.get(stat, 1.0)
+                new_val = max(0.80, current - 0.05)
+                state.enemy_debuffs[stat] = new_val
+                logs.append(f"⏳ Passif Gardien du Temps : {STAT_FR.get(stat, stat)} ennemi −5% → {new_val*100:.0f}%")
+                _apply_debuffs_to_enemy(state)
 
     elif cls == "Ombre Venin":
-        if random.random() < 0.30 and state.enemy_poison_stacks < 10:
+        if random.random() < 0.40 and state.enemy_poison_stacks < 10:
             state.enemy_poison_stacks += 1
             logs.append(f"☠️ Passif Ombre Venin : +1 stack poison ({state.enemy_poison_stacks} total)")
 
     elif cls == "Pyromancien":
-        if random.random() < 0.35 and state.enemy_burns < 5:
+        if random.random() < 0.45 and state.enemy_burns < 5:
             state.enemy_burns += 1
             logs.append(f"🔥 Passif Pyromancien : +1 stack brûlure ({state.enemy_burns} total)")
 
     elif cls == "Paladin":
-        if random.random() < 0.35:
-            stat_choices = ["p_atk", "p_def", "m_def", "p_pen", "speed"]
-            stat = random.choice(stat_choices)
-            current = getattr(ps, stat, 0)
-            increase = max(1, int(current * 0.05))
-            setattr(ps, stat, current + increase)
-            stat_name = STAT_FR.get(stat, stat)
-            logs.append(f"✝️ Passif Paladin : {stat_name} +5% → {current + increase:,}")
+        if random.random() < 0.50:
+            stat_choices = ["p_atk", "m_atk", "p_def", "m_def", "p_pen", "m_pen", "speed"]
+            # Mémorise les stats initiales au premier proc (référence fixe pour +5% et cap +20%)
+            if not state.paladin_initial_stats:
+                state.paladin_initial_stats = {s: getattr(ps, s, 0) for s in stat_choices}
+            # Retirage forcé : on exclut les stats déjà capées à +20%
+            uncapped = [s for s in stat_choices
+                        if getattr(ps, s, 0) < state.paladin_initial_stats[s] * 1.2]
+            if uncapped:
+                stat = random.choice(uncapped)
+                increase = max(1, int(state.paladin_initial_stats[stat] * 0.05))
+                current = getattr(ps, stat, 0)
+                setattr(ps, stat, current + increase)
+                logs.append(f"✝️ Passif Paladin : {STAT_FR.get(stat, stat)} +{increase:,} → {current + increase:,}")
 
     return base_phys, base_magic, logs
 
@@ -838,16 +851,15 @@ def enemy_turn(state: CombatState) -> list[str]:
             if enrage_bonus > 0:
                 combined = int(combined * (1 + enrage_bonus))
 
-        # Passif ignore_mdef (Mage) — bonus dégâts basé sur la def mag ignorée
+        # Passif ignore_mdef — bonus dégâts basé sur la def mag ignorée (Mage ou arme donjon)
         ignore_mdef = pe.get("ignore_mdef_pct", 0)
         if ignore_mdef > 0:
-            bonus_dmg = int(ps.m_def * ignore_mdef)
-            combined += bonus_dmg
+            combined += int(ps.m_def * ignore_mdef)
 
-        # Arme donjon : ignore 30% de la Défense Physique et Magique du joueur
-        ignore_def = pe.get("ignore_def_pct", 0)
-        if ignore_def > 0:
-            combined += int(ps.p_def * ignore_def) + int(ps.m_def * ignore_def)
+        # Passif ignore_pdef — bonus dégâts basé sur la def phys ignorée (arme donjon)
+        ignore_pdef = pe.get("ignore_pdef_pct", 0)
+        if ignore_pdef > 0:
+            combined += int(ps.p_def * ignore_pdef)
 
         # Anneau donjon : ramp dégâts cumulé par tour
         if ramp_mult > 1.0:
@@ -1708,59 +1720,99 @@ def build_combat_state(
     stats_bonus_pct : bonus % de stats passif issu des titres débloqués
                       (cumul du bonus contextuel + bonus prestige titre).
     """
+    import json as _json
     from bot.cogs.rpg.models import compute_total_stats, compute_max_hp, get_set_bonus
 
     set_bonus = get_set_bonus(equipment_list)
-    total_stats = compute_total_stats(
+
+    # 1. Stats de base finales = classe + niveau + prestige + équipements (bonus flat panoplie inclus)
+    set_bonus_flat = {k: v for k, v in set_bonus["stats"].items() if not k.endswith("_pct")}
+    base_stats = compute_total_stats(
         player_data["class"], player_data["level"], player_data["prestige_level"],
-        equipment_list, set_bonus["stats"]
+        equipment_list, set_bonus_flat or None
     )
+
+    # 2. Accumulation additive de tous les bonus % (panoplie + titres + runes équip + élixir + nourriture)
+    pct_pool: dict[str, float] = {}
+
+    def _add_pct(stat: str, value: float) -> None:
+        pct_pool[stat] = pct_pool.get(stat, 0.0) + value
+
+    # Bonus panoplie (%)
+    for k, v in set_bonus["stats"].items():
+        if k.endswith("_pct"):
+            _add_pct(k[:-4], v)
+
+    # Bonus titres (%)
+    if stats_bonus_pct:
+        for k in base_stats:
+            _add_pct(k, stats_bonus_pct)
+
+    # Élixir passé en paramètre direct (legacy)
     if elixir:
         for k, v in elixir.items():
-            if k in total_stats:
-                total_stats[k] = int(total_stats[k] * (1 + v / 100))
-    if stats_bonus_pct:
-        mult = 1 + stats_bonus_pct / 100
-        for k in list(total_stats):
-            if k in ("crit_chance", "crit_damage"):
-                total_stats[k] = round(total_stats[k] * mult, 2)
-            else:
-                total_stats[k] = int(total_stats[k] * mult)
+            _add_pct(k, v)
 
-    relic_effects = compute_relic_effects(relics) if relics else {}
+    # Runes posées sur les équipements (%)
+    for eq in equipment_list:
+        rune_data = eq.get("rune_bonuses")
+        if rune_data:
+            try:
+                runes = _json.loads(rune_data) if isinstance(rune_data, str) else rune_data
+                for rstat, rval in runes.items():
+                    _add_pct(rstat, rval)
+            except Exception:
+                pass
 
-    # Buffs alimentaires (stat_def, stat_speed, stat_patk, stat_matk) et élixirs
+    # Élixir et buffs nourriture combat (%)
+    food_buffs: dict = {}
     if not ignore_food_buffs:
         food_buffs = _parse_food_buffs(player_data.get("food_buffs"))
-        # Buffs nourriture combat
-        for stat_key in ("stat_def", "stat_speed", "stat_patk", "stat_matk"):
-            buff = food_buffs.get(stat_key)
-            if buff and buff.get("combats", 0) > 0:
-                stat_map = {"stat_def": ("p_def", "m_def"), "stat_speed": ("speed",),
-                            "stat_patk": ("p_atk",), "stat_matk": ("m_atk",)}
-                pct = buff["value"]
-                for s in stat_map[stat_key]:
-                    if s in total_stats:
-                        total_stats[s] = int(total_stats[s] * (1 + pct / 100))
-        # Buffs élixirs (1 combat, un par type d'effet)
         _elixir_map = {
             "elixir_patk":  ("p_atk",),
             "elixir_matk":  ("m_atk",),
-            "elixir_def":   ("p_def", "m_def"),
+            "elixir_def":   ("p_def", "m_def"),   # legacy (anciens élixirs def combinés)
+            "elixir_def_p": ("p_def",),
+            "elixir_def_m": ("m_def",),
             "elixir_speed": ("speed",),
             "elixir_all":   ("p_atk", "m_atk", "p_def", "m_def", "speed"),
         }
         for ekey, estats in _elixir_map.items():
             ebuff = food_buffs.get(ekey)
             if ebuff and ebuff.get("combats", 0) > 0:
-                pct = ebuff["value"]
                 for s in estats:
-                    if s in total_stats:
-                        total_stats[s] = int(total_stats[s] * (1 + pct / 100))
-        # Élixir critique (bonus flat sur crit_chance)
+                    _add_pct(s, ebuff["value"])
+        _food_stat_map = {
+            "stat_def":   ("p_def", "m_def"),
+            "stat_speed": ("speed",),
+            "stat_patk":  ("p_atk",),
+            "stat_matk":  ("m_atk",),
+        }
+        for stat_key, targets in _food_stat_map.items():
+            buff = food_buffs.get(stat_key)
+            if buff and buff.get("combats", 0) > 0:
+                for s in targets:
+                    _add_pct(s, buff["value"])
+
+    # 3. Application unique — tous les % sont additifs entre eux, appliqués aux stats de base finales
+    total_stats: dict = {}
+    for k, v in base_stats.items():
+        pct = pct_pool.get(k, 0.0)
+        if pct:
+            if k in ("crit_chance", "crit_damage"):
+                total_stats[k] = round(v * (1 + pct / 100), 2)
+            else:
+                total_stats[k] = int(v * (1 + pct / 100))
+        else:
+            total_stats[k] = v
+
+    # Élixir critique (bonus flat sur crit_damage, hors pool %)
+    if not ignore_food_buffs and food_buffs:
         ecrit = food_buffs.get("elixir_crit")
         if ecrit and ecrit.get("combats", 0) > 0:
-            total_stats["crit_chance"] = total_stats.get("crit_chance", 0) + ecrit["value"]
+            total_stats["crit_damage"] = total_stats.get("crit_damage", 0) + ecrit["value"]
+
+    relic_effects = compute_relic_effects(relics) if relics else {}
 
     ps = CombatStats.from_dict(total_stats)
     max_hp = compute_max_hp(total_stats)

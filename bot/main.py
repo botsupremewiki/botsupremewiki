@@ -89,6 +89,33 @@ async def on_ready():
 async def setup_hook():
     """Appelé avant le démarrage de la session du bot."""
     bot.add_view(CasinoWelcomeView(bot))
+
+    # ── Startup message queue ─────────────────────────────────────
+    # Chaque cog enfile ses coroutines via bot._startup_queue.put_nowait().
+    # Le worker les traite séquentiellement avec 2s d'intervalle.
+    bot._startup_queue = asyncio.Queue()
+
+    async def _run_startup_queue():
+        await bot.wait_until_ready()
+        count = 0
+        while True:
+            try:
+                coro_fn = await asyncio.wait_for(bot._startup_queue.get(), timeout=10.0)
+            except asyncio.TimeoutError:
+                break
+            try:
+                await coro_fn()
+            except Exception as e:
+                logger.error("startup queue: %s", e)
+            count += 1
+            await asyncio.sleep(1.3)
+        logger.info(
+            "Tous les messages (%d) ont été créés dans les salons dédiés", count
+        )
+
+    asyncio.create_task(_run_startup_queue())
+    # ─────────────────────────────────────────────────────────────
+
     await load_cogs()
 
 bot.setup_hook = setup_hook

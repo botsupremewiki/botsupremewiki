@@ -671,7 +671,7 @@ class AcceptChallengeView(discord.ui.View):
         await asyncio.sleep(8)
         try:
             await interaction.message.delete()
-        except Exception:
+        except discord.HTTPException:
             pass
 
     async def on_timeout(self):
@@ -1155,31 +1155,9 @@ class PvPCombatView(discord.ui.View):
             t_losses = t_db.get("pvp_losses", 0)
 
             # Nettoyer les buffs de combat utilisés
-            import json as _json
-            _FOOD_COMBAT_KEYS = ("stat_def", "stat_speed", "stat_patk", "stat_matk",
-                                 "elixir_patk", "elixir_matk", "elixir_def",
-                                 "elixir_speed", "elixir_crit", "elixir_all")
-            async def _clear_pvp_buffs(uid: int, player_data: dict):
-                fb = {}
-                try:
-                    raw = player_data.get("food_buffs")
-                    if raw:
-                        fb = _json.loads(raw)
-                except Exception:
-                    pass
-                changed = False
-                for k in _FOOD_COMBAT_KEYS:
-                    if k in fb:
-                        fb[k]["combats"] = fb[k].get("combats", 1) - 1
-                        if fb[k]["combats"] <= 0:
-                            del fb[k]
-                        changed = True
-                if changed:
-                    await db.update_player(uid, food_buffs=_json.dumps(fb) if fb else None)
-
             if session.use_buffs:
-                await _clear_pvp_buffs(session.challenger_id, c_db)
-                await _clear_pvp_buffs(session.target_id, t_db)
+                await db.consume_food_buffs(session.challenger_id)
+                await db.consume_food_buffs(session.target_id)
 
             await db.update_player(
                 session.challenger_id, in_combat=0,
