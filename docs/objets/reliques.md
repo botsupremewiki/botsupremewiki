@@ -132,4 +132,4 @@ Les reliques sont distribuées à l'issue de chaque événement World Boss en fo
 
 - **Top 3** : l'objectif idéal. Les reliques Prismatique, Transcendante et Divine ont les valeurs les plus élevées et représentent un avantage majeur.
 - **Top 10** : très rentable. Les reliques Artefact à Rare offrent un bon gain pour un effort de participation standard.
-- **Au-delà du top 10** : même une Relique Commune et 200 gold contribuent à votre progression sur la durée.
+- **Au-delà du top 10** : même une Relique Commune et 50 000 gold contribuent à votre progression sur la durée.

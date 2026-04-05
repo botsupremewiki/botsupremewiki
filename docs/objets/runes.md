@@ -2,154 +2,106 @@
 
 Les Runes sont fabriquées par l'**Enchanteur**. Elles s'utilisent avant un combat pour booster une statistique spécifique. Contrairement aux élixirs de l'Alchimiste, les runes donnent des boosts **en pourcentage**.
 
-Les runes existent en **10 paliers** (Infime → Ultime), débloqués progressivement avec ton niveau d'Enchanteur. Les paliers se débloquent aux niveaux **1 / 10 / 20 / 30 / 40 / 50 / 60 / 70 / 80 / 90**.
-
-!!! tip "Cumul avec les Élixirs"
-    Runes et élixirs de l'Alchimiste se **cumulent** — combine les deux avant un combat difficile pour un effet maximal.
-
-!!! note "Récompense quotidienne"
-    La récompense journalière peut accorder une rune aléatoire parmi les **6 types × 9 paliers** (t1–t9, version Ultime et Rune Divine exclues).
-
 ---
 
-## Crafting — Ingrédients requis
+=== "🔴 Rune de Force"
 
-Toutes les runes sont fabriquées via le menu **Enchanteur** (`/metiers`).
+    Augmente l'**Attaque Physique** pour le combat. Recette : ⛏️ Mineur + 🏹 Chasseur du même tier.
 
-=== "🔴 Rune de Force — P.ATK %"
+    | Nom | Bonus | Niv. Enchanteur | ⛏️ Mineur | 🏹 Chasseur |
+    |-----|:-----:|:---------------:|----------|------------|
+    | 🔴 Infime Rune de Force | +5% ATK Phy. | 1 | 🪨 Minerai de Fer ×3 | 🐺 Cuir de Loup ×2 |
+    | 🔴 Léger Rune de Force | +10% | 10 | ⛏️ Minerai d'Acier ×4 | 🦌 Cuir de Cerf ×3 |
+    | 🔴 Petit Rune de Force | +15% | 20 | 💎 Minerai de Mithril ×5 | 🐍 Écailles de Serpent ×3 |
+    | 🔴 Mineur Rune de Force | +20% | 30 | 🔷 Adamantium Brut ×6 | 🦅 Plumes de Phénix ×4 |
+    | 🔴 Standard Rune de Force | +25% | 40 | 🔥 Pierre de Feu ×7 | 🦷 Croc de Goule ×5 |
+    | 🔴 Grand Rune de Force | +30% | 50 | ❄️ Pierre de Glace ×8 | 🦁 Griffe de Griffon ×5 |
+    | 🔴 Fort Rune de Force | +35% | 60 | 🟠 Orichalque ×10 | 🐉 Peau de Dragon ×6 |
+    | 🔴 Puissant Rune de Force | +40% | 70 | ⚡ Pierre de Foudre ×12 | 💀 Os de Chimère ×7 |
+    | 🔴 Suprême Rune de Force | +45% | 80 | 🔮 Cristal Brut ×14 | ☠️ Venin de Basilic ×9 |
+    | 🔴 Ultime Rune de Force | +50% | 90 | 💠 Diamant Brut ×16 | ❤️ Cœur de Bête ×10 |
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | 🔴 Infime Rune de Force | +1% | 1 | 🪨 Minerai de Fer ×3 | 🐺 Cuir de Loup ×2 | 150 |
-    | 🔴 Mineure Rune de Force | +2% | 10 |⛏️ Minerai d'Acier ×4 | 🦌 Cuir de Cerf ×2 | 450 |
-    | 🔴 Petite Rune de Force | +3% | 20 |💎 Minerai de Mithril ×4 | 🐍 Écailles de Serpent ×3 | 1 200 |
-    | 🔴 Légère Rune de Force | +4% | 30 |🔷 Adamantium Brut ×5 | 🦅 Plumes de Phénix ×3 | 3 000 |
-    | 🔴 Rune de Force | +5% | 40 |🔥 Pierre de Feu ×5 | 🦷 Croc de Goule ×4 | 9 000 |
-    | 🔴 Grande Rune de Force | +6% | 50 |❄️ Pierre de Glace ×6 | 🦁 Griffe de Griffon ×4 | 24 000 |
-    | 🔴 Forte Rune de Force | +7% | 60 |🟠 Orichalque ×6 | 🐉 Peau de Dragon ×5 | 60 000 |
-    | 🔴 Puissante Rune de Force | +8% | 70 |⚡ Pierre de Foudre ×7 | 💀 Os de Chimère ×5 | 180 000 |
-    | 🔴 Giga Rune de Force | +9% | 80 |🔮 Cristal Brut ×7 | ☠️ Venin de Basilic ×6 | 480 000 |
-    | 🔴 Rune de Force Ultime | +10% | 90 |💠 Diamant Brut ×8 | ❤️ Cœur de Bête ×6 | 1 500 000 |
+=== "🔵 Rune de Magie"
 
-=== "🔵 Rune de Magie — M.ATK %"
+    Augmente l'**Attaque Magique** pour le combat. Recette : ⛏️ Mineur + 🌿 Herboriste du même tier.
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | 🔵 Infime Rune de Magie | +1% | 1 | 🪨 Minerai de Fer ×3 | 🌿 Herbe de Soin ×2 | 150 |
-    | 🔵 Mineure Rune de Magie | +2% | 10 |⛏️ Minerai d'Acier ×4 | 💧 Herbe de Mana ×2 | 450 |
-    | 🔵 Petite Rune de Magie | +3% | 20 |💎 Minerai de Mithril ×4 | 🌱 Racine de Force ×3 | 1 200 |
-    | 🔵 Légère Rune de Magie | +4% | 30 |🔷 Adamantium Brut ×5 | 🌸 Fleur de Lune ×3 | 3 000 |
-    | 🔵 Rune de Magie | +5% | 40 |🔥 Pierre de Feu ×5 | 🌼 Pollen Doré ×4 | 9 000 |
-    | 🔵 Grande Rune de Magie | +6% | 50 |❄️ Pierre de Glace ×6 | 🍄 Champignon Vénéneux ×4 | 24 000 |
-    | 🔵 Forte Rune de Magie | +7% | 60 |🟠 Orichalque ×6 | 🔮 Cristal Végétal ×5 | 60 000 |
-    | 🔵 Puissante Rune de Magie | +8% | 70 |⚡ Pierre de Foudre ×7 | 🌾 Mousse Ancienne ×5 | 180 000 |
-    | 🔵 Giga Rune de Magie | +9% | 80 |🔮 Cristal Brut ×7 | 🌵 Épine de Dragon ×6 | 480 000 |
-    | 🔵 Rune de Magie Ultime | +10% | 90 |💠 Diamant Brut ×8 | 🖤 Lotus de l'Ombre ×6 | 1 500 000 |
+    | Nom | Bonus | Niv. Enchanteur | ⛏️ Mineur | 🌿 Herboriste |
+    |-----|:-----:|:---------------:|----------|--------------|
+    | 🔵 Infime Rune de Magie | +5% ATK Mag. | 1 | 🪨 Minerai de Fer ×3 | 🌿 Herbe de Soin ×2 |
+    | 🔵 Léger Rune de Magie | +10% | 10 | ⛏️ Minerai d'Acier ×4 | 💧 Herbe de Mana ×3 |
+    | 🔵 Petit Rune de Magie | +15% | 20 | 💎 Minerai de Mithril ×5 | 🌱 Racine de Force ×3 |
+    | 🔵 Mineur Rune de Magie | +20% | 30 | 🔷 Adamantium Brut ×6 | 🌸 Fleur de Lune ×4 |
+    | 🔵 Standard Rune de Magie | +25% | 40 | 🔥 Pierre de Feu ×7 | 🌼 Pollen Doré ×5 |
+    | 🔵 Grand Rune de Magie | +30% | 50 | ❄️ Pierre de Glace ×8 | 🍄 Champignon Vénéneux ×5 |
+    | 🔵 Fort Rune de Magie | +35% | 60 | 🟠 Orichalque ×10 | 🔮 Cristal Végétal ×6 |
+    | 🔵 Puissant Rune de Magie | +40% | 70 | ⚡ Pierre de Foudre ×12 | 🌾 Mousse Ancienne ×7 |
+    | 🔵 Suprême Rune de Magie | +45% | 80 | 🔮 Cristal Brut ×14 | 🌵 Épine de Dragon ×9 |
+    | 🔵 Ultime Rune de Magie | +50% | 90 | 💠 Diamant Brut ×16 | 🖤 Lotus de l'Ombre ×10 |
 
-=== "🟡 Rune de Déf. Physique — P.DEF %"
+=== "🟢 Rune de Déf. Physique"
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | 🟡 Infime Rune de Déf. Physique | +1% | 1 | 🪨 Minerai de Fer ×3 | 🐺 Cuir de Loup ×2 | 150 |
-    | 🟡 Mineure Rune de Déf. Physique | +2% | 10 |⛏️ Minerai d'Acier ×4 | 🦌 Cuir de Cerf ×2 | 450 |
-    | 🟡 Petite Rune de Déf. Physique | +3% | 20 |💎 Minerai de Mithril ×4 | 🐍 Écailles de Serpent ×3 | 1 200 |
-    | 🟡 Légère Rune de Déf. Physique | +4% | 30 |🔷 Adamantium Brut ×5 | 🦅 Plumes de Phénix ×3 | 3 000 |
-    | 🟡 Rune de Déf. Physique | +5% | 40 |🔥 Pierre de Feu ×5 | 🦷 Croc de Goule ×4 | 9 000 |
-    | 🟡 Grande Rune de Déf. Physique | +6% | 50 |❄️ Pierre de Glace ×6 | 🦁 Griffe de Griffon ×4 | 24 000 |
-    | 🟡 Forte Rune de Déf. Physique | +7% | 60 |🟠 Orichalque ×6 | 🐉 Peau de Dragon ×5 | 60 000 |
-    | 🟡 Puissante Rune de Déf. Physique | +8% | 70 |⚡ Pierre de Foudre ×7 | 💀 Os de Chimère ×5 | 180 000 |
-    | 🟡 Giga Rune de Déf. Physique | +9% | 80 |🔮 Cristal Brut ×7 | ☠️ Venin de Basilic ×6 | 480 000 |
-    | 🟡 Rune de Déf. Physique Ultime | +10% | 90 |💠 Diamant Brut ×8 | ❤️ Cœur de Bête ×6 | 1 500 000 |
+    Augmente la **Défense Physique** pour le combat. Recette : ⛏️ Mineur + 🪓 Bûcheron du même tier.
 
-=== "🟢 Rune de Déf. Magique — M.DEF %"
+    | Nom | Bonus | Niv. Enchanteur | ⛏️ Mineur | 🪓 Bûcheron |
+    |-----|:-----:|:---------------:|----------|------------|
+    | 🟢 Infime Rune de Déf. Physique | +5% DEF Phy. | 1 | 🪨 Minerai de Fer ×3 | 🌳 Bois de Chêne ×2 |
+    | 🟢 Léger Rune de Déf. Physique | +10% | 10 | ⛏️ Minerai d'Acier ×4 | 🌲 Bois de Sapin ×3 |
+    | 🟢 Petit Rune de Déf. Physique | +15% | 20 | 💎 Minerai de Mithril ×5 | 🪵 Bois d'Ébène ×3 |
+    | 🟢 Mineur Rune de Déf. Physique | +20% | 30 | 🔷 Adamantium Brut ×6 | 🪵 Bois de Teck ×4 |
+    | 🟢 Standard Rune de Déf. Physique | +25% | 40 | 🔥 Pierre de Feu ×7 | 🪵 Bois de Cèdre ×5 |
+    | 🟢 Grand Rune de Déf. Physique | +30% | 50 | ❄️ Pierre de Glace ×8 | ✨ Bois Enchanté ×5 |
+    | 🟢 Fort Rune de Déf. Physique | +35% | 60 | 🟠 Orichalque ×10 | 🔴 Bois de Sang ×6 |
+    | 🟢 Puissant Rune de Déf. Physique | +40% | 70 | ⚡ Pierre de Foudre ×12 | 🌙 Bois de Lune ×7 |
+    | 🟢 Suprême Rune de Déf. Physique | +45% | 80 | 🔮 Cristal Brut ×14 | 🔥 Bois de Feu ×9 |
+    | 🟢 Ultime Rune de Déf. Physique | +50% | 90 | 💠 Diamant Brut ×16 | 🐉 Bois de Dragon ×10 |
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | 🟢 Infime Rune de Déf. Magique | +1% | 1 | 🪨 Minerai de Fer ×3 | 🌿 Herbe de Soin ×2 | 150 |
-    | 🟢 Mineure Rune de Déf. Magique | +2% | 10 |⛏️ Minerai d'Acier ×4 | 💧 Herbe de Mana ×2 | 450 |
-    | 🟢 Petite Rune de Déf. Magique | +3% | 20 |💎 Minerai de Mithril ×4 | 🌱 Racine de Force ×3 | 1 200 |
-    | 🟢 Légère Rune de Déf. Magique | +4% | 30 |🔷 Adamantium Brut ×5 | 🌸 Fleur de Lune ×3 | 3 000 |
-    | 🟢 Rune de Déf. Magique | +5% | 40 |🔥 Pierre de Feu ×5 | 🌼 Pollen Doré ×4 | 9 000 |
-    | 🟢 Grande Rune de Déf. Magique | +6% | 50 |❄️ Pierre de Glace ×6 | 🍄 Champignon Vénéneux ×4 | 24 000 |
-    | 🟢 Forte Rune de Déf. Magique | +7% | 60 |🟠 Orichalque ×6 | 🔮 Cristal Végétal ×5 | 60 000 |
-    | 🟢 Puissante Rune de Déf. Magique | +8% | 70 |⚡ Pierre de Foudre ×7 | 🌾 Mousse Ancienne ×5 | 180 000 |
-    | 🟢 Giga Rune de Déf. Magique | +9% | 80 |🔮 Cristal Brut ×7 | 🌵 Épine de Dragon ×6 | 480 000 |
-    | 🟢 Rune de Déf. Magique Ultime | +10% | 90 |💠 Diamant Brut ×8 | 🖤 Lotus de l'Ombre ×6 | 1 500 000 |
+=== "🟣 Rune de Déf. Magique"
 
-=== "⚡ Rune de Vitesse — Vitesse %"
+    Augmente la **Défense Magique** pour le combat. Recette : 🪓 Bûcheron + 🌿 Herboriste du même tier.
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | ⚡ Infime Rune de Vitesse | +1% | 1 | 🐺 Cuir de Loup ×3 | 🌿 Herbe de Soin ×2 | 150 |
-    | ⚡ Mineure Rune de Vitesse | +2% | 10 |🦌 Cuir de Cerf ×4 | 💧 Herbe de Mana ×2 | 450 |
-    | ⚡ Petite Rune de Vitesse | +3% | 20 |🐍 Écailles de Serpent ×4 | 🌱 Racine de Force ×3 | 1 200 |
-    | ⚡ Légère Rune de Vitesse | +4% | 30 |🦅 Plumes de Phénix ×5 | 🌸 Fleur de Lune ×3 | 3 000 |
-    | ⚡ Rune de Vitesse | +5% | 40 |🦷 Croc de Goule ×5 | 🌼 Pollen Doré ×4 | 9 000 |
-    | ⚡ Grande Rune de Vitesse | +6% | 50 |🦁 Griffe de Griffon ×6 | 🍄 Champignon Vénéneux ×4 | 24 000 |
-    | ⚡ Forte Rune de Vitesse | +7% | 60 |🐉 Peau de Dragon ×6 | 🔮 Cristal Végétal ×5 | 60 000 |
-    | ⚡ Puissante Rune de Vitesse | +8% | 70 |💀 Os de Chimère ×7 | 🌾 Mousse Ancienne ×5 | 180 000 |
-    | ⚡ Giga Rune de Vitesse | +9% | 80 |☠️ Venin de Basilic ×7 | 🌵 Épine de Dragon ×6 | 480 000 |
-    | ⚡ Rune de Vitesse Ultime | +10% | 90 |❤️ Cœur de Bête ×8 | 🖤 Lotus de l'Ombre ×6 | 1 500 000 |
+    | Nom | Bonus | Niv. Enchanteur | 🪓 Bûcheron | 🌿 Herboriste |
+    |-----|:-----:|:---------------:|------------|--------------|
+    | 🟣 Infime Rune de Déf. Magique | +5% DEF Mag. | 1 | 🌳 Bois de Chêne ×3 | 🌿 Herbe de Soin ×2 |
+    | 🟣 Léger Rune de Déf. Magique | +10% | 10 | 🌲 Bois de Sapin ×4 | 💧 Herbe de Mana ×3 |
+    | 🟣 Petit Rune de Déf. Magique | +15% | 20 | 🪵 Bois d'Ébène ×5 | 🌱 Racine de Force ×3 |
+    | 🟣 Mineur Rune de Déf. Magique | +20% | 30 | 🪵 Bois de Teck ×6 | 🌸 Fleur de Lune ×4 |
+    | 🟣 Standard Rune de Déf. Magique | +25% | 40 | 🪵 Bois de Cèdre ×7 | 🌼 Pollen Doré ×5 |
+    | 🟣 Grand Rune de Déf. Magique | +30% | 50 | ✨ Bois Enchanté ×8 | 🍄 Champignon Vénéneux ×5 |
+    | 🟣 Fort Rune de Déf. Magique | +35% | 60 | 🔴 Bois de Sang ×10 | 🔮 Cristal Végétal ×6 |
+    | 🟣 Puissant Rune de Déf. Magique | +40% | 70 | 🌙 Bois de Lune ×12 | 🌾 Mousse Ancienne ×7 |
+    | 🟣 Suprême Rune de Déf. Magique | +45% | 80 | 🔥 Bois de Feu ×14 | 🌵 Épine de Dragon ×9 |
+    | 🟣 Ultime Rune de Déf. Magique | +50% | 90 | 🐉 Bois de Dragon ×16 | 🖤 Lotus de l'Ombre ×10 |
 
-=== "🎯 Rune de Critique — Crit% +"
+=== "🟡 Rune de Vitesse"
 
-    | Rune | Bonus | Niv. Enchanteur | Mat. 1 | Mat. 2 | Valeur |
-    |------|:-----:|:---------------:|--------|--------|-------:|
-    | 🎯 Infime Rune de Critique | +1% | 1 | 🐺 Cuir de Loup ×3 | 🌿 Herbe de Soin ×2 | 150 |
-    | 🎯 Mineure Rune de Critique | +2% | 10 |🦌 Cuir de Cerf ×4 | 💧 Herbe de Mana ×2 | 450 |
-    | 🎯 Petite Rune de Critique | +3% | 20 |🐍 Écailles de Serpent ×4 | 🌱 Racine de Force ×3 | 1 200 |
-    | 🎯 Légère Rune de Critique | +4% | 30 |🦅 Plumes de Phénix ×5 | 🌸 Fleur de Lune ×3 | 3 000 |
-    | 🎯 Rune de Critique | +5% | 40 |🦷 Croc de Goule ×5 | 🌼 Pollen Doré ×4 | 9 000 |
-    | 🎯 Grande Rune de Critique | +6% | 50 |🦁 Griffe de Griffon ×6 | 🍄 Champignon Vénéneux ×4 | 24 000 |
-    | 🎯 Forte Rune de Critique | +7% | 60 |🐉 Peau de Dragon ×6 | 🔮 Cristal Végétal ×5 | 60 000 |
-    | 🎯 Puissante Rune de Critique | +8% | 70 |💀 Os de Chimère ×7 | 🌾 Mousse Ancienne ×5 | 180 000 |
-    | 🎯 Giga Rune de Critique | +9% | 80 |☠️ Venin de Basilic ×7 | 🌵 Épine de Dragon ×6 | 480 000 |
-    | 🎯 Rune de Critique Ultime | +10% | 90 |❤️ Cœur de Bête ×8 | 🖤 Lotus de l'Ombre ×6 | 1 500 000 |
+    Augmente la **Vitesse** pour le combat. Recette : 🏹 Chasseur + 🌾 Fermier du même tier.
 
-=== "✨ Rune Divine — Toutes stats"
+    | Nom | Bonus | Niv. Enchanteur | 🏹 Chasseur | 🌾 Fermier |
+    |-----|:-----:|:---------------:|------------|-----------|
+    | 🟡 Infime Rune de Vitesse | +5% Vitesse | 1 | 🐺 Cuir de Loup ×3 | 🌾 Blé ×2 |
+    | 🟡 Léger Rune de Vitesse | +10% | 10 | 🦌 Cuir de Cerf ×4 | 🌾 Orge ×3 |
+    | 🟡 Petit Rune de Vitesse | +15% | 20 | 🐍 Écailles de Serpent ×5 | 🌽 Farine de Maïs ×3 |
+    | 🟡 Mineur Rune de Vitesse | +20% | 30 | 🦅 Plumes de Phénix ×6 | 🌿 Herbes Aromatiques ×4 |
+    | 🟡 Standard Rune de Vitesse | +25% | 40 | 🦷 Croc de Goule ×7 | 🫐 Baies Sauvages ×5 |
+    | 🟡 Grand Rune de Vitesse | +30% | 50 | 🦁 Griffe de Griffon ×8 | 🦄 Lait de Licorne ×5 |
+    | 🟡 Fort Rune de Vitesse | +35% | 60 | 🐉 Peau de Dragon ×10 | 🍯 Miel Enchanté ×6 |
+    | 🟡 Puissant Rune de Vitesse | +40% | 70 | 💀 Os de Chimère ×12 | 🧂 Sel de Mer ×7 |
+    | 🟡 Suprême Rune de Vitesse | +45% | 80 | ☠️ Venin de Basilic ×14 | 🌶️ Épices Rares ×9 |
+    | 🟡 Ultime Rune de Vitesse | +50% | 90 | ❤️ Cœur de Bête ×16 | 🍑 Fruit du Paradis ×10 |
 
-    La **Rune Divine** est le consommable ultime de l'Enchanteur. Elle booste **toutes les statistiques de combat** simultanément en pourcentage.
+=== "✨ Rune Divine"
 
-    | Rune | Effet | Niv. Enchanteur | Mat. 1 | Mat. 2 | Mat. 3 | Qté | Valeur |
-    |------|-------|:---------------:|--------|--------|--------|:---:|-------:|
-    | ✨ Rune Divine | +10% à **toutes les stats** | 100 | 💠 Diamant Brut ×50 | 🖤 Lotus de l'Ombre ×40 | ❤️ Cœur de Bête ×40 | 1 | 5 000 000 |
+    La Rune Divine booste **toutes les statistiques** de combat simultanément. Recette à **5 ingrédients** T10.
 
-    !!! warning "Recette d'endgame absolu"
-        La Rune Divine requiert le **niveau 100** d'Enchanteur et des matériaux de tiers 10 des trois professions (Mineur + Herboriste + Chasseur). Réserve-la aux combats les plus exigeants.
-
----
-
-## Tableau récapitulatif — Familles de runes
-
-| Rune | Effet | T1 | T2 | T3 | T4 | T5 | T6 | T7 | T8 | T9 | T10 |
-|------|-------|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:--:|:---:|
-| 🔴 Rune de Force | P.ATK % | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-| 🔵 Rune de Magie | M.ATK % | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-| 🟡 Rune de Déf. Phy. | P.DEF % | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-| 🟢 Rune de Déf. Mag. | M.DEF % | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-| ⚡ Rune de Vitesse | Vitesse % | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-| 🎯 Rune de Critique | Crit% + | +1% | +2% | +3% | +4% | +5% | +6% | +7% | +8% | +9% | +10% |
-
-Paliers : T1 = Niv.1 · T2 = Niv.10 · T3 = Niv.20 · T4 = Niv.30 · T5 = Niv.40 · T6 = Niv.50 · T7 = Niv.60 · T8 = Niv.70 · T9 = Niv.80 · T10 = Niv.90
-
----
-
-## Ingrédients par famille
-
-!!! info "Professions requises pour l'Enchanteur"
-    Les runes mélangent matériaux de **Mineur** + **Chasseur** pour les runes physiques (Force, Déf. Phy.), **Mineur** + **Herboriste** pour les runes magiques (Magie, Déf. Mag.), et **Chasseur** + **Herboriste** pour les runes hybrides (Vitesse, Critique).
-
-| Famille | Professions | Progression des matériaux (T1→T10) |
-|---------|:-----------:|-------------------------------------|
-| 🔴 Force / 🟡 Déf. Phy. | Mineur + Chasseur | Fer→Acier→Mithril→Adamantium→P. Feu→P. Glace→Orichalque→P. Foudre→Cristal Brut→Diamant Brut + Cuir Loup→Cuir Cerf→Écailles→Plumes→Croc Goule→Griffe Griff→Peau Dragon→Os Chimère→Venin Basil→Cœur Bête |
-| 🔵 Magie / 🟢 Déf. Mag. | Mineur + Herboriste | Fer→Acier→Mithril→Adamantium→P. Feu→P. Glace→Orichalque→P. Foudre→Cristal Brut→Diamant Brut + Herbe Soin→Herbe Mana→Racine Force→Fleur Lune→Pollen Doré→Champi Venin→Cristal Végétal→Mousse Ancienne→Épine Dragon→Lotus Ombre |
-| ⚡ Vitesse / 🎯 Critique | Chasseur + Herboriste | Cuir Loup→Cuir Cerf→Écailles→Plumes→Croc Goule→Griffe Griff→Peau Dragon→Os Chimère→Venin Basil→Cœur Bête + Herbe Soin→Herbe Mana→Racine Force→Fleur Lune→Pollen Doré→Champi Venin→Cristal Végétal→Mousse Ancienne→Épine Dragon→Lotus Ombre |
+    | Nom | Effet | Niv. Enchanteur | Ingrédients |
+    |-----|-------|:---------------:|-------------|
+    | ✨ Rune Divine | +100% à toutes les stats | 100 | 💠 Diamant Brut ×10 · 🖤 Lotus de l'Ombre ×10 · ❤️ Cœur de Bête ×10 · 🐉 Bois de Dragon ×8 · 🍑 Fruit du Paradis ×8 |
 
 ---
 
 ## Voir aussi
 
-- [Métiers de Conception](../metiers/conception.md) — recettes Enchanteur complètes
-- [Récolte](../metiers/recolte.md) — Mineur, Chasseur et Herboriste
+- [Métiers de Conception](../metiers/conception.md) — menu Enchanteur complet
+- [Récolte](../metiers/recolte.md) — Mineur, Chasseur, Herboriste, Bûcheron, Fermier
 - [Potions & Élixirs](potions.md) — consommables de l'Alchimiste (soins & boosts)
 - [Nourritures](nourriture.md) — consommables du Boulanger (énergie)

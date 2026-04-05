@@ -1,6 +1,9 @@
-# ✝️ Paladin
+# ✝️ Paladin ✨
 
 Le Paladin est un tank offensif qui **renforce progressivement toutes ses stats** au fil du combat. Avec les meilleures défenses du jeu et une montée en puissance constante, il excelle aussi bien en solo face aux boss qu'en Raid où ses bénédictions profitent à toute l'équipe.
+
+!!! info "Classe Premium"
+    Le Paladin nécessite le rôle **Premium** pour être sélectionné.
 
 ---
 
@@ -27,15 +30,14 @@ Le Paladin a **50% de chance d'augmenter une stat aléatoire de 5%** (max **+20%
 
 ## Ressource — Rage
 
-La Rage se régénère automatiquement : **+10 par tour** et **+5 à chaque coup reçu**.
-Elle est plafonnée à **100**.
+La Rage se régénère de **+5 au début de ton tour** et de **+15 à la fin du tour ennemi**. Elle est plafonnée à **100**.
 
 ---
 
 ## Sorts
 
 === "✝️ Frappe Sacrée"
-    **Coût :** 20 Rage — **Temps de recharge :** aucun
+    **Coût :** 20 Rage — **Temps de recharge :** 1 tour
 
     Inflige **×1.6 dégâts physiques** et génère un **bouclier égal à 15% des PV max**.
 
@@ -45,7 +47,7 @@ Elle est plafonnée à **100**.
     Réduit sa vitesse de **-30%**, génère un **bouclier de 20% des PV max**, et augmente **ATK Phy, Déf Phy+Mag et Pén Phy de +20% pendant 2 tours**.
 
 === "⚡ Châtiment Divin (Ultime)"
-    **Coût :** 80 Rage — **Temps de recharge :** 7 tours
+    **Coût :** 80 Rage — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
 
     Inflige des dégâts égaux à la **somme de toutes ses stats de combat** (ignore la défense).
 
@@ -54,7 +56,7 @@ Elle est plafonnée à **100**.
 ## Conseils
 
 - **Frappe Sacrée** est ton attaque principale — elle frappe fort (×1.6) et génère un bouclier à chaque utilisation.
-- **Pénitence** est maintenant sécurisée : le bouclier de 20% PV max couvre la fenêtre de vulnérabilité due à la réduction de vitesse.
+- **Pénitence** est sécurisée grâce au bouclier de 20% PV max qui couvre la fenêtre de vulnérabilité due à la réduction de vitesse.
 - Enchaîne **Pénitence** → attendre que les buffs expirent → **Châtiment Divin** pour un burst maximal : les stats boostées rentrent dans le calcul.
 - Le passif proc à **50%** — dans les combats longs, tu accumules facilement +10/+15% sur plusieurs stats avant ton ultime.
 - En Raid, le passif **buff toute l'équipe** à chaque proc — le Paladin est l'amplificateur passif le plus puissant du jeu en groupe.

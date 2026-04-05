@@ -27,33 +27,33 @@ Le Support est la classe de **soutien, de survie et d'attaque polyvalente**. Il 
 
 ## Ressource — Mana
 
-Le Mana se régénère de **+12 par tour**. Il est plafonné à **100**.
+Le Mana se régénère de **+15 au début de ton tour**. Il est plafonné à **100**.
 
 ---
 
 ## Sorts
 
 === "💚 Frappe Régénérante"
-    **Coût :** 15 Mana — **Temps de recharge :** aucun
+    **Coût :** 15 Mana — **Temps de recharge :** 1 tour
 
-    Inflige **×1.0 dégâts physiques et magiques combinés**, puis se soigne de **35% des PV max**.
+    Inflige **×1.5 dégâts physiques et magiques combinés**, puis se soigne de **12% des PV max**.
 
 === "💫 Frappe d'Affaiblissement"
     **Coût :** 20 Mana — **Temps de recharge :** 3 tours
 
-    Inflige **×1.2 dégâts (physiques + magiques)** et réduit les dégâts ennemis de **30% pendant 3 tours**.
+    Inflige **×2.5 dégâts (physiques + magiques)** et réduit les dégâts ennemis de **25% pendant 2 tours**.
 
 === "🌟 Renvoi Sacré (Ultime)"
-    **Coût :** 80 Mana — **Temps de recharge :** 7 tours
+    **Coût :** 80 Mana — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
 
-    Inflige **×2.0 dégâts combinés**, puis active un bouclier pendant **3 tours** : renvoie **40% des dégâts reçus** à l'ennemi et réduit **35% des dégâts restants**.
+    Inflige **×3.5 dégâts combinés**, puis active un bouclier pendant **3 tours** : renvoie **40% des dégâts reçus** à l'ennemi et réduit **35% des dégâts restants**.
 
 ---
 
 ## Conseils
 
-- Le Support est la classe la plus polyvalente — il inflige, soigne et protège dans le même rotation.
-- **Frappe Régénérante** soigne 35% des PV max à chaque utilisation — utilise-la dès que tu descends sous 60% pour te maintenir en vie indéfiniment.
-- **Frappe d'Affaiblissement** réduit les dégâts ennemis de 30% pendant 3 tours — applique-la tôt pour réduire toute la pression du combat.
+- Le Support est la classe la plus polyvalente — il inflige, soigne et protège dans la même rotation.
+- **Frappe Régénérante** est ton attaque principale — elle inflige ×1.5 dégâts ET te soigne de 12% HP max. Utilise-la régulièrement pour te maintenir en vie.
+- **Frappe d'Affaiblissement** réduit les dégâts ennemis de 25% pendant 2 tours — applique-la tôt pour réduire toute la pression du combat.
 - **Renvoi Sacré** est l'ultime défensive et offensive : tu infliges des dégâts ET tu forces l'ennemi à s'endommager lui-même pendant 3 tours.
 - En Raid, le Support est **indispensable** : ses réductions de dégâts et son renvoi profitent à toute l'équipe.

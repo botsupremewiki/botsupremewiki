@@ -1,331 +1,356 @@
 # 🧪 Métiers de Conception
 
-Les métiers de conception fabriquent des **consommables** utilisables en combat ou hors combat. Chaque recette n'utilise que des matériaux du **tier correspondant à son niveau requis**.
+Les métiers de conception fabriquent des **consommables** utilisables en combat ou hors combat. Chaque recette utilise **2 matériaux** du même tier que le niveau de métier requis.
 
 ---
 
-## 🧪 Alchimiste
+=== "🧪 Alchimiste"
 
-Fabrique des **potions de soin** et des **élixirs de statistiques** à partir de plantes de l'Herboriste.
+    Fabrique des **potions de soin** et des **élixirs de statistiques** (durée **10 tours**) à partir de matières premières. Les familles de matériaux varient selon le type de craft.
 
-### Potions de Soin — heal % des PV max
+    === "💚 Potions de Soin"
 
-| Item | Effet | Niv. requis | Tier | Ingrédient |
-|------|:-----:|:-----------:|:----:|-----------|
-| 🧪 Infime Potion de Soin | Soin 10% | 1 | T1 | 🌿 Herbe de Soin ×3 |
-| 🧪 Légère Potion de Soin | Soin 20% | 10 | T2 | 💧 Herbe de Mana ×4 |
-| 🧪 Petite Potion de Soin | Soin 30% | 20 | T3 | 🌱 Racine de Force ×4 |
-| 💊 Potion de Soin | Soin 40% | 30 | T4 | 🌸 Fleur de Lune ×5 |
-| 💊 Grande Potion de Soin | Soin 50% | 40 | T5 | 🌼 Pollen Doré ×5 |
-| 💊 Forte Potion de Soin | Soin 60% | 50 | T6 | 🍄 Champignon Vénéneux ×6 |
-| ✨ Puissante Potion de Soin | Soin 70% | 60 | T7 | 🔮 Cristal Végétal ×6 |
-| ✨ Giga Potion de Soin | Soin 80% | 70 | T8 | 🌾 Mousse Ancienne ×7 |
-| 🌟 Suprême Potion de Soin | Soin 90% | 80 | T9 | 🌵 Épine de Dragon ×7 |
-| 🌟 Potion de Soin Ultime | Soin 100% | 90 | T10 | 🖤 Lotus de l'Ombre ×8 |
+        Matériaux : **🌿 Herboriste** + **🌾 Fermier** — soigne des PV fixes.
 
-### Élixirs de Force — ATK Physique +%
+        | Tier | Item | Niv. | Effet | 🌿 Herboriste | 🌾 Fermier |
+        |:----:|------|:----:|------:|---------------|------------|
+        | T1 | 🧪 Infime Potion de Soin | 1 | +250 PV | Herbe de Soin ×3 | Blé ×2 |
+        | T2 | 🧪 Léger Potion de Soin | 10 | +750 PV | Herbe de Mana ×4 | Orge ×3 |
+        | T3 | 🧪 Petit Potion de Soin | 20 | +2 000 PV | Racine de Force ×5 | Farine de Maïs ×3 |
+        | T4 | 💊 Mineur Potion de Soin | 30 | +4 000 PV | Fleur de Lune ×6 | Herbes Aromatiques ×4 |
+        | T5 | 💊 Standard Potion de Soin | 40 | +7 000 PV | Pollen Doré ×7 | Baies Sauvages ×5 |
+        | T6 | 💊 Grand Potion de Soin | 50 | +10 000 PV | Champignon Vénéneux ×8 | Lait de Licorne ×5 |
+        | T7 | ✨ Fort Potion de Soin | 60 | +15 000 PV | Cristal Végétal ×10 | Miel Enchanté ×6 |
+        | T8 | ✨ Puissant Potion de Soin | 70 | +20 000 PV | Mousse Ancienne ×12 | Sel de Mer ×7 |
+        | T9 | 💫 Suprême Potion de Soin | 80 | +30 000 PV | Épine de Dragon ×14 | Épices Rares ×9 |
+        | T10 | 🌟 Ultime Potion de Soin | 90 | +50 000 PV | Lotus de l'Ombre ×16 | Fruit du Paradis ×10 |
 
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 💪 Infime Élixir de Force | 1 | T1 | +2% P.ATK | 🌿 Herbe de Soin ×3 |
-| 💪 Mineur Élixir de Force | 10 | T2 | +4% P.ATK | 💧 Herbe de Mana ×4 |
-| 💪 Petit Élixir de Force | 20 | T3 | +6% P.ATK | 🌱 Racine de Force ×4 |
-| 💪 Léger Élixir de Force | 30 | T4 | +8% P.ATK | 🌸 Fleur de Lune ×5 |
-| 💪 Élixir de Force | 40 | T5 | +10% P.ATK | 🌼 Pollen Doré ×5 |
-| 💪 Grand Élixir de Force | 50 | T6 | +12% P.ATK | 🍄 Champignon Vénéneux ×6 |
-| 💪 Fort Élixir de Force | 60 | T7 | +14% P.ATK | 🔮 Cristal Végétal ×6 |
-| 💪 Puissant Élixir de Force | 70 | T8 | +16% P.ATK | 🌾 Mousse Ancienne ×7 |
-| 💪 Giga Élixir de Force | 80 | T9 | +18% P.ATK | 🌵 Épine de Dragon ×7 |
-| 💪 Ultime Élixir de Force | 90 | T10 | +20% P.ATK | 🖤 Lotus de l'Ombre ×8 |
+    === "💪 Élixirs de Force"
 
-### Élixirs de Magie — ATK Magique +%
+        Matériaux : **🌿 Herboriste** + **🪵 Bûcheron** — ATK Physique +%, durée 10 tours.
 
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🔮 Infime Élixir de Magie | 1 | T1 | +2% M.ATK | 🌿 Herbe de Soin ×3 |
-| 🔮 Mineur Élixir de Magie | 10 | T2 | +4% M.ATK | 💧 Herbe de Mana ×4 |
-| 🔮 Petit Élixir de Magie | 20 | T3 | +6% M.ATK | 🌱 Racine de Force ×4 |
-| 🔮 Léger Élixir de Magie | 30 | T4 | +8% M.ATK | 🌸 Fleur de Lune ×5 |
-| 🔮 Élixir de Magie | 40 | T5 | +10% M.ATK | 🌼 Pollen Doré ×5 |
-| 🔮 Grand Élixir de Magie | 50 | T6 | +12% M.ATK | 🍄 Champignon Vénéneux ×6 |
-| 🔮 Fort Élixir de Magie | 60 | T7 | +14% M.ATK | 🔮 Cristal Végétal ×6 |
-| 🔮 Puissant Élixir de Magie | 70 | T8 | +16% M.ATK | 🌾 Mousse Ancienne ×7 |
-| 🔮 Giga Élixir de Magie | 80 | T9 | +18% M.ATK | 🌵 Épine de Dragon ×7 |
-| 🔮 Ultime Élixir de Magie | 90 | T10 | +20% M.ATK | 🖤 Lotus de l'Ombre ×8 |
+        | Tier | Item | Niv. | Effet | 🌿 Herboriste | 🪵 Bûcheron |
+        |:----:|------|:----:|------:|---------------|-------------|
+        | T1 | 💪 Infime Élixir de Force | 1 | +10% P.ATK | Herbe de Soin ×3 | Bois de Chêne ×2 |
+        | T2 | 💪 Léger Élixir de Force | 10 | +20% P.ATK | Herbe de Mana ×4 | Bois de Sapin ×3 |
+        | T3 | 💪 Petit Élixir de Force | 20 | +30% P.ATK | Racine de Force ×5 | Bois d'Ébène ×3 |
+        | T4 | 💪 Mineur Élixir de Force | 30 | +40% P.ATK | Fleur de Lune ×6 | Bois de Teck ×4 |
+        | T5 | 💪 Standard Élixir de Force | 40 | +50% P.ATK | Pollen Doré ×7 | Bois de Cèdre ×5 |
+        | T6 | 💪 Grand Élixir de Force | 50 | +60% P.ATK | Champignon Vénéneux ×8 | Bois Enchanté ×5 |
+        | T7 | 💪 Fort Élixir de Force | 60 | +70% P.ATK | Cristal Végétal ×10 | Bois de Sang ×6 |
+        | T8 | 💪 Puissant Élixir de Force | 70 | +80% P.ATK | Mousse Ancienne ×12 | Bois de Lune ×7 |
+        | T9 | 💪 Suprême Élixir de Force | 80 | +90% P.ATK | Épine de Dragon ×14 | Bois de Feu ×9 |
+        | T10 | 💪 Ultime Élixir de Force | 90 | +100% P.ATK | Lotus de l'Ombre ×16 | Bois de Dragon ×10 |
 
-### Élixirs de Défense Physique — P.DEF +%
+    === "🔮 Élixirs de Magie"
 
-Ces élixirs combinent une plante **Herboriste** et un bois **Bûcheron** du même tier.
+        Matériaux : **🌿 Herboriste** + **🪵 Bûcheron** — ATK Magique +%, durée 10 tours.
 
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Herboriste) | Mat. 2 (Bûcheron) |
-|--------|:-----------:|:----:|:-----:|---------------------|-------------------|
-| 🛡️ Infime Élixir de Déf. Physique | 1 | T1 | +2% P.DEF | 🌿 Herbe de Soin ×2 | 🌳 Bois de Chêne ×2 |
-| 🛡️ Mineur Élixir de Déf. Physique | 10 | T2 | +4% P.DEF | 💧 Herbe de Mana ×3 | 🌲 Bois de Sapin ×2 |
-| 🛡️ Petit Élixir de Déf. Physique | 20 | T3 | +6% P.DEF | 🌱 Racine de Force ×3 | 🪵 Bois d'Ébène ×2 |
-| 🛡️ Léger Élixir de Déf. Physique | 30 | T4 | +8% P.DEF | 🌸 Fleur de Lune ×4 | 🪵 Bois de Teck ×2 |
-| 🛡️ Élixir de Déf. Physique | 40 | T5 | +10% P.DEF | 🌼 Pollen Doré ×4 | 🪵 Bois de Cèdre ×2 |
-| 🛡️ Grand Élixir de Déf. Physique | 50 | T6 | +12% P.DEF | 🍄 Champignon Vénéneux ×5 | ✨ Bois Enchanté ×2 |
-| 🛡️ Fort Élixir de Déf. Physique | 60 | T7 | +14% P.DEF | 🔮 Cristal Végétal ×5 | 🔴 Bois de Sang ×2 |
-| 🛡️ Puissant Élixir de Déf. Phy. | 70 | T8 | +16% P.DEF | 🌾 Mousse Ancienne ×6 | 🌙 Bois de Lune ×2 |
-| 🛡️ Giga Élixir de Déf. Physique | 80 | T9 | +18% P.DEF | 🌵 Épine de Dragon ×6 | 🔥 Bois de Feu ×2 |
-| 🛡️ Ultime Élixir de Déf. Physique | 90 | T10 | +20% P.DEF | 🖤 Lotus de l'Ombre ×7 | 🐉 Bois de Dragon ×2 |
+        | Tier | Item | Niv. | Effet | 🌿 Herboriste | 🪵 Bûcheron |
+        |:----:|------|:----:|------:|---------------|-------------|
+        | T1 | 🔮 Infime Élixir de Magie | 1 | +10% M.ATK | Herbe de Soin ×3 | Bois de Chêne ×2 |
+        | T2 | 🔮 Léger Élixir de Magie | 10 | +20% M.ATK | Herbe de Mana ×4 | Bois de Sapin ×3 |
+        | T3 | 🔮 Petit Élixir de Magie | 20 | +30% M.ATK | Racine de Force ×5 | Bois d'Ébène ×3 |
+        | T4 | 🔮 Mineur Élixir de Magie | 30 | +40% M.ATK | Fleur de Lune ×6 | Bois de Teck ×4 |
+        | T5 | 🔮 Standard Élixir de Magie | 40 | +50% M.ATK | Pollen Doré ×7 | Bois de Cèdre ×5 |
+        | T6 | 🔮 Grand Élixir de Magie | 50 | +60% M.ATK | Champignon Vénéneux ×8 | Bois Enchanté ×5 |
+        | T7 | 🔮 Fort Élixir de Magie | 60 | +70% M.ATK | Cristal Végétal ×10 | Bois de Sang ×6 |
+        | T8 | 🔮 Puissant Élixir de Magie | 70 | +80% M.ATK | Mousse Ancienne ×12 | Bois de Lune ×7 |
+        | T9 | 🔮 Suprême Élixir de Magie | 80 | +90% M.ATK | Épine de Dragon ×14 | Bois de Feu ×9 |
+        | T10 | 🔮 Ultime Élixir de Magie | 90 | +100% M.ATK | Lotus de l'Ombre ×16 | Bois de Dragon ×10 |
 
-### Élixirs de Défense Magique — M.DEF +%
+    === "🛡️ Élixirs de Déf. Physique"
 
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🔮 Infime Élixir de Déf. Magique | 1 | T1 | +2% M.DEF | 🌿 Herbe de Soin ×3 |
-| 🔮 Mineur Élixir de Déf. Magique | 10 | T2 | +4% M.DEF | 💧 Herbe de Mana ×4 |
-| 🔮 Petit Élixir de Déf. Magique | 20 | T3 | +6% M.DEF | 🌱 Racine de Force ×4 |
-| 🔮 Léger Élixir de Déf. Magique | 30 | T4 | +8% M.DEF | 🌸 Fleur de Lune ×5 |
-| 🔮 Élixir de Déf. Magique | 40 | T5 | +10% M.DEF | 🌼 Pollen Doré ×5 |
-| 🔮 Grand Élixir de Déf. Magique | 50 | T6 | +12% M.DEF | 🍄 Champignon Vénéneux ×6 |
-| 🔮 Fort Élixir de Déf. Magique | 60 | T7 | +14% M.DEF | 🔮 Cristal Végétal ×6 |
-| 🔮 Puissant Élixir de Déf. Mag. | 70 | T8 | +16% M.DEF | 🌾 Mousse Ancienne ×7 |
-| 🔮 Giga Élixir de Déf. Magique | 80 | T9 | +18% M.DEF | 🌵 Épine de Dragon ×7 |
-| 🔮 Ultime Élixir de Déf. Magique | 90 | T10 | +20% M.DEF | 🖤 Lotus de l'Ombre ×8 |
+        Matériaux : **🌿 Herboriste** + **⛏️ Mineur** — Défense Physique +%, durée 10 tours.
 
-### Élixirs de Vitesse — Vitesse +%
+        | Tier | Item | Niv. | Effet | 🌿 Herboriste | ⛏️ Mineur |
+        |:----:|------|:----:|------:|---------------|-----------|
+        | T1 | 🛡️ Infime Élixir de Déf. Physique | 1 | +10% P.DEF | Herbe de Soin ×3 | Minerai de Fer ×2 |
+        | T2 | 🛡️ Léger Élixir de Déf. Physique | 10 | +20% P.DEF | Herbe de Mana ×4 | Minerai d'Acier ×3 |
+        | T3 | 🛡️ Petit Élixir de Déf. Physique | 20 | +30% P.DEF | Racine de Force ×5 | Minerai de Mithril ×3 |
+        | T4 | 🛡️ Mineur Élixir de Déf. Physique | 30 | +40% P.DEF | Fleur de Lune ×6 | Adamantium Brut ×4 |
+        | T5 | 🛡️ Standard Élixir de Déf. Physique | 40 | +50% P.DEF | Pollen Doré ×7 | Pierre de Feu ×5 |
+        | T6 | 🛡️ Grand Élixir de Déf. Physique | 50 | +60% P.DEF | Champignon Vénéneux ×8 | Pierre de Glace ×5 |
+        | T7 | 🛡️ Fort Élixir de Déf. Physique | 60 | +70% P.DEF | Cristal Végétal ×10 | Orichalque ×6 |
+        | T8 | 🛡️ Puissant Élixir de Déf. Physique | 70 | +80% P.DEF | Mousse Ancienne ×12 | Pierre de Foudre ×7 |
+        | T9 | 🛡️ Suprême Élixir de Déf. Physique | 80 | +90% P.DEF | Épine de Dragon ×14 | Cristal Brut ×9 |
+        | T10 | 🛡️ Ultime Élixir de Déf. Physique | 90 | +100% P.DEF | Lotus de l'Ombre ×16 | Diamant Brut ×10 |
 
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| ⚡ Infime Élixir de Vitesse | 1 | T1 | +2% Vit | 🌿 Herbe de Soin ×3 |
-| ⚡ Mineur Élixir de Vitesse | 10 | T2 | +4% Vit | 💧 Herbe de Mana ×4 |
-| ⚡ Petit Élixir de Vitesse | 20 | T3 | +6% Vit | 🌱 Racine de Force ×4 |
-| ⚡ Léger Élixir de Vitesse | 30 | T4 | +8% Vit | 🌸 Fleur de Lune ×5 |
-| ⚡ Élixir de Vitesse | 40 | T5 | +10% Vit | 🌼 Pollen Doré ×5 |
-| ⚡ Grand Élixir de Vitesse | 50 | T6 | +12% Vit | 🍄 Champignon Vénéneux ×6 |
-| ⚡ Fort Élixir de Vitesse | 60 | T7 | +14% Vit | 🔮 Cristal Végétal ×6 |
-| ⚡ Puissant Élixir de Vitesse | 70 | T8 | +16% Vit | 🌾 Mousse Ancienne ×7 |
-| ⚡ Giga Élixir de Vitesse | 80 | T9 | +18% Vit | 🌵 Épine de Dragon ×7 |
-| ⚡ Ultime Élixir de Vitesse | 90 | T10 | +20% Vit | 🖤 Lotus de l'Ombre ×8 |
+    === "🔵 Élixirs de Déf. Magique"
 
-### Élixirs de Dégâts Critiques — Dégâts Crit +%
+        Matériaux : **🌿 Herboriste** + **⛏️ Mineur** — Défense Magique +%, durée 10 tours.
 
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🎯 Infime Élixir de Dég. Crit. | 1 | T1 | +10% Dég.Crit | 🌿 Herbe de Soin ×3 |
-| 🎯 Mineur Élixir de Dég. Crit. | 10 | T2 | +20% Dég.Crit | 💧 Herbe de Mana ×4 |
-| 🎯 Petit Élixir de Dég. Crit. | 20 | T3 | +30% Dég.Crit | 🌱 Racine de Force ×4 |
-| 🎯 Léger Élixir de Dég. Crit. | 30 | T4 | +40% Dég.Crit | 🌸 Fleur de Lune ×5 |
-| 🎯 Élixir de Dég. Critiques | 40 | T5 | +50% Dég.Crit | 🌼 Pollen Doré ×5 |
-| 🎯 Grand Élixir de Dég. Crit. | 50 | T6 | +60% Dég.Crit | 🍄 Champignon Vénéneux ×6 |
-| 🎯 Fort Élixir de Dég. Crit. | 60 | T7 | +70% Dég.Crit | 🔮 Cristal Végétal ×6 |
-| 🎯 Puissant Élixir de Dég. Crit. | 70 | T8 | +80% Dég.Crit | 🌾 Mousse Ancienne ×7 |
-| 🎯 Giga Élixir de Dég. Crit. | 80 | T9 | +90% Dég.Crit | 🌵 Épine de Dragon ×7 |
-| 🎯 Ultime Élixir de Dég. Crit. | 90 | T10 | +100% Dég.Crit | 🖤 Lotus de l'Ombre ×8 |
+        | Tier | Item | Niv. | Effet | 🌿 Herboriste | ⛏️ Mineur |
+        |:----:|------|:----:|------:|---------------|-----------|
+        | T1 | 🔵 Infime Élixir de Déf. Magique | 1 | +10% M.DEF | Herbe de Soin ×3 | Minerai de Fer ×2 |
+        | T2 | 🔵 Léger Élixir de Déf. Magique | 10 | +20% M.DEF | Herbe de Mana ×4 | Minerai d'Acier ×3 |
+        | T3 | 🔵 Petit Élixir de Déf. Magique | 20 | +30% M.DEF | Racine de Force ×5 | Minerai de Mithril ×3 |
+        | T4 | 🔵 Mineur Élixir de Déf. Magique | 30 | +40% M.DEF | Fleur de Lune ×6 | Adamantium Brut ×4 |
+        | T5 | 🔵 Standard Élixir de Déf. Magique | 40 | +50% M.DEF | Pollen Doré ×7 | Pierre de Feu ×5 |
+        | T6 | 🔵 Grand Élixir de Déf. Magique | 50 | +60% M.DEF | Champignon Vénéneux ×8 | Pierre de Glace ×5 |
+        | T7 | 🔵 Fort Élixir de Déf. Magique | 60 | +70% M.DEF | Cristal Végétal ×10 | Orichalque ×6 |
+        | T8 | 🔵 Puissant Élixir de Déf. Magique | 70 | +80% M.DEF | Mousse Ancienne ×12 | Pierre de Foudre ×7 |
+        | T9 | 🔵 Suprême Élixir de Déf. Magique | 80 | +90% M.DEF | Épine de Dragon ×14 | Cristal Brut ×9 |
+        | T10 | 🔵 Ultime Élixir de Déf. Magique | 90 | +100% M.DEF | Lotus de l'Ombre ×16 | Diamant Brut ×10 |
 
-### Élixir Royal — Toutes stats +20%
+    === "⚡ Élixirs de Vitesse"
 
-!!! warning "Recette d'endgame absolu"
-    L'Élixir Royal est un **item unique** — il n'existe pas en paliers. Requis : niveau **100** d'Alchimiste et 80 Lotus de l'Ombre.
+        Matériaux : **🏹 Chasseur** + **🌿 Herboriste** — Vitesse +%, durée 10 tours.
 
-| Item | Niv. requis | Effet | Ingrédient |
-|------|:-----------:|:-----:|-----------|
-| 👑 Élixir Royal | 100 | **+20% à toutes les stats** | 🖤 Lotus de l'Ombre ×80 |
+        | Tier | Item | Niv. | Effet | 🏹 Chasseur | 🌿 Herboriste |
+        |:----:|------|:----:|------:|-------------|--------------|
+        | T1 | ⚡ Infime Élixir de Vitesse | 1 | +10% Vit. | Cuir de Loup ×3 | Herbe de Soin ×2 |
+        | T2 | ⚡ Léger Élixir de Vitesse | 10 | +20% Vit. | Cuir de Cerf ×4 | Herbe de Mana ×3 |
+        | T3 | ⚡ Petit Élixir de Vitesse | 20 | +30% Vit. | Écailles de Serpent ×5 | Racine de Force ×3 |
+        | T4 | ⚡ Mineur Élixir de Vitesse | 30 | +40% Vit. | Plumes de Phénix ×6 | Fleur de Lune ×4 |
+        | T5 | ⚡ Standard Élixir de Vitesse | 40 | +50% Vit. | Croc de Goule ×7 | Pollen Doré ×5 |
+        | T6 | ⚡ Grand Élixir de Vitesse | 50 | +60% Vit. | Griffe de Griffon ×8 | Champignon Vénéneux ×5 |
+        | T7 | ⚡ Fort Élixir de Vitesse | 60 | +70% Vit. | Peau de Dragon ×10 | Cristal Végétal ×6 |
+        | T8 | ⚡ Puissant Élixir de Vitesse | 70 | +80% Vit. | Os de Chimère ×12 | Mousse Ancienne ×7 |
+        | T9 | ⚡ Suprême Élixir de Vitesse | 80 | +90% Vit. | Venin de Basilic ×14 | Épine de Dragon ×9 |
+        | T10 | ⚡ Ultime Élixir de Vitesse | 90 | +100% Vit. | Cœur de Bête ×16 | Lotus de l'Ombre ×10 |
 
-### Potions Spéciales
+    === "✨ Spéciaux"
 
-| Item | Effet | Niv. requis | Ingrédient |
-|------|-------|:-----------:|-----------|
-| 🔰 Potion de Renforcement | Annule la pénalité de mort pour ce combat | 15 | 💧 Herbe de Mana ×5 |
-| ⚗️ Potion d'Affaiblissement | Annule le passif de classe de l'ennemi pour ce combat | 50 | 🍄 Champignon Vénéneux ×6 |
-| ❤️‍🔥 Potion de Résurrection | Se relève automatiquement à 50% PV si mort en combat (1 fois) | 100 | 🖤 Lotus de l'Ombre ×80 |
+        Items uniques — ne suivent pas le système de tiers. Requièrent des matériaux T2, T5 ou T10.
+
+        ---
+
+        **🔰 Potion de Renforcement** — Niv. 15
+
+        Annule la pénalité de mort pour ce combat.
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 💧 Herbe de Mana | ×4 |
+        | 🌾 Orge | ×3 |
+        | ⛏️ Minerai d'Acier | ×3 |
+        | 🌲 Bois de Sapin | ×3 |
+        | 🦌 Cuir de Cerf | ×2 |
+
+        ---
+
+        **⚗️ Potion d'Affaiblissement** — Niv. 50
+
+        Annule le passif de classe de l'adversaire pour ce combat.
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 🌼 Pollen Doré | ×6 |
+        | 🦷 Croc de Goule | ×5 |
+        | 🔥 Pierre de Feu | ×4 |
+        | 🫐 Baies Sauvages | ×4 |
+        | 🪵 Bois de Cèdre | ×3 |
+
+        ---
+
+        **❤️‍🔥 Potion de Résurrection** — Niv. 100
+
+        Se relève automatiquement à 50% PV si mort en combat (1 fois).
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 🖤 Lotus de l'Ombre | ×12 |
+        | 🍑 Fruit du Paradis | ×10 |
+        | 💠 Diamant Brut | ×8 |
+        | ❤️ Cœur de Bête | ×8 |
+        | 🐉 Bois de Dragon | ×6 |
+
+        ---
+
+        **👑 Élixir Royal** — Niv. 100
+
+        +200% à toutes les statistiques pendant 10 tours.
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 🖤 Lotus de l'Ombre | ×12 |
+        | 💠 Diamant Brut | ×10 |
+        | ❤️ Cœur de Bête | ×8 |
+        | 🐉 Bois de Dragon | ×8 |
+        | 🍑 Fruit du Paradis | ×6 |
+
+=== "🍞 Boulanger"
+
+    Fabrique de la **nourriture** qui restaure l'énergie ou booste la régénération, à partir des récoltes du Fermier, du Bûcheron, de l'Herboriste et du Chasseur.
+
+    === "🍞 Pain"
+
+        Matériaux : **🌾 Fermier** + **🪵 Bûcheron** — restaure de l'énergie directement.
+
+        | Tier | Item | Niv. | Effet | 🌾 Fermier | 🪵 Bûcheron |
+        |:----:|------|:----:|------:|-----------:|-------------|
+        | T1 | 🍞 Croûton | 1 | +10 énergie | Blé ×3 | Bois de Chêne ×2 |
+        | T2 | 🍞 Petit Pain | 10 | +20 énergie | Orge ×4 | Bois de Sapin ×3 |
+        | T3 | 🥐 Pain | 20 | +30 énergie | Farine de Maïs ×5 | Bois d'Ébène ×3 |
+        | T4 | 🥐 Miche | 30 | +40 énergie | Herbes Aromatiques ×6 | Bois de Teck ×4 |
+        | T5 | 🥖 Pain de Campagne | 40 | +50 énergie | Baies Sauvages ×7 | Bois de Cèdre ×5 |
+        | T6 | 🥖 Pain Artisanal | 50 | +60 énergie | Lait de Licorne ×8 | Bois Enchanté ×5 |
+        | T7 | 🥨 Pain des Anciens | 60 | +70 énergie | Miel Enchanté ×10 | Bois de Sang ×6 |
+        | T8 | 🥨 Pain Enchanté | 70 | +80 énergie | Sel de Mer ×12 | Bois de Lune ×7 |
+        | T9 | 🎂 Pain Sacré | 80 | +90 énergie | Épices Rares ×14 | Bois de Feu ×9 |
+        | T10 | 🌟 Pain Divin | 90 | +100 énergie | Fruit du Paradis ×16 | Bois de Dragon ×10 |
+
+    === "🍵 Infusion"
+
+        Matériaux : **🌾 Fermier** + **🌿 Herboriste** — boost régénération d'énergie passive, durée **1 heure**.
+
+        | Tier | Item | Niv. | Effet | 🌾 Fermier | 🌿 Herboriste |
+        |:----:|------|:----:|------:|-----------:|--------------|
+        | T1 | 🍵 Tisane Légère | 1 | +10% regen | Blé ×3 | Herbe de Soin ×2 |
+        | T2 | 🍵 Tisane | 10 | +20% regen | Orge ×4 | Herbe de Mana ×3 |
+        | T3 | 🍵 Infusion Légère | 20 | +30% regen | Farine de Maïs ×5 | Racine de Force ×3 |
+        | T4 | 🫖 Infusion | 30 | +40% regen | Herbes Aromatiques ×6 | Fleur de Lune ×4 |
+        | T5 | 🫖 Infusion des Herbes | 40 | +50% regen | Baies Sauvages ×7 | Pollen Doré ×5 |
+        | T6 | 🫖 Grande Infusion | 50 | +60% regen | Lait de Licorne ×8 | Champignon Vénéneux ×5 |
+        | T7 | ☕ Infusion des Anciens | 60 | +70% regen | Miel Enchanté ×10 | Cristal Végétal ×6 |
+        | T8 | ☕ Infusion Renforcée | 70 | +80% regen | Sel de Mer ×12 | Mousse Ancienne ×7 |
+        | T9 | 🍶 Infusion Enchantée | 80 | +90% regen | Épices Rares ×14 | Épine de Dragon ×9 |
+        | T10 | 🌟 Infusion Légendaire | 90 | +100% regen | Fruit du Paradis ×16 | Lotus de l'Ombre ×10 |
+
+    === "🍱 Ration"
+
+        Matériaux : **🌾 Fermier** + **🏹 Chasseur** — énergie par victoire de combat, durée **3 combats**.
+
+        | Tier | Item | Niv. | Effet | 🌾 Fermier | 🏹 Chasseur |
+        |:----:|------|:----:|------:|-----------:|-------------|
+        | T1 | 🍱 Mini Ration | 1 | +5 énergie/victoire | Blé ×3 | Cuir de Loup ×2 |
+        | T2 | 🍱 Petite Ration | 10 | +10 énergie/victoire | Orge ×4 | Cuir de Cerf ×3 |
+        | T3 | 🍱 Ration de Victoire | 20 | +15 énergie/victoire | Farine de Maïs ×5 | Écailles de Serpent ×3 |
+        | T4 | ⚔️ Ration du Soldat | 30 | +20 énergie/victoire | Herbes Aromatiques ×6 | Plumes de Phénix ×4 |
+        | T5 | ⚔️ Ration du Guerrier | 40 | +25 énergie/victoire | Baies Sauvages ×7 | Croc de Goule ×5 |
+        | T6 | ⚔️ Grande Ration | 50 | +30 énergie/victoire | Lait de Licorne ×8 | Griffe de Griffon ×5 |
+        | T7 | 🏆 Ration du Conquérant | 60 | +35 énergie/victoire | Miel Enchanté ×10 | Peau de Dragon ×6 |
+        | T8 | 🏆 Ration du Héros | 70 | +40 énergie/victoire | Sel de Mer ×12 | Os de Chimère ×7 |
+        | T9 | 👑 Ration du Champion | 80 | +45 énergie/victoire | Épices Rares ×14 | Venin de Basilic ×9 |
+        | T10 | 🌟 Ration Légendaire | 90 | +50 énergie/victoire | Fruit du Paradis ×16 | Cœur de Bête ×10 |
+
+    === "🌟 Repas Légendaire"
+
+        Item unique de niveau 100 — combine énergie directe, boost regen et énergie par victoire.
+
+        **🌟 Repas Légendaire** — Niv. 100
+
+        Restaure +200 énergie · +200% regen (1h) · +100 énergie/victoire (3 combats).
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 🍑 Fruit du Paradis | ×12 |
+        | 🐉 Bois de Dragon | ×10 |
+        | 🖤 Lotus de l'Ombre | ×8 |
+        | ❤️ Cœur de Bête | ×6 |
+        | 💠 Diamant Brut | ×6 |
+
+=== "⚡ Enchanteur"
+
+    Fabrique des **runes** qui boostent une statistique avant un combat. Les runes se consomment à l'utilisation.
+
+    === "🔴 Rune de Force"
+
+        Matériaux : **🏹 Chasseur** + **⛏️ Mineur** — ATK Physique +%.
+
+        | Tier | Item | Niv. | Effet | 🏹 Chasseur | ⛏️ Mineur |
+        |:----:|------|:----:|------:|-------------|-----------|
+        | T1 | 🪨 Infime Rune de Force | 1 | +5% P.ATK | Cuir de Loup ×3 | Minerai de Fer ×2 |
+        | T2 | 🪨 Léger Rune de Force | 10 | +10% P.ATK | Cuir de Cerf ×4 | Minerai d'Acier ×3 |
+        | T3 | 🪨 Petit Rune de Force | 20 | +15% P.ATK | Écailles de Serpent ×5 | Minerai de Mithril ×3 |
+        | T4 | 💠 Mineur Rune de Force | 30 | +20% P.ATK | Plumes de Phénix ×6 | Adamantium Brut ×4 |
+        | T5 | 💠 Standard Rune de Force | 40 | +25% P.ATK | Croc de Goule ×7 | Pierre de Feu ×5 |
+        | T6 | 💠 Grand Rune de Force | 50 | +30% P.ATK | Griffe de Griffon ×8 | Pierre de Glace ×5 |
+        | T7 | 🔷 Fort Rune de Force | 60 | +35% P.ATK | Peau de Dragon ×10 | Orichalque ×6 |
+        | T8 | 🔷 Puissant Rune de Force | 70 | +40% P.ATK | Os de Chimère ×12 | Pierre de Foudre ×7 |
+        | T9 | 💎 Suprême Rune de Force | 80 | +45% P.ATK | Venin de Basilic ×14 | Cristal Brut ×9 |
+        | T10 | 🌟 Ultime Rune de Force | 90 | +50% P.ATK | Cœur de Bête ×16 | Diamant Brut ×10 |
+
+    === "🔵 Rune de Magie"
+
+        Matériaux : **🏹 Chasseur** + **🪵 Bûcheron** — ATK Magique +%.
+
+        | Tier | Item | Niv. | Effet | 🏹 Chasseur | 🪵 Bûcheron |
+        |:----:|------|:----:|------:|-------------|-------------|
+        | T1 | 🪨 Infime Rune de Magie | 1 | +5% M.ATK | Cuir de Loup ×3 | Bois de Chêne ×2 |
+        | T2 | 🪨 Léger Rune de Magie | 10 | +10% M.ATK | Cuir de Cerf ×4 | Bois de Sapin ×3 |
+        | T3 | 🪨 Petit Rune de Magie | 20 | +15% M.ATK | Écailles de Serpent ×5 | Bois d'Ébène ×3 |
+        | T4 | 💠 Mineur Rune de Magie | 30 | +20% M.ATK | Plumes de Phénix ×6 | Bois de Teck ×4 |
+        | T5 | 💠 Standard Rune de Magie | 40 | +25% M.ATK | Croc de Goule ×7 | Bois de Cèdre ×5 |
+        | T6 | 💠 Grand Rune de Magie | 50 | +30% M.ATK | Griffe de Griffon ×8 | Bois Enchanté ×5 |
+        | T7 | 🔷 Fort Rune de Magie | 60 | +35% M.ATK | Peau de Dragon ×10 | Bois de Sang ×6 |
+        | T8 | 🔷 Puissant Rune de Magie | 70 | +40% M.ATK | Os de Chimère ×12 | Bois de Lune ×7 |
+        | T9 | 💎 Suprême Rune de Magie | 80 | +45% M.ATK | Venin de Basilic ×14 | Bois de Feu ×9 |
+        | T10 | 🌟 Ultime Rune de Magie | 90 | +50% M.ATK | Cœur de Bête ×16 | Bois de Dragon ×10 |
+
+    === "🟢 Rune de Déf. Physique"
+
+        Matériaux : **⛏️ Mineur** + **🌾 Fermier** — Défense Physique +%.
+
+        | Tier | Item | Niv. | Effet | ⛏️ Mineur | 🌾 Fermier |
+        |:----:|------|:----:|------:|-----------|-----------|
+        | T1 | 🪨 Infime Rune de Déf. Physique | 1 | +5% P.DEF | Minerai de Fer ×3 | Blé ×2 |
+        | T2 | 🪨 Léger Rune de Déf. Physique | 10 | +10% P.DEF | Minerai d'Acier ×4 | Orge ×3 |
+        | T3 | 🪨 Petit Rune de Déf. Physique | 20 | +15% P.DEF | Minerai de Mithril ×5 | Farine de Maïs ×3 |
+        | T4 | 💠 Mineur Rune de Déf. Physique | 30 | +20% P.DEF | Adamantium Brut ×6 | Herbes Aromatiques ×4 |
+        | T5 | 💠 Standard Rune de Déf. Physique | 40 | +25% P.DEF | Pierre de Feu ×7 | Baies Sauvages ×5 |
+        | T6 | 💠 Grand Rune de Déf. Physique | 50 | +30% P.DEF | Pierre de Glace ×8 | Lait de Licorne ×5 |
+        | T7 | 🔷 Fort Rune de Déf. Physique | 60 | +35% P.DEF | Orichalque ×10 | Miel Enchanté ×6 |
+        | T8 | 🔷 Puissant Rune de Déf. Physique | 70 | +40% P.DEF | Pierre de Foudre ×12 | Sel de Mer ×7 |
+        | T9 | 💎 Suprême Rune de Déf. Physique | 80 | +45% P.DEF | Cristal Brut ×14 | Épices Rares ×9 |
+        | T10 | 🌟 Ultime Rune de Déf. Physique | 90 | +50% P.DEF | Diamant Brut ×16 | Fruit du Paradis ×10 |
+
+    === "🟣 Rune de Déf. Magique"
+
+        Matériaux : **⛏️ Mineur** + **🌿 Herboriste** — Défense Magique +%.
+
+        | Tier | Item | Niv. | Effet | ⛏️ Mineur | 🌿 Herboriste |
+        |:----:|------|:----:|------:|-----------|--------------|
+        | T1 | 🪨 Infime Rune de Déf. Magique | 1 | +5% M.DEF | Minerai de Fer ×3 | Herbe de Soin ×2 |
+        | T2 | 🪨 Léger Rune de Déf. Magique | 10 | +10% M.DEF | Minerai d'Acier ×4 | Herbe de Mana ×3 |
+        | T3 | 🪨 Petit Rune de Déf. Magique | 20 | +15% M.DEF | Minerai de Mithril ×5 | Racine de Force ×3 |
+        | T4 | 💠 Mineur Rune de Déf. Magique | 30 | +20% M.DEF | Adamantium Brut ×6 | Fleur de Lune ×4 |
+        | T5 | 💠 Standard Rune de Déf. Magique | 40 | +25% M.DEF | Pierre de Feu ×7 | Pollen Doré ×5 |
+        | T6 | 💠 Grand Rune de Déf. Magique | 50 | +30% M.DEF | Pierre de Glace ×8 | Champignon Vénéneux ×5 |
+        | T7 | 🔷 Fort Rune de Déf. Magique | 60 | +35% M.DEF | Orichalque ×10 | Cristal Végétal ×6 |
+        | T8 | 🔷 Puissant Rune de Déf. Magique | 70 | +40% M.DEF | Pierre de Foudre ×12 | Mousse Ancienne ×7 |
+        | T9 | 💎 Suprême Rune de Déf. Magique | 80 | +45% M.DEF | Cristal Brut ×14 | Épine de Dragon ×9 |
+        | T10 | 🌟 Ultime Rune de Déf. Magique | 90 | +50% M.DEF | Diamant Brut ×16 | Lotus de l'Ombre ×10 |
+
+    === "🟡 Rune de Vitesse"
+
+        Matériaux : **🪵 Bûcheron** + **🏹 Chasseur** — Vitesse +%.
+
+        | Tier | Item | Niv. | Effet | 🪵 Bûcheron | 🏹 Chasseur |
+        |:----:|------|:----:|------:|-------------|-------------|
+        | T1 | 🪨 Infime Rune de Vitesse | 1 | +5% Vit. | Bois de Chêne ×3 | Cuir de Loup ×2 |
+        | T2 | 🪨 Léger Rune de Vitesse | 10 | +10% Vit. | Bois de Sapin ×4 | Cuir de Cerf ×3 |
+        | T3 | 🪨 Petit Rune de Vitesse | 20 | +15% Vit. | Bois d'Ébène ×5 | Écailles de Serpent ×3 |
+        | T4 | 💠 Mineur Rune de Vitesse | 30 | +20% Vit. | Bois de Teck ×6 | Plumes de Phénix ×4 |
+        | T5 | 💠 Standard Rune de Vitesse | 40 | +25% Vit. | Bois de Cèdre ×7 | Croc de Goule ×5 |
+        | T6 | 💠 Grand Rune de Vitesse | 50 | +30% Vit. | Bois Enchanté ×8 | Griffe de Griffon ×5 |
+        | T7 | 🔷 Fort Rune de Vitesse | 60 | +35% Vit. | Bois de Sang ×10 | Peau de Dragon ×6 |
+        | T8 | 🔷 Puissant Rune de Vitesse | 70 | +40% Vit. | Bois de Lune ×12 | Os de Chimère ×7 |
+        | T9 | 💎 Suprême Rune de Vitesse | 80 | +45% Vit. | Bois de Feu ×14 | Venin de Basilic ×9 |
+        | T10 | 🌟 Ultime Rune de Vitesse | 90 | +50% Vit. | Bois de Dragon ×16 | Cœur de Bête ×10 |
+
+    === "✨ Rune Divine"
+
+        Item unique de niveau 100 — boost toutes les statistiques.
+
+        **✨ Rune Divine** — Niv. 100
+
+        +100% à toutes les statistiques.
+
+        | Ingrédient | Quantité |
+        |-----------|:--------:|
+        | 💠 Diamant Brut | ×10 |
+        | 🖤 Lotus de l'Ombre | ×10 |
+        | ❤️ Cœur de Bête | ×10 |
+        | 🐉 Bois de Dragon | ×8 |
+        | 🍑 Fruit du Paradis | ×8 |
 
 ---
 
-## 🍞 Boulanger
+## Voir aussi
 
-Fabrique de la **nourriture** qui restaure l'énergie et boost les stats, à partir des récoltes du Fermier.
-
-### Pain — Énergie directe
-
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🍞 Croûton | 1 | T1 | +10 énergie | 🌾 Blé ×3 |
-| 🍞 Petit Pain | 10 | T2 | +20 énergie | 🌾 Orge ×4 |
-| 🥖 Pain | 20 | T3 | +30 énergie | 🌽 Farine de Maïs ×4 |
-| 🥖 Miche de Pain | 30 | T4 | +40 énergie | 🌿 Herbes Aromatiques ×5 |
-| 🥖 Pain de Campagne | 40 | T5 | +50 énergie | 🫐 Baies Sauvages ×5 |
-| 🥖 Pain Artisanal | 50 | T6 | +60 énergie | 🦄 Lait de Licorne ×6 |
-| ✨ Pain des Anciens | 60 | T7 | +70 énergie | 🍯 Miel Enchanté ×4 + ✨ Bois Enchanté ×2 |
-| ✨ Pain Enchanté | 70 | T8 | +80 énergie | 🧂 Sel de Mer ×5 + 🌙 Bois de Lune ×2 |
-| 🌟 Pain Sacré | 80 | T9 | +90 énergie | 🌶️ Épices Rares ×5 + 🔥 Bois de Feu ×2 |
-| 🌟 Pain Divin | 90 | T10 | +100 énergie | 🍑 Fruit du Paradis ×6 + 🐉 Bois de Dragon ×2 |
-
-### Infusions — Boost regen énergie (durée : 1h)
-
-!!! info "Durée"
-    Les infusions durent **1 heure** et boostent uniquement la régénération d'énergie passive.
-
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🍵 Tisane Légère | 1 | T1 | +20% regen | 🌾 Blé ×3 |
-| 🍵 Tisane | 10 | T2 | +40% regen | 🌾 Orge ×4 |
-| 🍵 Infusion Légère | 20 | T3 | +60% regen | 🌽 Farine de Maïs ×4 |
-| 🫖 Infusion | 30 | T4 | +80% regen | 🌿 Herbes Aromatiques ×5 |
-| 🫖 Infusion des Herbes | 40 | T5 | +100% regen | 🫐 Baies Sauvages ×5 |
-| 🫖 Grande Infusion | 50 | T6 | +120% regen | 🦄 Lait de Licorne ×6 |
-| ✨ Infusion des Anciens | 60 | T7 | +140% regen | 🍯 Miel Enchanté ×6 |
-| ✨ Infusion Renforcée | 70 | T8 | +160% regen | 🧂 Sel de Mer ×7 |
-| 🌟 Infusion Enchantée | 80 | T9 | +180% regen | 🌶️ Épices Rares ×7 |
-| 🌟 Infusion Légendaire | 90 | T10 | +200% regen | 🍑 Fruit du Paradis ×8 |
-
-### Rations de Victoire — Énergie par victoire de combat (durée : 3 combats)
-
-!!! info "Durée"
-    Les rations de victoire durent **3 combats** (victoire ou défaite).
-
-| Palier | Niv. requis | Tier | Effet | Ingrédient |
-|--------|:-----------:|:----:|:-----:|-----------|
-| 🍱 Mini Ration | 1 | T1 | +5 énergie/victoire | 🌾 Blé ×3 |
-| 🍱 Petite Ration | 10 | T2 | +10 énergie/victoire | 🌾 Orge ×4 |
-| 🍱 Ration de Victoire | 20 | T3 | +15 énergie/victoire | 🌽 Farine de Maïs ×4 |
-| 🍱 Ration du Soldat | 30 | T4 | +20 énergie/victoire | 🌿 Herbes Aromatiques ×5 |
-| ⚔️ Ration du Guerrier | 40 | T5 | +25 énergie/victoire | 🫐 Baies Sauvages ×5 |
-| ⚔️ Grande Ration de Victoire | 50 | T6 | +30 énergie/victoire | 🦄 Lait de Licorne ×6 |
-| ⚔️ Ration du Conquérant | 60 | T7 | +35 énergie/victoire | 🍯 Miel Enchanté ×6 |
-| ✨ Ration du Héros | 70 | T8 | +40 énergie/victoire | 🧂 Sel de Mer ×7 |
-| 🌟 Ration du Champion | 80 | T9 | +45 énergie/victoire | 🌶️ Épices Rares ×7 |
-| 🌟 Ration Légendaire | 90 | T10 | +50 énergie/victoire | 🍑 Fruit du Paradis ×8 |
-
-### Repas Spécial — Tout-en-un
-
-!!! warning "Recette d'endgame absolu"
-    Le Repas Légendaire requiert le niveau **100** de Boulanger et 50 Fruits du Paradis.
-
-| Item | Énergie | Regen | Énergie/victoire | Niv. requis | Ingrédient |
-|------|:-------:|:-----:|:----------------:|:-----------:|-----------|
-| 🌟 Repas Légendaire | +200 | +400% | +100 (3 combats) | 100 | 🍑 Fruit du Paradis ×50 |
-
----
-
-## ⚡ Enchanteur
-
-Fabrique des **runes** qui donnent un boost de stats avant un combat.
-
-Chaque type de rune existe en **10 paliers** (Infime→Ultime), niveaux 1/10/20/30/40/50/60/70/80/90. Les runes apportent des **boosts en pourcentage**.
-
-### Récapitulatif des types
-
-| Type | Stat | Emoji | Famille 1 | Famille 2 |
-|------|:----:|:-----:|-----------|-----------|
-| Rune de Force | P.ATK% | 🔴 | Mineur | Chasseur |
-| Rune de Déf. Physique | P.DEF% | 🟡 | Mineur | Chasseur |
-| Rune de Magie | M.ATK% | 🔵 | Mineur | Herboriste |
-| Rune de Déf. Magique | M.DEF% | 🟢 | Mineur | Herboriste |
-| Rune de Vitesse | Vitesse% | ⚡ | Chasseur | Herboriste |
-| Rune de Critique | Crit% | 🎯 | Chasseur | Herboriste |
-
----
-
-### 🔴 Rune de Force — P.ATK +%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Mineur) | Mat. 2 (Chasseur) |
-|--------|:-----------:|:----:|:-----:|-----------------|-------------------|
-| Infime | 1 | T1 | +1% P.ATK | 🪨 Minerai de Fer ×3 | 🐺 Cuir de Loup ×2 |
-| Mineure | 10 | T2 | +2% P.ATK | ⛏️ Minerai d'Acier ×4 | 🦌 Cuir de Cerf ×2 |
-| Petite | 20 | T3 | +3% P.ATK | 💎 Minerai de Mithril ×4 | 🐍 Écailles de Serpent ×3 |
-| Légère | 30 | T4 | +4% P.ATK | 🔷 Adamantium ×5 | 🦅 Plumes ×3 |
-| Rune de Force | 40 | T5 | +5% P.ATK | 🔥 Pierre de Feu ×5 | 🦷 Croc de Goule ×4 |
-| Grande | 50 | T6 | +6% P.ATK | ❄️ Pierre de Glace ×6 | 🦁 Griffe de Griffon ×4 |
-| Forte | 60 | T7 | +7% P.ATK | 🟠 Orichalque ×6 | 🐉 Peau de Dragon ×5 |
-| Puissante | 70 | T8 | +8% P.ATK | ⚡ Pierre de Foudre ×7 | 💀 Os de Chimère ×5 |
-| Giga | 80 | T9 | +9% P.ATK | 🔮 Cristal Brut ×7 | ☠️ Venin de Basilic ×6 |
-| Ultime | 90 | T10 | +10% P.ATK | 💠 Diamant Brut ×8 | ❤️ Cœur de Bête ×6 |
-
----
-
-### 🟡 Rune de Déf. Physique — P.DEF +%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Mineur) | Mat. 2 (Chasseur) |
-|--------|:-----------:|:----:|:-----:|-----------------|-------------------|
-| Infime | 1 | T1 | +1% P.DEF | 🪨 Minerai de Fer ×3 | 🐺 Cuir de Loup ×2 |
-| Mineure | 10 | T2 | +2% P.DEF | ⛏️ Minerai d'Acier ×4 | 🦌 Cuir de Cerf ×2 |
-| Petite | 20 | T3 | +3% P.DEF | 💎 Minerai de Mithril ×4 | 🐍 Écailles de Serpent ×3 |
-| Légère | 30 | T4 | +4% P.DEF | 🔷 Adamantium ×5 | 🦅 Plumes ×3 |
-| Rune de Déf. Physique | 40 | T5 | +5% P.DEF | 🔥 Pierre de Feu ×5 | 🦷 Croc de Goule ×4 |
-| Grande | 50 | T6 | +6% P.DEF | ❄️ Pierre de Glace ×6 | 🦁 Griffe de Griffon ×4 |
-| Forte | 60 | T7 | +7% P.DEF | 🟠 Orichalque ×6 | 🐉 Peau de Dragon ×5 |
-| Puissante | 70 | T8 | +8% P.DEF | ⚡ Pierre de Foudre ×7 | 💀 Os de Chimère ×5 |
-| Giga | 80 | T9 | +9% P.DEF | 🔮 Cristal Brut ×7 | ☠️ Venin de Basilic ×6 |
-| Ultime | 90 | T10 | +10% P.DEF | 💠 Diamant Brut ×8 | ❤️ Cœur de Bête ×6 |
-
----
-
-### 🔵 Rune de Magie — M.ATK +%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Mineur) | Mat. 2 (Herboriste) |
-|--------|:-----------:|:----:|:-----:|-----------------|---------------------|
-| Infime | 1 | T1 | +1% M.ATK | 🪨 Minerai de Fer ×3 | 🌿 Herbe de Soin ×2 |
-| Mineure | 10 | T2 | +2% M.ATK | ⛏️ Minerai d'Acier ×4 | 💧 Herbe de Mana ×2 |
-| Petite | 20 | T3 | +3% M.ATK | 💎 Minerai de Mithril ×4 | 🌱 Racine de Force ×3 |
-| Légère | 30 | T4 | +4% M.ATK | 🔷 Adamantium ×5 | 🌸 Fleur de Lune ×3 |
-| Rune de Magie | 40 | T5 | +5% M.ATK | 🔥 Pierre de Feu ×5 | 🌼 Pollen Doré ×4 |
-| Grande | 50 | T6 | +6% M.ATK | ❄️ Pierre de Glace ×6 | 🍄 Champignon Vénéneux ×4 |
-| Forte | 60 | T7 | +7% M.ATK | 🟠 Orichalque ×6 | 🔮 Cristal Végétal ×5 |
-| Puissante | 70 | T8 | +8% M.ATK | ⚡ Pierre de Foudre ×7 | 🌾 Mousse Ancienne ×5 |
-| Giga | 80 | T9 | +9% M.ATK | 🔮 Cristal Brut ×7 | 🌵 Épine de Dragon ×6 |
-| Ultime | 90 | T10 | +10% M.ATK | 💠 Diamant Brut ×8 | 🖤 Lotus de l'Ombre ×6 |
-
----
-
-### 🟢 Rune de Déf. Magique — M.DEF +%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Mineur) | Mat. 2 (Herboriste) |
-|--------|:-----------:|:----:|:-----:|-----------------|---------------------|
-| Infime | 1 | T1 | +1% M.DEF | 🪨 Minerai de Fer ×3 | 🌿 Herbe de Soin ×2 |
-| Mineure | 10 | T2 | +2% M.DEF | ⛏️ Minerai d'Acier ×4 | 💧 Herbe de Mana ×2 |
-| Petite | 20 | T3 | +3% M.DEF | 💎 Minerai de Mithril ×4 | 🌱 Racine de Force ×3 |
-| Légère | 30 | T4 | +4% M.DEF | 🔷 Adamantium ×5 | 🌸 Fleur de Lune ×3 |
-| Rune de Déf. Magique | 40 | T5 | +5% M.DEF | 🔥 Pierre de Feu ×5 | 🌼 Pollen Doré ×4 |
-| Grande | 50 | T6 | +6% M.DEF | ❄️ Pierre de Glace ×6 | 🍄 Champignon Vénéneux ×4 |
-| Forte | 60 | T7 | +7% M.DEF | 🟠 Orichalque ×6 | 🔮 Cristal Végétal ×5 |
-| Puissante | 70 | T8 | +8% M.DEF | ⚡ Pierre de Foudre ×7 | 🌾 Mousse Ancienne ×5 |
-| Giga | 80 | T9 | +9% M.DEF | 🔮 Cristal Brut ×7 | 🌵 Épine de Dragon ×6 |
-| Ultime | 90 | T10 | +10% M.DEF | 💠 Diamant Brut ×8 | 🖤 Lotus de l'Ombre ×6 |
-
----
-
-### ⚡ Rune de Vitesse — Vitesse +%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Chasseur) | Mat. 2 (Herboriste) |
-|--------|:-----------:|:----:|:-----:|-------------------|---------------------|
-| Infime | 1 | T1 | +1% Vitesse | 🐺 Cuir de Loup ×3 | 🌿 Herbe de Soin ×2 |
-| Mineure | 10 | T2 | +2% Vitesse | 🦌 Cuir de Cerf ×4 | 💧 Herbe de Mana ×2 |
-| Petite | 20 | T3 | +3% Vitesse | 🐍 Écailles de Serpent ×4 | 🌱 Racine de Force ×3 |
-| Légère | 30 | T4 | +4% Vitesse | 🦅 Plumes ×5 | 🌸 Fleur de Lune ×3 |
-| Rune de Vitesse | 40 | T5 | +5% Vitesse | 🦷 Croc de Goule ×5 | 🌼 Pollen Doré ×4 |
-| Grande | 50 | T6 | +6% Vitesse | 🦁 Griffe de Griffon ×6 | 🍄 Champignon Vénéneux ×4 |
-| Forte | 60 | T7 | +7% Vitesse | 🐉 Peau de Dragon ×6 | 🔮 Cristal Végétal ×5 |
-| Puissante | 70 | T8 | +8% Vitesse | 💀 Os de Chimère ×7 | 🌾 Mousse Ancienne ×5 |
-| Giga | 80 | T9 | +9% Vitesse | ☠️ Venin de Basilic ×7 | 🌵 Épine de Dragon ×6 |
-| Ultime | 90 | T10 | +10% Vitesse | ❤️ Cœur de Bête ×8 | 🖤 Lotus de l'Ombre ×6 |
-
----
-
-### 🎯 Rune de Critique — Crit%
-
-| Palier | Niv. requis | Tier | Effet | Mat. 1 (Chasseur) | Mat. 2 (Herboriste) |
-|--------|:-----------:|:----:|:-----:|-------------------|---------------------|
-| Infime | 1 | T1 | +1% Crit | 🐺 Cuir de Loup ×3 | 🌿 Herbe de Soin ×2 |
-| Mineure | 10 | T2 | +2% Crit | 🦌 Cuir de Cerf ×4 | 💧 Herbe de Mana ×2 |
-| Petite | 20 | T3 | +3% Crit | 🐍 Écailles de Serpent ×4 | 🌱 Racine de Force ×3 |
-| Légère | 30 | T4 | +4% Crit | 🦅 Plumes ×5 | 🌸 Fleur de Lune ×3 |
-| Rune de Critique | 40 | T5 | +5% Crit | 🦷 Croc de Goule ×5 | 🌼 Pollen Doré ×4 |
-| Grande | 50 | T6 | +6% Crit | 🦁 Griffe de Griffon ×6 | 🍄 Champignon Vénéneux ×4 |
-| Forte | 60 | T7 | +7% Crit | 🐉 Peau de Dragon ×6 | 🔮 Cristal Végétal ×5 |
-| Puissante | 70 | T8 | +8% Crit | 💀 Os de Chimère ×7 | 🌾 Mousse Ancienne ×5 |
-| Giga | 80 | T9 | +9% Crit | ☠️ Venin de Basilic ×7 | 🌵 Épine de Dragon ×6 |
-| Ultime | 90 | T10 | +10% Crit | ❤️ Cœur de Bête ×8 | 🖤 Lotus de l'Ombre ×6 |
-
----
-
-### ✨ Rune Divine — Toutes stats +%
-
-!!! warning "Recette coûteuse"
-    La Rune Divine coûte **×10** plus cher en matériaux que les runes classiques.
-
-| Item | Effet | Niv. requis | Tier | Ingrédients |
-|------|:-----:|:-----------:|:----:|------------|
-| ✨ Rune Divine | +10% à toutes les stats | 100 | T10 | 💠 Diamant Brut ×50 + 🖤 Lotus de l'Ombre ×40 + ❤️ Cœur de Bête ×40 |
+- [Récolte](recolte.md) — obtenir les matériaux nécessaires
+- [Potions & Élixirs](../objets/potions.md) — effets en détail
+- [Nourritures](../objets/nourriture.md) — effets en détail
+- [Runes](../objets/runes.md) — effets en détail

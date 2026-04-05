@@ -40,36 +40,22 @@ extra_css:
 
 extra_javascript:
   - javascripts/enemy_calc.js
+  - javascripts/stat_calc.js
+  - javascripts/craft_calc.js
+  - javascripts/equip_calc.js
 
 nav:
   - Accueil: index.md
   - Guide du Débutant: debutant.md
-  - Prestige: prestige.md
   - Classes:
-      - Vue d'ensemble: classes/index.md
-      - Guerrier: classes/guerrier.md
-      - Assassin: classes/assassin.md
-      - Mage: classes/mage.md
-      - Tireur: classes/tireur.md
-      - Support: classes/support.md
-      - Vampire: classes/vampire.md
-      - Gardien du Temps: classes/gardien.md
-      - Ombre Venin: classes/ombre.md
-      - Pyromancien: classes/pyromancien.md
-      - Paladin: classes/paladin.md
+      - Classes & Sorts: classes/index.md
+      - Calculateur de Stats: classes/calculateur.md
+      - Prestige: prestige.md
   - Métiers:
       - Vue d'ensemble: metiers/index.md
       - Récolte: metiers/recolte.md
       - Artisanat: metiers/artisanat.md
       - Conception: metiers/conception.md
-  - Modes de jeu:
-      - Vue d'ensemble: modes/index.md
-      - Monde: modes/monde.md
-      - Donjons: modes/donjons.md
-      - Raids: modes/raids.md
-      - World Boss: modes/world_boss.md
-      - Taverne (PvP): modes/pvp.md
-      - Simulateur d'Ennemis: modes/ennemis.md
   - Objets:
       - Matériaux: objets/materiaux.md
       - Équipements & Panoplies: objets/equipements.md
@@ -77,6 +63,13 @@ nav:
       - Nourritures: objets/nourriture.md
       - Runes: objets/runes.md
       - Reliques: objets/reliques.md
+  - Modes de Jeu:
+      - Vue d'ensemble: modes/index.md
+      - Monde: modes/monde.md
+      - Donjons: modes/donjons.md
+      - Raids: modes/raids.md
+      - World Boss: modes/world_boss.md
+      - Taverne (PvP): modes/pvp.md
   - Titres & Quêtes:
       - Titres: titres.md
       - Quêtes: quetes.md

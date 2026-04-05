@@ -108,7 +108,7 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
       </select>
     </div>
     <div class="ec-hint-box">
-      👥 Chaque raid boss a une classe fixe. Stats ×2.5 pour un combat à 5 joueurs, puis HP ×4 supplémentaire (HP total ×10 vs un ennemi de zone équivalente).
+      👥 Chaque raid boss a une classe fixe. Stats ×1,8 vs un ennemi de zone équivalente, puis HP ×5 supplémentaire (HP total ×9 vs un ennemi de zone équivalente).
     </div>
   </div>
 
@@ -135,7 +135,7 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
 
 | Stat marquée ★ | Signification |
 |----------------|---------------|
-| **★ sur une stat** | Statistique spécialement boostée ×diff (×1,2 / ×1,4 / ×1,6) selon la difficulté |
+| **★ sur une stat** | Stat signature du boss — boost fixe ×1,15 (indépendant de la difficulté) |
 
 !!! info "Précision"
     Les noms d'ennemis normaux, runiques et de boss classiques varient aléatoirement en jeu. Pour les boss emblématiques et antiques, la **classe suit une rotation déterministe** par zone (Zone 100 = Guerrier, Zone 200 = Assassin…). Tu peux sélectionner une classe différente pour simuler un cas particulier.

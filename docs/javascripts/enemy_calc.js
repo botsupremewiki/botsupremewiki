@@ -5,7 +5,7 @@
 (function () {
   'use strict';
 
-  // ─── Données statiques ────────────────────────────────────────────────────
+  // ─── Données statiques ─────────────────────────────────────────────────────
 
   var ALL_CLASSES = [
     'Guerrier','Assassin','Mage','Tireur','Support',
@@ -15,9 +15,10 @@
   var CLASS_EMOJI = {
     'Guerrier':'⚔️','Assassin':'🗡️','Mage':'🔮','Tireur':'🏹','Support':'💚',
     'Vampire':'🧛','Gardien du Temps':'⏳','Ombre Venin':'☠️','Pyromancien':'🔥',
-    'Paladin':'🛡️','Titan':'🐉'
+    'Paladin':'🛡️','Titan':'🤖'
   };
 
+  // Zone themes — rotation tous les 100 zones : ((zone-1)//100) % 10
   var ZONE_THEMES = [
     ['Plaine Verdoyante','🌿'],['Forêt Ombreuse','🌲'],['Marais Pestilentiel','🌫️'],
     ['Désert Ardent','🏜️'],['Toundra Glacée','❄️'],['Volcans Ardents','🌋'],
@@ -48,46 +49,44 @@
     "Omegaris la Fin du Monde"
   ];
 
-  // ─── Stats de base — models.py BASE_STATS ─────────────────────────────────
-
+  // ─── BASE_STATS — models.py ────────────────────────────────────────────────
   var BASE_STATS = {
-    'Guerrier':         {hp:600,  p_atk:57,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:28, m_def:6,  speed:80,  crit_chance:5.0,  crit_damage:150.0},
-    'Assassin':         {hp:500,  p_atk:50,  m_atk:0,   p_pen:10, m_pen:0,  p_def:4,  m_def:3,  speed:160, crit_chance:20.0, crit_damage:175.0},
-    'Mage':             {hp:400,  p_atk:0,   m_atk:38,  p_pen:0,  m_pen:8,  p_def:3,  m_def:10, speed:90,  crit_chance:12.0, crit_damage:175.0},
-    'Tireur':           {hp:440,  p_atk:44,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:4,  m_def:4,  speed:130, crit_chance:18.0, crit_damage:175.0},
-    'Support':          {hp:650,  p_atk:48,  m_atk:48,  p_pen:6,  m_pen:6,  p_def:25, m_def:25, speed:80,  crit_chance:5.0,  crit_damage:140.0},
-    'Vampire':          {hp:450,  p_atk:45,  m_atk:0,   p_pen:9,  m_pen:0,  p_def:12, m_def:7,  speed:90,  crit_chance:15.0, crit_damage:175.0},
-    'Gardien du Temps': {hp:480,  p_atk:35,  m_atk:35,  p_pen:6,  m_pen:6,  p_def:18, m_def:18, speed:100, crit_chance:8.0,  crit_damage:155.0},
-    'Ombre Venin':      {hp:370,  p_atk:30,  m_atk:15,  p_pen:6,  m_pen:3,  p_def:5,  m_def:5,  speed:115, crit_chance:17.0, crit_damage:170.0},
-    'Pyromancien':      {hp:420,  p_atk:0,   m_atk:43,  p_pen:0,  m_pen:9,  p_def:2,  m_def:10, speed:85,  crit_chance:13.0, crit_damage:175.0},
-    'Paladin':          {hp:560,  p_atk:42,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:35, m_def:22, speed:72,  crit_chance:5.0,  crit_damage:150.0}
+    'Guerrier':         {hp:550,  p_atk:52,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:32, m_def:6,  speed:80,  crit_chance:5.0,  crit_damage:50.0},
+    'Assassin':         {hp:500,  p_atk:50,  m_atk:0,   p_pen:10, m_pen:0,  p_def:4,  m_def:3,  speed:105, crit_chance:18.0, crit_damage:75.0},
+    'Mage':             {hp:420,  p_atk:0,   m_atk:42,  p_pen:0,  m_pen:8,  p_def:3,  m_def:10, speed:92,  crit_chance:12.0, crit_damage:75.0},
+    'Tireur':           {hp:440,  p_atk:44,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:4,  m_def:4,  speed:105, crit_chance:16.0, crit_damage:75.0},
+    'Support':          {hp:650,  p_atk:48,  m_atk:48,  p_pen:6,  m_pen:6,  p_def:25, m_def:25, speed:80,  crit_chance:5.0,  crit_damage:40.0},
+    'Vampire':          {hp:580,  p_atk:60,  m_atk:0,   p_pen:9,  m_pen:0,  p_def:12, m_def:7,  speed:90,  crit_chance:15.0, crit_damage:75.0},
+    'Gardien du Temps': {hp:480,  p_atk:35,  m_atk:35,  p_pen:6,  m_pen:6,  p_def:18, m_def:18, speed:95,  crit_chance:8.0,  crit_damage:55.0},
+    'Ombre Venin':      {hp:460,  p_atk:32,  m_atk:32,  p_pen:5,  m_pen:5,  p_def:5,  m_def:5,  speed:115, crit_chance:17.0, crit_damage:70.0},
+    'Pyromancien':      {hp:500,  p_atk:0,   m_atk:58,  p_pen:0,  m_pen:9,  p_def:2,  m_def:10, speed:85,  crit_chance:13.0, crit_damage:75.0},
+    'Paladin':          {hp:560,  p_atk:42,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:35, m_def:22, speed:72,  crit_chance:5.0,  crit_damage:50.0}
   };
 
-  // ─── Croissance par niveau — models.py LEVEL_GROWTH ──────────────────────
-
+  // ─── LEVEL_GROWTH — models.py ─────────────────────────────────────────────
   var LEVEL_GROWTH = {
-    'Guerrier':         {hp:35.45, p_atk:2.986, m_atk:0.0,   p_pen:0.632, m_pen:0.0,   p_def:0.572, m_def:0.114, speed:0.195, crit_chance:0.007, crit_damage:0.015},
-    'Assassin':         {hp:39.54, p_atk:2.953, m_atk:0.0,   p_pen:0.591, m_pen:0.0,   p_def:0.076, m_def:0.047, speed:0.340, crit_chance:0.010, crit_damage:0.025},
-    'Mage':             {hp:34.64, p_atk:0.0,   m_atk:2.339, p_pen:0.0,   m_pen:0.492, p_def:0.047, m_def:0.190, speed:0.260, crit_chance:0.016, crit_damage:0.020},
-    'Tireur':           {hp:37.60, p_atk:2.760, m_atk:0.0,   p_pen:0.552, m_pen:0.0,   p_def:0.076, m_def:0.076, speed:0.270, crit_chance:0.014, crit_damage:0.020},
-    'Support':          {hp:64.46, p_atk:2.168, m_atk:2.168, p_pen:0.434, m_pen:0.434, p_def:0.475, m_def:0.475, speed:0.195, crit_chance:0.003, crit_damage:0.010},
-    'Vampire':          {hp:39.59, p_atk:2.758, m_atk:0.0,   p_pen:0.551, m_pen:0.0,   p_def:0.188, m_def:0.113, speed:0.260, crit_chance:0.007, crit_damage:0.020},
-    'Gardien du Temps': {hp:37.64, p_atk:1.480, m_atk:1.480, p_pen:0.296, m_pen:0.296, p_def:0.335, m_def:0.335, speed:0.245, crit_chance:0.010, crit_damage:0.015},
-    'Ombre Venin':      {hp:43.74, p_atk:2.172, m_atk:1.487, p_pen:0.434, m_pen:0.210, p_def:0.075, m_def:0.075, speed:0.300, crit_chance:0.008, crit_damage:0.015},
-    'Pyromancien':      {hp:41.60, p_atk:0.0,   m_atk:2.647, p_pen:0.0,   m_pen:0.529, p_def:0.048, m_def:0.190, speed:0.245, crit_chance:0.013, crit_damage:0.020},
-    'Paladin':          {hp:54.50, p_atk:2.973, m_atk:0.0,   p_pen:0.594, m_pen:0.0,   p_def:0.665, m_def:0.429, speed:0.195, crit_chance:0.003, crit_damage:0.005}
+    'Guerrier':         {hp:45.44, p_atk:2.400, m_atk:0.0,   p_pen:0.0,   m_pen:0.0,   p_def:0.822, m_def:0.194, speed:0.230, crit_chance:0.0, crit_damage:0.0},
+    'Support':          {hp:72.42, p_atk:1.283, m_atk:1.283, p_pen:0.0,   m_pen:0.0,   p_def:0.630, m_def:0.630, speed:0.195, crit_chance:0.0, crit_damage:0.0},
+    'Paladin':          {hp:71.51, p_atk:2.361, m_atk:0.0,   p_pen:0.0,   m_pen:0.0,   p_def:0.916, m_def:0.428, speed:0.193, crit_chance:0.0, crit_damage:0.0},
+    'Assassin':         {hp:36.54, p_atk:2.643, m_atk:0.0,   p_pen:0.549, m_pen:0.0,   p_def:0.0,   m_def:0.0,   speed:0.365, crit_chance:0.0, crit_damage:0.0},
+    'Tireur':           {hp:37.60, p_atk:2.668, m_atk:0.0,   p_pen:0.555, m_pen:0.0,   p_def:0.0,   m_def:0.0,   speed:0.360, crit_chance:0.0, crit_damage:0.0},
+    'Mage':             {hp:39.64, p_atk:0.0,   m_atk:2.814, p_pen:0.0,   m_pen:0.553, p_def:0.0,   m_def:0.0,   speed:0.405, crit_chance:0.0, crit_damage:0.0},
+    'Pyromancien':      {hp:43.64, p_atk:0.0,   m_atk:3.100, p_pen:0.0,   m_pen:0.610, p_def:0.0,   m_def:0.0,   speed:0.395, crit_chance:0.0, crit_damage:0.0},
+    'Ombre Venin':      {hp:45.65, p_atk:1.540, m_atk:1.540, p_pen:0.300, m_pen:0.300, p_def:0.0,   m_def:0.0,   speed:0.345, crit_chance:0.0, crit_damage:0.0},
+    'Vampire':          {hp:50.00, p_atk:2.638, m_atk:0.0,   p_pen:0.528, m_pen:0.0,   p_def:0.268, m_def:0.193, speed:0.245, crit_chance:0.0, crit_damage:0.0},
+    'Gardien du Temps': {hp:41.56, p_atk:1.400, m_atk:1.400, p_pen:0.304, m_pen:0.304, p_def:0.362, m_def:0.362, speed:0.240, crit_chance:0.0, crit_damage:0.0}
   };
 
   var STAT_KEYS = ['hp','p_atk','m_atk','p_pen','m_pen','p_def','m_def','speed','crit_chance','crit_damage'];
 
-  // ─── Passifs par classe — enemies.py ─────────────────────────────────────
+  // ─── Passifs boss — enemies.py ────────────────────────────────────────────
 
   var RUNIC_PASSIFS = {
     'Guerrier':         "Furie Mineure : +3% dégâts par tranche de 25% HP perdus (max +12%)",
     'Assassin':         "Réflexes : 5% de chance d'esquiver une attaque physique",
     'Mage':             "Résonance Arcanique : ignore 8% de ta Déf. Mag.",
     'Tireur':           "Visée Précise : +8% chance de critique",
-    'Support':          "Régénération : récupère 0.5% HP max au début de chaque tour",
+    'Support':          "Régénération : récupère 0,5% HP max au début de chaque tour",
     'Vampire':          "Siphon Mineur : récupère 5% des dégâts infligés en HP",
     'Gardien du Temps': "Distorsion Légère : ta vitesse réduite de 5%",
     'Ombre Venin':      "Glandes Actives : 10% de chance de poison additionnel à chaque attaque",
@@ -113,46 +112,48 @@
     'Assassin':         "Ombre Persistante : 15% esquive + ses critiques ignorent 15% de ta Déf. Phy.",
     'Mage':             "Annihilation Partielle : ignore 20% de ta Déf. Mag. + tous les 5 tours : dégâts purs 10% HP max",
     'Tireur':           "Salve Précise : +18% chance de critique + tes défenses physiques -10%",
-    'Support':          "Bastion : récupère 1.5% HP max/tour + dégâts reçus -10%",
+    'Support':          "Bastion : récupère 1,5% HP max/tour + dégâts reçus -10%",
     'Vampire':          "Avidité Sanguine : récupère 12% des dégâts infligés + te vole 1% HP max/tour",
     'Gardien du Temps': "Distorsion Temporelle : ta vitesse -15%, sa vitesse +15%",
-    'Ombre Venin':      "Nuée Venimeuse : 20% de chance de poison additionnel + dégâts DoT ×1.2",
-    'Pyromancien':      "Combustion : 40% de chance d'appliquer 1 stack de brûlure + dégâts brûlure ×1.2",
+    'Ombre Venin':      "Nuée Venimeuse : 20% de chance de poison additionnel + dégâts DoT ×1,2",
+    'Pyromancien':      "Combustion : 40% de chance d'appliquer 1 stack de brûlure + dégâts brûlure ×1,2",
     'Paladin':          "Jugement : dégâts reçus -12% + tous les 5 tours : dégâts purs 8% HP max"
   };
 
-  // ─── Donjons (7 boss par slot d'équipement) ───────────────────────────────
-
+  // ─── Donjons — enemies.py DUNGEON_BOSSES ──────────────────────────────────
   var DUNGEON_BOSSES = [
-    {id:'d_casque',     name:'Gardien des Crânes',  emoji:'🪖', boost:'p_def',       passif:'Protection Céphalique : réduit les dégâts critiques reçus de 20%.'},
-    {id:'d_plastron',   name:'Titan Cuirassé',       emoji:'🛡️', boost:'hp',          passif:'Endurance Absolue : récupère 3% de ses HP max au début de chaque tour.'},
-    {id:'d_pantalon',   name:'Danseur de Guerre',    emoji:'🌪️', boost:'speed',       passif:"Esquive Naturelle : 10% de chance d'éviter complètement une attaque."},
-    {id:'d_chaussures', name:'Spectre Fulgurant',    emoji:'⚡', boost:'speed',       passif:"Foulée Redoublée : 20% de chance d'attaquer deux fois lors de son tour."},
-    {id:'d_arme',       name:'Lame Dévastatrice',    emoji:'⚔️', boost:'p_atk',       passif:'Tranchant Absolu : ignore 20% de ta Défense Physique et 20% de ta Défense Magique.'},
-    {id:'d_amulette',   name:'Mystique Absolu',      emoji:'📿', boost:'m_atk',       passif:'Renvoi Mystique : renvoie 8% des dégâts reçus sous forme de dégâts purs (avant défense).'},
-    {id:'d_anneau',     name:'Catalyseur Éternel',   emoji:'💍', boost:'crit_chance', passif:'Empowerment Runique : gagne +2.5% dégâts par tour (cumulé, max 10 fois, +25% au maximum).'}
+    {id:'d_casque',     slot:'casque',     name:'Gardien des Crânes',  emoji:'🪖', stat_boost:'p_def',       passif:'Armure Solide : réduit tous les dégâts reçus de 12%.'},
+    {id:'d_plastron',   slot:'plastron',   name:'Titan Cuirassé',       emoji:'🛡️', stat_boost:'hp',          passif:'Endurance Absolue : récupère 3% de ses HP max au début de chaque tour.'},
+    {id:'d_pantalon',   slot:'pantalon',   name:'Danseur de Guerre',    emoji:'🌪️', stat_boost:'speed',       passif:"Esquive Naturelle : 10% de chance d'éviter complètement une attaque."},
+    {id:'d_chaussures', slot:'chaussures', name:'Spectre Fulgurant',    emoji:'⚡', stat_boost:'speed',       passif:"Foulée Redoublée : 20% de chance d'attaquer deux fois lors de son tour."},
+    {id:'d_arme',       slot:'arme',       name:'Lame Dévastatrice',    emoji:'⚔️', stat_boost:'p_atk',       passif:'Tranchant Absolu : ignore 20% de ta Défense Physique et 20% de ta Défense Magique.'},
+    {id:'d_amulette',   slot:'amulette',   name:'Mystique Absolu',      emoji:'📿', stat_boost:'m_atk',       passif:'Renvoi Mystique : renvoie 8% des dégâts reçus sous forme de dégâts purs (avant défense).'},
+    {id:'d_anneau',     slot:'anneau',     name:'Catalyseur Éternel',   emoji:'💍', stat_boost:'crit_chance', passif:'Empowerment Runique : gagne +2,5% dégâts par tour (cumulé, max 10 stacks, +25% au maximum).'}
   ];
 
-  // ─── Raids (noms et classes corrects — enemies.py RAID_BOSSES) ───────────
-
+  // ─── Raids — enemies.py RAID_BOSSES ───────────────────────────────────────
   var RAID_BOSSES_DATA = [
-    {id:'raid_1',  name:"Vorgath l'Implacable",    emoji:'🐉', level:1,  req:100,  cls:'Guerrier'},
-    {id:'raid_2',  name:"Shivra l'Ombre Mortelle", emoji:'🗡️', level:2,  req:200,  cls:'Assassin'},
-    {id:'raid_3',  name:"Zyrex l'Archmage",        emoji:'⚡', level:3,  req:300,  cls:'Mage'},
-    {id:'raid_4',  name:"Karek le Chasseur",        emoji:'🏹', level:4,  req:400,  cls:'Tireur'},
-    {id:'raid_5',  name:"Serath le Corrupteur",     emoji:'🕸️', level:5,  req:500,  cls:'Support'},
-    {id:'raid_6',  name:"Mordas le Sans-Âme",       emoji:'🧛', level:6,  req:600,  cls:'Vampire'},
-    {id:'raid_7',  name:"Chronovex l'Invariant",    emoji:'⏳', level:7,  req:700,  cls:'Gardien du Temps'},
-    {id:'raid_8',  name:"Nyxara la Corrompue",      emoji:'🐍', level:8,  req:800,  cls:'Ombre Venin'},
-    {id:'raid_9',  name:"Ignareth le Phénix",       emoji:'🔥', level:9,  req:900,  cls:'Pyromancien'},
-    {id:'raid_10', name:"Omnifax le Divin",         emoji:'🌑', level:10, req:1000, cls:'Paladin'}
+    {id:'raid_1',  name:"Vorgath l'Implacable",    emoji:'🐉', raid_level:1,  level_req:100,  cls:'Guerrier'},
+    {id:'raid_2',  name:"Shivra l'Ombre Mortelle", emoji:'🗡️', raid_level:2,  level_req:200,  cls:'Assassin'},
+    {id:'raid_3',  name:"Zyrex l'Archmage",        emoji:'⚡', raid_level:3,  level_req:300,  cls:'Mage'},
+    {id:'raid_4',  name:"Karek le Chasseur",        emoji:'🏹', raid_level:4,  level_req:400,  cls:'Tireur'},
+    {id:'raid_5',  name:"Serath le Corrupteur",     emoji:'🕸️', raid_level:5,  level_req:500,  cls:'Support'},
+    {id:'raid_6',  name:"Mordas le Sans-Âme",       emoji:'🧛', raid_level:6,  level_req:600,  cls:'Vampire'},
+    {id:'raid_7',  name:"Chronovex l'Invariant",    emoji:'⏳', raid_level:7,  level_req:700,  cls:'Gardien du Temps'},
+    {id:'raid_8',  name:"Nyxara la Corrompue",      emoji:'🐍', raid_level:8,  level_req:800,  cls:'Ombre Venin'},
+    {id:'raid_9',  name:"Ignareth le Phénix",       emoji:'🔥', raid_level:9,  level_req:900,  cls:'Pyromancien'},
+    {id:'raid_10', name:"Omnifax le Divin",          emoji:'🌑', raid_level:10, level_req:1000, cls:'Paladin'}
   ];
 
   // ─── Formule de calcul — enemies.py compute_enemy_stats ──────────────────
+  // monde_scaling: pct = 0.50 + 9.50 × (level - 1) / 999
+  // pct_override : valeur fixe (donjons, raids, world boss)
 
-  function computeEnemyStats(level, cls) {
+  function computeEnemyStats(level, cls, pctOverride) {
     level = Math.max(1, level);
-    var pct = 0.3 + 0.7 * (level - 1) / 9999;
+    var pct = (pctOverride !== undefined && pctOverride !== null)
+      ? pctOverride
+      : 0.50 + 9.50 * (level - 1) / 999;
     var resolved = BASE_STATS[cls] ? cls : 'Guerrier';
     var base   = BASE_STATS[resolved];
     var growth = LEVEL_GROWTH[resolved] || LEVEL_GROWTH['Guerrier'];
@@ -168,32 +169,22 @@
     return stats;
   }
 
-  function computeEnemyStatsAvg(level) {
-    var allStats = ALL_CLASSES.map(function(c) { return computeEnemyStats(level, c); });
-    var r = {};
-    STAT_KEYS.forEach(function(k) {
-      var sum = allStats.reduce(function(s, st) { return s + st[k]; }, 0);
-      if (k === 'crit_chance' || k === 'crit_damage') {
-        r[k] = Math.round(sum / allStats.length * 100) / 100;
-      } else {
-        r[k] = Math.floor(sum / allStats.length);
-      }
-    });
-    return r;
-  }
-
   function classForIndex(n) {
     return ALL_CLASSES[((n % 10) + 10) % 10];
   }
 
+  // Zone theme : ((zone-1) // 100) % 10 — rotation tous les 100 zones
   function getTheme(zone) {
-    return ZONE_THEMES[Math.floor((zone - 1) / 1000) % ZONE_THEMES.length];
+    return ZONE_THEMES[Math.floor((zone - 1) / 100) % 10];
   }
 
-  // ── Monde : ennemis normaux ────────────────────────────────────────────────
+  // ── Monde : ennemi de stage ────────────────────────────────────────────────
+  // Stage auto-déterminé : ((zone-1) % 10) + 1
 
   function calcMondeEnemy(zone, stage) {
-    var cls   = ALL_CLASSES[(stage - 1) % ALL_CLASSES.length];
+    zone = Math.max(1, Math.min(1000, zone));
+    if (!stage) stage = ((zone - 1) % 10) + 1;
+    var cls   = classForIndex(stage - 1);
     var stats = computeEnemyStats(zone, cls);
     var th    = getTheme(zone);
     return {
@@ -204,15 +195,17 @@
       passif: null,
       xp:   Math.max(1, Math.floor(zone * 15) + stage),
       gold: Math.max(1, Math.floor(zone * 8)  + stage),
-      drops: '10% : 1 item (ta classe) · 1% : 1 item (autre classe) — Panoplie Monde, slot aléatoire',
-      matZone: zone,
+      drops: '10% chance : 1 item (ta classe) · 1% chance : 1 item (autre classe) — Panoplie Monde',
       stats: stats
     };
   }
 
-  // ── Monde : boss classique ─────────────────────────────────────────────────
+  // ── Monde : boss de zone ───────────────────────────────────────────────────
+  // Classe : _class_by_index(zone - 1) → rotation par zone
+  // HP × 1.2
 
   function calcMondeBossClassique(zone) {
+    zone = Math.max(1, Math.min(1000, zone));
     var cls   = classForIndex(zone - 1);
     var stats = computeEnemyStats(zone, cls);
     stats.hp  = Math.floor(stats.hp * 1.2);
@@ -225,18 +218,20 @@
       passif: null,
       xp:   Math.max(3,  Math.floor(zone * 18)),
       gold: Math.max(2,  Math.floor(zone * 10)),
-      drops: '50% : 1 item (ta classe) · 10% : 1 item (autre classe) — Panoplie Monde, slot aléatoire',
-      matZone: zone,
+      drops: '50% chance : 1 item (ta classe) · 10% chance : 1 item (autre classe) — Panoplie Monde',
       stats: stats
     };
   }
 
-  // ── Monde : boss runique (toutes les 10 zones, sauf emblématiques/antiques)
+  // ── Monde : boss runique (zones ×10, sauf ×100) ───────────────────────────
+  // Classe : _class_by_index(zone // 10 - 1)
+  // HP × 1.4
 
   function calcRunicBoss(zone) {
+    zone = Math.max(1, Math.min(1000, zone));
     var cls   = classForIndex(Math.floor(zone / 10) - 1);
     var stats = computeEnemyStats(zone, cls);
-    stats.hp  = Math.floor(stats.hp * 1.5);
+    stats.hp  = Math.floor(stats.hp * 1.4);
     var th    = getTheme(zone);
     return {
       name: '[Préfixe aléatoire] ' + (ENEMY_FIRST[cls] || cls),
@@ -246,81 +241,84 @@
       passif: RUNIC_PASSIFS[cls] || null,
       xp:   Math.max(5,  Math.floor(zone * 23)),
       gold: Math.max(3,  Math.floor(zone * 12)),
-      drops: '50% : 1 item (ta classe) · 10% : 1 item (autre classe) — Panoplie Monde, slot aléatoire',
-      matZone: zone,
+      drops: '50% chance : 1 item (ta classe) · 10% chance : 1 item (autre classe) — Panoplie Monde',
       stats: stats
     };
   }
 
-  // ── Monde : boss emblématique (toutes les 100 zones, sauf antiques) ────────
+  // ── Monde : boss emblématique (zones ×100, sauf ×1000) ────────────────────
+  // idx = zone // 100 - 1 → classe et nom
+  // HP × 1.6
 
-  function calcEmblematique(zone, clsOverride) {
-    var idx     = Math.floor(zone / 100) - 1;
-    var autoCls = classForIndex(idx);
-    var cls     = clsOverride || autoCls;
-    var stats   = computeEnemyStats(zone, cls);
-    stats.hp    = Math.floor(stats.hp * 2);
+  function calcEmblematique(zone) {
+    zone = Math.max(1, Math.min(1000, zone));
+    var idx  = Math.floor(zone / 100) - 1;
+    var cls  = classForIndex(idx);
+    var stats = computeEnemyStats(zone, cls);
+    stats.hp  = Math.floor(stats.hp * 1.6);
     return {
-      name: EMBLEMATIC_NAMES[idx % EMBLEMATIC_NAMES.length],
+      name: EMBLEMATIC_NAMES[((idx % 20) + 20) % 20],
       nameNote: null,
       cls: cls, theme: 'Boss Emblématique', themeEmoji: '🌟',
       typeLabel: 'Boss Emblématique', typeBadge: 'Emblématique', typeEmoji: '🌟',
       passif: EMBLEMATIC_PASSIFS[cls] || null,
       xp:   Math.max(50,  Math.floor(zone * 30)),
       gold: Math.max(30,  Math.floor(zone * 16)),
-      drops: '100% : 1 item (ta classe) + 50% : 1 item (autre classe) — Panoplie Monde, slot aléatoire',
-      matZone: zone,
+      drops: '100% : 1 item (ta classe) + 50% : 1 item (autre classe) — Panoplie Monde',
       stats: stats
     };
   }
 
-  // ── Monde : boss antique (toutes les 1000 zones, dont zone 10 000) ─────────
+  // ── Monde : boss antique (zone 1000, idx 0-9 selon classe) ────────────────
+  // idx déterminé par la classe choisie
+  // HP × 1.8
 
-  function calcAntique(zone, clsOverride) {
-    var idx     = Math.floor(zone / 1000) - 1;
-    var autoCls = classForIndex(idx);
-    var cls     = clsOverride || autoCls;
-    var stats   = computeEnemyStats(zone, cls);
-    stats.hp    = Math.floor(stats.hp * 3);
+  function calcAntique(cls) {
+    var zone = 1000;
+    var idx  = ALL_CLASSES.indexOf(cls);
+    if (idx < 0) idx = 0;
+    var stats = computeEnemyStats(zone, cls);
+    stats.hp  = Math.floor(stats.hp * 1.8);
     return {
-      name: ANTIQUE_NAMES[idx % ANTIQUE_NAMES.length],
+      name: ANTIQUE_NAMES[idx],
       nameNote: null,
       cls: cls, theme: 'Boss Antique', themeEmoji: '⚠️',
-      typeLabel: 'Boss Antique', typeBadge: 'Antique', typeEmoji: '⚠️',
+      typeLabel: 'Boss Antique — Zone 1 000', typeBadge: 'Antique', typeEmoji: '⚠️',
       passif: ANTIQUE_PASSIFS[cls] || null,
       xp:   Math.max(200, Math.floor(zone * 45)),
       gold: Math.max(100, Math.floor(zone * 24)),
-      drops: '3× items (ta classe, garantis) + 1× item (autre classe, garanti) — Panoplie Monde, slot aléatoire',
-      matZone: zone,
+      drops: '3 items garantis (ta classe) + 1 item (autre classe) — Panoplie Monde',
       stats: stats
     };
   }
 
-  // ── Donjon ─────────────────────────────────────────────────────────────────
+  // ─── Donjon — enemies.py generate_dungeon_boss ────────────────────────────
+  // player_level = zone_equiv = (tier_offset + level) × 3
+  // pct linéaire : classique 1.0→4.0, elite 5.0→9.0, abyssal 10.0→14.0
+  // stat_boost × 1.15
+  // zone_equiv = (tier_offset + level) × 3 : classique=0, elite=100, abyssal=200
 
   function calcDonjon(bossId, difficulty, level) {
-    var boss      = DUNGEON_BOSSES.filter(function(b){ return b.id === bossId; })[0] || DUNGEON_BOSSES[0];
-    var offsets   = {classique:0, elite:3333, abyssal:6666};
-    var zoneEquiv = (offsets[difficulty] || 0) + level * 33;
-    var cls       = classForIndex(level - 1);
-    var diffMult  = {classique:1.2, elite:1.4, abyssal:1.6}[difficulty] || 1.2;
-    var rewardM   = {classique:2,   elite:3,   abyssal:4}[difficulty]   || 2;
-    var diffLabel = {classique:'Classique', elite:'Élite', abyssal:'Abyssal'}[difficulty] || difficulty;
+    var boss = DUNGEON_BOSSES.filter(function(b){ return b.id === bossId; })[0] || DUNGEON_BOSSES[0];
+    var tierOffset = {classique:0, elite:100, abyssal:200}[difficulty] || 0;
+    var zoneEquiv  = (tierOffset + level) * 3;
+    var playerLevel = zoneEquiv;
+    var pctMin = {classique:1.0, elite:5.0, abyssal:10.0}[difficulty] || 1.0;
+    var pctMax = {classique:4.0, elite:9.0, abyssal:14.0}[difficulty] || 4.0;
+    var pct    = pctMin + (pctMax - pctMin) * (level - 1) / 99;
+    var cls    = classForIndex(level - 1);
+    var rewardMult = {classique:2, elite:3, abyssal:5}[difficulty] || 2;
+    var diffLabel  = {classique:'Classique', elite:'Élite', abyssal:'Abyssal'}[difficulty] || difficulty;
 
-    var stats = computeEnemyStats(zoneEquiv, cls);
-    STAT_KEYS.forEach(function(k) {
-      if (k === 'crit_chance' || k === 'crit_damage') {
-        stats[k] = Math.round(stats[k] * diffMult * 100) / 100;
+    var stats = computeEnemyStats(playerLevel, cls, pct);
+
+    // Boost stat signature × 1.15
+    var sb = boss.stat_boost;
+    if (sb && stats[sb] !== undefined) {
+      if (sb === 'crit_chance' || sb === 'crit_damage') {
+        stats[sb] = Math.round(stats[sb] * 1.15 * 100) / 100;
       } else {
-        stats[k] = Math.floor(stats[k] * diffMult);
-      }
-    });
-    // Boost stat spéciale du boss ×diffMult supplémentaire
-    if (boss.boost && stats[boss.boost] !== undefined) {
-      if (boss.boost === 'crit_chance' || boss.boost === 'crit_damage') {
-        stats[boss.boost] = Math.round(stats[boss.boost] * diffMult * 100) / 100;
-      } else {
-        stats[boss.boost] = Math.floor(stats[boss.boost] * diffMult);
+        stats[sb] = Math.floor(stats[sb] * 1.15);
       }
     }
 
@@ -330,72 +328,79 @@
       theme: 'Donjon ' + diffLabel + ' Niv.' + level, themeEmoji: boss.emoji,
       typeLabel: 'Donjon ' + diffLabel + ' — Niv.' + level,
       typeBadge: 'Donjon ' + diffLabel, typeEmoji: boss.emoji,
-      passif: boss.passif, boostStat: boss.boost,
-      xp:   Math.max(1, Math.floor(zoneEquiv * 15 * rewardM)),
-      gold: Math.max(1, Math.floor(zoneEquiv * 8  * rewardM)),
-      drops: '1 item garanti (slot : ' + boss.emoji + ' ' + boss.name + ') — 80% ta classe / 20% autre classe — Panoplie Donjon ' + diffLabel,
-      matZone: zoneEquiv, matMult: diffMult,
-      zoneEquiv: zoneEquiv,
+      passif: boss.passif, boostStat: boss.stat_boost,
+      xp:   Math.max(1, Math.floor(zoneEquiv * 15 * rewardMult)),
+      gold: Math.max(1, Math.floor(zoneEquiv * 8  * rewardMult)),
+      drops: '1 équipement garanti (slot : ' + boss.emoji + ' ' + boss.name + ') — Panoplie Donjon ' + diffLabel,
       stats: stats
     };
   }
 
-  // ── Raid ───────────────────────────────────────────────────────────────────
+  // ─── Raid — enemies.py generate_raid_boss ─────────────────────────────────
+  // player_level = raid_level × 100
+  // pct = 1.0 + raid_level × 1.5 (raid1=2.5 → raid10=16.0)
+  // HP × 3
+  // zone_equiv = raid_level × 100
 
   function calcRaid(raidId) {
-    var boss      = RAID_BOSSES_DATA.filter(function(b){ return b.id === raidId; })[0] || RAID_BOSSES_DATA[0];
-    var zoneEquiv = boss.level * 1000;
-    var stats     = computeEnemyStats(zoneEquiv, boss.cls);
+    var boss = RAID_BOSSES_DATA.filter(function(b){ return b.id === raidId; })[0] || RAID_BOSSES_DATA[0];
+    var rl    = boss.raid_level;
+    var playerLevel = rl * 100;
+    var pct   = 1.0 + rl * 1.5;
+    var zoneEquiv = rl * 100;
 
-    // ×2.5 toutes stats (combat 5 joueurs), puis HP ×4 supplémentaire → HP ×10 total
-    STAT_KEYS.forEach(function(k) {
-      if (k === 'crit_chance' || k === 'crit_damage') {
-        stats[k] = Math.round(stats[k] * 2.5 * 100) / 100;
-      } else {
-        stats[k] = Math.floor(stats[k] * 2.5);
-      }
-    });
-    stats.hp = Math.floor(stats.hp * 4);
-
-    // raid_10 : stats offensives + défensives doublées (hors HP, vitesse, crit)
-    if (raidId === 'raid_10') {
-      ['p_atk','m_atk','p_pen','m_pen','p_def','m_def'].forEach(function(k) {
-        stats[k] = Math.floor(stats[k] * 2);
-      });
-    }
+    var stats = computeEnemyStats(playerLevel, boss.cls, pct);
+    stats.hp  = Math.floor(stats.hp * 3);
 
     return {
       name: boss.name, nameNote: null,
       cls: boss.cls, theme: 'Raid', themeEmoji: boss.emoji,
-      typeLabel: 'Raid ' + boss.level + ' — Niveau requis : ' + boss.req,
-      typeBadge: 'Raid ' + boss.level, typeEmoji: boss.emoji,
-      passif: null, req: boss.req,
+      typeLabel: 'Raid ' + rl + ' — Niveau requis : ' + boss.level_req,
+      typeBadge: 'Raid ' + rl, typeEmoji: boss.emoji,
+      passif: null, req: boss.level_req,
       xp:   Math.floor(zoneEquiv * 150),
       gold: Math.floor(zoneEquiv * 50),
-      drops: '7 items garantis (1 par slot) — classe totalement aléatoire — Panoplie Raid Niv. ' + boss.level,
-      matZone: zoneEquiv, matMult: 9,
+      drops: '7 items garantis (1 par slot) — classe aléatoire — Panoplie Raid Niv. ' + rl,
       stats: stats
     };
   }
 
-  // ── World Boss ─────────────────────────────────────────────────────────────
+  // ─── World Boss ─────────────────────────────────────────────────────────────
+  // Tour T : pct = T × 0.8 (tour 1 → ×0.8, tour 25 → ×20.0), level = T × 100
+  // Vitesse verrouillée à 100
 
-  function calcWorldBoss(tourPersonnel) {
-    // Tour 1 → turn=0 → zone 1000, Tour 2 → turn=1 → zone 1250, etc.
-    var turn      = Math.max(0, tourPersonnel - 1);
-    var zoneEquiv = Math.round(1000 * Math.pow(1.25, turn));
-    var stats     = computeEnemyStatsAvg(zoneEquiv);
-    delete stats.hp; // HP fixe hebdomadaire (collectif), non affiché ici
+  function computeEnemyStatsAvg(level, pct) {
+    var r = {};
+    STAT_KEYS.forEach(function(k) {
+      var sum = ALL_CLASSES.reduce(function(s, c) {
+        return s + (computeEnemyStats(level, c, pct)[k] || 0);
+      }, 0);
+      if (k === 'crit_chance' || k === 'crit_damage') {
+        r[k] = Math.round(sum / ALL_CLASSES.length * 100) / 100;
+      } else {
+        r[k] = Math.floor(sum / ALL_CLASSES.length);
+      }
+    });
+    return r;
+  }
+
+  function calcWorldBoss(tour) {
+    tour = Math.max(1, Math.min(25, tour));
+    var level = tour * 100;
+    var pct   = tour * 0.8;
+    var stats = computeEnemyStatsAvg(level, pct);
+    stats.speed = 100; // vitesse verrouillée
+    delete stats.hp;   // HP collectifs hebdomadaires (non affichés ici)
+    var zoneEquiv = level;
     return {
       name: 'Bot Suprême', nameNote: null,
-      cls: 'Titan', theme: 'World Boss', themeEmoji: '🐉',
-      typeLabel: 'Tour WB #' + tourPersonnel + ' — Zone ' + fmt(zoneEquiv),
-      typeBadge: 'World Boss T' + tourPersonnel, typeEmoji: '🐉',
-      passif: "Escalade ×1.25 : zone équivalente ×1.25 par attaque WB de la semaine. Tour 20 maximum — en cas de défaite, le tour repart à 1.",
+      cls: 'Titan', theme: 'World Boss', themeEmoji: '🤖',
+      typeLabel: 'Tour WB #' + tour + ' — Niveau équivalent : ' + fmt(level),
+      typeBadge: 'World Boss T' + tour, typeEmoji: '🤖',
+      passif: "Montée en puissance : Augmente ses stats à chaque tour.<br>Vitesse verrouillée à 100.<br>Max 25 tours.",
       xp:   Math.floor(zoneEquiv * 500),
       gold: Math.floor(zoneEquiv * 200),
-      drops: 'Récompenses hebdomadaires (classement) : 🥇 Prismatique +300 000g · 🥈 Transcendant +250 000g · 🥉 Divin +200 000g · Top 10 : Légendaire +150 000g · Top 50 : Épique +100 000g · Top 100 : Rare +75 000g · Tous les participants : Commun +50 000g',
-      matZone: zoneEquiv,
+      drops: 'Voir <a href="../objets/reliques/">Reliques</a>',
       stats: stats
     };
   }
@@ -491,7 +496,6 @@
     matMult = matMult || 1;
     var zoneMult  = Math.round((1 + zone / 1000) * 100) / 100;
     var totalMult = Math.round(zoneMult * matMult * 100) / 100;
-    // Index by prof
     var byProf = {};
     PROF_ORDER.forEach(function(p) { byProf[p] = []; });
     MATERIALS_DATA.forEach(function(m) { byProf[m.prof].push(m); });
@@ -511,22 +515,20 @@
       html += '</div>';
     });
     html += '</div></div>';
-    var multNote = matMult > 1
-      ? '×' + zoneMult + ' zone × ×' + matMult + ' difficulté = ×' + totalMult + ' total'
-      : '×' + totalMult + ' zone';
-    html += '<div class="ec-mat-note">Taux indiqués = votre métier de récolte (' + multNote + '). Hors métier : ÷10. Niveau de récolte insuffisant = tier verrouillé.</div>';
+    html += '<div class="ec-mat-note">Taux = ton métier de récolte (×' + totalMult + '). Hors métier : ÷10. Tier verrouillé si niveau de récolte insuffisant.</div>';
     return html;
   }
 
   var BADGE_COLORS = {
-    'Emblématique': '#d97706', 'Antique': '#dc2626', 'Runique': '#7c3aed'
+    'Emblématique':'#d97706','Antique':'#dc2626','Runique':'#7c3aed',
+    'Boss Zone':'#4b5563'
   };
 
   function badgeColor(badge) {
     if (BADGE_COLORS[badge]) return BADGE_COLORS[badge];
     if (badge.indexOf('World Boss') === 0) return '#16a34a';
-    if (badge.indexOf('Raid') === 0)       return '#2563eb';
-    if (badge.indexOf('Donjon') === 0)     return '#0891b2';
+    if (badge.indexOf('Raid')       === 0) return '#2563eb';
+    if (badge.indexOf('Donjon')     === 0) return '#0891b2';
     return '#6b7280';
   }
 
@@ -552,14 +554,8 @@
         '<div class="ec-passif-txt">' + data.passif + '</div></div>'
       : '';
 
-    var noteHtml = data.nameNote
-      ? '<div class="ec-note">ℹ️ ' + data.nameNote + '</div>' : '';
-
-    var reqHtml = data.req
-      ? '<div class="ec-req">🔓 Niveau requis : <strong>' + data.req + '</strong></div>' : '';
-
-    var zoneHtml = data.zoneEquiv
-      ? '<div class="ec-note">⚙️ Zone équivalente : ' + fmt(data.zoneEquiv) + '</div>' : '';
+    var noteHtml = data.nameNote ? '<div class="ec-note">ℹ️ ' + data.nameNote + '</div>' : '';
+    var reqHtml  = data.req      ? '<div class="ec-req">🔓 Niveau requis : <strong>' + data.req + '</strong></div>' : '';
 
     var bc = badgeColor(data.typeBadge);
     resultEl.innerHTML =
@@ -574,15 +570,15 @@
       '</div>' +
       reqHtml +
       '<div class="ec-stats-grid">' + statsHtml + '</div>' +
-      passifHtml + zoneHtml +
+      passifHtml +
       '<div class="ec-rewards">' +
         '<span>✨ XP : <strong>'  + fmt(data.xp)   + '</strong></span>' +
         '<span>🪙 Or : <strong>' + fmt(data.gold) + '</strong></span>' +
       '</div>' +
-      (data.drops || data.matZone ? '<details class="ec-drops-detail"><summary>🎁 Récompenses possibles</summary>' +
-        (data.drops ? '<div class="ec-drops-equip">⚔️ <strong>Équipement</strong> : ' + data.drops + '</div>' : '') +
-        (data.matZone ? '<div class="ec-drops-mats"><strong>📦 Matériaux</strong> (hors bonus niveau récolte)</div>' + renderMaterialDrops(data.matZone, data.matMult) : '') +
-      '</details>' : '');
+      (data.drops ? '<div class="ec-drops-equip">🎁 <strong>Récompenses</strong> : ' + data.drops + '</div>' : '') +
+      (data.matZone ? '<details class="ec-drops-detail"><summary>📦 Matériaux possibles</summary>' +
+        renderMaterialDrops(data.matZone, data.matMult) +
+        '</details>' : '');
 
     resultEl.style.display = 'block';
   }
@@ -611,41 +607,35 @@
       refresh();
     }
 
-    function updateMondeStageOptions(zone) {
-      var sel = container.querySelector('#ec-stage');
-      if (!sel) return;
-      var cur = sel.value;
-      sel.querySelectorAll('option').forEach(function(o) {
-        if (o.value === 'boss_runique')      o.disabled = (zone % 10  !== 0);
-        if (o.value === 'boss_emblematique') o.disabled = (zone % 100 !== 0);
-        if (o.value === 'boss_antique')      o.disabled = (zone % 1000 !== 0);
-      });
-      var curOpt = sel.querySelector('option[value="' + cur + '"]');
-      if (curOpt && curOpt.disabled) sel.value = 'boss_classique';
-    }
-
-    tabs.forEach(function(t){
-      t.addEventListener('click', function(){ showPanel(t.dataset.mode); });
-    });
-
     function refresh() {
       try {
         var data;
         if (mode === 'monde') {
-          var zone      = Math.max(1, Math.min(10000, parseInt(container.querySelector('#ec-zone').value, 10) || 1));
-          updateMondeStageOptions(zone);
+          var zoneEl    = container.querySelector('#ec-zone');
           var stageVal  = container.querySelector('#ec-stage').value;
-          var bossClass = container.querySelector('#ec-boss-class') ? (container.querySelector('#ec-boss-class').value || null) : null;
           var classRow  = container.querySelector('#ec-class-row');
+          var stageRow  = container.querySelector('#ec-stage-row');
+          var bossClass = container.querySelector('#ec-boss-class') ? container.querySelector('#ec-boss-class').value : 'Guerrier';
 
-          var showClass = (stageVal === 'boss_emblematique' || stageVal === 'boss_antique');
-          if (classRow) classRow.style.display = showClass ? '' : 'none';
+          // Boss antique : zone toujours 1000
+          if (stageVal === 'boss_antique') {
+            if (zoneEl) zoneEl.value = 1000;
+          }
+          var zone = Math.max(1, Math.min(1000, parseInt((zoneEl || {}).value || 50, 10) || 50));
 
-          if      (stageVal === 'boss_antique')      data = calcAntique(zone, bossClass);
-          else if (stageVal === 'boss_emblematique') data = calcEmblematique(zone, bossClass);
+          // Afficher les sélecteurs selon le type
+          if (classRow) classRow.style.display = stageVal === 'boss_antique' ? '' : 'none';
+          if (stageRow) stageRow.style.display  = stageVal === 'ennemi'       ? '' : 'none';
+
+          if      (stageVal === 'boss_antique')      data = calcAntique(bossClass);
+          else if (stageVal === 'boss_emblematique') data = calcEmblematique(zone);
           else if (stageVal === 'boss_runique')      data = calcRunicBoss(zone);
           else if (stageVal === 'boss_classique')    data = calcMondeBossClassique(zone);
-          else                                       data = calcMondeEnemy(zone, parseInt(stageVal, 10));
+          else {
+            var enemyStageEl = container.querySelector('#ec-enemy-stage');
+            var enemyStage   = enemyStageEl ? (parseInt(enemyStageEl.value, 10) || 1) : ((zone - 1) % 10 + 1);
+            data = calcMondeEnemy(zone, enemyStage);
+          }
 
         } else if (mode === 'donjon') {
           var bossId = container.querySelector('#ec-donjon-boss').value;
@@ -658,7 +648,7 @@
 
         } else {
           var wbInput = container.querySelector('#ec-wb-tour-input') || container.querySelector('#ec-wb-tour');
-          data = calcWorldBoss(parseInt(wbInput.value, 10) || 1);
+          data = calcWorldBoss(parseInt((wbInput || {}).value || 1, 10) || 1);
         }
 
         renderEnemy(data, resultEl);
@@ -666,6 +656,10 @@
         console.error('[EnemyCalc]', e);
       }
     }
+
+    tabs.forEach(function(t){
+      t.addEventListener('click', function(){ showPanel(t.dataset.mode); });
+    });
 
     // Sliders → label
     var djLvl = container.querySelector('#ec-donjon-level');
@@ -678,14 +672,13 @@
     var wbTourInput = container.querySelector('#ec-wb-tour-input');
 
     function syncWbTour(val) {
-      val = Math.max(1, Math.min(20, parseInt(val, 10) || 1));
+      val = Math.max(1, Math.min(25, parseInt(val, 10) || 1));
       if (wbVal)       wbVal.textContent = val;
       if (wbTour)      wbTour.value      = val;
       if (wbTourInput) wbTourInput.value = val;
-      var turn = Math.max(0, val - 1);
-      var ze   = Math.round(1000 * Math.pow(1.25, turn));
-      var zeEl = container.querySelector('#ec-wb-zone-equiv');
-      if (zeEl) zeEl.textContent = 'Zone équivalente : ~' + ze.toLocaleString('fr-FR');
+      var level = val * 100;
+      var zeEl  = container.querySelector('#ec-wb-zone-equiv');
+      if (zeEl) zeEl.textContent = 'Niveau équivalent : ' + level.toLocaleString('fr-FR');
     }
 
     if (wbTour) {
@@ -696,7 +689,6 @@
       wbTourInput.addEventListener('change', function(){ syncWbTour(wbTourInput.value); refresh(); });
     }
 
-    // Tous les autres inputs
     container.querySelectorAll('input:not([type="range"]):not([type="radio"]), select').forEach(function(el){
       el.addEventListener('change', refresh);
       el.addEventListener('input',  refresh);
@@ -705,12 +697,10 @@
       el.addEventListener('change', refresh);
     });
 
-    // Initialise WB zone equiv display
     syncWbTour(1);
 
-    // Render initial — auto-detect first available panel
     var defaultMode = null;
-    ['monde', 'donjon', 'raid', 'wb'].forEach(function(m) {
+    ['monde','donjon','raid','wb'].forEach(function(m) {
       if (!defaultMode && panels[m]) defaultMode = m;
     });
     if (defaultMode) showPanel(defaultMode);

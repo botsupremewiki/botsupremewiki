@@ -25,7 +25,7 @@ Atteindre ces niveaux débloque **+5% d'XP globale** (cumulatif, max +50%).
 
 ## 🌍 Titres Globaux — Prestige
 
-Chaque titre de prestige donne **+10% d'efficacité de prestige** (cumulatif).
+Chaque titre de prestige donne **+10% d'efficacité de prestige** (cumulatif, max +100%).
 
 | Prestige requis | Titre | Bonus |
 |----------------|-------|-------|
@@ -67,16 +67,16 @@ Chaque titre de prestige donne **+10% d'efficacité de prestige** (cumulatif).
 
 | Zone requise | Titre | Bonus |
 |-------------|-------|-------|
-| 1 000 | L'Explorateur | +2% loot |
-| 2 000 | L'Aventurier du Monde | +2% loot |
-| 3 000 | Le Conquérant | +2% loot |
-| 4 000 | L'Intrépide Voyageur | +2% loot |
-| 5 000 | Le Maître du Monde | +2% loot |
-| 6 000 | Le Ravageur des Terres | +2% loot |
-| 7 000 | Le Dévastateur des Zones | +2% loot |
-| 8 000 | Le Fléau du Monde | +2% loot |
-| 9 000 | L'Éternel Marcheur | +2% loot |
-| 10 000 | Le Chromate Vivant | +2% loot |
+| 100 | L'Explorateur | +2% loot |
+| 200 | L'Aventurier du Monde | +2% loot |
+| 300 | Le Conquérant | +2% loot |
+| 400 | L'Intrépide Voyageur | +2% loot |
+| 500 | Le Maître du Monde | +2% loot |
+| 600 | Le Ravageur des Terres | +2% loot |
+| 700 | Le Dévastateur des Zones | +2% loot |
+| 800 | Le Fléau du Monde | +2% loot |
+| 900 | L'Éternel Marcheur | +2% loot |
+| 1 000 | Le Chromate Vivant | +2% loot |
 
 ---
 
@@ -158,20 +158,26 @@ Chaque titre de prestige donne **+10% d'efficacité de prestige** (cumulatif).
 
 ## 🐉 Titres du World Boss — Dégâts totaux
 
-**+3% de statistiques WB** (cumulatif, max +30%).
+**+5% de statistiques WB** (cumulatif, max +50%).
 
 | Dégâts totaux requis | Titre | Bonus |
 |---------------------|-------|-------|
-| 10 000 | Le Piquant | +3% stats WB |
-| 50 000 | Le Blesseur | +3% stats WB |
-| 200 000 | Le Maraudeur | +3% stats WB |
-| 500 000 | Le Dévastateur | +3% stats WB |
-| 1 000 000 | L'Exterminateur | +3% stats WB |
-| 5 000 000 | Le Ravageur | +3% stats WB |
-| 10 000 000 | La Calamité | +3% stats WB |
-| 50 000 000 | Le Fléau du Boss | +3% stats WB |
-| 100 000 000 | L'Annihilateur | +3% stats WB |
-| 1 000 000 000 | Le Destructeur Suprême | +3% stats WB |
+| 5 000 | Le Piquant | +5% stats WB |
+| 20 000 | Le Blesseur | +5% stats WB |
+| 75 000 | Le Maraudeur | +5% stats WB |
+| 250 000 | Le Dévastateur | +5% stats WB |
+| 750 000 | L'Exterminateur | +5% stats WB |
+| 2 000 000 | Le Ravageur | +5% stats WB |
+| 7 000 000 | La Calamité | +5% stats WB |
+| 20 000 000 | Le Fléau du Boss | +5% stats WB |
+| 50 000 000 | L'Annihilateur | +5% stats WB |
+| 100 000 000 | Le Destructeur Suprême | +5% stats WB |
+
+## 🐉 Titres du World Boss — Killing Blow
+
+| Condition | Titre | Bonus |
+|-----------|-------|-------|
+| Porter le coup fatal au Bot Suprême | 💀 Tueur du Bot Suprême | Cosmétique |
 
 ---
 
@@ -286,21 +292,116 @@ Ces titres sont des exploits uniques et légendaires — **purement cosmétiques
 
 | Condition | Titre |
 |-----------|-------|
-| Finir #1 du classement global | Légende Vivante |
-| Finir #1 du classement PvP | L'Intouchable |
-| Finir #1 du classement World Boss | Tueur de Titans |
+| Être classé #1 au Classement Général | Légende Vivante |
+| Être classé #1 au Classement PvP | L'Intouchable |
+| Être classé #1 au World Boss | Tueur de Titans |
 | Accumuler 10 milliards d'or | Le Maître des Richesses |
 
-### Exploits toutes classes
+### Exploits par classe
 
-Ces titres requièrent d'accomplir l'exploit avec **chacune des 10 classes**.
+Ces titres requièrent d'accomplir l'exploit avec **une classe spécifique**. Il existe un titre par exploit pour chacune des 10 classes.
 
-| Condition (avec toutes les classes) | Titre |
-|-------------------------------------|-------|
-| Prestige 1 000 | Le Maître Absolu |
-| Zone 10 000 | Seigneur des Dix Mondes |
-| Donjon Classique niveau 100 | Maître du Gouffre Éternel |
-| Donjon Élite niveau 100 | Champion des Hauts Faits |
-| Donjon Abyssal niveau 100 | Terreur des Abysses Éternelle |
-| Raid niveau 10 | Légionnaire Éternel |
-| 1 milliard de dégâts WB | L'Apocalypse |
+#### Prestige 1 000 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier Absolu |
+| 🗡️ Assassin | Assassin Absolu |
+| 🔮 Mage | Archimage Absolu |
+| 🏹 Tireur | Tireur Absolu |
+| 💚 Support | Soutien Absolu |
+| 🧛 Vampire | Vampire Absolu |
+| ⏳ Gardien du Temps | Gardien du Temps Absolu |
+| ☠️ Ombre Venin | Ombre Venin Absolu |
+| 🔥 Pyromancien | Pyromancien Absolu |
+| 🛡️ Paladin | Paladin Absolu |
+
+#### Zone 1 000 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier du Monde |
+| 🗡️ Assassin | Assassin du Monde |
+| 🔮 Mage | Mage du Monde |
+| 🏹 Tireur | Tireur du Monde |
+| 💚 Support | Soutien du Monde |
+| 🧛 Vampire | Vampire du Monde |
+| ⏳ Gardien du Temps | Gardien du Monde |
+| ☠️ Ombre Venin | Ombre du Monde |
+| 🔥 Pyromancien | Flamme du Monde |
+| 🛡️ Paladin | Lumière du Monde |
+
+#### Donjon Classique niveau 100 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier du Gouffre |
+| 🗡️ Assassin | Assassin du Gouffre |
+| 🔮 Mage | Mage du Gouffre |
+| 🏹 Tireur | Tireur du Gouffre |
+| 💚 Support | Soutien du Gouffre |
+| 🧛 Vampire | Vampire du Gouffre |
+| ⏳ Gardien du Temps | Gardien du Gouffre |
+| ☠️ Ombre Venin | Ombre du Gouffre |
+| 🔥 Pyromancien | Flamme du Gouffre |
+| 🛡️ Paladin | Lumière du Gouffre |
+
+#### Donjon Élite niveau 100 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier des Hauts Faits |
+| 🗡️ Assassin | Assassin des Hauts Faits |
+| 🔮 Mage | Mage des Hauts Faits |
+| 🏹 Tireur | Tireur des Hauts Faits |
+| 💚 Support | Soutien des Hauts Faits |
+| 🧛 Vampire | Vampire des Hauts Faits |
+| ⏳ Gardien du Temps | Gardien des Hauts Faits |
+| ☠️ Ombre Venin | Ombre des Hauts Faits |
+| 🔥 Pyromancien | Flamme des Hauts Faits |
+| 🛡️ Paladin | Lumière des Hauts Faits |
+
+#### Donjon Abyssal niveau 100 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier des Abysses |
+| 🗡️ Assassin | Assassin des Abysses |
+| 🔮 Mage | Mage des Abysses |
+| 🏹 Tireur | Tireur des Abysses |
+| 💚 Support | Soutien des Abysses |
+| 🧛 Vampire | Vampire des Abysses |
+| ⏳ Gardien du Temps | Gardien des Abysses |
+| ☠️ Ombre Venin | Ombre des Abysses |
+| 🔥 Pyromancien | Flamme des Abysses |
+| 🛡️ Paladin | Lumière des Abysses |
+
+#### Raid niveau 10 par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier des Légions |
+| 🗡️ Assassin | Assassin des Légions |
+| 🔮 Mage | Mage des Légions |
+| 🏹 Tireur | Tireur des Légions |
+| 💚 Support | Soutien des Légions |
+| 🧛 Vampire | Vampire des Légions |
+| ⏳ Gardien du Temps | Gardien des Légions |
+| ☠️ Ombre Venin | Ombre des Légions |
+| 🔥 Pyromancien | Flamme des Légions |
+| 🛡️ Paladin | Lumière des Légions |
+
+#### 100 000 000 dégâts au World Boss par classe
+
+| Classe | Titre |
+|--------|-------|
+| ⚔️ Guerrier | Guerrier Destructeur |
+| 🗡️ Assassin | Assassin Destructeur |
+| 🔮 Mage | Archimage Destructeur |
+| 🏹 Tireur | Tireur Destructeur |
+| 💚 Support | Soutien Destructeur |
+| 🧛 Vampire | Vampire Destructeur |
+| ⏳ Gardien du Temps | Gardien Destructeur |
+| ☠️ Ombre Venin | Ombre Destructrice |
+| 🔥 Pyromancien | Flamme Destructrice |
+| 🛡️ Paladin | Paladin Destructeur |

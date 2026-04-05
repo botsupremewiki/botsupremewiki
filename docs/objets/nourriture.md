@@ -2,130 +2,72 @@
 
 Les nourritures sont fabriquées par le **Boulanger**. Elles s'utilisent avant un combat pour gagner de l'énergie et/ou booster tes statistiques.
 
-!!! info "Durée"
-    Sauf indication contraire, les bonus de combat durent pour **1 combat**.
-
-!!! tip "Cumul avec les Élixirs"
-    Les nourritures (Boulanger) et les élixirs (Alchimiste) se **cumulent** — tu peux avoir un buff nourriture ET un élixir actifs simultanément.
-
-!!! warning "Une seule nourriture active à la fois"
-    Utiliser une nouvelle nourriture **remplace** la nourriture active précédente. De même, utiliser un nouvel élixir remplace l'élixir actif précédent.
-
-!!! note "Récompense quotidienne"
-    La récompense journalière peut accorder un consommable parmi les paliers 1 à 9 (t1–t9). Le palier 10 n'est pas dans le pool quotidien.
-
 ---
-
-## Crafting — Ingrédients requis
-
-Toutes les nourritures sont fabriquées via le menu **Boulanger** (`/metiers`).
 
 === "🍞 Pains — Énergie directe"
 
-    Les pains donnent immédiatement de l'**énergie** à la consommation.
+    Donnent immédiatement de l'**énergie** à la consommation. Recette : 🌾 Fermier + 🪓 Bûcheron du même tier.
 
-    | Pain | Énergie | Niv. Boulanger | Ingrédients | Valeur |
-    |------|:-------:|:--------------:|-------------|-------:|
-    | 🍞 Croûton | +10 | 1 | 🌾 Blé ×3 | 50 |
-    | 🍞 Petit Pain | +20 | 10 | 🌾 Orge ×4 | 150 |
-    | 🥖 Pain | +30 | 20 | 🌽 Farine de Maïs ×4 | 400 |
-    | 🥖 Miche de Pain | +40 | 30 | 🌿 Herbes Aromatiques ×5 | 1 000 |
-    | 🥖 Pain de Campagne | +50 | 40 | 🫐 Baies Sauvages ×5 | 3 000 |
-    | 🥖 Pain Artisanal | +60 | 50 | 🦄 Lait de Licorne ×6 | 8 000 |
-    | ✨ Pain des Anciens | +70 | 60 | 🍯 Miel Enchanté ×4 + ✨ Bois Enchanté ×2 | 20 000 |
-    | ✨ Pain Enchanté | +80 | 70 | 🧂 Sel de Mer ×5 + 🌙 Bois de Lune ×2 | 60 000 |
-    | 🌟 Pain Sacré | +90 | 80 | 🌶️ Épices Rares ×5 + 🔥 Bois de Feu ×2 | 160 000 |
-    | 🌟 Pain Divin | +100 | 90 | 🍑 Fruit du Paradis ×6 + 🐉 Bois de Dragon ×2 | 480 000 |
-
-    !!! tip "Idéal pour recharger l'énergie"
-        Le **Croûton** (niv. 1) est le consommable de base de l'économie d'énergie. Les pains de haut niveau (T7+) nécessitent aussi du **Bois** (Bûcheron) — le four du boulanger ne se contente plus de bois ordinaire !
+    | Nom | Énergie | Niv. Boulanger | 🌾 Fermier | 🪓 Bûcheron |
+    |-----|:-------:|:--------------:|-----------|------------|
+    | 🍞 Croûton | +10 | 1 | 🌾 Blé ×3 | 🌳 Bois de Chêne ×2 |
+    | 🍞 Petit Pain | +20 | 10 | 🌾 Orge ×4 | 🌲 Bois de Sapin ×3 |
+    | 🥐 Pain | +30 | 20 | 🌽 Farine de Maïs ×5 | 🪵 Bois d'Ébène ×3 |
+    | 🥐 Miche | +40 | 30 | 🌿 Herbes Aromatiques ×6 | 🪵 Bois de Teck ×4 |
+    | 🥖 Pain de Campagne | +50 | 40 | 🫐 Baies Sauvages ×7 | 🪵 Bois de Cèdre ×5 |
+    | 🥖 Pain Artisanal | +60 | 50 | 🦄 Lait de Licorne ×8 | ✨ Bois Enchanté ×5 |
+    | 🥨 Pain des Anciens | +70 | 60 | 🍯 Miel Enchanté ×10 | 🔴 Bois de Sang ×6 |
+    | 🥨 Pain Enchanté | +80 | 70 | 🧂 Sel de Mer ×12 | 🌙 Bois de Lune ×7 |
+    | 🎂 Pain Sacré | +90 | 80 | 🌶️ Épices Rares ×14 | 🔥 Bois de Feu ×9 |
+    | 🌟 Pain Divin | +100 | 90 | 🍑 Fruit du Paradis ×16 | 🐉 Bois de Dragon ×10 |
 
 === "🍵 Infusions — Régénération passive"
 
-    Les infusions augmentent ton **taux de régénération passive d'énergie** entre les combats. Durée : **1 heure**.
+    Augmentent le **taux de régénération d'énergie** pendant **1 heure**. Recette : 🌾 Fermier + 🌿 Herboriste du même tier.
 
-    | Infusion | Bonus regen | Niv. Boulanger | Ingrédients | Valeur |
-    |----------|:-----------:|:--------------:|-------------|-------:|
-    | 🍵 Tisane Légère | +20% | 1 | 🌾 Blé ×3 | 75 |
-    | 🍵 Tisane | +40% | 10 | 🌾 Orge ×4 | 225 |
-    | 🍵 Infusion Légère | +60% | 20 | 🌽 Farine de Maïs ×4 | 600 |
-    | 🫖 Infusion | +80% | 30 | 🌿 Herbes Aromatiques ×5 | 1 500 |
-    | 🫖 Infusion des Herbes | +100% | 40 | 🫐 Baies Sauvages ×5 | 4 500 |
-    | 🫖 Grande Infusion | +120% | 50 | 🦄 Lait de Licorne ×6 | 12 000 |
-    | ✨ Infusion des Anciens | +140% | 60 | 🍯 Miel Enchanté ×6 | 30 000 |
-    | ✨ Infusion Renforcée | +160% | 70 | 🧂 Sel de Mer ×7 | 90 000 |
-    | 🌟 Infusion Enchantée | +180% | 80 | 🌶️ Épices Rares ×7 | 240 000 |
-    | 🌟 Infusion Légendaire | +200% | 90 | 🍑 Fruit du Paradis ×8 | 720 000 |
+    | Nom | Regen bonus | Niv. Boulanger | 🌾 Fermier | 🌿 Herboriste |
+    |-----|:-----------:|:--------------:|-----------|--------------|
+    | 🍵 Tisane Légère | +10% | 1 | 🌾 Blé ×3 | 🌿 Herbe de Soin ×2 |
+    | 🍵 Tisane | +20% | 10 | 🌾 Orge ×4 | 💧 Herbe de Mana ×3 |
+    | 🍵 Infusion Légère | +30% | 20 | 🌽 Farine de Maïs ×5 | 🌱 Racine de Force ×3 |
+    | 🫖 Infusion | +40% | 30 | 🌿 Herbes Aromatiques ×6 | 🌸 Fleur de Lune ×4 |
+    | 🫖 Infusion des Herbes | +50% | 40 | 🫐 Baies Sauvages ×7 | 🌼 Pollen Doré ×5 |
+    | 🫖 Grande Infusion | +60% | 50 | 🦄 Lait de Licorne ×8 | 🍄 Champignon Vénéneux ×5 |
+    | ☕ Infusion des Anciens | +70% | 60 | 🍯 Miel Enchanté ×10 | 🔮 Cristal Végétal ×6 |
+    | ☕ Infusion Renforcée | +80% | 70 | 🧂 Sel de Mer ×12 | 🌾 Mousse Ancienne ×7 |
+    | 🍶 Infusion Enchantée | +90% | 80 | 🌶️ Épices Rares ×14 | 🌵 Épine de Dragon ×9 |
+    | 🌟 Infusion Légendaire | +100% | 90 | 🍑 Fruit du Paradis ×16 | 🖤 Lotus de l'Ombre ×10 |
 
-=== "🍱 Rations de Victoire — Énergie par victoire"
+=== "🍱 Rations — Énergie par victoire"
 
-    Chaque combat gagné te rapporte de l'**énergie bonus** tant que la ration est active. Durée : **3 combats**.
+    Donnent de l'**énergie à chaque victoire** pendant **15 combats**. Recette : 🌾 Fermier + 🏹 Chasseur du même tier.
 
-    | Ration | Énergie / victoire | Niv. Boulanger | Ingrédients | Valeur |
-    |--------|:-----------------:|:--------------:|-------------|-------:|
-    | 🍱 Mini Ration | +5 | 1 | 🌾 Blé ×3 | 75 |
-    | 🍱 Petite Ration | +10 | 10 | 🌾 Orge ×4 | 225 |
-    | 🍱 Ration de Victoire | +15 | 20 | 🌽 Farine de Maïs ×4 | 600 |
-    | ⚔️ Ration du Soldat | +20 | 30 | 🌿 Herbes Aromatiques ×5 | 1 500 |
-    | ⚔️ Ration du Guerrier | +25 | 40 | 🫐 Baies Sauvages ×5 | 4 500 |
-    | ⚔️ Grande Ration de Victoire | +30 | 50 | 🦄 Lait de Licorne ×6 | 12 000 |
-    | ✨ Ration du Conquérant | +35 | 60 | 🍯 Miel Enchanté ×6 | 30 000 |
-    | ✨ Ration du Héros | +40 | 70 | 🧂 Sel de Mer ×7 | 90 000 |
-    | 🌟 Ration du Champion | +45 | 80 | 🌶️ Épices Rares ×7 | 240 000 |
-    | 🌟 Ration Légendaire | +50 | 90 | 🍑 Fruit du Paradis ×8 | 720 000 |
+    | Nom | Énergie / victoire | Niv. Boulanger | 🌾 Fermier | 🏹 Chasseur |
+    |-----|:-----------------:|:--------------:|-----------|------------|
+    | 🍱 Mini Ration | +1 | 1 | 🌾 Blé ×3 | 🐺 Cuir de Loup ×2 |
+    | 🍱 Petite Ration | +2 | 10 | 🌾 Orge ×4 | 🦌 Cuir de Cerf ×3 |
+    | 🍱 Ration de Victoire | +3 | 20 | 🌽 Farine de Maïs ×5 | 🐍 Écailles de Serpent ×3 |
+    | ⚔️ Ration du Soldat | +4 | 30 | 🌿 Herbes Aromatiques ×6 | 🦅 Plumes de Phénix ×4 |
+    | ⚔️ Ration du Guerrier | +5 | 40 | 🫐 Baies Sauvages ×7 | 🦷 Croc de Goule ×5 |
+    | ⚔️ Grande Ration | +6 | 50 | 🦄 Lait de Licorne ×8 | 🦁 Griffe de Griffon ×5 |
+    | 🏆 Ration du Conquérant | +7 | 60 | 🍯 Miel Enchanté ×10 | 🐉 Peau de Dragon ×6 |
+    | 🏆 Ration du Héros | +8 | 70 | 🧂 Sel de Mer ×12 | 💀 Os de Chimère ×7 |
+    | 👑 Ration du Champion | +9 | 80 | 🌶️ Épices Rares ×14 | ☠️ Venin de Basilic ×9 |
+    | 🌟 Ration Légendaire | +10 | 90 | 🍑 Fruit du Paradis ×16 | ❤️ Cœur de Bête ×10 |
 
-    !!! tip "Idéal pour le mode Auto"
-        Utilise une **Ration de Victoire** pour le mode Auto dans le Monde — chaque combat gagné te redonne de l'énergie automatiquement.
+=== "🌟 Repas Spéciaux"
 
-=== "🍽️ Repas Spéciaux — Tout-en-un"
+    Combine **énergie directe**, **régénération** et **énergie par victoire** en un seul consommable. Recette à **5 ingrédients** T10.
 
-    Ce consommable d'exception combine **énergie directe**, **bonus de régénération** (1h) et **énergie par victoire** (3 combats) en un seul item.
-
-    | Repas | Énergie | Regen | Énergie / victoire | Niv. Boulanger | Ingrédients | Valeur |
-    |-------|:-------:|:-----:|:-----------------:|:--------------:|-------------|-------:|
-    | 🌟 Repas Légendaire | +200 | +400% (1h) | +100 (3 combats) | 100 | 🍑 Fruit du Paradis ×50 | 2 000 000 |
-
-    !!! warning "Recette d'endgame absolu"
-        Le **Repas Légendaire** requiert le niveau **100** de Boulanger et 50 Fruits du Paradis. C'est le consommable alimentaire le plus puissant du jeu.
-
----
-
-## Récapitulatif des ingrédients
-
-La majorité des recettes de Boulanger utilisent des matériaux **Fermier**. Les pains de haut niveau (T7+) requièrent aussi du **Bois** (Bûcheron) — le four du boulanger ne se contente plus de céréales ordinaires à ce stade !
-
-**Fermier** (requis pour toutes les recettes) :
-
-| Ingrédient (Fermier) | Tier | Utilisé dans |
-|----------------------|:----:|-------------|
-| 🌾 Blé | 1 | Croûton, Tisane Légère, Mini Ration |
-| 🌾 Orge | 2 | Petit Pain, Tisane, Petite Ration |
-| 🌽 Farine de Maïs | 3 | Pain, Infusion Légère, Ration de Victoire |
-| 🌿 Herbes Aromatiques | 4 | Miche de Pain, Infusion, Ration du Soldat |
-| 🫐 Baies Sauvages | 5 | Pain de Campagne, Infusion des Herbes, Ration du Guerrier |
-| 🦄 Lait de Licorne | 6 | Pain Artisanal, Grande Infusion, Grande Ration de Victoire |
-| 🍯 Miel Enchanté | 7 | Pain des Anciens (+ Bois), Infusion des Anciens, Ration du Conquérant |
-| 🧂 Sel de Mer | 8 | Pain Enchanté (+ Bois), Infusion Renforcée, Ration du Héros |
-| 🌶️ Épices Rares | 9 | Pain Sacré (+ Bois), Infusion Enchantée, Ration du Champion |
-| 🍑 Fruit du Paradis | 10 | Pain Divin (+ Bois), Infusion Légendaire, Ration Légendaire, Repas Légendaire |
-
-**Bûcheron** (requis uniquement pour les Pains T7–T10) :
-
-| Ingrédient (Bûcheron) | Tier | Utilisé dans |
-|-----------------------|:----:|-------------|
-| ✨ Bois Enchanté | 6 | Pain des Anciens (T7) |
-| 🌙 Bois de Lune | 7 | Pain Enchanté (T8) |
-| 🔥 Bois de Feu | 8 | Pain Sacré (T9) |
-| 🐉 Bois de Dragon | 9 | Pain Divin (T10) |
-
-!!! success "Les plus précieux"
-    Le **Fruit du Paradis** (tier 10) est l'ingrédient le plus rare — il entre dans les recettes endgame. Accumule-le avant de crafter les consommables de haut niveau.
+    | Nom | Effet | Niv. Boulanger | Ingrédients |
+    |-----|-------|:--------------:|-------------|
+    | 🌟 Repas Légendaire | +200 énergie · +200% regen (1h) · +20 énergie/victoire (15 combats) | 100 | 🍑 Fruit du Paradis ×12 · 🐉 Bois de Dragon ×10 · 🖤 Lotus de l'Ombre ×8 · ❤️ Cœur de Bête ×6 · 💠 Diamant Brut ×6 |
 
 ---
 
 ## Voir aussi
 
-- [Métiers de Conception](../metiers/conception.md) — recettes Boulanger complètes
-- [Récolte — Fermier](../metiers/recolte.md) — comment obtenir les ingrédients
+- [Métiers de Conception](../metiers/conception.md) — menu Boulanger complet
+- [Récolte](../metiers/recolte.md) — comment obtenir les ingrédients
 - [Potions & Élixirs](potions.md) — consommables de l'Alchimiste (soins & boosts)
 - [Runes](runes.md) — consommables de l'Enchanteur (stats %)

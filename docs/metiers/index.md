@@ -64,8 +64,7 @@ Tous les crafts (artisanat et conception) suivent un système de **10 tiers** ba
 
 ## Règles générales
 
-- Tu peux avoir **autant de métiers de récolte** que tu veux simultanément
-- Tu ne peux avoir qu'**un seul métier d'artisanat** et **un seul métier de conception** à la fois
+- Tu ne peux avoir qu'**un seul métier de récolte**, **un seul métier d'artisanat** et **un seul métier de conception** à la fois
 - Changer de métier réinitialise ton niveau dans ce métier à 1
 
 ---

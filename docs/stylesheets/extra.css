@@ -865,6 +865,414 @@
   .ec-name { font-size: 1.05rem; }
 }
 
+/* ══════════════════════════════════════════════════════════════
+   Calculateur de Stats
+   ══════════════════════════════════════════════════════════════ */
+
+#stat-calculator {
+  background: rgba(10, 6, 18, 0.7);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.sc-inputs {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.25rem 1.5rem;
+  align-items: start;
+  margin-bottom: 1.4rem;
+}
+
+.sc-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.sc-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color);
+}
+
+.sc-label-hint {
+  font-weight: 400;
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+/* Prestige badge */
+.sc-prestige-badge {
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 8px;
+  padding: 0.55rem 0.9rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--rpg-gold);
+  margin-bottom: 1rem;
+}
+
+/* Result card */
+.sc-result {
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.08), rgba(0, 0, 0, 0.2));
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.sc-class-header {
+  font-size: 1.05rem;
+  font-weight: 700;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.2);
+  color: var(--rpg-gold-light);
+  background: rgba(124, 58, 237, 0.1);
+}
+
+/* Table */
+.sc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border-radius: 0 !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+}
+
+.sc-table th {
+  background: rgba(124, 58, 237, 0.18) !important;
+  color: var(--rpg-gold-light) !important;
+  font-weight: 700;
+  padding: 0.55rem 1rem !important;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3) !important;
+  text-align: left !important;
+}
+
+.sc-table th:not(:first-child) {
+  text-align: right !important;
+}
+
+.sc-table td {
+  padding: 0.5rem 1rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  font-size: 0.92rem;
+}
+
+.sc-table td:not(:first-child) {
+  text-align: right !important;
+}
+
+.sc-table tr:hover td {
+  background: rgba(124, 58, 237, 0.08);
+}
+
+.sc-row-hp td {
+  background: rgba(239, 68, 68, 0.07) !important;
+}
+
+.sc-row-hp:hover td {
+  background: rgba(239, 68, 68, 0.12) !important;
+}
+
+.sc-stat-icon {
+  margin-right: 0.35rem;
+}
+
+.sc-col-base {
+  opacity: 0.5;
+  font-size: 0.85rem;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .sc-inputs {
+    grid-template-columns: 1fr;
+  }
+  .sc-range {
+    max-width: 100%;
+  }
+}
+
+/* ── Calculateur d'Artisanat ───────────────────────────────── */
+
+#craft-calculator,
+#rarity-calculator {
+  background: rgba(10, 6, 18, 0.7);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.cc-section-label {
+  font-weight: 700;
+  font-size: 0.82rem;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--rpg-gold);
+  margin-bottom: 0.6rem;
+  margin-top: 1rem;
+}
+
+.cc-section-label:first-child {
+  margin-top: 0;
+}
+
+.cc-tab-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.9rem;
+}
+
+.cc-tab-btn {
+  background: rgba(124, 58, 237, 0.1);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 8px;
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  font-size: 0.82rem;
+  padding: 0.3rem 0.7rem;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.cc-tab-btn:hover {
+  background: rgba(124, 58, 237, 0.2);
+  border-color: rgba(124, 58, 237, 0.5);
+}
+
+.cc-tab-btn.active {
+  background: rgba(124, 58, 237, 0.35);
+  border-color: rgba(124, 58, 237, 0.8);
+  color: var(--rpg-gold-light);
+  font-weight: 600;
+}
+
+.cc-profession-info {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+  color: var(--md-default-fg-color);
+  opacity: 0.85;
+}
+
+.cc-slot-badge {
+  font-weight: 600;
+  color: var(--rpg-gold-light);
+  margin-right: 0.25rem;
+}
+
+/* Recipe & rarity tables */
+.cc-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0.75rem 0 0 !important;
+}
+
+.cc-table th {
+  background: rgba(124, 58, 237, 0.18) !important;
+  color: var(--rpg-gold-light) !important;
+  font-weight: 700;
+  padding: 0.5rem 0.85rem !important;
+  font-size: 0.83rem;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid rgba(124, 58, 237, 0.3) !important;
+  text-align: left !important;
+}
+
+.cc-table td {
+  padding: 0.45rem 0.85rem !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04) !important;
+  font-size: 0.9rem;
+  vertical-align: middle;
+}
+
+.cc-table tr:hover td {
+  background: rgba(124, 58, 237, 0.07);
+}
+
+.cc-row-t10 td {
+  background: rgba(245, 158, 11, 0.08) !important;
+  color: var(--rpg-gold-light);
+  font-weight: 600;
+}
+
+.cc-row-t10:hover td {
+  background: rgba(245, 158, 11, 0.14) !important;
+}
+
+/* Rarity bar */
+.cc-bar {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  height: 10px;
+  min-width: 80px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.cc-bar-fill {
+  border-radius: 4px;
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+/* Level input row */
+.cc-field {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.cc-label {
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--md-default-fg-color);
+  white-space: nowrap;
+}
+
+.cc-hint {
+  font-weight: 400;
+  opacity: 0.5;
+  font-size: 0.8rem;
+}
+
+@media (max-width: 640px) {
+  .cc-tab-btn {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.5rem;
+  }
+  .cc-field {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+/* ── Simulateur d'Équipements ──────────────────────────────── */
+
+.eq-card {
+  background: rgba(10, 6, 18, 0.7);
+  border: 1px solid rgba(124, 58, 237, 0.35);
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  margin: 1.25rem 0;
+}
+
+.eq-builder-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.25rem;
+  align-items: flex-end;
+  margin-bottom: 0.9rem;
+}
+
+.eq-preview {
+  font-size: 0.85rem;
+  opacity: 0.85;
+  padding: 0.6rem 0.8rem;
+  border-radius: 8px;
+  background: rgba(124, 58, 237, 0.08);
+  border: 1px solid rgba(124, 58, 237, 0.18);
+  margin-bottom: 0.75rem;
+}
+
+.eq-add-btn {
+  background: rgba(124, 58, 237, 0.25);
+  border: 1px solid rgba(124, 58, 237, 0.6);
+  border-radius: 8px;
+  color: var(--rpg-gold-light);
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.4rem 1rem;
+  transition: background 0.15s;
+}
+
+.eq-add-btn:hover {
+  background: rgba(124, 58, 237, 0.4);
+}
+
+.eq-del-btn {
+  background: rgba(239, 68, 68, 0.12);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 6px;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1;
+  padding: 0.1rem 0.45rem;
+  transition: background 0.12s;
+}
+
+.eq-del-btn:hover {
+  background: rgba(239, 68, 68, 0.28);
+}
+
+.eq-preview-header {
+  opacity: 0.75;
+  margin-bottom: 0.4rem;
+}
+
+.eq-stat-line {
+  font-size: 0.83rem;
+  line-height: 1.7;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.eq-totals-section {
+  margin-top: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.eq-totals-group {
+  background: rgba(124, 58, 237, 0.07);
+  border: 1px solid rgba(124, 58, 237, 0.22);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+}
+
+.eq-totals-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  opacity: 0.55;
+  margin-bottom: 0.35rem;
+}
+
+.eq-bonus-stat-line {
+  color: var(--rpg-gold-light);
+}
+
+.eq-passive-line {
+  background: rgba(245, 158, 11, 0.1);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  border-radius: 8px;
+  color: var(--rpg-gold-light);
+  font-size: 0.83rem;
+  margin-bottom: 0.35rem;
+  padding: 0.35rem 0.7rem;
+}
+
+@media (max-width: 640px) {
+  .eq-builder-grid {
+    flex-direction: column;
+  }
+}
+
 /* ── Sticky Footer ─────────────────────────────────────────── */
 .md-footer {
   position: sticky;
@@ -917,4 +1325,69 @@
 
 .md-footer-meta {
   display: none !important;
+}
+
+/* ── Browser de panoplie ───────────────────────────────────── */
+
+.set-tab-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .35rem;
+}
+
+.set-tab-btn {
+  background: rgba(124, 58, 237, 0.12);
+  border: 1px solid rgba(124, 58, 237, 0.3);
+  border-radius: 6px;
+  color: var(--md-default-fg-color);
+  cursor: pointer;
+  font-size: .82rem;
+  padding: .3rem .75rem;
+  transition: background .15s, border-color .15s;
+}
+
+.set-tab-btn:hover {
+  background: rgba(124, 58, 237, 0.25);
+  border-color: rgba(124, 58, 237, 0.6);
+}
+
+.set-tab-btn.active {
+  background: rgba(124, 58, 237, 0.40);
+  border-color: rgba(124, 58, 237, 0.85);
+  color: #fff;
+  font-weight: 600;
+}
+
+.set-name-badge {
+  background: rgba(124, 58, 237, 0.18);
+  border-left: 3px solid rgba(124, 58, 237, 0.7);
+  border-radius: 4px;
+  font-size: .9rem;
+  font-weight: 700;
+  padding: .35rem .75rem;
+  color: var(--rpg-gold-light, #ffd700);
+}
+
+.set-passive-row td {
+  background: rgba(124, 58, 237, 0.07) !important;
+  font-style: italic;
+}
+
+.set-tier {
+  border-radius: 4px;
+  font-size: .72rem;
+  font-style: normal;
+  font-weight: 700;
+  margin-left: .3rem;
+  padding: .1rem .35rem;
+}
+
+.set-tier-D {
+  background: rgba(100, 180, 100, 0.25);
+  color: #6ecf6e;
+}
+
+.set-tier-C {
+  background: rgba(100, 140, 240, 0.25);
+  color: #7eb0ff;
 }

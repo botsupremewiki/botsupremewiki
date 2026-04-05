@@ -13,8 +13,8 @@ L'Assassin est un combattant **ultra-rapide et furtif**, spécialisé dans les d
 | Attaque Magique | 0 |
 | Défense Physique | 4 |
 | Défense Magique | 3 |
-| Vitesse | 160 |
-| Chance de Critique | 20.0% |
+| Vitesse | 105 |
+| Chance de Critique | 18.0% |
 | Dégâts de Critique | 175.0% |
 
 ---
@@ -27,32 +27,33 @@ L'Assassin a **20% de chance d'esquiver** chaque attaque ennemie. Totalement pas
 
 ## Ressource — Combo
 
-Le Combo se régénère de **+1 par tour**. Il est plafonné à **5**.
+Le Combo se régénère de **+1 à la fin de ton tour** et de **+1 à la fin du tour ennemi**. Il est plafonné à **10**.
 
 ---
 
 ## Sorts
 
 === "🗡️ Frappe de l'Ombre"
-    **Coût :** 1 Combo — **Temps de recharge :** aucun
+    **Coût :** 2 Combo — **Temps de recharge :** 1 tour
 
-    Inflige **×1.8 dégâts physiques**. Double les chances d'esquive pour la prochaine attaque ennemie.
+    Inflige **×1.4 dégâts physiques**. Double les chances d'esquive pour la prochaine attaque ennemie.
 
 === "✴️ Lame Perçante"
-    **Coût :** 2 Combo — **Temps de recharge :** 2 tours
+    **Coût :** 4 Combo — **Temps de recharge :** 2 tours
 
-    Inflige **×1.6 dégâts physiques** en ignorant **60% de la Déf. Phy.** ennemie.
+    Inflige **×2.0 dégâts physiques** en garantissant un **coup critique**.
 
 === "💀 Exécution (Ultime)"
-    **Coût :** 5 Combo — **Temps de recharge :** 6 tours
+    **Coût :** 10 Combo — **Temps de recharge :** 6 tours — **Disponible à partir du tour 3**
 
-    Dégâts **×2.0 → ×3.5** selon les PV manquants de l'ennemi (×3.5 à 0% PV).
+    Dégâts **×2.5 → ×5.0** selon les PV manquants de l'ennemi (×5.0 à 0% PV).
 
 ---
 
 ## Conseils
 
-- L'Assassin est la classe la plus rapide du jeu — il agit presque toujours en premier.
-- **Frappe de l'Ombre** à ×1.8 est excellent pour spammer et accumuler du Combo rapidement.
-- **Lame Perçante** est idéale contre les ennemis bien blindés physiquement — 60% d'ignore de défense est énorme.
-- Garde **Exécution** pour quand l'ennemi est à faibles PV — le bonus de ×3.5 à 0 PV est dévastateur.
+- L'Assassin est parmi les classes les plus rapides du jeu — il agit souvent en premier.
+- **Frappe de l'Ombre** offre aussi un double d'esquive sur la prochaine attaque — utile pour encaisser un coup critique ennemi.
+- **Lame Perçante** est ton principal outil de burst : ×2.0 avec crit garanti ignore toute la variance de critique.
+- Accumule du Combo progressivement (tu en gagnes 2 par tour complet) pour enchaîner les sorts.
+- Garde **Exécution** pour quand l'ennemi est bas en PV — à 0% PV restants, les dégâts sont doublés par rapport à la valeur de base.
