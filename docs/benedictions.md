@@ -14,7 +14,7 @@ Les Bénédictions sont des **buffs temporaires globaux** qui s'appliquent à **
 |-------------|:-----:|-------|
 | **Éveil des Anciens** | ✨ | ×1.5 sur toute l'XP gagnée (combat + métiers) |
 | **Touche de Midas** | 💰 | ×1.5 sur tout l'or gagné en combat |
-| **Abondance Primordiale** | 🌿 | ×1.5 sur tous les matériaux droppés en combat |
+| **Abondance Primordiale** | 🌿 | Chances de drop de chaque matériau en combat ×1.5 |
 | **Œil du Destin** | 🔮 | Les équipements **lootés** ont leur rareté augmentée d'1 tier (max Prismatique) |
 | **Main du Maître** | ⚒️ | Les équipements **craftés** ont leur rareté augmentée d'1 tier (max Prismatique) |
 | **Économie Runique** | 🔱 | Le coût en matériaux de toutes les recettes de craft est réduit de 1 (minimum 1 par matériau) |
