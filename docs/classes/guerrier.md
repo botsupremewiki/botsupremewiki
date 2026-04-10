@@ -37,26 +37,26 @@ La Rage se régénère de **+5 au début de ton tour** et de **+15 à la fin du 
 ## Sorts
 
 === "⚔️ Châtiment Sanglant"
-    **Coût :** 25 Rage — **Temps de recharge :** 1 tour
+    **Coût :** 20 Rage — **Temps de recharge :** 1 tour
 
-    Inflige **×1.6 dégâts physiques**.
+    Sacrifie **10% des PV max**, gagne **+20% ATK Phy pendant 1 tour**, inflige **×1.5 dégâts physiques** et vole **10% des dégâts infligés** en PV.
 
 === "🔄 Contre-Attaque"
     **Coût :** 30 Rage — **Temps de recharge :** 4 tours
 
-    Inflige **×1.8 dégâts physiques** puis riposte automatiquement à chaque attaque ennemie pendant **2 tours**.
+    Riposte automatiquement à chaque attaque ennemie pendant **2 tours**, puis inflige **×2.5 dégâts physiques**.
 
 === "💢 Immortalité (Ultime)"
     **Coût :** 80 Rage — **Temps de recharge :** 8 tours — **Disponible à partir du tour 3**
 
-    Inflige **×2.0 dégâts physiques** puis devient immortel pendant **2 tours** — impossible de tomber sous 1 PV.
+    Devient immortel pendant **2 tours** (impossible de tomber sous 1 PV), puis inflige **×4.5 dégâts physiques**.
 
 ---
 
 ## Conseils
 
 - Le passif du Guerrier est son point fort : être blessé n'est pas une mauvaise chose tant que tu restes en vie.
-- **Châtiment Sanglant** est ton attaque principale — CD court (1 tour) et bon ratio ×1.6.
-- **Contre-Attaque** combine une attaque forte (×1.8) avec une riposte automatique — idéal contre les ennemis qui attaquent souvent.
-- Garde **Immortalité** pour les situations où tu risques d'être tué en un coup — 2 tours d'invincibilité + ×2.0 dégâts peut renverser un combat.
+- **Châtiment Sanglant** sacrifie 10% de tes PV mais te rend plus puissant (+20% ATK Phy) et te soigne via le vol de vie — un coût compensé par les gains.
+- **Contre-Attaque** est particulièrement redoutable contre les ennemis rapides ou les boss qui enchaînent les attaques — chaque frappe ennemie déclenche une riposte.
+- Garde **Immortalité** pour les situations où tu risques d'être tué en un coup — 2 tours d'invincibilité + ×4.5 dégâts peut renverser un combat.
 - La Rage monte vite en combat long grâce au gain passif chaque tour — tu auras souvent accès à tes sorts dès le tour 2.

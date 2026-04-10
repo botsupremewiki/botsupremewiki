@@ -37,24 +37,24 @@ Le Combo se régénère de **+1 à la fin de ton tour** et de **+1 à la fin du 
 === "🗡️ Frappe de l'Ombre"
     **Coût :** 2 Combo — **Temps de recharge :** 1 tour
 
-    Inflige **×1.4 dégâts physiques**. Double les chances d'esquive pour la prochaine attaque ennemie.
+    Gagne **+20% pénétration physique pendant 1 tour**, puis inflige **×1.5 dégâts physiques**.
 
 === "✴️ Lame Perçante"
-    **Coût :** 4 Combo — **Temps de recharge :** 2 tours
+    **Coût :** 4 Combo — **Temps de recharge :** 3 tours
 
-    Inflige **×2.0 dégâts physiques** en garantissant un **coup critique**.
+    Garantit un **coup critique**, puis inflige **×2.5 dégâts physiques**.
 
 === "💀 Exécution (Ultime)"
     **Coût :** 10 Combo — **Temps de recharge :** 6 tours — **Disponible à partir du tour 3**
 
-    Dégâts **×2.5 → ×5.0** selon les PV manquants de l'ennemi (×5.0 à 0% PV).
+    Dégâts **×4.5 → ×7.5** selon les PV manquants de l'ennemi (×7.5 à 0% PV).
 
 ---
 
 ## Conseils
 
 - L'Assassin est parmi les classes les plus rapides du jeu — il agit souvent en premier.
-- **Frappe de l'Ombre** offre aussi un double d'esquive sur la prochaine attaque — utile pour encaisser un coup critique ennemi.
-- **Lame Perçante** est ton principal outil de burst : ×2.0 avec crit garanti ignore toute la variance de critique.
+- **Frappe de l'Ombre** augmente ta pénétration physique de +20% — utilise-la avant **Lame Perçante** pour maximiser les dégâts perçants.
+- **Lame Perçante** est ton principal outil de burst : ×2.5 avec crit garanti ignore toute la variance de critique.
 - Accumule du Combo progressivement (tu en gagnes 2 par tour complet) pour enchaîner les sorts.
-- Garde **Exécution** pour quand l'ennemi est bas en PV — à 0% PV restants, les dégâts sont doublés par rapport à la valeur de base.
+- Garde **Exécution** pour quand l'ennemi est bas en PV — à 0% PV restants, tu atteins ×7.5 dégâts.

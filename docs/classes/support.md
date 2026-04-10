@@ -38,24 +38,24 @@ Le Mana se régénère de **+15 au début de ton tour**. Il est plafonné à **1
 === "💚 Frappe Régénérante"
     **Coût :** 15 Mana — **Temps de recharge :** 1 tour
 
-    Inflige **×1.5 dégâts physiques et magiques combinés**, puis se soigne de **12% des PV max**.
+    Se soigne de **5% des PV max**, réduit la **Déf. Phy. et Déf. Mag. ennemies de 10% pendant 1 tour**, puis inflige **×1.5 dégâts physiques et magiques combinés**.
 
-=== "💫 Frappe d'Affaiblissement"
+=== "💫 Frappe Résiliente"
     **Coût :** 20 Mana — **Temps de recharge :** 3 tours
 
-    Inflige **×2.5 dégâts (physiques + magiques)** et réduit les dégâts ennemis de **25% pendant 2 tours**.
+    Réduit les **dégâts reçus de 25% pendant 2 tours**, puis inflige **×2.5 dégâts (physiques + magiques)**.
 
 === "🌟 Renvoi Sacré (Ultime)"
     **Coût :** 80 Mana — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
 
-    Inflige **×3.5 dégâts combinés**, puis active un bouclier pendant **3 tours** : renvoie **40% des dégâts reçus** à l'ennemi et réduit **35% des dégâts restants**.
+    Active un bouclier pendant **3 tours** : renvoie **50% des dégâts reçus** à l'ennemi et réduit **20% des dégâts restants**, puis inflige **×4.5 dégâts combinés**.
 
 ---
 
 ## Conseils
 
 - Le Support est la classe la plus polyvalente — il inflige, soigne et protège dans la même rotation.
-- **Frappe Régénérante** est ton attaque principale — elle inflige ×1.5 dégâts ET te soigne de 12% HP max. Utilise-la régulièrement pour te maintenir en vie.
-- **Frappe d'Affaiblissement** réduit les dégâts ennemis de 25% pendant 2 tours — applique-la tôt pour réduire toute la pression du combat.
-- **Renvoi Sacré** est l'ultime défensive et offensive : tu infliges des dégâts ET tu forces l'ennemi à s'endommager lui-même pendant 3 tours.
+- **Frappe Régénérante** affaiblit les deux défenses ennemies de 10% ET te soigne — utilise-la régulièrement pour maintenir la pression offensive et ta survie.
+- **Frappe Résiliente** réduit les dégâts reçus de 25% pendant 2 tours — applique-la avant les grosses attaques ennemies pour réduire toute la pression du combat.
+- **Renvoi Sacré** est l'ultime défensive et offensive : tu infliges des dégâts ET forces l'ennemi à s'endommager lui-même pendant 3 tours.
 - En Raid, le Support est **indispensable** : ses réductions de dégâts et son renvoi profitent à toute l'équipe.

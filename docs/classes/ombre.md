@@ -39,27 +39,26 @@ Le Combo se régénère de **+1 à la fin de ton tour** et de **+1 à la fin du 
 ## Sorts
 
 === "☠️ Injection"
-    **Coût :** 2 Combo — **Temps de recharge :** 1 tour
+    **Coût :** 2 Combo — **Temps de recharge :** 2 tours
 
-    Inflige **×1.6 dégâts physiques** et applique **2 stacks de poison** (+35% ATK Phy par stack actif).
+    Applique **2 stacks de poison** (+35% ATK Phy par stack actif), puis inflige **×1.5 dégâts physiques**.
 
 === "💨 Brume Toxique"
     **Coût :** 4 Combo — **Temps de recharge :** 3 tours
 
-    Inflige **×2.0 dégâts physiques**, applique **2 stacks de poison** et réduit la **Déf. Phy. ennemie de 20% pendant 2 tours**.
+    Applique **3 stacks de poison** et réduit la **Déf. Phy. ennemie de 20% pendant 2 tours**, puis inflige **×2.5 dégâts physiques**.
 
 === "💀 Nécrose (Ultime)"
     **Coût :** 10 Combo — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
 
-    Inflige **×3.5 dégâts physiques + ×1.5 ATK Phy par stack de poison**. Consomme tous les stacks.
+    Consomme tous les stacks de poison, puis inflige **×4.5 dégâts physiques + 0.2×ATK Phy par stack consommé**.
 
 ---
 
 ## Conseils
 
-- L'Ombre Venin est la classe la plus **rapide** du jeu (115 vitesse) — elle agit presque toujours en premier.
 - Accumule des stacks de poison avec **Injection** puis explose tout avec **Nécrose** pour des dégâts massifs.
-- **Brume Toxique** réduit la Déf. Phy. de 20% — utilise-la juste avant **Nécrose** pour amplifier les dégâts.
+- **Brume Toxique** applique 3 stacks de poison d'un coup et réduit la Déf. Phy. de 20% — utilise-la juste avant **Nécrose** pour amplifier les dégâts.
 - Le Combo monte à 2/tour (fin de ton tour + fin du tour ennemi) — tu peux enchaîner tes sorts régulièrement.
 - L'Ombre Venin est moins efficace sur les combats très courts — elle a besoin de quelques tours pour accumuler du poison.
-- Investis dans des **Runes de Vie** et des **Potions de Soin** pour compenser la faible résistance (5 Déf. Phy. et Mag.).
+- Plus tu as de stacks actifs au moment de **Nécrose**, plus le bonus de dégâts est élevé — ne la déclenche pas trop tôt.

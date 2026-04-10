@@ -25,7 +25,7 @@ Le Vampire est un combattant **autosuffisant** qui vole la vie de ses ennemis. S
 
 ## Passif — Instinct Prédateur
 
-Le Vampire a **20% de chance de vol de vie** à chaque attaque, récupérant **25% des dégâts infligés** en PV.
+Le Vampire a **30% de chance de vol de vie** à chaque attaque, récupérant **25% des dégâts infligés** en PV.
 
 ---
 
@@ -50,13 +50,13 @@ La Rage se régénère de **+5 au début de ton tour** et de **+15 à la fin du 
 === "💀 Festin Sanglant (Ultime)"
     **Coût :** 80 Rage — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
 
-    Inflige **×4.0 dégâts** + stun **1 tour**. Si **Marque de Sang** est active : dégâts **×5.0** à la place.
+    Étourdit la cible **1 tour**, puis inflige **×4.5 dégâts**. Si **Marque de Sang** est active : **×6.0 dégâts** à la place.
 
 ---
 
 ## Conseils
 
-- **Marque de Sang** avant **Festin Sanglant** booste l'ultime de ×4.0 à ×5.0 — ne les utilise jamais séparément si possible.
+- **Marque de Sang** avant **Festin Sanglant** booste l'ultime de ×4.5 à ×6.0 — ne les utilise jamais séparément si possible.
 - **Morsure** garantit 20% de vol de vie à chaque utilisation — excellent pour récupérer des PV de façon fiable.
 - Le passif peut se déclencher en plus du vol de vie des sorts, créant des moments de soin massif.
 - Le sacrifice de PV de **Marque de Sang** est compensé par le vol de vie accru pendant 3 tours — n'hésite pas à l'utiliser tôt.

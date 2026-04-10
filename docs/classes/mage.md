@@ -39,12 +39,12 @@ Le Mana se régénère de **+15 au début de ton tour**. Il est plafonné à **1
 === "⚡ Soif Arcane"
     **Coût :** 15 Mana — **Temps de recharge :** 1 tour
 
-    Inflige **×1.6 dégâts magiques** et récupère **20 mana supplémentaire**.
+    Réduit la **Déf. Mag. ennemie de 15% pendant 1 tour**, puis inflige **×1.5 dégâts magiques**.
 
-=== "🔵 Écran Magique"
+=== "🔵 Amplification Arcane"
     **Coût :** 25 Mana — **Temps de recharge :** 3 tours
 
-    Inflige **×2.0 dégâts magiques** et réduit les dégâts subis de **25% pendant 2 tours**.
+    Gagne **+20% ATK Mag et +20% Pén. Mag. pendant 2 tours**, puis inflige **×2.5 dégâts magiques**.
 
 === "☄️ Nova Primordiale (Ultime)"
     **Coût :** 80 Mana — **Temps de recharge :** 7 tours — **Disponible à partir du tour 3**
@@ -56,7 +56,7 @@ Le Mana se régénère de **+15 au début de ton tour**. Il est plafonné à **1
 ## Conseils
 
 - Reste en bonne santé pour conserver le bonus passif — utilise des consommables avant les gros combats.
-- **Soif Arcane** récupère 20 mana en plus des dégâts — utilise-la quand tu en as besoin pour accélérer l'accumulation vers l'ultime.
-- **Écran Magique** combine une attaque solide (×2.0) avec une réduction de dégâts — idéal pour survivre tout en attaquant.
-- **Nova Primordiale** à ×4.5 et ignore toute la Déf. Mag. ennemie — c'est un des ultimés les plus puissants du jeu contre les ennemis résistants magiquement.
-- Le Mana monte de +15/tour automatiquement — tu peux souvent lancer **Soif Arcane** dès le tour 2 et **Écran Magique** au tour 2 également.
+- **Soif Arcane** réduit la Déf. Mag. ennemie de 15% — utilise-la juste avant une attaque forte pour amplifier les dégâts.
+- **Amplification Arcane** booste tes deux stats offensives magiques de +20% pendant 2 tours — enchaîne-la avec **Nova Primordiale** ou des attaques normales pour un burst optimal.
+- **Nova Primordiale** à ×4.5 ignore toute la Déf. Mag. ennemie — c'est un des ultimés les plus puissants du jeu contre les ennemis résistants magiquement.
+- Le Mana monte de +15/tour automatiquement — tu peux souvent lancer **Soif Arcane** dès le tour 2 et **Amplification Arcane** rapidement après.

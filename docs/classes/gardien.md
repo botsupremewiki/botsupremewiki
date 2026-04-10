@@ -41,7 +41,7 @@ Le Combo se régénère de **+1 à la fin de ton tour** et de **+1 à la fin du 
 === "⚡ Accélération Temporelle"
     **Coût :** 2 Combo — **Temps de recharge :** 2 tours
 
-    Inflige **×1.5 dégâts combinés** et augmente sa vitesse de **+25% pendant 2 tours**.
+    Inflige **×1.5 dégâts combinés** et augmente sa vitesse de **+20% pendant 2 tours**.
 
 === "⏳ Fissure du Temps"
     **Coût :** 4 Combo — **Temps de recharge :** 3 tours
@@ -59,7 +59,7 @@ Le Combo se régénère de **+1 à la fin de ton tour** et de **+1 à la fin du 
 
 - **Vitesse 120** : le Gardien est la classe la plus rapide du jeu — tu agis en premier dans la grande majorité des combats.
 - Le passif proc à 35% — dans les combats de 5+ tours, l'ennemi est souvent réduit à −10/−15% sur plusieurs stats.
-- **Accélération Temporelle** enchaîne les attaques rapidement et augmente encore plus la vitesse — idéal pour maintenir l'avantage d'initiative.
+- **Accélération Temporelle** augmente encore ta vitesse de +20% — idéal pour maintenir l'avantage d'initiative et enchaîner les attaques.
 - **Fissure du Temps** débuff toutes les stats ennemies de −5% — utilise-la avant **Arrêt du Temps** pour que l'ennemi subisse les dégâts ×4.5 avec ses stats affaiblies.
 - **Arrêt du Temps** réduit tes cooldowns de 2 tours ET étourdit 1 tour — c'est l'ultime parfait pour enchaîner les sorts et bloquer les mécaniques dangereuses des boss.
 - En Raid, **Fissure du Temps** + **Arrêt du Temps** créent une fenêtre où toute l'équipe inflige des dégâts amplifiés sans contre-attaque.
