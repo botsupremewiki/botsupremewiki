@@ -8,13 +8,14 @@ Le Guerrier est un combattant robuste qui devient **plus dangereux à mesure qu'
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 550 |
-| Attaque Physique | 52 |
+| Points de Vie | 6 000 |
+| Attaque Physique | 200 |
 | Attaque Magique | 0 |
-| Défense Physique | 32 |
-| Défense Magique | 6 |
-| Vitesse | 80 |
-| Chance de Critique | 5.0% |
+| Pénétration Physique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
 | Dégâts de Critique | 150.0% |
 
 ---

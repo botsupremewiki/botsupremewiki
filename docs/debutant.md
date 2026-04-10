@@ -62,7 +62,7 @@ Le jeu propose plusieurs modes de jeu avec des niveaux de difficulté très diff
 | Mode | Difficulté | Quand s'y lancer |
 |------|:----------:|-----------------|
 | 🌍 **Monde** (1 000 zones) | ⭐ à ⭐⭐⭐⭐⭐ | Dès le début — c'est le mode principal |
-| 🏰 **Donjon Classique** (niv. 1–100) | ⭐ à ⭐⭐ | Dès que tu peux, coût 3 ⚡ |
+| 🏰 **Donjon Classique** (niv. 1–100) | ⭐ à ⭐⭐ | Dès que tu peux, coût 5 ⚡ |
 | 🏰 **Donjon Élite** (niv. 1–100) | ⭐⭐⭐ | Niveau 330+ |
 | 🏰 **Donjon Abyssal** (niv. 1–100) | ⭐⭐⭐⭐⭐ | Niveau 660+ |
 | 👥 **Raids** (1–10, jusqu'à 3 joueurs) | ⭐⭐⭐ à ⭐⭐⭐⭐⭐ | Niveau 100+ par raid |
@@ -89,6 +89,27 @@ Ces valeurs augmentent au fil de tes **quêtes** (voir Étape 6). À 100 quêtes
 
 Tu n'as jamais besoin de te connecter en urgence — la regen tourne en continu.
 
+### Se reposer (récup manuelle)
+
+Depuis le Hub Profil, le bouton **Se reposer** permet de récupérer des HP rapidement en échange d'énergie.
+
+| Gain par cycle | Coût par cycle | Arrêt automatique |
+|:--------------:|:--------------:|:-----------------:|
+| +10% PV max | 10 ⚡ | HP pleins ou énergie insuffisante |
+
+### Récompense quotidienne
+
+Tu peux récupérer une récompense gratuite chaque jour depuis le Hub Profil. La streak de jours consécutifs augmente le multiplicateur de récompenses.
+
+| Streak | Multiplicateur | Nombre d'items |
+|:------:|:--------------:|:--------------:|
+| Jour 1 | ×1.0 | 1 |
+| Jour 7 | ×1.6 | 2 |
+| Jour 14 | ×2.2 | 3 |
+| Jour 21 | ×2.8 | 4 |
+| Jour 28 | ×3.4 | 5 |
+| Jour 30+ | ×4.0 | 5 |
+
 !!! warning "**Attention à ne pas mourir !**"
     En cas de mort au combat, une **pénalité de mort de 1 heure** est appliquée : toute régénération passive (❤️ HP et ⚡ énergie) est entièrement suspendue pendant cette durée. Tu perds également une partie de ton or et de ton énergie au moment de la mort. Pour annuler la pénalité avant la fin du timer, utilise une **Potion de Résurrection** (craftée par l'Alchimiste).
 
@@ -99,7 +120,7 @@ Tu n'as jamais besoin de te connecter en urgence — la regen tourne en continu.
 Voici les leviers clés pour progresser :
 
 **⚙️ Équipements & Panoplies**
-Équipe les meilleures pièces disponibles. Réunir les 7 pièces d'une même panoplie débloque des **bonus de set** très puissants. Tu peux aussi améliorer chaque pièce à la Forge jusqu'au **+10**.
+Équipe les meilleures pièces disponibles. Réunir les 7 pièces d'une même panoplie débloque des **bonus de set** très puissants. Tu peux aussi améliorer chaque pièce à la Forge jusqu'au **+20**.
 👉 [Équipements & Panoplies](objets/equipements.md)
 
 **✨ Prestige**
@@ -133,6 +154,16 @@ Chaque **quête principale** complétée ajoute **+0,15 énergie/cycle** et **+0
 Chaque **quête secondaire** complétée ajoute **+0,5% de chance de gagner +1 énergie** après chaque combat gagné.
 
 👉 [Voir toutes les quêtes](quetes.md)
+
+---
+
+## ✨ Les Bénédictions
+
+Des **buffs temporaires globaux** s'activent automatiquement sur le serveur à intervalles aléatoires. Quand une bénédiction est active, tout le monde en profite pendant 30 minutes.
+
+Exemples d'effets : ×1.5 XP, ×1.5 or, rareté des loots +1 tier, aucune pénalité de mort, +10% stats de combat...
+
+👉 [Voir toutes les Bénédictions](benedictions.md)
 
 ---
 

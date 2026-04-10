@@ -11,20 +11,21 @@ Le Vampire est un combattant **autosuffisant** qui vole la vie de ses ennemis. S
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 580 |
-| Attaque Physique | 60 |
+| Points de Vie | 5 000 |
+| Attaque Physique | 220 |
 | Attaque Magique | 0 |
-| Défense Physique | 12 |
-| Défense Magique | 7 |
-| Vitesse | 90 |
-| Chance de Critique | 15.0% |
-| Dégâts de Critique | 175.0% |
+| Pénétration Physique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Instinct Prédateur
 
-Le Vampire a **25% de chance de vol de vie** à chaque attaque, récupérant **30% des dégâts infligés** en PV.
+Le Vampire a **20% de chance de vol de vie** à chaque attaque, récupérant **25% des dégâts infligés** en PV.
 
 ---
 

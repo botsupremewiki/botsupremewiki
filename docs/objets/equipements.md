@@ -81,7 +81,7 @@ Il y a au total **60 panoplies** : 6 par classe × 10 classes.
 
     <div class="ec-field">
       <label class="ec-label">Forge</label>
-      <input type="number" id="eq-forge" class="ec-input" min="0" max="10" value="0">
+      <input type="number" id="eq-forge" class="ec-input" min="0" max="20" value="0">
     </div>
 
   </div>
@@ -110,6 +110,28 @@ Il y a au total **60 panoplies** : 6 par classe × 10 classes.
   </table>
   <div id="eq-totals"></div>
 </div>
+
+---
+
+## La Forge — coûts par niveau
+
+La Forge améliore un équipement jusqu'au **+20**. Chaque niveau augmente ses stats de **+10%** supplémentaires.
+
+| Niveau | Coût | Niveau | Coût |
+|:------:|-----:|:------:|-----:|
+| **+1** | 5 000 | **+11** | 500 000 |
+| **+2** | 8 000 | **+12** | 800 000 |
+| **+3** | 13 000 | **+13** | 1 250 000 |
+| **+4** | 20 000 | **+14** | 2 000 000 |
+| **+5** | 32 000 | **+15** | 3 000 000 |
+| **+6** | 50 000 | **+16** | 4 500 000 |
+| **+7** | 80 000 | **+17** | 6 000 000 |
+| **+8** | 125 000 | **+18** | 7 500 000 |
+| **+9** | 200 000 | **+19** | 9 000 000 |
+| **+10** | 315 000 | **+20** | 10 000 000 |
+
+!!! tip "Coût total cumulé"
+    Monter un équipement de 0 à +20 coûte au total **54 476 000 or**.
 
 ---
 

@@ -49,32 +49,38 @@
     "Omegaris la Fin du Monde"
   ];
 
-  // ─── BASE_STATS — models.py ────────────────────────────────────────────────
+  // ─── BASE_STATS — models.py _build_base() ────────────────────────────────
+  // Base socle : physique (p_atk=200, m_atk=0, p_pen=90, m_pen=0)
+  //              magique  (p_atk=0, m_atk=200, p_pen=0, m_pen=90)
+  //              hybride  (p_atk=150, m_atk=150, p_pen=90, m_pen=90)
+  // Commun à tous : hp=5000, p_def=100, m_def=100, speed=100, crit_chance=20, crit_damage=50
+  // Bonus par classe : une seule stat signature multipliée (voir CLASS_BONUS_MULT)
   var BASE_STATS = {
-    'Guerrier':         {hp:550,  p_atk:52,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:32, m_def:6,  speed:80,  crit_chance:5.0,  crit_damage:50.0},
-    'Assassin':         {hp:500,  p_atk:50,  m_atk:0,   p_pen:10, m_pen:0,  p_def:4,  m_def:3,  speed:105, crit_chance:18.0, crit_damage:75.0},
-    'Mage':             {hp:420,  p_atk:0,   m_atk:42,  p_pen:0,  m_pen:8,  p_def:3,  m_def:10, speed:92,  crit_chance:12.0, crit_damage:75.0},
-    'Tireur':           {hp:440,  p_atk:44,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:4,  m_def:4,  speed:105, crit_chance:16.0, crit_damage:75.0},
-    'Support':          {hp:650,  p_atk:48,  m_atk:48,  p_pen:6,  m_pen:6,  p_def:25, m_def:25, speed:80,  crit_chance:5.0,  crit_damage:40.0},
-    'Vampire':          {hp:580,  p_atk:60,  m_atk:0,   p_pen:9,  m_pen:0,  p_def:12, m_def:7,  speed:90,  crit_chance:15.0, crit_damage:75.0},
-    'Gardien du Temps': {hp:480,  p_atk:35,  m_atk:35,  p_pen:6,  m_pen:6,  p_def:18, m_def:18, speed:95,  crit_chance:8.0,  crit_damage:55.0},
-    'Ombre Venin':      {hp:460,  p_atk:32,  m_atk:32,  p_pen:5,  m_pen:5,  p_def:5,  m_def:5,  speed:115, crit_chance:17.0, crit_damage:70.0},
-    'Pyromancien':      {hp:500,  p_atk:0,   m_atk:58,  p_pen:0,  m_pen:9,  p_def:2,  m_def:10, speed:85,  crit_chance:13.0, crit_damage:75.0},
-    'Paladin':          {hp:560,  p_atk:42,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:35, m_def:22, speed:72,  crit_chance:5.0,  crit_damage:50.0}
+    'Guerrier':         {hp:6000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0},  // hp ×1.2
+    'Assassin':         {hp:5000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:75.0},  // crit_damage ×1.5
+    'Mage':             {hp:5000, p_atk:0,   m_atk:220, p_pen:0,  m_pen:90, p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0},  // m_atk ×1.1
+    'Tireur':           {hp:5000, p_atk:200, m_atk:0,   p_pen:99, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0},  // p_pen ×1.1
+    'Support':          {hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:110, speed:100, crit_chance:20.0, crit_damage:50.0},  // m_def ×1.1
+    'Vampire':          {hp:5000, p_atk:220, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0},  // p_atk ×1.1
+    'Gardien du Temps': {hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:100, speed:120, crit_chance:20.0, crit_damage:50.0},  // speed ×1.2
+    'Ombre Venin':      {hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:100, speed:100, crit_chance:30.0, crit_damage:50.0},  // crit_chance ×1.5
+    'Pyromancien':      {hp:5000, p_atk:0,   m_atk:200, p_pen:0,  m_pen:99, p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0},  // m_pen ×1.1
+    'Paladin':          {hp:5000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:110, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0}   // p_def ×1.1
   };
 
-  // ─── LEVEL_GROWTH — models.py ─────────────────────────────────────────────
+  // ─── LEVEL_GROWTH — models.py (+1%/niveau de la base, crit exclus) ────────
+  // growth[stat] = base[stat] × 0.01  (arrondi à 4 décimales)
   var LEVEL_GROWTH = {
-    'Guerrier':         {hp:45.44, p_atk:2.400, m_atk:0.0,   p_pen:0.0,   m_pen:0.0,   p_def:0.822, m_def:0.194, speed:0.230, crit_chance:0.0, crit_damage:0.0},
-    'Support':          {hp:72.42, p_atk:1.283, m_atk:1.283, p_pen:0.0,   m_pen:0.0,   p_def:0.630, m_def:0.630, speed:0.195, crit_chance:0.0, crit_damage:0.0},
-    'Paladin':          {hp:71.51, p_atk:2.361, m_atk:0.0,   p_pen:0.0,   m_pen:0.0,   p_def:0.916, m_def:0.428, speed:0.193, crit_chance:0.0, crit_damage:0.0},
-    'Assassin':         {hp:36.54, p_atk:2.643, m_atk:0.0,   p_pen:0.549, m_pen:0.0,   p_def:0.0,   m_def:0.0,   speed:0.365, crit_chance:0.0, crit_damage:0.0},
-    'Tireur':           {hp:37.60, p_atk:2.668, m_atk:0.0,   p_pen:0.555, m_pen:0.0,   p_def:0.0,   m_def:0.0,   speed:0.360, crit_chance:0.0, crit_damage:0.0},
-    'Mage':             {hp:39.64, p_atk:0.0,   m_atk:2.814, p_pen:0.0,   m_pen:0.553, p_def:0.0,   m_def:0.0,   speed:0.405, crit_chance:0.0, crit_damage:0.0},
-    'Pyromancien':      {hp:43.64, p_atk:0.0,   m_atk:3.100, p_pen:0.0,   m_pen:0.610, p_def:0.0,   m_def:0.0,   speed:0.395, crit_chance:0.0, crit_damage:0.0},
-    'Ombre Venin':      {hp:45.65, p_atk:1.540, m_atk:1.540, p_pen:0.300, m_pen:0.300, p_def:0.0,   m_def:0.0,   speed:0.345, crit_chance:0.0, crit_damage:0.0},
-    'Vampire':          {hp:50.00, p_atk:2.638, m_atk:0.0,   p_pen:0.528, m_pen:0.0,   p_def:0.268, m_def:0.193, speed:0.245, crit_chance:0.0, crit_damage:0.0},
-    'Gardien du Temps': {hp:41.56, p_atk:1.400, m_atk:1.400, p_pen:0.304, m_pen:0.304, p_def:0.362, m_def:0.362, speed:0.240, crit_chance:0.0, crit_damage:0.0}
+    'Guerrier':         {hp:60.0,  p_atk:2.0,  m_atk:0.0,  p_pen:0.9,  m_pen:0.0,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Assassin':         {hp:50.0,  p_atk:2.0,  m_atk:0.0,  p_pen:0.9,  m_pen:0.0,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Mage':             {hp:50.0,  p_atk:0.0,  m_atk:2.2,  p_pen:0.0,  m_pen:0.9,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Tireur':           {hp:50.0,  p_atk:2.0,  m_atk:0.0,  p_pen:0.99, m_pen:0.0,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Support':          {hp:50.0,  p_atk:1.5,  m_atk:1.5,  p_pen:0.9,  m_pen:0.9,  p_def:1.0,  m_def:1.1,  speed:1.0},
+    'Vampire':          {hp:50.0,  p_atk:2.2,  m_atk:0.0,  p_pen:0.9,  m_pen:0.0,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Gardien du Temps': {hp:50.0,  p_atk:1.5,  m_atk:1.5,  p_pen:0.9,  m_pen:0.9,  p_def:1.0,  m_def:1.0,  speed:1.2},
+    'Ombre Venin':      {hp:50.0,  p_atk:1.5,  m_atk:1.5,  p_pen:0.9,  m_pen:0.9,  p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Pyromancien':      {hp:50.0,  p_atk:0.0,  m_atk:2.0,  p_pen:0.0,  m_pen:0.99, p_def:1.0,  m_def:1.0,  speed:1.0},
+    'Paladin':          {hp:50.0,  p_atk:2.0,  m_atk:0.0,  p_pen:0.9,  m_pen:0.0,  p_def:1.1,  m_def:1.0,  speed:1.0}
   };
 
   var STAT_KEYS = ['hp','p_atk','m_atk','p_pen','m_pen','p_def','m_def','speed','crit_chance','crit_damage'];
@@ -133,36 +139,41 @@
 
   // ─── Raids — enemies.py RAID_BOSSES ───────────────────────────────────────
   var RAID_BOSSES_DATA = [
-    {id:'raid_1',  name:"Vorgath l'Implacable",    emoji:'🐉', raid_level:1,  level_req:100,  cls:'Guerrier'},
-    {id:'raid_2',  name:"Shivra l'Ombre Mortelle", emoji:'🗡️', raid_level:2,  level_req:200,  cls:'Assassin'},
-    {id:'raid_3',  name:"Zyrex l'Archmage",        emoji:'⚡', raid_level:3,  level_req:300,  cls:'Mage'},
-    {id:'raid_4',  name:"Karek le Chasseur",        emoji:'🏹', raid_level:4,  level_req:400,  cls:'Tireur'},
-    {id:'raid_5',  name:"Serath le Corrupteur",     emoji:'🕸️', raid_level:5,  level_req:500,  cls:'Support'},
-    {id:'raid_6',  name:"Mordas le Sans-Âme",       emoji:'🧛', raid_level:6,  level_req:600,  cls:'Vampire'},
-    {id:'raid_7',  name:"Chronovex l'Invariant",    emoji:'⏳', raid_level:7,  level_req:700,  cls:'Gardien du Temps'},
-    {id:'raid_8',  name:"Nyxara la Corrompue",      emoji:'🐍', raid_level:8,  level_req:800,  cls:'Ombre Venin'},
-    {id:'raid_9',  name:"Ignareth le Phénix",       emoji:'🔥', raid_level:9,  level_req:900,  cls:'Pyromancien'},
-    {id:'raid_10', name:"Omnifax le Divin",          emoji:'🌑', raid_level:10, level_req:1000, cls:'Paladin'}
+    {id:'raid_1',  name:"Vorgath l'Implacable",    emoji:'🐉', raid_level:1,  level_req:100,  cls:'Guerrier',         ult:'💢 Déchaînement (à 25% HP) : dégâts ×2 permanents'},
+    {id:'raid_2',  name:"Shivra l'Ombre Mortelle", emoji:'🗡️', raid_level:2,  level_req:200,  cls:'Assassin',         ult:'⚡ Fulgurance (à 25% HP) : vitesse ×1,5 permanente'},
+    {id:'raid_3',  name:"Zyrex l'Archmage",        emoji:'⚡', raid_level:3,  level_req:300,  cls:'Mage',             ult:'🔮 Transcendance (à 25% HP) : inflige des dégâts purs chaque tour'},
+    {id:'raid_4',  name:"Karek le Chasseur",        emoji:'🏹', raid_level:4,  level_req:400,  cls:'Tireur',           ult:'🎯 Insaisissable (à 25% HP) : esquive +35% permanente'},
+    {id:'raid_5',  name:"Serath le Corrupteur",     emoji:'🕸️', raid_level:5,  level_req:500,  cls:'Support',          ult:'🛡️ Forteresse (à 25% HP) : bouclier 20% HP max + défenses ×1,5'},
+    {id:'raid_6',  name:"Mordas le Sans-Âme",       emoji:'🧛', raid_level:6,  level_req:600,  cls:'Vampire',          ult:'🩸 Renaissance (à 25% HP) : soigne 50% des HP max'},
+    {id:'raid_7',  name:"Chronovex l'Invariant",    emoji:'⏳', raid_level:7,  level_req:700,  cls:'Gardien du Temps', ult:'♾️ Distorsion (à 25% HP) : fréquence du Tremblement ×2'},
+    {id:'raid_8',  name:"Nyxara la Corrompue",      emoji:'🐍', raid_level:8,  level_req:800,  cls:'Ombre Venin',      ult:'☠️ Déflagration (à 25% HP) : explose les stacks de poison, repart à 2'},
+    {id:'raid_9',  name:"Ignareth le Phénix",       emoji:'🔥', raid_level:9,  level_req:900,  cls:'Pyromancien',      ult:'🌋 Ignition (à 25% HP) : explose les stacks de brûlure, repart à 3'},
+    {id:'raid_10', name:"Omnifax le Divin",          emoji:'🌑', raid_level:10, level_req:1000, cls:'Paladin',          ult:'✨ Jugement (à 25% HP) : toutes les stats ×1,5 permanentes'}
   ];
 
   // ─── Formule de calcul — enemies.py compute_enemy_stats ──────────────────
-  // monde_scaling: pct = 0.50 + 9.50 × (level - 1) / 999
+  // monde_scaling: pct = 0.50 + 29.50 × (zone - 1) / 999  (zone 1→×0.5, zone 1000→×30)
   // pct_override : valeur fixe (donjons, raids, world boss)
+
+  function mondePct(zone) {
+    return 0.50 + 29.50 * (zone - 1) / 999;
+  }
 
   function computeEnemyStats(level, cls, pctOverride) {
     level = Math.max(1, level);
     var pct = (pctOverride !== undefined && pctOverride !== null)
       ? pctOverride
-      : 0.50 + 9.50 * (level - 1) / 999;
+      : mondePct(level);
     var resolved = BASE_STATS[cls] ? cls : 'Guerrier';
     var base   = BASE_STATS[resolved];
     var growth = LEVEL_GROWTH[resolved] || LEVEL_GROWTH['Guerrier'];
     var stats  = {};
     STAT_KEYS.forEach(function(stat) {
-      var playerVal = (base[stat] || 0) + (growth[stat] || 0) * (level - 1);
       if (stat === 'crit_chance' || stat === 'crit_damage') {
-        stats[stat] = Math.round(playerVal * pct * 100) / 100;
+        // fixé à la valeur de base niveau 1 (pas de scaling par pct ni par niveau)
+        stats[stat] = base[stat] || 0;
       } else {
+        var playerVal = (base[stat] || 0) + (growth[stat] || 0) * (level - 1);
         stats[stat] = Math.floor(playerVal * pct);
       }
     });
@@ -185,7 +196,7 @@
     zone = Math.max(1, Math.min(1000, zone));
     if (!stage) stage = ((zone - 1) % 10) + 1;
     var cls   = classForIndex(stage - 1);
-    var stats = computeEnemyStats(zone, cls);
+    var stats = computeEnemyStats(zone, cls, mondePct(zone));
     var th    = getTheme(zone);
     return {
       name: ENEMY_FIRST[cls] || cls,
@@ -207,7 +218,7 @@
   function calcMondeBossClassique(zone) {
     zone = Math.max(1, Math.min(1000, zone));
     var cls   = classForIndex(zone - 1);
-    var stats = computeEnemyStats(zone, cls);
+    var stats = computeEnemyStats(zone, cls, mondePct(zone));
     stats.hp  = Math.floor(stats.hp * 1.2);
     var th    = getTheme(zone);
     return {
@@ -230,7 +241,7 @@
   function calcRunicBoss(zone) {
     zone = Math.max(1, Math.min(1000, zone));
     var cls   = classForIndex(Math.floor(zone / 10) - 1);
-    var stats = computeEnemyStats(zone, cls);
+    var stats = computeEnemyStats(zone, cls, mondePct(zone));
     stats.hp  = Math.floor(stats.hp * 1.4);
     var th    = getTheme(zone);
     return {
@@ -254,7 +265,7 @@
     zone = Math.max(1, Math.min(1000, zone));
     var idx  = Math.floor(zone / 100) - 1;
     var cls  = classForIndex(idx);
-    var stats = computeEnemyStats(zone, cls);
+    var stats = computeEnemyStats(zone, cls, mondePct(zone));
     stats.hp  = Math.floor(stats.hp * 1.6);
     return {
       name: EMBLEMATIC_NAMES[((idx % 20) + 20) % 20],
@@ -277,7 +288,7 @@
     var zone = 1000;
     var idx  = ALL_CLASSES.indexOf(cls);
     if (idx < 0) idx = 0;
-    var stats = computeEnemyStats(zone, cls);
+    var stats = computeEnemyStats(zone, cls, mondePct(zone));
     stats.hp  = Math.floor(stats.hp * 1.8);
     return {
       name: ANTIQUE_NAMES[idx],
@@ -293,21 +304,22 @@
   }
 
   // ─── Donjon — enemies.py generate_dungeon_boss ────────────────────────────
-  // player_level = zone_equiv = (tier_offset + level) × 3
-  // pct linéaire : classique 1.0→4.0, elite 5.0→9.0, abyssal 10.0→14.0
+  // player_level : classique = level×3 | elite = 300+level×3 | abyssal = 600+level×4
+  // pct linéaire : classique 1.0→9.0, elite 10.0→18.0, abyssal 20.0→35.0
   // stat_boost × 1.15
-  // zone_equiv = (tier_offset + level) × 3 : classique=0, elite=100, abyssal=200
 
   function calcDonjon(bossId, difficulty, level) {
     var boss = DUNGEON_BOSSES.filter(function(b){ return b.id === bossId; })[0] || DUNGEON_BOSSES[0];
-    var tierOffset = {classique:0, elite:100, abyssal:200}[difficulty] || 0;
-    var zoneEquiv  = (tierOffset + level) * 3;
-    var playerLevel = zoneEquiv;
-    var pctMin = {classique:1.0, elite:5.0, abyssal:10.0}[difficulty] || 1.0;
-    var pctMax = {classique:4.0, elite:9.0, abyssal:14.0}[difficulty] || 4.0;
+    var playerLevel;
+    if      (difficulty === 'classique') { playerLevel = level * 3; }
+    else if (difficulty === 'elite')     { playerLevel = 300 + level * 3; }
+    else                                 { playerLevel = 600 + level * 4; } // abyssal
+    var zoneEquiv = playerLevel;
+    var pctMin = {classique:1.0, elite:10.0, abyssal:20.0}[difficulty] || 1.0;
+    var pctMax = {classique:9.0, elite:18.0, abyssal:35.0}[difficulty] || 9.0;
     var pct    = pctMin + (pctMax - pctMin) * (level - 1) / 99;
     var cls    = classForIndex(level - 1);
-    var rewardMult = {classique:2, elite:3, abyssal:5}[difficulty] || 2;
+    var rewardMult = {classique:2, elite:3, abyssal:4}[difficulty] || 2;
     var diffLabel  = {classique:'Classique', elite:'Élite', abyssal:'Abyssal'}[difficulty] || difficulty;
 
     var stats = computeEnemyStats(playerLevel, cls, pct);
@@ -338,26 +350,31 @@
 
   // ─── Raid — enemies.py generate_raid_boss ─────────────────────────────────
   // player_level = raid_level × 100
-  // pct = 1.0 + raid_level × 1.5 (raid1=2.5 → raid10=16.0)
+  // pct = raid_level × 4.0 (raid1=4.0 → raid10=40.0)
   // HP × 3
-  // zone_equiv = raid_level × 100
 
   function calcRaid(raidId) {
     var boss = RAID_BOSSES_DATA.filter(function(b){ return b.id === raidId; })[0] || RAID_BOSSES_DATA[0];
     var rl    = boss.raid_level;
     var playerLevel = rl * 100;
-    var pct   = 1.0 + rl * 1.5;
+    var pct   = rl * 4.0;
     var zoneEquiv = rl * 100;
 
     var stats = computeEnemyStats(playerLevel, boss.cls, pct);
     stats.hp  = Math.floor(stats.hp * 3);
+
+    var passifLines = [
+      '⚡ Rage (75/50/25% HP) : stats du boss augmentées progressivement',
+      '🌊 Tremblement AoE : frappe tous les joueurs tous les 6 tours',
+      boss.ult
+    ];
 
     return {
       name: boss.name, nameNote: null,
       cls: boss.cls, theme: 'Raid', themeEmoji: boss.emoji,
       typeLabel: 'Raid ' + rl + ' — Niveau requis : ' + boss.level_req,
       typeBadge: 'Raid ' + rl, typeEmoji: boss.emoji,
-      passif: null, req: boss.level_req,
+      passif: passifLines.join('\n'), req: boss.level_req,
       xp:   Math.floor(zoneEquiv * 150),
       gold: Math.floor(zoneEquiv * 50),
       drops: '7 items garantis (1 par slot) — classe aléatoire — Panoplie Raid Niv. ' + rl,
@@ -366,8 +383,9 @@
   }
 
   // ─── World Boss ─────────────────────────────────────────────────────────────
-  // Tour T : pct = T × 0.8 (tour 1 → ×0.8, tour 25 → ×20.0), level = T × 100
-  // Vitesse verrouillée à 100
+  // Tour T : level = 1000 + 100×(T−1), pct = 1.0 + 2.0×(T−1)
+  // Tour 1 : level=1000, pct=1.0 — Tour 25 : level=3400, pct=49.0
+  // Vitesse verrouillée à 100 pour les deux camps
 
   function computeEnemyStatsAvg(level, pct) {
     var r = {};
@@ -386,20 +404,19 @@
 
   function calcWorldBoss(tour) {
     tour = Math.max(1, Math.min(25, tour));
-    var level = tour * 100;
-    var pct   = tour * 0.8;
+    var level = 1000 + 100 * (tour - 1);
+    var pct   = 1.0  + 2.0 * (tour - 1);
     var stats = computeEnemyStatsAvg(level, pct);
     stats.speed = 100; // vitesse verrouillée
     delete stats.hp;   // HP collectifs hebdomadaires (non affichés ici)
-    var zoneEquiv = level;
     return {
       name: 'Bot Suprême', nameNote: null,
       cls: 'Titan', theme: 'World Boss', themeEmoji: '🤖',
-      typeLabel: 'Tour WB #' + tour + ' — Niveau équivalent : ' + fmt(level),
+      typeLabel: 'Tour WB #' + tour + ' — Niveau : ' + fmt(level) + ' / Pct : ×' + pct.toFixed(1),
       typeBadge: 'World Boss T' + tour, typeEmoji: '🤖',
-      passif: "Montée en puissance : Augmente ses stats à chaque tour.<br>Vitesse verrouillée à 100.<br>Max 25 tours.",
-      xp:   Math.floor(zoneEquiv * 500),
-      gold: Math.floor(zoneEquiv * 200),
+      passif: '⚡ Vitesse Verrouillée : vitesse fixée à 100 pour les deux camps\n📈 Montée en Puissance : +100 niveaux et ×2 pct à chaque tour ennemi\n🔮 Passif de classe : varie selon la classe hebdomadaire',
+      xp:   Math.floor(level * 500),
+      gold: Math.floor(level * 200),
       drops: 'Voir <a href="../objets/reliques/">Reliques</a>',
       stats: stats
     };
@@ -549,9 +566,18 @@
         '<span class="ec-stat-val">'   + valStr + (isBoosted ? ' ★' : '') + '</span></div>';
     });
 
-    var passifHtml = data.passif
-      ? '<div class="ec-passif"><div class="ec-passif-lbl">⚡ Passif</div>' +
-        '<div class="ec-passif-txt">' + data.passif + '</div></div>'
+    var passifLines = data.passif
+      ? data.passif.split(/<br\s*\/?>/i).reduce(function(acc, part) {
+          return acc.concat(part.split('\n'));
+        }, []).filter(function(l) { return l.trim(); })
+      : [];
+    var passifHtml = passifLines.length
+      ? '<div class="ec-passif ec-passif-warn">' +
+        '<div class="ec-passif-lbl">⚠️ Mécaniques Spéciales</div>' +
+        passifLines.map(function(l) {
+          return '<div class="ec-passif-line">' + l.trim() + '</div>';
+        }).join('') +
+        '</div>'
       : '';
 
     var noteHtml = data.nameNote ? '<div class="ec-note">ℹ️ ' + data.nameNote + '</div>' : '';
@@ -676,9 +702,10 @@
       if (wbVal)       wbVal.textContent = val;
       if (wbTour)      wbTour.value      = val;
       if (wbTourInput) wbTourInput.value = val;
-      var level = val * 100;
+      var level = 1000 + 100 * (val - 1);
+      var pct   = 1.0 + 2.0 * (val - 1);
       var zeEl  = container.querySelector('#ec-wb-zone-equiv');
-      if (zeEl) zeEl.textContent = 'Niveau équivalent : ' + level.toLocaleString('fr-FR');
+      if (zeEl) zeEl.textContent = 'Niveau : ' + level.toLocaleString('fr-FR') + ' — Pct : ×' + pct.toFixed(1);
     }
 
     if (wbTour) {

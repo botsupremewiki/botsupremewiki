@@ -22,15 +22,15 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 550 | +45.4 |
-    | ATK Phy | 52 | +2.4 |
+    | PV | 6 000 | +60.0 |
+    | ATK Phy | 200 | +2.0 |
     | ATK Mag | 0 | — |
-    | Pén. Phy | 8 | — |
+    | Pén. Phy | 90 | +0.9 |
     | Pén. Mag | 0 | — |
-    | Déf. Phy | 32 | +0.8 |
-    | Déf. Mag | 6 | +0.2 |
-    | Vitesse | 80 | +0.2 |
-    | Crit. % | 5% | — |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
     | Crit. DMG | 150% | — |
     | 🔴 **Ressource** | **Rage** · max 100 | +5 début tour · +15 fin tour ennemi |
 
@@ -62,15 +62,15 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 500 | +36.5 |
-    | ATK Phy | 50 | +2.6 |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 200 | +2.0 |
     | ATK Mag | 0 | — |
-    | Pén. Phy | 10 | +0.5 |
+    | Pén. Phy | 90 | +0.9 |
     | Pén. Mag | 0 | — |
-    | Déf. Phy | 4 | — |
-    | Déf. Mag | 3 | — |
-    | Vitesse | 105 | +0.4 |
-    | Crit. % | 18% | — |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
     | Crit. DMG | 175% | — |
     | 🟡 **Ressource** | **Combo** · max 10 | +1 fin de ton tour · +1 fin tour ennemi |
 
@@ -102,19 +102,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 420 | +39.6 |
+    | PV | 5 000 | +50.0 |
     | ATK Phy | 0 | — |
-    | ATK Mag | 42 | +2.8 |
+    | ATK Mag | 220 | +2.2 |
     | Pén. Phy | 0 | — |
-    | Pén. Mag | 8 | +0.6 |
-    | Déf. Phy | 3 | — |
-    | Déf. Mag | 10 | — |
-    | Vitesse | 92 | +0.4 |
-    | Crit. % | 12% | — |
-    | Crit. DMG | 175% | — |
+    | Pén. Mag | 90 | +0.9 |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🔵 **Ressource** | **Mana** · max 100 | +15 au début de ton tour |
 
-    **Passif — Concentration Arcanique :** +0.5% de dégâts magiques par % de HP actuels (max +50%). À pleine vie : +50% de dégâts.
+    **Passif — Concentration Arcanique :** +0.25% de dégâts magiques par % de HP actuels (max +25%). À pleine vie : +25% de dégâts.
 
     **Sorts**
 
@@ -142,19 +142,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 440 | +37.6 |
-    | ATK Phy | 44 | +2.7 |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 200 | +2.0 |
     | ATK Mag | 0 | — |
-    | Pén. Phy | 8 | +0.6 |
+    | Pén. Phy | 99 | +0.99 |
     | Pén. Mag | 0 | — |
-    | Déf. Phy | 4 | — |
-    | Déf. Mag | 4 | — |
-    | Vitesse | 105 | +0.4 |
-    | Crit. % | 16% | — |
-    | Crit. DMG | 175% | — |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🟡 **Ressource** | **Combo** · max 10 | +1 fin de ton tour · +1 fin tour ennemi |
 
-    **Passif — Double Tir :** 25% de chance de doubler ses dégâts à chaque attaque.
+    **Passif — Double Tir :** 20% de chance de doubler ses dégâts à chaque attaque.
 
     **Sorts**
 
@@ -182,19 +182,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 650 | +72.4 |
-    | ATK Phy | 48 | +1.3 |
-    | ATK Mag | 48 | +1.3 |
-    | Pén. Phy | 6 | — |
-    | Pén. Mag | 6 | — |
-    | Déf. Phy | 25 | +0.6 |
-    | Déf. Mag | 25 | +0.6 |
-    | Vitesse | 80 | +0.2 |
-    | Crit. % | 5% | — |
-    | Crit. DMG | 140% | — |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 150 | +1.5 |
+    | ATK Mag | 150 | +1.5 |
+    | Pén. Phy | 90 | +0.9 |
+    | Pén. Mag | 90 | +0.9 |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 110 | +1.1 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🔵 **Ressource** | **Mana** · max 100 | +15 au début de ton tour |
 
-    **Passif — Instinct Protecteur :** 45% de chance de générer automatiquement un bouclier absorbant 10% des PV max chaque tour.
+    **Passif — Instinct Protecteur :** 30% de chance de générer automatiquement un bouclier absorbant 8% des PV max chaque tour.
 
     **Sorts**
 
@@ -222,19 +222,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 580 | +50.0 |
-    | ATK Phy | 60 | +2.6 |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 220 | +2.2 |
     | ATK Mag | 0 | — |
-    | Pén. Phy | 9 | +0.5 |
+    | Pén. Phy | 90 | +0.9 |
     | Pén. Mag | 0 | — |
-    | Déf. Phy | 12 | +0.3 |
-    | Déf. Mag | 7 | +0.2 |
-    | Vitesse | 90 | +0.2 |
-    | Crit. % | 15% | — |
-    | Crit. DMG | 175% | — |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🔴 **Ressource** | **Rage** · max 100 | +5 début tour · +15 fin tour ennemi |
 
-    **Passif — Instinct Prédateur :** 25% de chance de vol de vie à chaque attaque, récupérant 30% des dégâts infligés en PV.
+    **Passif — Instinct Prédateur :** 20% de chance de vol de vie à chaque attaque, récupérant 25% des dégâts infligés en PV.
 
     **Sorts**
 
@@ -262,19 +262,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 480 | +41.6 |
-    | ATK Phy | 35 | +1.4 |
-    | ATK Mag | 35 | +1.4 |
-    | Pén. Phy | 6 | +0.3 |
-    | Pén. Mag | 6 | +0.3 |
-    | Déf. Phy | 18 | +0.4 |
-    | Déf. Mag | 18 | +0.4 |
-    | Vitesse | 95 | +0.2 |
-    | Crit. % | 8% | — |
-    | Crit. DMG | 155% | — |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 150 | +1.5 |
+    | ATK Mag | 150 | +1.5 |
+    | Pén. Phy | 90 | +0.9 |
+    | Pén. Mag | 90 | +0.9 |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 120 | +1.2 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🟡 **Ressource** | **Combo** · max 10 | +1 fin de ton tour · +1 fin tour ennemi |
 
-    **Passif — Distorsion Temporelle :** 55% de chance de réduire une stat ennemie aléatoire de 5% chaque tour (cumulatif, max −20% par stat).
+    **Passif — Distorsion Temporelle :** 35% de chance de réduire une stat ennemie aléatoire de 5% chaque tour (cumulatif, max −20% par stat).
 
     **Sorts**
 
@@ -302,16 +302,16 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 460 | +45.7 |
-    | ATK Phy | 32 | +1.5 |
-    | ATK Mag | 32 | +1.5 |
-    | Pén. Phy | 5 | +0.3 |
-    | Pén. Mag | 5 | +0.3 |
-    | Déf. Phy | 5 | — |
-    | Déf. Mag | 5 | — |
-    | Vitesse | 115 | +0.3 |
-    | Crit. % | 17% | — |
-    | Crit. DMG | 170% | — |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 150 | +1.5 |
+    | ATK Mag | 150 | +1.5 |
+    | Pén. Phy | 90 | +0.9 |
+    | Pén. Mag | 90 | +0.9 |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 30% | — |
+    | Crit. DMG | 150% | — |
     | 🟡 **Ressource** | **Combo** · max 10 | +1 fin de ton tour · +1 fin tour ennemi |
 
     **Passif — Venin Corrosif :** 30% de chance d'appliquer du poison à chaque attaque (+35% ATK Phy par stack actif).
@@ -342,19 +342,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 500 | +43.6 |
+    | PV | 5 000 | +50.0 |
     | ATK Phy | 0 | — |
-    | ATK Mag | 58 | +3.1 |
+    | ATK Mag | 200 | +2.0 |
     | Pén. Phy | 0 | — |
-    | Pén. Mag | 9 | +0.6 |
-    | Déf. Phy | 2 | — |
-    | Déf. Mag | 10 | — |
-    | Vitesse | 85 | +0.4 |
-    | Crit. % | 13% | — |
-    | Crit. DMG | 175% | — |
+    | Pén. Mag | 99 | +0.99 |
+    | Déf. Phy | 100 | +1.0 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
+    | Crit. DMG | 150% | — |
     | 🔵 **Ressource** | **Mana** · max 100 | +15 au début de ton tour |
 
-    **Passif — Embrasement Perpétuel :** 45% de chance d'appliquer 1 stack de brûlure à chaque attaque (15% ATK Mag de dégâts par stack actif).
+    **Passif — Embrasement Perpétuel :** 30% de chance d'appliquer 1 stack de brûlure à chaque attaque (15% ATK Mag de dégâts par stack actif).
 
     **Sorts**
 
@@ -382,19 +382,19 @@
 
     | Stat | Niv. 1 | +/niv. |
     |------|-------:|-------:|
-    | PV | 560 | +71.5 |
-    | ATK Phy | 42 | +2.4 |
+    | PV | 5 000 | +50.0 |
+    | ATK Phy | 200 | +2.0 |
     | ATK Mag | 0 | — |
-    | Pén. Phy | 8 | — |
+    | Pén. Phy | 90 | +0.9 |
     | Pén. Mag | 0 | — |
-    | Déf. Phy | 35 | +0.9 |
-    | Déf. Mag | 22 | +0.4 |
-    | Vitesse | 72 | +0.2 |
-    | Crit. % | 5% | — |
+    | Déf. Phy | 110 | +1.1 |
+    | Déf. Mag | 100 | +1.0 |
+    | Vitesse | 100 | +1.0 |
+    | Crit. % | 20% | — |
     | Crit. DMG | 150% | — |
     | 🔴 **Ressource** | **Rage** · max 100 | +5 début tour · +15 fin tour ennemi |
 
-    **Passif — Bénédiction de Combat :** 50% de chance d'augmenter une stat aléatoire de 5% (max +20%, permanent ce combat). En raid, le boost s'applique à tous les alliés.
+    **Passif — Bénédiction de Combat :** 30% de chance d'augmenter une stat aléatoire de 5% (max +20%, permanent ce combat). En raid, le boost s'applique à tous les alliés.
 
     **Sorts**
 

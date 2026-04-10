@@ -8,22 +8,23 @@ Le Mage est un lanceur de sorts **dévastateur**. Il inflige de lourds dégâts 
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 420 |
+| Points de Vie | 5 000 |
 | Attaque Physique | 0 |
-| Attaque Magique | 42 |
-| Défense Physique | 3 |
-| Défense Magique | 10 |
-| Vitesse | 92 |
-| Chance de Critique | 12.0% |
-| Dégâts de Critique | 175.0% |
+| Attaque Magique | 220 |
+| Pénétration Magique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Concentration Arcanique
 
-Le Mage gagne **+0.5% de dégâts magiques par % de HP actuels**, jusqu'à un maximum de **+50%**.
+Le Mage gagne **+0.25% de dégâts magiques par % de HP actuels**, jusqu'à un maximum de **+25%**.
 
-> À 100% de PV : +50% de dégâts magiques. À 50% de PV : +25%. À 0 PV : +0%.
+> À 100% de PV : +25% de dégâts magiques. À 50% de PV : +12.5%. À 0 PV : +0%.
 
 ---
 

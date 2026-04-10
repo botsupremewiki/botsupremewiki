@@ -5,28 +5,28 @@
 
   /* ── Données de classe ─────────────────────────────────────── */
   const BASE_STATS = {
-    "Guerrier":         { hp:550,  p_atk:52,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:32, m_def:6,  speed:80,  crit_chance:5.0,  crit_damage:50.0 },
-    "Assassin":         { hp:500,  p_atk:50,  m_atk:0,   p_pen:10, m_pen:0,  p_def:4,  m_def:3,  speed:105, crit_chance:18.0, crit_damage:75.0 },
-    "Mage":             { hp:420,  p_atk:0,   m_atk:42,  p_pen:0,  m_pen:8,  p_def:3,  m_def:10, speed:92,  crit_chance:12.0, crit_damage:75.0 },
-    "Tireur":           { hp:440,  p_atk:44,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:4,  m_def:4,  speed:105, crit_chance:16.0, crit_damage:75.0 },
-    "Support":          { hp:650,  p_atk:48,  m_atk:48,  p_pen:6,  m_pen:6,  p_def:25, m_def:25, speed:80,  crit_chance:5.0,  crit_damage:40.0 },
-    "Vampire":          { hp:580,  p_atk:60,  m_atk:0,   p_pen:9,  m_pen:0,  p_def:12, m_def:7,  speed:90,  crit_chance:15.0, crit_damage:75.0 },
-    "Gardien du Temps": { hp:480,  p_atk:35,  m_atk:35,  p_pen:6,  m_pen:6,  p_def:18, m_def:18, speed:95,  crit_chance:8.0,  crit_damage:55.0 },
-    "Ombre Venin":      { hp:460,  p_atk:32,  m_atk:32,  p_pen:5,  m_pen:5,  p_def:5,  m_def:5,  speed:115, crit_chance:17.0, crit_damage:70.0 },
-    "Pyromancien":      { hp:500,  p_atk:0,   m_atk:58,  p_pen:0,  m_pen:9,  p_def:2,  m_def:10, speed:85,  crit_chance:13.0, crit_damage:75.0 },
-    "Paladin":          { hp:560,  p_atk:42,  m_atk:0,   p_pen:8,  m_pen:0,  p_def:35, m_def:22, speed:72,  crit_chance:5.0,  crit_damage:50.0 },
+    "Guerrier":         { hp:6000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Assassin":         { hp:5000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:75.0 },
+    "Mage":             { hp:5000, p_atk:0,   m_atk:220, p_pen:0,  m_pen:90, p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Tireur":           { hp:5000, p_atk:200, m_atk:0,   p_pen:99, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Support":          { hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:110, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Vampire":          { hp:5000, p_atk:220, m_atk:0,   p_pen:90, m_pen:0,  p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Gardien du Temps": { hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:100, speed:120, crit_chance:20.0, crit_damage:50.0 },
+    "Ombre Venin":      { hp:5000, p_atk:150, m_atk:150, p_pen:90, m_pen:90, p_def:100, m_def:100, speed:100, crit_chance:30.0, crit_damage:50.0 },
+    "Pyromancien":      { hp:5000, p_atk:0,   m_atk:200, p_pen:0,  m_pen:99, p_def:100, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
+    "Paladin":          { hp:5000, p_atk:200, m_atk:0,   p_pen:90, m_pen:0,  p_def:110, m_def:100, speed:100, crit_chance:20.0, crit_damage:50.0 },
   };
   const LEVEL_GROWTH = {
-    "Guerrier":         { hp:45.44, p_atk:2.400, m_atk:0,     p_pen:0,     m_pen:0,     p_def:0.822, m_def:0.194, speed:0.230, crit_chance:0, crit_damage:0 },
-    "Assassin":         { hp:36.54, p_atk:2.643, m_atk:0,     p_pen:0.549, m_pen:0,     p_def:0,     m_def:0,     speed:0.365, crit_chance:0, crit_damage:0 },
-    "Mage":             { hp:39.64, p_atk:0,     m_atk:2.814, p_pen:0,     m_pen:0.553, p_def:0,     m_def:0,     speed:0.405, crit_chance:0, crit_damage:0 },
-    "Tireur":           { hp:37.60, p_atk:2.668, m_atk:0,     p_pen:0.555, m_pen:0,     p_def:0,     m_def:0,     speed:0.360, crit_chance:0, crit_damage:0 },
-    "Support":          { hp:72.42, p_atk:1.283, m_atk:1.283, p_pen:0,     m_pen:0,     p_def:0.630, m_def:0.630, speed:0.195, crit_chance:0, crit_damage:0 },
-    "Vampire":          { hp:50.00, p_atk:2.638, m_atk:0,     p_pen:0.528, m_pen:0,     p_def:0.268, m_def:0.193, speed:0.245, crit_chance:0, crit_damage:0 },
-    "Gardien du Temps": { hp:41.56, p_atk:1.400, m_atk:1.400, p_pen:0.304, m_pen:0.304, p_def:0.362, m_def:0.362, speed:0.240, crit_chance:0, crit_damage:0 },
-    "Ombre Venin":      { hp:45.65, p_atk:1.540, m_atk:1.540, p_pen:0.300, m_pen:0.300, p_def:0,     m_def:0,     speed:0.345, crit_chance:0, crit_damage:0 },
-    "Pyromancien":      { hp:43.64, p_atk:0,     m_atk:3.100, p_pen:0,     m_pen:0.610, p_def:0,     m_def:0,     speed:0.395, crit_chance:0, crit_damage:0 },
-    "Paladin":          { hp:71.51, p_atk:2.361, m_atk:0,     p_pen:0,     m_pen:0,     p_def:0.916, m_def:0.428, speed:0.193, crit_chance:0, crit_damage:0 },
+    "Guerrier":         { hp:60.0, p_atk:2.0, m_atk:0.0, p_pen:0.9,  m_pen:0.0, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Assassin":         { hp:50.0, p_atk:2.0, m_atk:0.0, p_pen:0.9,  m_pen:0.0, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Mage":             { hp:50.0, p_atk:0.0, m_atk:2.2, p_pen:0.0,  m_pen:0.9, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Tireur":           { hp:50.0, p_atk:2.0, m_atk:0.0, p_pen:0.99, m_pen:0.0, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Support":          { hp:50.0, p_atk:1.5, m_atk:1.5, p_pen:0.9,  m_pen:0.9, p_def:1.0, m_def:1.1, speed:1.0 },
+    "Vampire":          { hp:50.0, p_atk:2.2, m_atk:0.0, p_pen:0.9,  m_pen:0.0, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Gardien du Temps": { hp:50.0, p_atk:1.5, m_atk:1.5, p_pen:0.9,  m_pen:0.9, p_def:1.0, m_def:1.0, speed:1.2 },
+    "Ombre Venin":      { hp:50.0, p_atk:1.5, m_atk:1.5, p_pen:0.9,  m_pen:0.9, p_def:1.0, m_def:1.0, speed:1.0 },
+    "Pyromancien":      { hp:50.0, p_atk:0.0, m_atk:2.0, p_pen:0.0,  m_pen:0.99,p_def:1.0, m_def:1.0, speed:1.0 },
+    "Paladin":          { hp:50.0, p_atk:2.0, m_atk:0.0, p_pen:0.9,  m_pen:0.0, p_def:1.1, m_def:1.0, speed:1.0 },
   };
   const CLASS_EMOJI = { "Guerrier":"⚔️","Assassin":"🗡️","Mage":"🔮","Tireur":"🏹","Support":"🛡️","Vampire":"🧛","Gardien du Temps":"⏳","Ombre Venin":"☠️","Pyromancien":"🔥","Paladin":"✝️" };
   const CLASS_TYPE  = { "Guerrier":"physique","Assassin":"physique","Tireur":"physique","Vampire":"physique","Paladin":"physique","Mage":"magique","Pyromancien":"magique","Support":"hybride","Gardien du Temps":"hybride","Ombre Venin":"hybride" };
@@ -47,21 +47,22 @@
 
   /* ── Formules stats item ───────────────────────────────────── */
   const RARITY_MULT = { commun:1.0,"peu commun":1.2,rare:1.4,"épique":1.6,"légendaire":1.8,mythique:2.0,artefact:2.2,divin:2.4,transcendant:2.6,prismatique:3.0 };
-  const SOURCE_MULT = { monde:1.0,donjon_classique:1.2,donjon_elite:1.4,donjon_abyssal:1.6,raid:1.8 };
+  const SOURCE_MULT = { monde:1.0,donjon_classique:1.4,donjon_elite:1.8,donjon_abyssal:2.2,raid:2.6 };
   const RARITY_N_STATS = { commun:1,"peu commun":1,rare:2,"épique":2,"légendaire":3,mythique:3,artefact:4,divin:4,transcendant:5,prismatique:5 };
 
+  const ITEM_CRIT_BASE = { "crit_chance": 0.311, "crit_damage": 0.778 };
   const ARMOR_SLOT = {
-    casque:     [["m_def",0.38],["hp",0.28],["speed",0.20],["p_def",0.14]],
-    plastron:   [["hp",0.38],  ["p_def",0.28],["m_def",0.20],["speed",0.14]],
-    pantalon:   [["p_def",0.38],["speed",0.28],["hp",0.20],  ["m_def",0.14]],
-    chaussures: [["speed",0.38],["m_def",0.28],["p_def",0.20],["hp",0.14]],
+    casque:     [["m_def",0.38],["hp",0.28],["speed",0.10],["p_def",0.14]],
+    plastron:   [["hp",0.38],  ["p_def",0.28],["m_def",0.20],["speed",0.07]],
+    pantalon:   [["p_def",0.38],["speed",0.14],["hp",0.20],  ["m_def",0.14]],
+    chaussures: [["speed",0.19],["m_def",0.28],["p_def",0.20],["hp",0.14]],
   };
   const OFF_SLOT = {
     arme:     ["atk","pen","crit_chance","crit_damage","speed"],
     amulette: ["crit_chance","crit_damage","atk","speed","pen"],
     anneau:   ["pen","atk","speed","crit_chance","crit_damage"],
   };
-  const OFF_WEIGHTS = [0.35,0.25,0.18,0.13,0.09];
+  const OFFENSIVE_WEIGHTS = { "atk": 1/3, "pen": 1/3, "crit_chance": 1/3, "crit_damage": 1/3, "speed": 1/6 };
 
   function statAt(cls, stat, level) {
     const b = (BASE_STATS[cls]  || {})[stat] || 0;
@@ -71,35 +72,37 @@
 
   function computeItemStats(slot, cls, level, source, craftTier, rarity, enhancement) {
     level = Math.max(1, Math.min(level, 1000));
-    const srcMult  = source === "craft" ? (1.0 + Math.max(1, craftTier) * 0.1) : (SOURCE_MULT[source] || 1.0);
+    const srcMult  = source === "craft" ? (1.0 + Math.max(1, craftTier) * 0.2) : (SOURCE_MULT[source] || 1.0);
     const rarMult  = RARITY_MULT[rarity] || 1.0;
-    const totalMul = rarMult + srcMult - 1 + enhancement * 0.1;
+    const totalMul = (1 + 0.01 * (level - 1)) * rarMult * srcMult * (1 + enhancement * 0.1);
     const nStats   = RARITY_N_STATS[rarity] || 1;
+    const _base    = BASE_STATS[cls] || {};
     const stats    = {};
 
     if (ARMOR_SLOT[slot]) {
       ARMOR_SLOT[slot].slice(0, nStats).forEach(([stat, w]) => {
-        const base = statAt(cls, stat, level);
+        const base = _base[stat] || 0;
         const val  = base * w * totalMul;
         stats[stat] = (stats[stat] || 0) + (["crit_chance","crit_damage"].includes(stat) ? Math.round(val*100)/100 : Math.round(val));
       });
     } else if (OFF_SLOT[slot]) {
       const ctype = CLASS_TYPE[cls] || "physique";
-      OFF_SLOT[slot].slice(0, nStats).forEach((key, i) => {
-        const w = OFF_WEIGHTS[i];
+      OFF_SLOT[slot].slice(0, nStats).forEach((key) => {
+        const w = OFFENSIVE_WEIGHTS[key] || (1/3);
         if (key === "atk") {
-          if (ctype === "physique") { stats.p_atk = (stats.p_atk||0) + Math.round(statAt(cls,"p_atk",level) * w * totalMul); }
-          else if (ctype === "magique") { stats.m_atk = (stats.m_atk||0) + Math.round(statAt(cls,"m_atk",level) * w * totalMul); }
-          else { stats.p_atk = (stats.p_atk||0) + Math.round(statAt(cls,"p_atk",level) * (w/2) * totalMul); stats.m_atk = (stats.m_atk||0) + Math.round(statAt(cls,"m_atk",level) * (w/2) * totalMul); }
+          if (ctype === "physique") { stats.p_atk = (stats.p_atk||0) + Math.round((_base.p_atk||0) * w * totalMul); }
+          else if (ctype === "magique") { stats.m_atk = (stats.m_atk||0) + Math.round((_base.m_atk||0) * w * totalMul); }
+          else { stats.p_atk = (stats.p_atk||0) + Math.round((_base.p_atk||0) * w * totalMul); stats.m_atk = (stats.m_atk||0) + Math.round((_base.m_atk||0) * w * totalMul); }
         } else if (key === "pen") {
-          if (ctype === "physique") { stats.p_pen = (stats.p_pen||0) + Math.round(statAt(cls,"p_pen",level) * w * totalMul); }
-          else if (ctype === "magique") { stats.m_pen = (stats.m_pen||0) + Math.round(statAt(cls,"m_pen",level) * w * totalMul); }
-          else { stats.p_pen = (stats.p_pen||0) + Math.round(statAt(cls,"p_pen",level) * (w/2) * totalMul); stats.m_pen = (stats.m_pen||0) + Math.round(statAt(cls,"m_pen",level) * (w/2) * totalMul); }
+          if (ctype === "physique") { stats.p_pen = (stats.p_pen||0) + Math.round((_base.p_pen||0) * w * totalMul); }
+          else if (ctype === "magique") { stats.m_pen = (stats.m_pen||0) + Math.round((_base.m_pen||0) * w * totalMul); }
+          else { stats.p_pen = (stats.p_pen||0) + Math.round((_base.p_pen||0) * w * totalMul); stats.m_pen = (stats.m_pen||0) + Math.round((_base.m_pen||0) * w * totalMul); }
         } else if (["crit_chance","crit_damage"].includes(key)) {
-          const raw = statAt(cls, key, level) * w * totalMul;
-          stats[key] = Math.round((stats[key]||0) + raw * 100) / 100;
+          const base = ITEM_CRIT_BASE[key] || 0;
+          const raw = base * w * totalMul;
+          stats[key] = Math.round(((stats[key]||0) + raw) * 100) / 100;
         } else {
-          stats[key] = (stats[key]||0) + Math.round(statAt(cls, key, level) * w * totalMul);
+          stats[key] = (stats[key]||0) + Math.round((_base[key]||0) * w * totalMul);
         }
       });
     }
@@ -281,7 +284,7 @@
       source:    (g("eq-source")     ||{}).value || "monde",
       craftTier: Math.max(1, Math.min(10,  parseInt((g("eq-craft-tier")||{}).value)||1)),
       rarity:    (g("eq-rarity")     ||{}).value || "commun",
-      forge:     Math.max(0, Math.min(10,  parseInt((g("eq-forge")||{}).value)||0)),
+      forge:     Math.max(0, Math.min(20,  parseInt((g("eq-forge")||{}).value)||0)),
     };
   }
 

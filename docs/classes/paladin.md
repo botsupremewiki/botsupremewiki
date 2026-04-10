@@ -11,20 +11,21 @@ Le Paladin est un tank offensif qui **renforce progressivement toutes ses stats*
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 560 |
-| Attaque Physique | 42 |
+| Points de Vie | 5 000 |
+| Attaque Physique | 200 |
 | Attaque Magique | 0 |
-| Défense Physique | 35 |
-| Défense Magique | 22 |
-| Vitesse | 72 |
-| Chance de Critique | 5.0% |
+| Pénétration Physique | 90 |
+| Défense Physique | 110 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
 | Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Bénédiction de Combat
 
-Le Paladin a **50% de chance d'augmenter une stat aléatoire de 5%** (max **+20%**, permanent pour ce combat) — toutes les stats sauf les HP. En raid, le boost s'applique à **tous les alliés**.
+Le Paladin a **30% de chance d'augmenter une stat aléatoire de 5%** (max **+20%**, permanent pour ce combat) — toutes les stats sauf les HP. En raid, le boost s'applique à **tous les alliés**.
 
 ---
 
@@ -58,6 +59,6 @@ La Rage se régénère de **+5 au début de ton tour** et de **+15 à la fin du 
 - **Frappe Sacrée** est ton attaque principale — elle frappe fort (×1.6) et génère un bouclier à chaque utilisation.
 - **Pénitence** est sécurisée grâce au bouclier de 20% PV max qui couvre la fenêtre de vulnérabilité due à la réduction de vitesse.
 - Enchaîne **Pénitence** → attendre que les buffs expirent → **Châtiment Divin** pour un burst maximal : les stats boostées rentrent dans le calcul.
-- Le passif proc à **50%** — dans les combats longs, tu accumules facilement +10/+15% sur plusieurs stats avant ton ultime.
+- Le passif proc à **30%** — dans les combats longs, tu accumules facilement +10/+15% sur plusieurs stats avant ton ultime.
 - En Raid, le passif **buff toute l'équipe** à chaque proc — le Paladin est l'amplificateur passif le plus puissant du jeu en groupe.
 - **Châtiment Divin** ignore la défense — il est particulièrement dévastateur contre les boss à haute DEF comme les Donjons Abyssaux.

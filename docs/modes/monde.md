@@ -20,6 +20,72 @@ Le Monde est le **mode de jeu principal** pour progresser en solo. Il se compose
 
 ---
 
+## Mode Farm
+
+Après avoir battu un boss, un bouton **Farm** apparaît pour refaire le même combat à coût réduit.
+
+| Paramètre | Mode normal | Mode Farm |
+|-----------|:-----------:|:---------:|
+| Coût | 10–100 ⚡ (selon le tier) | 1 ⚡ |
+| XP & or | 100% | 50% |
+| Loot | 100% | 50% |
+
+!!! info "Disponible sur tous les boss"
+    Le mode Farm est disponible sur les Boss de zone, Runiques, Emblématiques et Antiques — pas sur les ennemis normaux.
+
+---
+
+## Passifs des boss
+
+Chaque boss a un passif thématique qui dépend de sa **classe**. Plus le tier du boss est élevé, plus le passif est puissant.
+
+=== "🔮 Boss Runiques"
+
+    | Classe du boss | Passif | Effet |
+    |----------------|--------|-------|
+    | ⚔️ Guerrier | Furie Mineure | +3% dégâts par tranche de 25% HP perdus (max +12%) |
+    | 🗡️ Assassin | Réflexes | 5% de chance d'esquiver une attaque physique |
+    | 🔮 Mage | Résonance Arcanique | Ignore 8% de ta Déf. Mag. |
+    | 🏹 Tireur | Visée Précise | +8% chance de critique |
+    | 💚 Support | Régénération | Récupère 0.5% HP max au début de chaque tour |
+    | 🧛 Vampire | Siphon Mineur | Récupère 5% des dégâts infligés en HP |
+    | ⏳ Gardien du Temps | Distorsion Légère | Ta vitesse réduite de 5% |
+    | ☠️ Ombre Venin | Glandes Actives | 10% de chance de poison additionnel à chaque attaque |
+    | 🔥 Pyromancien | Braises | 20% de chance d'appliquer 1 stack de brûlure à chaque attaque |
+    | ✝️ Paladin | Résistance | Dégâts reçus réduits de 5% |
+
+=== "🌟 Boss Emblématiques"
+
+    | Classe du boss | Passif | Effet |
+    |----------------|--------|-------|
+    | ⚔️ Guerrier | Furie Guerrière | +5% dégâts par tranche de 25% HP perdus (max +20%) |
+    | 🗡️ Assassin | Instinct | 10% de chance d'esquiver une attaque physique |
+    | 🔮 Mage | Voile Arcanique | Ignore 12% de ta Déf. Mag. |
+    | 🏹 Tireur | Œil Affûté | +12% chance de critique |
+    | 💚 Support | Régénération Active | Récupère 1% HP max au début de chaque tour |
+    | 🧛 Vampire | Siphon de Vie | Récupère 8% des dégâts infligés |
+    | ⏳ Gardien du Temps | Ralentissement | Ta vitesse réduite de 10% |
+    | ☠️ Ombre Venin | Venin Persistant | 15% de chance de poison additionnel à chaque attaque |
+    | 🔥 Pyromancien | Embrasement | 30% de chance d'appliquer 1 stack de brûlure à chaque attaque |
+    | ✝️ Paladin | Aura Défensive | Dégâts reçus réduits de 8% |
+
+=== "⚠️ Boss Antiques (zone 1 000)"
+
+    | Classe du boss | Passif | Effet |
+    |----------------|--------|-------|
+    | ⚔️ Vrethax | Rage Ancienne | +8% dégâts par tranche de 25% HP perdus (max +32%) + immunité aux stuns |
+    | 🗡️ Azkoth | Ombre Persistante | 15% de chance d'esquiver + ses critiques ignorent 15% de ta Déf. Phy. |
+    | 🔮 Solarius | Annihilation Partielle | Ignore 20% de ta Déf. Mag. + dégâts purs 10% HP max tous les 5 tours |
+    | 🏹 Mortifax | Salve Précise | +18% chance de critique + tes défenses physiques −10% |
+    | 💚 Chronaxis | Bastion | Récupère 1.5% HP max/tour + dégâts reçus −10% |
+    | 🧛 Nexuvor | Avidité Sanguine | Récupère 12% des dégâts infligés + te vole 1% HP max/tour |
+    | ⏳ Erebos | Distorsion Temporelle | Ta vitesse −15%, sa vitesse +15% |
+    | ☠️ Pantheos | Nuée Venimeuse | 20% de chance de poison additionnel + dégâts DoT ×1.2 |
+    | 🔥 Ultharak | Combustion | 40% de chance d'appliquer 1 stack de brûlure + dégâts brûlure ×1.2 |
+    | ✝️ Omegaris | Jugement | Dégâts reçus −12% + dégâts purs 8% HP max tous les 5 tours |
+
+---
+
 ## 🔍 Simulateur d'ennemi
 
 <div id="enemy-calculator">

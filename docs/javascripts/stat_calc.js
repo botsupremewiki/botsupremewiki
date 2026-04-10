@@ -4,29 +4,29 @@
 (function () {
 
   const BASE_STATS = {
-    "Guerrier":         { hp: 550,  p_atk: 52,  m_atk: 0,   p_pen: 8,  m_pen: 0,  p_def: 32, m_def: 6,  speed: 80,  crit_chance: 5.0,  crit_damage: 50.0 },
-    "Assassin":         { hp: 500,  p_atk: 50,  m_atk: 0,   p_pen: 10, m_pen: 0,  p_def: 4,  m_def: 3,  speed: 105, crit_chance: 18.0, crit_damage: 75.0 },
-    "Mage":             { hp: 420,  p_atk: 0,   m_atk: 42,  p_pen: 0,  m_pen: 8,  p_def: 3,  m_def: 10, speed: 92,  crit_chance: 12.0, crit_damage: 75.0 },
-    "Tireur":           { hp: 440,  p_atk: 44,  m_atk: 0,   p_pen: 8,  m_pen: 0,  p_def: 4,  m_def: 4,  speed: 105, crit_chance: 16.0, crit_damage: 75.0 },
-    "Support":          { hp: 650,  p_atk: 48,  m_atk: 48,  p_pen: 6,  m_pen: 6,  p_def: 25, m_def: 25, speed: 80,  crit_chance: 5.0,  crit_damage: 40.0 },
-    "Vampire":          { hp: 580,  p_atk: 60,  m_atk: 0,   p_pen: 9,  m_pen: 0,  p_def: 12, m_def: 7,  speed: 90,  crit_chance: 15.0, crit_damage: 75.0 },
-    "Gardien du Temps": { hp: 480,  p_atk: 35,  m_atk: 35,  p_pen: 6,  m_pen: 6,  p_def: 18, m_def: 18, speed: 95,  crit_chance: 8.0,  crit_damage: 55.0 },
-    "Ombre Venin":      { hp: 460,  p_atk: 32,  m_atk: 32,  p_pen: 5,  m_pen: 5,  p_def: 5,  m_def: 5,  speed: 115, crit_chance: 17.0, crit_damage: 70.0 },
-    "Pyromancien":      { hp: 500,  p_atk: 0,   m_atk: 58,  p_pen: 0,  m_pen: 9,  p_def: 2,  m_def: 10, speed: 85,  crit_chance: 13.0, crit_damage: 75.0 },
-    "Paladin":          { hp: 560,  p_atk: 42,  m_atk: 0,   p_pen: 8,  m_pen: 0,  p_def: 35, m_def: 22, speed: 72,  crit_chance: 5.0,  crit_damage: 50.0 },
+    "Guerrier":         { hp: 6000, p_atk: 200, m_atk: 0,   p_pen: 90, m_pen: 0,  p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Assassin":         { hp: 5000, p_atk: 200, m_atk: 0,   p_pen: 90, m_pen: 0,  p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 75.0 },
+    "Mage":             { hp: 5000, p_atk: 0,   m_atk: 220, p_pen: 0,  m_pen: 90, p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Tireur":           { hp: 5000, p_atk: 200, m_atk: 0,   p_pen: 99, m_pen: 0,  p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Support":          { hp: 5000, p_atk: 150, m_atk: 150, p_pen: 90, m_pen: 90, p_def: 100, m_def: 110, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Vampire":          { hp: 5000, p_atk: 220, m_atk: 0,   p_pen: 90, m_pen: 0,  p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Gardien du Temps": { hp: 5000, p_atk: 150, m_atk: 150, p_pen: 90, m_pen: 90, p_def: 100, m_def: 100, speed: 120, crit_chance: 20.0, crit_damage: 50.0 },
+    "Ombre Venin":      { hp: 5000, p_atk: 150, m_atk: 150, p_pen: 90, m_pen: 90, p_def: 100, m_def: 100, speed: 100, crit_chance: 30.0, crit_damage: 50.0 },
+    "Pyromancien":      { hp: 5000, p_atk: 0,   m_atk: 200, p_pen: 0,  m_pen: 99, p_def: 100, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
+    "Paladin":          { hp: 5000, p_atk: 200, m_atk: 0,   p_pen: 90, m_pen: 0,  p_def: 110, m_def: 100, speed: 100, crit_chance: 20.0, crit_damage: 50.0 },
   };
 
   const LEVEL_GROWTH = {
-    "Guerrier":         { hp: 45.44, p_atk: 2.400, m_atk: 0,     p_pen: 0,     m_pen: 0,     p_def: 0.822, m_def: 0.194, speed: 0.230, crit_chance: 0, crit_damage: 0 },
-    "Assassin":         { hp: 36.54, p_atk: 2.643, m_atk: 0,     p_pen: 0.549, m_pen: 0,     p_def: 0,     m_def: 0,     speed: 0.365, crit_chance: 0, crit_damage: 0 },
-    "Mage":             { hp: 39.64, p_atk: 0,     m_atk: 2.814, p_pen: 0,     m_pen: 0.553, p_def: 0,     m_def: 0,     speed: 0.405, crit_chance: 0, crit_damage: 0 },
-    "Tireur":           { hp: 37.60, p_atk: 2.668, m_atk: 0,     p_pen: 0.555, m_pen: 0,     p_def: 0,     m_def: 0,     speed: 0.360, crit_chance: 0, crit_damage: 0 },
-    "Support":          { hp: 72.42, p_atk: 1.283, m_atk: 1.283, p_pen: 0,     m_pen: 0,     p_def: 0.630, m_def: 0.630, speed: 0.195, crit_chance: 0, crit_damage: 0 },
-    "Vampire":          { hp: 50.00, p_atk: 2.638, m_atk: 0,     p_pen: 0.528, m_pen: 0,     p_def: 0.268, m_def: 0.193, speed: 0.245, crit_chance: 0, crit_damage: 0 },
-    "Gardien du Temps": { hp: 41.56, p_atk: 1.400, m_atk: 1.400, p_pen: 0.304, m_pen: 0.304, p_def: 0.362, m_def: 0.362, speed: 0.240, crit_chance: 0, crit_damage: 0 },
-    "Ombre Venin":      { hp: 45.65, p_atk: 1.540, m_atk: 1.540, p_pen: 0.300, m_pen: 0.300, p_def: 0,     m_def: 0,     speed: 0.345, crit_chance: 0, crit_damage: 0 },
-    "Pyromancien":      { hp: 43.64, p_atk: 0,     m_atk: 3.100, p_pen: 0,     m_pen: 0.610, p_def: 0,     m_def: 0,     speed: 0.395, crit_chance: 0, crit_damage: 0 },
-    "Paladin":          { hp: 71.51, p_atk: 2.361, m_atk: 0,     p_pen: 0,     m_pen: 0,     p_def: 0.916, m_def: 0.428, speed: 0.193, crit_chance: 0, crit_damage: 0 },
+    "Guerrier":         { hp: 60.0, p_atk: 2.0, m_atk: 0.0, p_pen: 0.9,  m_pen: 0.0, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Assassin":         { hp: 50.0, p_atk: 2.0, m_atk: 0.0, p_pen: 0.9,  m_pen: 0.0, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Mage":             { hp: 50.0, p_atk: 0.0, m_atk: 2.2, p_pen: 0.0,  m_pen: 0.9, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Tireur":           { hp: 50.0, p_atk: 2.0, m_atk: 0.0, p_pen: 0.99, m_pen: 0.0, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Support":          { hp: 50.0, p_atk: 1.5, m_atk: 1.5, p_pen: 0.9,  m_pen: 0.9, p_def: 1.0, m_def: 1.1, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Vampire":          { hp: 50.0, p_atk: 2.2, m_atk: 0.0, p_pen: 0.9,  m_pen: 0.0, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Gardien du Temps": { hp: 50.0, p_atk: 1.5, m_atk: 1.5, p_pen: 0.9,  m_pen: 0.9, p_def: 1.0, m_def: 1.0, speed: 1.2, crit_chance: 0, crit_damage: 0 },
+    "Ombre Venin":      { hp: 50.0, p_atk: 1.5, m_atk: 1.5, p_pen: 0.9,  m_pen: 0.9, p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Pyromancien":      { hp: 50.0, p_atk: 0.0, m_atk: 2.0, p_pen: 0.0,  m_pen: 0.99,p_def: 1.0, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
+    "Paladin":          { hp: 50.0, p_atk: 2.0, m_atk: 0.0, p_pen: 0.9,  m_pen: 0.0, p_def: 1.1, m_def: 1.0, speed: 1.0, crit_chance: 0, crit_damage: 0 },
   };
 
   const CLASS_EMOJI = {

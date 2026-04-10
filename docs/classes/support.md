@@ -8,20 +8,22 @@ Le Support est la classe de **soutien, de survie et d'attaque polyvalente**. Il 
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 650 |
-| Attaque Physique | 48 |
-| Attaque Magique | 48 |
-| Défense Physique | 25 |
-| Défense Magique | 25 |
-| Vitesse | 80 |
-| Chance de Critique | 5.0% |
-| Dégâts de Critique | 140.0% |
+| Points de Vie | 5 000 |
+| Attaque Physique | 150 |
+| Attaque Magique | 150 |
+| Pénétration Physique | 90 |
+| Pénétration Magique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 110 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Instinct Protecteur
 
-À chaque tour, le Support a **45% de chance de générer automatiquement un bouclier** absorbant **10% de ses PV maximum**.
+À chaque tour, le Support a **30% de chance de générer automatiquement un bouclier** absorbant **8% de ses PV maximum**.
 
 ---
 

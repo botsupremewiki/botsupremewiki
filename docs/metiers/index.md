@@ -67,6 +67,19 @@ Tous les crafts (artisanat et conception) suivent un système de **10 tiers** ba
 - Tu ne peux avoir qu'**un seul métier de récolte**, **un seul métier d'artisanat** et **un seul métier de conception** à la fois
 - Changer de métier réinitialise ton niveau dans ce métier à 1
 
+### Système de Legacy
+
+Quand tu changes de métier, ton niveau est **conservé en mémoire** (le "legacy"). Si tu reviens à ce métier plus tard, ton level legacy accélère ta progression.
+
+| Situation | Niveau de départ |
+|-----------|:----------------:|
+| Nouveau métier jamais pratiqué | 1 |
+| Retour à un métier précédent | 1 (mais XP boostée par le legacy) |
+| Legacy conservé | min(100, niveau précédent) |
+
+!!! tip "Alterne tes métiers sans perdre"
+    Il est tout à fait viable d'alterner entre plusieurs métiers de récolte au fil de ta progression — ton legacy est toujours là quand tu reviens.
+
 ---
 
 ## Pages détaillées

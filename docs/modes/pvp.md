@@ -27,7 +27,7 @@ Le mode Classique permet de se battre librement avec tes vraies stats contre n'i
 Le mode Classé est un **système compétitif** avec un classement Élo. Les combats sont **équitables** car tout le monde joue avec les mêmes stats normalisées.
 
 **Caractéristiques :**
-- Stats normalisées pour tous les joueurs (niveau 500, équipement craft de rareté rare)
+- Stats normalisées pour tous les joueurs (niveau 1 000, équipement craft de rareté rare)
 - Aucun buff externe — uniquement la classe, les sorts et la panoplie choisie
 - **5 combats maximum par jour**
 - Système **Élo** (les points gagnés/perdus dépendent de l'Élo de l'adversaire)
@@ -64,7 +64,7 @@ Perdre contre un joueur avec un Élo **plus faible** fait perdre **plus de point
 
 ### Les stats normalisées
 
-En PvP Classé, tous les joueurs jouent à **niveau 500** avec une panoplie **craft de rareté rare** complète (7 pièces). Seules ta classe et ta panoplie choisie influencent le résultat — pas ton vrai équipement, pas tes buffs alimentaires.
+En PvP Classé, tous les joueurs jouent à **niveau 1 000** avec une panoplie **craft de rareté rare** complète (7 pièces). Seules ta classe et ta panoplie choisie influencent le résultat — pas ton vrai équipement, pas tes buffs alimentaires.
 
 Cela garantit une compétition **100% équitable** basée sur la maîtrise des sorts et le bon choix stratégique.
 

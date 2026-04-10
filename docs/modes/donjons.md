@@ -8,9 +8,9 @@ Les Donjons sont des défis en solo avec des **ennemis et boss plus puissants qu
 
 | Type | Coût | Difficulté | Récompenses |
 |------|:----:|------------|-------------|
-| **Classique** | 3 ⚡ | ⭐ Accessible | Bonnes récompenses |
-| **Élite** | 5 ⚡ | ⭐⭐⭐ Difficile | Très bonnes récompenses |
-| **Abyssal** | 10 ⚡ | ⭐⭐⭐⭐⭐ Extrême | Récompenses d'exception |
+| **Classique** | 5 ⚡ | ⭐ Accessible | Bonnes récompenses |
+| **Élite** | 10 ⚡ | ⭐⭐⭐ Difficile | Très bonnes récompenses |
+| **Abyssal** | 15 ⚡ | ⭐⭐⭐⭐⭐ Extrême | Récompenses d'exception |
 
 ---
 

@@ -8,13 +8,14 @@ L'Assassin est un combattant **ultra-rapide et furtif**, spécialisé dans les d
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 500 |
-| Attaque Physique | 50 |
+| Points de Vie | 5 000 |
+| Attaque Physique | 200 |
 | Attaque Magique | 0 |
-| Défense Physique | 4 |
-| Défense Magique | 3 |
-| Vitesse | 105 |
-| Chance de Critique | 18.0% |
+| Pénétration Physique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
 | Dégâts de Critique | 175.0% |
 
 ---

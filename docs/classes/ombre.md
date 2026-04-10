@@ -11,14 +11,16 @@ L'Ombre Venin est une classe de **dégâts sur la durée**. Elle empoisonne l'en
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 460 |
-| Attaque Physique | 32 |
-| Attaque Magique | 32 |
-| Défense Physique | 5 |
-| Défense Magique | 5 |
-| Vitesse | 115 |
-| Chance de Critique | 17.0% |
-| Dégâts de Critique | 170.0% |
+| Points de Vie | 5 000 |
+| Attaque Physique | 150 |
+| Attaque Magique | 150 |
+| Pénétration Physique | 90 |
+| Pénétration Magique | 90 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 30.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 

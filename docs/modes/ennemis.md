@@ -18,8 +18,8 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
   <!-- ── Monde ─────────────────────────────────────────── -->
   <div id="ec-ctrl-monde" class="ec-controls">
     <div class="ec-row">
-      <label class="ec-label">Zone <span class="ec-hint">(1 – 10 000)</span></label>
-      <input type="number" id="ec-zone" class="ec-input" min="1" max="10000" value="100" />
+      <label class="ec-label">Zone <span class="ec-hint">(1 – 1 000)</span></label>
+      <input type="number" id="ec-zone" class="ec-input" min="1" max="1000" value="100" />
     </div>
     <div class="ec-row">
       <label class="ec-label">Ennemi</label>
@@ -58,7 +58,7 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
       </select>
     </div>
     <div class="ec-hint-box">
-      💡 Les options grisées sont activées automatiquement quand la zone le permet. Zone ×10 → Runique (HP ×1,5) · Zone ×100 → Emblématique (HP ×2) · Zone ×1 000 → Antique (HP ×3)
+      💡 Les boss ont des HP augmentés par rapport à un ennemi normal de même zone et classe : Boss de Zone (HP ×1,2) · Boss Runique (HP ×1,4) · Boss Emblématique (HP ×1,6) · Boss Antique (HP ×1,8)
     </div>
   </div>
 
@@ -108,7 +108,7 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
       </select>
     </div>
     <div class="ec-hint-box">
-      👥 Chaque raid boss a une classe fixe. Stats ×1,8 vs un ennemi de zone équivalente, puis HP ×5 supplémentaire (HP total ×9 vs un ennemi de zone équivalente).
+      👥 Chaque raid boss a une classe fixe. Calibré avec pct = niveau_raid × 4 (ex : Raid 1 → ×4, Raid 10 → ×40). HP ×3 par rapport à un ennemi de même niveau.
     </div>
   </div>
 
@@ -116,11 +116,11 @@ Sélectionne un mode de jeu, configure les paramètres, et découvre les statist
   <div id="ec-ctrl-wb" class="ec-controls" style="display:none">
     <div class="ec-row">
       <label class="ec-label">Tour personnel <strong id="ec-wb-tour-val">1</strong></label>
-      <input type="range" id="ec-wb-tour" class="ec-range" min="1" max="20" value="1" />
-      <input type="number" id="ec-wb-tour-input" class="ec-input" min="1" max="20" value="1" style="max-width:120px; margin-top:0.4rem" />
+      <input type="range" id="ec-wb-tour" class="ec-range" min="1" max="25" value="1" />
+      <input type="number" id="ec-wb-tour-input" class="ec-input" min="1" max="25" value="1" style="max-width:120px; margin-top:0.4rem" />
     </div>
     <div class="ec-hint-box">
-      🐉 Le World Boss est <strong>Bot Suprême</strong>. Ses stats suivent une zone équivalente = 1 000 × 1,3<sup>tour−1</sup> (Tour 1 = Zone 1 000 · Tour 10 ≈ Zone 13 786 · Tour 20 ≈ Zone 190 050). <strong>Tour 20 maximum</strong> — en cas de défaite, le tour repart à 1.
+      🐉 Le World Boss est <strong>Bot Suprême</strong>. Ses stats augmentent linéairement : chaque tour ennemi ajoute +100 niveaux et ×2 pct. Tour 1 → Niveau 1 000 / Pct ×1. Tour 25 → Niveau 3 400 / Pct ×49. <strong>Tour 25 maximum</strong> — en cas de défaite, le tour repart à 1. Stats affichées en moyenne des 10 classes (la classe réelle varie chaque semaine).
     </div>
   </div>
 

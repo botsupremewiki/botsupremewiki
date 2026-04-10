@@ -755,6 +755,29 @@
   line-height: 1.45;
 }
 
+/* Warning bubble — mécaniques spéciales */
+.ec-passif-warn {
+  background: rgba(239, 68, 68, 0.07);
+  border: 1px solid rgba(239, 68, 68, 0.30);
+  border-left: 3px solid #EF4444;
+}
+
+.ec-passif-warn .ec-passif-lbl {
+  color: #F87171;
+}
+
+.ec-passif-line {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  padding: 0.2rem 0 0.1rem;
+  border-top: 1px solid rgba(239, 68, 68, 0.12);
+}
+
+.ec-passif-line:first-of-type {
+  border-top: none;
+  padding-top: 0;
+}
+
 /* Récompenses */
 .ec-rewards {
   display: flex;

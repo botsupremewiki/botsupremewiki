@@ -11,20 +11,21 @@ Le Pyromancien est un mage spécialisé dans les **brûlures progressives**. Il 
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 500 |
+| Points de Vie | 5 000 |
 | Attaque Physique | 0 |
-| Attaque Magique | 58 |
-| Défense Physique | 2 |
-| Défense Magique | 10 |
-| Vitesse | 85 |
-| Chance de Critique | 13.0% |
-| Dégâts de Critique | 175.0% |
+| Attaque Magique | 200 |
+| Pénétration Magique | 99 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Embrasement Perpétuel
 
-Le Pyromancien a **45% de chance d'appliquer 1 stack de brûlure** à chaque attaque. Chaque stack actif inflige des dégâts supplémentaires égaux à **15% de l'ATK Mag par stack**.
+Le Pyromancien a **30% de chance d'appliquer 1 stack de brûlure** à chaque attaque. Chaque stack actif inflige des dégâts supplémentaires égaux à **15% de l'ATK Mag par stack**.
 
 ---
 

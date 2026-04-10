@@ -8,20 +8,21 @@ Le Tireur est un spécialiste des dégâts physiques à distance. Son passif lui
 
 | Stat | Valeur |
 |------|--------|
-| Points de Vie | 440 |
-| Attaque Physique | 44 |
+| Points de Vie | 5 000 |
+| Attaque Physique | 200 |
 | Attaque Magique | 0 |
-| Défense Physique | 4 |
-| Défense Magique | 4 |
-| Vitesse | 105 |
-| Chance de Critique | 16.0% |
-| Dégâts de Critique | 175.0% |
+| Pénétration Physique | 99 |
+| Défense Physique | 100 |
+| Défense Magique | 100 |
+| Vitesse | 100 |
+| Chance de Critique | 20.0% |
+| Dégâts de Critique | 150.0% |
 
 ---
 
 ## Passif — Double Tir
 
-À chaque attaque, le Tireur a **25% de chance de doubler ses dégâts**.
+À chaque attaque, le Tireur a **20% de chance de doubler ses dégâts**.
 
 ---
 

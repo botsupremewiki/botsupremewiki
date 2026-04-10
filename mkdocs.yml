@@ -44,6 +44,20 @@ extra_javascript:
   - javascripts/craft_calc.js
   - javascripts/equip_calc.js
 
+not_in_nav: |
+  classes/assassin.md
+  classes/gardien.md
+  classes/guerrier.md
+  classes/mage.md
+  classes/ombre.md
+  classes/paladin.md
+  classes/pyromancien.md
+  classes/support.md
+  classes/tireur.md
+  classes/vampire.md
+  modes/ennemis.md
+  modes/mecanique.md
+
 nav:
   - Accueil: index.md
   - Guide du Débutant: debutant.md
@@ -73,6 +87,7 @@ nav:
   - Titres & Quêtes:
       - Titres: titres.md
       - Quêtes: quetes.md
+  - Bénédictions: benedictions.md
 
 markdown_extensions:
   - admonition

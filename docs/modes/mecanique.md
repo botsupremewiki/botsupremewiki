@@ -23,7 +23,18 @@ Tous les combats dans le RPG se déroulent **au tour par tour**. Chaque tour, tu
 
 ## Dégâts, critique et vitesse
 
-Ta pénétration réduit la défense de l'ennemi. Plus ta pénétration est élevée, moins il est protégé. Le minimum de dégâts est toujours **1**.
+Ta pénétration réduit la défense de l'ennemi. La **défense effective** est la défense ennemie moins ta pénétration (minimum 0). Plus ta pénétration est élevée, moins il est protégé. Le minimum de dégâts est toujours **1**.
+
+| Défense effective | Réduction des dégâts reçus |
+|:-----------------:|:--------------------------:|
+| 0 | 0% |
+| 100 | 17% |
+| 250 | 33% |
+| 500 | 50% |
+| 750 | 60% |
+| 1 000 | 67% |
+| 2 000 | 80% |
+| 4 000 | 89% |
 
 Les coups critiques multiplient tes dégâts selon ton pourcentage de Dégâts de Critique. Si ta Chance de Critique dépasse 100 %, l'excédent augmente automatiquement tes Dégâts de Critique.
 
